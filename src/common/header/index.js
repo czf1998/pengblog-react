@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HeaderWrapper } from './style'
+import { HeaderWrapper, HeaderMainArea, LogoWrapper } from './style'
 import { connect } from 'react-redux'
 
 class Header extends Component {
@@ -8,9 +8,13 @@ class Header extends Component {
         super(props)
     }
     render() {
-        const { height, backgroundColor } = this.props
+        const { height, backgroundColor, widthOfMainArea } = this.props
         return (
-            <HeaderWrapper height={height} backgroundColor={backgroundColor}></HeaderWrapper>
+            <HeaderWrapper className="flex-row-center" height={height} backgroundColor={backgroundColor}>
+                <HeaderMainArea widthOfMainArea={widthOfMainArea}>
+                    <LogoWrapper></LogoWrapper>
+                </HeaderMainArea>
+            </HeaderWrapper>
         );
     }
 }
@@ -18,7 +22,8 @@ class Header extends Component {
 const mapState = (state) => {
     return  {
         height: state.header.height,
-        backgroundColor: state.header.backgroundColor
+        backgroundColor: state.header.backgroundColor,
+        widthOfMainArea: state.rootState.widthOfMainArea
     }
 }
 

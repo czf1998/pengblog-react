@@ -1,6 +1,6 @@
 const defaultState = {
-    height: '60px',
-    backgroundColor: 'red'
+    height: '70px',
+    backgroundColor: '#3367d6'
 }
 
 export default (state = defaultState, action) => {
