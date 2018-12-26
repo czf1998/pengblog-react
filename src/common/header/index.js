@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { HeaderWrapper, HeaderMainArea, LogoWrapper, Logo } from './style'
 import { connect } from 'react-redux'
+import * as commonClassNameConstant from '../../commonStyle/commonClassNameConstant'
 
 class Header extends Component {
 
@@ -9,13 +10,15 @@ class Header extends Component {
     }
 
     render() {
-        const { height, backgroundColor, widthOfMainArea } = this.props
+        const { height, backgroundColor, basicUIFeatures } = this.props
         return (
-            <HeaderWrapper className="flex-row-center" height={height} backgroundColor={backgroundColor}>
-                <HeaderMainArea widthOfMainArea={widthOfMainArea}>
-                    <LogoWrapper className="flex-column-center">
-                        <Logo className="font-large font-song flex-column-center">远方有鱼</Logo>
-                    </LogoWrapper>
+            <HeaderWrapper className={commonClassNameConstant.FLEX_ROW_ROW_CENTER} height={height} backgroundColor={backgroundColor}>
+                <HeaderMainArea widthOfMainArea={basicUIFeatures.widthOfMainArea}>
+                        <Logo className={commonClassNameConstant.FONT_LARGE +
+                                         commonClassNameConstant.FONT_SONG +
+                                         commonClassNameConstant.FLEX_COLUMN_ROW_CENTER}>
+                            远方有鱼
+                        </Logo>
                 </HeaderMainArea>
             </HeaderWrapper>
         );
@@ -26,7 +29,7 @@ const mapState = (state) => {
     return  {
         height: state.header.height,
         backgroundColor: state.header.backgroundColor,
-        widthOfMainArea: state.rootState.widthOfMainArea
+        basicUIFeatures: state.rootState.basicUIFeatures
     }
 }
 

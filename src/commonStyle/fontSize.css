@@ -1,10 +1,13 @@
 .font-middle{
     font-size: 18px;
+    line-height: 36px;
 }
 
 .font-large{
     font-size: 22px;
+    line-height: 44px;
 }
+
 
 @font-face{
     font-family: "Source Sans Pro";

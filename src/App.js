@@ -4,6 +4,8 @@ import store from './store'
 import './App.css';
 import './commonStyle'
 
+import Home from './pages/home'
+
 import Header from './common/header'
 
 class App extends Component {
@@ -11,6 +13,7 @@ class App extends Component {
     return (
         <Provider store={store}>
             <Header></Header>
+            <Home></Home>
         </Provider>
     );
   }

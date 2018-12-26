@@ -10,13 +10,13 @@ export const HeaderMainArea = styled.div`
         width: ${props => props.widthOfMainArea};
     `
 
-export const LogoWrapper = styled.div`
+/*export const LogoWrapper = styled.div`
         height: inherit;
         width: 200px;
-    `
+    `*/
 
 export const Logo = styled.div`
-        height: 80%
+        height: inherit;
         width: 100px;
         color: white;
     `
