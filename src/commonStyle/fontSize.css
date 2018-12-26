@@ -1,0 +1,22 @@
+.font-middle{
+    font-size: 18px;
+}
+
+.font-large{
+    font-size: 22px;
+}
+
+@font-face{
+    font-family: "Source Sans Pro";
+    src: url("./fonts/SourceSansPro-Light.ttf");
+    font-weight: 300;
+}
+@font-face{
+    font-family: "Dosis";
+    src: url("./fonts/Dosis-Medium-3.ttf");
+    font-weight: 300;
+}
+
+.font-song{
+    font-family: "Source Sans Pro", SimSun, Arial
+}

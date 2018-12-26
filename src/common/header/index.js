@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HeaderWrapper, HeaderMainArea, LogoWrapper } from './style'
+import { HeaderWrapper, HeaderMainArea, LogoWrapper, Logo } from './style'
 import { connect } from 'react-redux'
 
 class Header extends Component {
@@ -7,12 +7,15 @@ class Header extends Component {
     constructor(props) {
         super(props)
     }
+
     render() {
         const { height, backgroundColor, widthOfMainArea } = this.props
         return (
             <HeaderWrapper className="flex-row-center" height={height} backgroundColor={backgroundColor}>
                 <HeaderMainArea widthOfMainArea={widthOfMainArea}>
-                    <LogoWrapper></LogoWrapper>
+                    <LogoWrapper className="flex-column-center">
+                        <Logo className="font-large font-song flex-column-center">远方有鱼</Logo>
+                    </LogoWrapper>
                 </HeaderMainArea>
             </HeaderWrapper>
         );
@@ -27,10 +30,5 @@ const mapState = (state) => {
     }
 }
 
-const mapActions = (dispatch) => {
-    return {
 
-    }
-}
-
-export default connect(mapState, mapActions)(Header)
+export default connect(mapState)(Header)

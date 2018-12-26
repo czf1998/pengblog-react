@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import logoUrl from '../../image/logo_white.png'
 
 export const HeaderWrapper = styled.div`
         height: ${props => props.height};
@@ -14,8 +13,12 @@ export const HeaderMainArea = styled.div`
 export const LogoWrapper = styled.div`
         height: inherit;
         width: 200px;
-        background: url(${logoUrl}) no-repeat center    ;
-        background-size: contain;
+    `
+
+export const Logo = styled.div`
+        height: 80%
+        width: 100px;
+        color: white;
     `
 
 
