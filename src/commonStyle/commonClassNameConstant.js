@@ -4,11 +4,17 @@ export const COMMON_BORDER_RADIUS = 'common-border-radius '
 
 export const COMMON_BOX_SHADOW = 'common-box-shadow '
 
+export const FONT_TINY = 'font-tiny '
+
+export const FONT_SMALL ='font-small '
+
 export const FONT_MIDDLE = 'font-middle '
 
 export const FONT_LARGE = 'font-large '
 
 export const FONT_SONG = 'font-song '
+
+export const FONT_DARK = 'font-dark '
 
 export const FLEX_ROW_ROW_CENTER = 'flex-row-row-center '
 
@@ -16,3 +22,16 @@ export const FLEX_ROW_COLUMN_CENTER = 'flex-row-column-center '
 
 export const FLEX_COLUMN_ROW_CENTER = 'flex-column-row-center '
 
+export const CLICKABLE = 'clickable '
+
+export const WITH_SPLITTER = 'with-splitter '
+
+export const TAG = 'tag '
+
+export const CURSORP = 'cursorp '
+
+export const OVER_3ROWS_HANDLE = 'over-3rows-handle '
+
+export const OVER_ROW_HANDLE = 'over-row-handle '
+
+export const HOVER_ENLARGE = 'hover-enlarge '

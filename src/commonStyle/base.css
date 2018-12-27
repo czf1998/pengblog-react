@@ -13,3 +13,36 @@
 .common-box-shadow{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
+
+.tag:before{
+  content: "[";
+}
+
+.tag:after{
+    content: "]";
+}
+
+.cursorp{
+    cursor: pointer;
+}
+
+.over-3rows-handle{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+.over-row-handle{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hover-enlarge{
+    transition: all 0.2s ease;
+}
+
+.hover-enlarge:hover{
+    transform: scale(1.1);
+}

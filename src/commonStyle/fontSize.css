@@ -1,13 +1,35 @@
+.font-tiny{
+    font-size: 14px;
+}
+
+.font-small{
+    font-size: 16px;
+}
+
 .font-middle{
     font-size: 18px;
-    line-height: 36px;
 }
 
 .font-large{
     font-size: 22px;
-    line-height: 44px;
 }
 
+.font-dark{
+    color: #a2a2a2;
+}
+
+.clickable{
+    cursor: pointer;
+    color: #175199;
+}
+
+.clickable:hover{
+    color: #a2a2a2;
+}
+
+.with-splitter:after{
+    content: "|";
+}
 
 @font-face{
     font-family: "Source Sans Pro";
