@@ -1,0 +1,1 @@
+export const GET_HOME_ARTICLE_LIST_DATA = 'getHomeArticleListData'

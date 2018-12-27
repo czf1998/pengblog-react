@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import ArticleSummary from './components/articleSummary'
-
 import { HomeWrapper, Gap } from './style'
+import { actionCreators } from './store'
 
 class Home extends Component {
 
@@ -22,12 +21,27 @@ class Home extends Component {
             </HomeWrapper>
         )
     }
-}
 
-const mapState = (state) => {
-    return {
-        basicUIFeatures: state.rootState.basicUIFeatures
+    componentDidMount() {
+        this.props.getData(this.props.startIndex, this.props.pageScale)
     }
 }
 
-export default connect(mapState)(Home)
+const mapState = (state) => ({
+        startIndex: state.home.startIndex,
+        pageScale: state.home.pageScale,
+        basicUIFeatures: state.rootState.basicUIFeatures
+    })
+
+const mapActions = (dispatch) => ({
+        getData(startIndex, pageScale) {
+            let value = {
+                startIndex: startIndex,
+                pageScale: pageScale
+            }
+            const action = actionCreators.createGetHomeDataAction(value)
+            dispatch(action)
+        }
+    })
+
+export default connect(mapState, mapActions)(Home)
