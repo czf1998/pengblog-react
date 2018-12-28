@@ -10,15 +10,9 @@ class ArticleSummary extends Component {
     }
 
     render() {
-
         const { basicUIFeatures, article } = this.props
-
-        const withPreviewImage = article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined
-
         return (
-            <ArticleSummaryWrapper className={commonClassName.COMMON_PADDING +
-
-                                              commonClassName.COMMON_BORDER_RADIUS}
+            <ArticleSummaryWrapper
                                    widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
 
                 <Title className={commonClassName.FONT_MIDDLE +
@@ -26,7 +20,7 @@ class ArticleSummary extends Component {
                     {article.get('article_title')}
                 </Title>
 
-                <SummaryWrapper withPreviewImage={withPreviewImage}>
+                <SummaryWrapper withPreviewImage={ article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined}>
                     <ArticleInfoColumn className={commonClassName.FONT_DARK +
                                                   commonClassName.FONT_SMALL}>
                             <span className={commonClassName.CLICKABLE +
@@ -48,8 +42,7 @@ class ArticleSummary extends Component {
                     </ArticleInfoColumn>
 
                     <ArticleContent className={commonClassName.CURSORP +
-                                               commonClassName.OVER_3ROWS_HANDLE}
-                                    withPreviewImage={withPreviewImage}>
+                                               commonClassName.OVER_3ROWS_HANDLE}>
 
                         {article.get('article_summary')}
 
@@ -60,7 +53,7 @@ class ArticleSummary extends Component {
                 {
                     article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined
                     ?
-                    <PreviewImage className={commonClassName.COMMON_BORDER_RADIUS +
+                    <PreviewImage className={
                                              commonClassName.CURSORP +
                                              commonClassName.HOVER_ENLARGE} imageUrl={article.get('article_previewImageUrl')}/>
                     :

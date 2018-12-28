@@ -1,13 +1,15 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { GET_HOME_ARTICLE_LIST_DATA } from './actionTypesWithSaga'
-
+import { createDeliverArticleDataToHomeAction } from './actionCreators'
 import { ArticleRequest } from './request'
 
 
 function* ajaxHomeArticleListData(action) {
     try{
         const res = yield ArticleRequest.RequestArticleListData(action.value.startIndex, action.value.pageScale)
-        console.log(res)
+        const nextAction = createDeliverArticleDataToHomeAction(res.data)
+        yield put(nextAction)
+
     }catch (err) {
         console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_DATA  ERR: ' + err)
     }

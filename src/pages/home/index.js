@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, {Component, Fragment} from 'react'
 import { connect } from 'react-redux'
-import ArticleSummary from './components/articleSummary'
+import { ArticleSummary, ArticleSummaryAlpha, Jumbotron }from './components'
 import { HomeWrapper, Gap } from './style'
 import { actionCreators } from './store'
 
@@ -12,25 +12,40 @@ class Home extends Component {
 
     render() {
 
-        const {basicUIFeatures} = this.props
+        const {basicUIFeatures, articleList} = this.props
 
         return (
             <HomeWrapper>
-                <Gap widthOfMainArea={basicUIFeatures.widthOfMainArea}></Gap>
-                <ArticleSummary></ArticleSummary>
+                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
+                <Jumbotron/>
+
+                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
+
+                {
+                    articleList.map((item, index) => {
+                        return (
+                            <Fragment key={item.get('article_title')}>
+                                <ArticleSummary article={item}/>
+                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+                            </Fragment>
+
+                        )
+                    })
+                }
             </HomeWrapper>
         )
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.getData(this.props.startIndex, this.props.pageScale)
     }
 }
 
 const mapState = (state) => ({
-        startIndex: state.home.startIndex,
-        pageScale: state.home.pageScale,
-        basicUIFeatures: state.rootState.basicUIFeatures
+        startIndex: state.get('home').get('startIndex'),
+        pageScale: state.get('home').get('pageScale'),
+        basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
+        articleList: state.get('home').get('articleList')
     })
 
 const mapActions = (dispatch) => ({

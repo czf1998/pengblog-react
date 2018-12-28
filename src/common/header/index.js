@@ -13,7 +13,7 @@ class Header extends Component {
         const { height, backgroundColor, basicUIFeatures } = this.props
         return (
             <HeaderWrapper className={commonClassNameConstant.FLEX_ROW_ROW_CENTER} height={height} backgroundColor={backgroundColor}>
-                <HeaderMainArea widthOfMainArea={basicUIFeatures.widthOfMainArea}>
+                <HeaderMainArea widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
                         <Logo className={commonClassNameConstant.FONT_LARGE +
                                          commonClassNameConstant.FONT_SONG +
                                          commonClassNameConstant.FLEX_COLUMN_ROW_CENTER}>
@@ -27,9 +27,9 @@ class Header extends Component {
 
 const mapState = (state) => {
     return  {
-        height: state.header.height,
-        backgroundColor: state.header.backgroundColor,
-        basicUIFeatures: state.rootState.basicUIFeatures
+        height: state.get('header').get('height'),
+        backgroundColor: state.get('header').get('backgroundColor'),
+        basicUIFeatures: state.get('rootState').get('basicUIFeatures')
     }
 }
 
