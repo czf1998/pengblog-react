@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { HeaderWrapper, HeaderMainArea, LogoWrapper, Logo } from './style'
+import { HeaderWrapper, HeaderMainArea, LogoWrapper, Logo, NavItem, NavItemWrapper } from './style'
 import { connect } from 'react-redux'
-import * as commonClassNameConstant from '../../commonStyle/commonClassNameConstant'
+import { CommonClassNameConstants } from '../../commonStyle'
 
 class Header extends Component {
 
@@ -12,13 +12,29 @@ class Header extends Component {
     render() {
         const { height, backgroundColor, basicUIFeatures } = this.props
         return (
-            <HeaderWrapper className={commonClassNameConstant.FLEX_ROW_ROW_CENTER} height={height} backgroundColor={backgroundColor}>
+            <HeaderWrapper className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER} height={height} backgroundColor={backgroundColor}>
                 <HeaderMainArea widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
-                        <Logo className={commonClassNameConstant.FONT_LARGE +
-                                         commonClassNameConstant.FONT_SONG +
-                                         commonClassNameConstant.FLEX_COLUMN_ROW_CENTER}>
-                            远方有鱼
+                        <Logo className={CommonClassNameConstants.FONT_LARGE +
+                                         CommonClassNameConstants.FONT_SONG +
+                                         CommonClassNameConstants.FLEX_COLUMN_CENTER}>
+                            <div>
+                                远方有鱼
+                            </div>
+                            <div style={{borderTop: "solid 1px white"}}
+                                 className={CommonClassNameConstants.FONT_TINY}>
+                                It's a Wonderful Life
+                            </div>
                         </Logo>
+                        <NavItemWrapper>
+                            <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
+                                                CommonClassNameConstants.CURSORP}>
+                                杂谈
+                            </NavItem>
+                            <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
+                                                CommonClassNameConstants.CURSORP}>
+                                索引
+                            </NavItem>
+                        </NavItemWrapper>
                 </HeaderMainArea>
             </HeaderWrapper>
         );

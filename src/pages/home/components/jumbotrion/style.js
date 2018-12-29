@@ -5,6 +5,7 @@ export const JumbotronWrapper = styled.div`
         padding: 64px 32px;
         width: 750px;
         background: #eeeeee
+        position: relative;
     `
 
 export const Title = styled.div`
@@ -12,12 +13,46 @@ export const Title = styled.div`
         line-height: 1.2;
         margin-bottom: 10px;
         font-weight: lighter;
-        width: 70%;
+        width: 60%;
     `
 
 export const Summary = styled.div`
         font-size: 20px;
         line-height: 1.2;
-        font-weight: 100
+        font-weight: 100;
+        width: 60%;
+    `
+
+export const ImageWrapper = styled.div`
+        position: absolute;
+        top: 64px;
+        bottom: 64px;
+        left: 60%;
+        right: 32px;
+        overflow: hidden;
+    `
+
+export const ImageFirst = styled.div`
+        position: absolute;
+        top: 0px;
+        bottom: 45%;
+        left: 0px;
+        right: 0px;
+        background: url(${props => props.imgUrl}) no-repeat center center;
+        background-size: cover;
+    `
+
+export const ImageSecond = styled(ImageFirst)`
+        top: 56%;
+        bottom: 0px;
+        left: 0px;
+        right: 50%;
+    `
+
+export const ImageThird = styled(ImageFirst)`
+        top: 56%;
+        bottom: 0px;
+        left: 51%;
+        right: 0px;
     `
 

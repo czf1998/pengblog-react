@@ -1,11 +1,15 @@
 import styled from 'styled-components'
 
+const height = "70px"
+
 export const HeaderWrapper = styled.div`
-        height: ${props => props.height};
+        height: ${height};
         background: ${props => props.backgroundColor};
     `
 
 export const HeaderMainArea = styled.div`
+        display: flex;
+        justify-content: space-between;
         height: inherit;
         width: ${props => props.widthOfMainArea};
     `
@@ -16,9 +20,23 @@ export const HeaderMainArea = styled.div`
     `*/
 
 export const Logo = styled.div`
-        height: inherit;
-        width: 100px;
+        padding: 0 20px;
         color: white;
+    `
+
+export const NavItemWrapper = styled.div`
+        display: flex;
+        height: inherit;
+        float: right;
+    `
+
+export const NavItem = styled.div`
+        color: #E6E6E6;
+        line-height: ${height};
+        padding: 0 20px;
+        &:hover{
+            color: white;
+        }
     `
 
 

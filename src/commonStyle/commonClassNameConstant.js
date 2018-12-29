@@ -35,3 +35,9 @@ export const OVER_3ROWS_HANDLE = 'over-3rows-handle '
 export const OVER_ROW_HANDLE = 'over-row-handle '
 
 export const HOVER_ENLARGE = 'hover-enlarge '
+
+export const BUTTON_BLUE = 'button-blue '
+
+export const FLEX_ROW_CENTER ='flex-row-center '
+
+export const FLEX_COLUMN_CENTER = 'flex-column-center '
