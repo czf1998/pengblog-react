@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { ArticleSummaryWrapper, Title, SummaryWrapper, ArticleInfoColumn, ArticleContent, PreviewImage } from './style'
 import { connect } from 'react-redux'
 import * as commonClassName from '../../../../commonStyle/commonClassNameConstant'
 
-class ArticleSummary extends Component {
+class ArticleSummary extends PureComponent {
 
     constructor(props) {
         super(props)

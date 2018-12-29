@@ -4,9 +4,10 @@ import jumbotronImageWrapper from '../../../../image/jumbotronWrapper2.png'
 export const JumbotronWrapper = styled.div`
         padding: 64px 32px;
         width: 750px;
-        background: #eeeeee
+        background: #eeeeee;
         position: relative;
     `
+
 
 export const Title = styled.div`
         font-size: 48px;
@@ -14,6 +15,7 @@ export const Title = styled.div`
         margin-bottom: 10px;
         font-weight: lighter;
         width: 60%;
+
     `
 
 export const Summary = styled.div`

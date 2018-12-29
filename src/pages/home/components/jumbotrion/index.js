@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { JumbotronWrapper, Title, Summary, ImageWrapper, ImageFirst, ImageSecond, ImageThird } from './style'
+import { JumbotronWrapper, JumbotronBackground, Title, Summary, ImageWrapper, ImageFirst, ImageSecond, ImageThird } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { Button } from "../../../../common/button";
 
-class Jumbotron extends Component {
+class Jumbotron extends PureComponent {
     constructor(props) {
         super(props)
     }
@@ -13,6 +13,7 @@ class Jumbotron extends Component {
 
         return (
             <JumbotronWrapper className={CommonClassNameConstants.COMMON_BORDER_RADIUS}>
+
                 <Title className={CommonClassNameConstants.CURSORP}>
                     我们大多数人，都生活在平静的绝望
                 </Title>

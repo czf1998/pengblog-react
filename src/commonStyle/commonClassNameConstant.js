@@ -41,3 +41,5 @@ export const BUTTON_BLUE = 'button-blue '
 export const FLEX_ROW_CENTER ='flex-row-center '
 
 export const FLEX_COLUMN_CENTER = 'flex-column-center '
+
+export const COMMON_TEXT_SHADOW = 'common-text-shadow '

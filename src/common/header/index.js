@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { HeaderWrapper, HeaderMainArea, LogoWrapper, Logo, NavItem, NavItemWrapper } from './style'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
 
-class Header extends Component {
+class Header extends PureComponent {
 
     constructor(props) {
         super(props)
@@ -16,12 +16,13 @@ class Header extends Component {
                 <HeaderMainArea widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
                         <Logo className={CommonClassNameConstants.FONT_LARGE +
                                          CommonClassNameConstants.FONT_SONG +
+                                         CommonClassNameConstants.CURSORP +
                                          CommonClassNameConstants.FLEX_COLUMN_CENTER}>
-                            <div>
+                            <div className={CommonClassNameConstants.COMMON_TEXT_SHADOW}>
                                 远方有鱼
                             </div>
                             <div style={{borderTop: "solid 1px white"}}
-                                 className={CommonClassNameConstants.FONT_TINY}>
+                                 className={CommonClassNameConstants.FONT_TINY + CommonClassNameConstants.COMMON_TEXT_SHADOW}>
                                 It's a Wonderful Life
                             </div>
                         </Logo>

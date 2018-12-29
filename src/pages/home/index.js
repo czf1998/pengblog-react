@@ -1,10 +1,10 @@
-import React, {Component, Fragment} from 'react'
+import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
 import { ArticleSummary, ArticleSummaryAlpha, Jumbotron }from './components'
 import { HomeWrapper, Gap } from './style'
 import { actionCreators } from './store'
 
-class Home extends Component {
+class Home extends PureComponent {
 
     constructor(props) {
         super(props)
