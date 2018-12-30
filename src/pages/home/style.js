@@ -8,5 +8,6 @@ export const HomeWrapper = styled.div`
     `
 export const Gap = styled.div`
         height: ${props => props.gapHeight};
-        width: ${props => props.widthOfMainArea}
+        width: ${props => props.widthOfMainArea};
+      
     `

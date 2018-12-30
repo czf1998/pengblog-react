@@ -12,7 +12,11 @@ const defaultState = fromJS({
         boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
         widthOfMainArea: '750px'
     },
-    scrollTopOfElementEl: 0
+    scrollTopOfElementEl: 0,
+    offsetTopOfElementEl: 0,
+    heightOfBrowser: 0,
+    widthOfBrowser: 0,
+    isMobile: false
 })
 
 export default combineReducers({
@@ -20,7 +24,18 @@ export default combineReducers({
     home: homeReducer,
     rootState:(state = defaultState, action) => {
         if(action.type === RECORD_SCROLL_TOP_OF_ELEMENT_EL){
-            return state.set('scrollTopOfElementEl', action.value)
+            return state.merge({
+                scrollTopOfElementEl: action.value,
+                offsetTopOfElementEl: document.body.offsetHeight,
+                heightOfBrowser: window.innerHeight,
+                widthOfBrowser: window.innerWidth,
+                basicUIFeatures: window.innerWidth > 750 ? fromJS({
+                    widthOfMainArea: '750px'
+                }) : fromJS({
+                    widthOfMainArea: '100%'
+                }),
+                isMobile: window.innerWidth > 750 ? false : true
+            })
         }
         return state
     }

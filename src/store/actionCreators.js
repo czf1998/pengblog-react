@@ -12,7 +12,11 @@ export const createRecordScrollTopOfElementElAction = (value) => ({
     value
 })
 
-export const createObserveScrollTopOfElementElAction = (value) => ({
-    type: OBSERVE_SCROLL_TOP_OF_ELEMENT_EL,
-    value
-})
+export const createObserveScrollTopOfElementElAction = () => {
+    let scrollTopOfDocumentEl = document.body.scrollTop === 0 ? document.documentElement.scrollTop : document.body.scrollTop
+    const action = {
+        type: OBSERVE_SCROLL_TOP_OF_ELEMENT_EL,
+        scrollTopOfDocumentEl
+    }
+    return action
+}

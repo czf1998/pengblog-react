@@ -1,5 +1,6 @@
 import Jumbotron from './jumbotrion'
 import ArticleSummary from './articleSummary'
-import ArticleSummaryAlpha from './articleSummary-alpha'
+import ArticleSummaryMobile from './articleSummaryMobile'
+import ForMore from './forMore'
 
-export { Jumbotron, ArticleSummary, ArticleSummaryAlpha }
+export { Jumbotron, ArticleSummary, ArticleSummaryMobile, ForMore }

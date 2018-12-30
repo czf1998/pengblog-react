@@ -6,9 +6,11 @@ import { ArticleRequest } from './request'
 
 function* ajaxHomeArticleListData(action) {
     try{
+
         const res = yield ArticleRequest.RequestArticleListData(action.value.startIndex, action.value.pageScale)
-        let nextAction = createDeliverArticleDataToHomeAction(res.data)
-        yield put(nextAction)
+        let appointDataAction = createDeliverArticleDataToHomeAction(res.data)
+        yield put(appointDataAction)
+
 
     }catch (err) {
         console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_DATA  ERR: ' + err)
