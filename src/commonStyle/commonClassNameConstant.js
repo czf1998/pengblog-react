@@ -45,3 +45,7 @@ export const FLEX_COLUMN_CENTER = 'flex-column-center '
 export const COMMON_TEXT_SHADOW = 'common-text-shadow '
 
 export const HOVER_UNDERLINE = 'hover-underline '
+
+export const SLIDE_UP = 'slide-up'
+
+export const ZOOM = 'zoom'

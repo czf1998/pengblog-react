@@ -1,8 +1,10 @@
 import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { ArticleSummary, ArticleSummaryMobile, Jumbotron, ForMore }from './components'
 import { HomeWrapper, Gap } from './style'
 import { actionCreators } from './store'
+import { CommonClassNameConstants } from "../../commonStyle";
 
 class Home extends PureComponent {
 
@@ -19,6 +21,8 @@ class Home extends PureComponent {
             startIndex,
             pageScale,maxPage,currentPage} = this.props
 
+        const animateTime = 300
+
         return (
             <HomeWrapper>
                 <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
@@ -31,22 +35,31 @@ class Home extends PureComponent {
                     </Fragment>
                 }
 
-                {
-                    articleList.map((item) => {
-                        return (
-                            <Fragment key={item.get('article_title')}>
-                                {
-                                    isMobile ?
-                                        <ArticleSummaryMobile article={item}/>
-                                    :
-                                        <ArticleSummary article={item}/>
-                                }
-                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
-                            </Fragment>
+                <TransitionGroup>
+                    {
+                        articleList.map((item) => {
+                            return (
+                                <CSSTransition
+                                    key={item.get('article_title')}
+                                    timeout={animateTime}
+                                    classNames={CommonClassNameConstants.SLIDE_UP}
+                                    appear>
+                                    <Fragment>
+                                        {
+                                            isMobile ?
+                                                <ArticleSummaryMobile article={item}/>
+                                                :
+                                                <ArticleSummary article={item}/>
+                                        }
+                                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+                                    </Fragment>
+                                </CSSTransition>
+                            )
+                        })
+                    }
+                </TransitionGroup>
 
-                        )
-                    })
-                }
+
                 <div onClick={() => {this.props.getMoreArticleListData(startIndex, pageScale, maxPage, currentPage, isLoading)}} >
                     <ForMore isLoading={isLoading} noMore={currentPage === maxPage}/>
                 </div>

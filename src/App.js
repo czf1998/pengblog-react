@@ -7,23 +7,44 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import Home from './pages/home'
 
-import Header from './common/header'
-import Footer from './common/footer'
+import { Header, Footer, HeaderMobile } from './common'
 
 
 class App extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            isMobile: false
+        }
+        store.subscribe(() => {
+            this.setState({
+                isMobile: store.getState().get('rootState').get('isMobile')
+            })
+        })
+    }
+
 
   render() {
+    const { isMobile } = this.state
+
     return (
         <Provider store={store}>
-            <Header/>
-                <BrowserRouter>
-                    <Fragment>
-                        <Route path='/' exact component={Home}/>
-                        <Route path='/article' exact render={() => <div>article</div>}/>
-                    </Fragment>
-                </BrowserRouter>
+            {
+                isMobile ?
+                    <HeaderMobile/>
+                :
+                    <Header/>
+            }
+
+            <BrowserRouter>
+                <Fragment>
+                    <Route path='/' exact component={Home}/>
+                    <Route path='/article' exact render={() => <div>article</div>}/>
+                </Fragment>
+            </BrowserRouter>
+
             <Footer/>
+
         </Provider>
     );
   }

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import { ForMoreWrapper } from './style'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../../../commonStyle'
@@ -25,6 +26,7 @@ class ForMore extends PureComponent{
                                                  CommonClassNameConstants.CURSORP}>
                                     CLICK FOR MORE づ￣ 3￣)づ
                                 </span>
+
                         )
                 }
 
