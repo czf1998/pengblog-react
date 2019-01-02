@@ -12,17 +12,19 @@ class Header extends PureComponent {
     render() {
         const { height, backgroundColor, basicUIFeatures } = this.props
         return (
-            <HeaderWrapper className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER} height={height} backgroundColor={backgroundColor}>
+            <HeaderWrapper className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
+                           height={height}
+                           backgroundColor={backgroundColor}>
                 <HeaderMainArea widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
                         <Logo className={CommonClassNameConstants.FONT_LARGE +
                                          CommonClassNameConstants.FONT_SONG +
                                          CommonClassNameConstants.CURSORP +
                                          CommonClassNameConstants.FLEX_COLUMN_CENTER}>
-                            <div className={CommonClassNameConstants.COMMON_TEXT_SHADOW}>
+                            <div>
                                 远方有鱼
                             </div>
                             <div style={{borderTop: "solid 1px white"}}
-                                 className={CommonClassNameConstants.FONT_TINY + CommonClassNameConstants.COMMON_TEXT_SHADOW}>
+                                 className={CommonClassNameConstants.FONT_TINY}>
                                 It's a Wonderful Life
                             </div>
                         </Logo>

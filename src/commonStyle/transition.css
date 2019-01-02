@@ -1,12 +1,16 @@
-.slide-up-enter{
+:root{
+    --animate-time:1s;
+}
+
+.slide-up-group-enter{
     opacity: 0.01;
     transform: translateY(50%);
 }
 
-.slide-up-enter-active {
+.slide-up-group-enter-active {
     opacity: 1;
     transform: translateY(0%);
-    transition: all 300ms ease;
+    transition: all var(--animate-time) ease;
 }
 
 .zoom-enter{
@@ -17,7 +21,11 @@
 .zoom-enter-active{
     opacity: 1;
     transform: scale(1);
-    transition: all 200ms ease;
+    transition: all var(--animate-time) ease;
+}
+
+.zoom-enter-done{
+    opacity: 1;
 }
 
 .zoom-exit{
@@ -28,5 +36,65 @@
 .zoom-exit-active{
     opacity: 0;
     transform: scale(0.5);
-    transition: all 200ms ease;
+    transition: all var(--animate-time) ease;
+}
+
+.zoom-exit-active{
+    opacity: 0;
+}
+
+.slide-down{
+    animation: slide-down-animation var(--animate-time) ease-out forwards;
+}
+
+@keyframes slide-down-animation {
+    0%{
+        transform: translateY(-100%);
+    }
+
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+.slide-up{
+    animation: slide-up-animation var(--animate-time) ease-out forwards;
+}
+
+@keyframes slide-up-animation {
+    0%{
+        transform: translateY(100%);
+    }
+
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+.fade-in{
+    animation: fade-in-animation var(--animate-time) ease forwards;
+}
+
+@keyframes fade-in-animation {
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+
+.zoom-in{
+    animation: zoom-in-animation var(--animate-time) ease forwards;
+}
+
+@keyframes zoom-in-animation {
+    0%{
+        transform: scale(0.5);
+    }
+
+    100%{
+        transform: scale(1);
+    }
 }

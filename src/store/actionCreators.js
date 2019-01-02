@@ -1,6 +1,8 @@
 import { DELIVER_ARTICLE_LIST_DATA_TO_HOME,
+         DELIVER_ARTICLE_DATA_TO_JUMBOTRON,
          RECORD_SCROLL_TOP_OF_ELEMENT_EL,
-         OBSERVE_SCROLL_TOP_OF_ELEMENT_EL } from './actionTypesWithSaga'
+         OBSERVE_SCROLL_TOP_OF_ELEMENT_EL,
+         ROADED_AND_SHOW_JUMBOTRON } from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -20,3 +22,9 @@ export const createObserveScrollTopOfElementElAction = () => {
     }
     return action
 }
+
+export const createDeliverArticleDataToJumbotronAction = (value) => ({
+    type: DELIVER_ARTICLE_DATA_TO_JUMBOTRON,
+    value
+})
+

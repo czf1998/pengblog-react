@@ -46,6 +46,16 @@ export const COMMON_TEXT_SHADOW = 'common-text-shadow '
 
 export const HOVER_UNDERLINE = 'hover-underline '
 
-export const SLIDE_UP = 'slide-up'
+export const SLIDE_UP_GROUP = 'slide-up-group'
 
 export const ZOOM = 'zoom'
+
+export const TRANSITION_GROUP_PATCH = 'transition-group-patch '
+
+export const SLIDE_DOWN = 'slide-down'
+
+export const SLIDE_UP = 'slide-up'
+
+export const FADE_IN = 'fade-in'
+
+export const ZOOM_IN = 'zoom-in'

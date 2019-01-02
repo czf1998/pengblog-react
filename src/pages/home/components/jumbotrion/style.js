@@ -2,6 +2,10 @@ import styled from 'styled-components'
 import jumbotronImageWrapper from '../../../../image/jumbotronWrapper2.png'
 
 export const JumbotronWrapper = styled.div`
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 350px;
         padding: 64px 32px;
         width: 750px;
         background: #eeeeee;
@@ -35,6 +39,7 @@ export const ImageWrapper = styled.div`
     `
 
 export const ImageFirst = styled.div`
+        border-radius: 2px;
         position: absolute;
         top: 0px;
         bottom: 45%;
@@ -45,6 +50,7 @@ export const ImageFirst = styled.div`
     `
 
 export const ImageSecond = styled(ImageFirst)`
+        border-radius: 2px; 
         top: 56%;
         bottom: 0px;
         left: 0px;
@@ -52,6 +58,7 @@ export const ImageSecond = styled(ImageFirst)`
     `
 
 export const ImageThird = styled(ImageFirst)`
+        border-radius: 2px;
         top: 56%;
         bottom: 0px;
         left: 51%;

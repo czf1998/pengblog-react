@@ -1,46 +1,88 @@
-import React, { PureComponent } from 'react'
+import React, {Fragment, PureComponent} from 'react'
 import { connect } from 'react-redux'
 import { JumbotronWrapper, JumbotronBackground, Title, Summary, ImageWrapper, ImageFirst, ImageSecond, ImageThird } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { Button } from "../../../../common/button";
+import { actionCreators } from './store'
 
 class Jumbotron extends PureComponent {
     constructor(props) {
         super(props)
+
     }
 
     render() {
 
-        return (
-            <JumbotronWrapper className={CommonClassNameConstants.COMMON_BORDER_RADIUS}>
+        const { articleTitle,
+                articleSummary,
+                articlePreviewImages
+              } = this.props
 
-                <Title className={CommonClassNameConstants.CURSORP}>
-                    我们大多数人，都生活在平静的绝望
-                </Title>
-                <Summary className={CommonClassNameConstants.CURSORP}>
-                    上海市区人中很多都是外地移民，所以比较容易接受新事物，就是所谓的海派文化，所以说上海本身比较开放，也是因为它是一个移民城市
-                </Summary>
-                <Button color="black"
-                        backgroundColor="#eeeeee"
-                        margin="15px 0 0 0"
-                        borderColor="#DDDDDD">查看全文</Button>
-                <ImageWrapper>
-                    <ImageFirst  className={CommonClassNameConstants.CURSORP +
-                                            CommonClassNameConstants.HOVER_ENLARGE}
-                                 imgUrl="https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/77/image201812010404747.jpg"/>
-                    <ImageSecond  className={CommonClassNameConstants.CURSORP +
-                                             CommonClassNameConstants.HOVER_ENLARGE}
-                                  imgUrl="https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/131/image201812011104113.jpg"/>
-                    <ImageThird  className={CommonClassNameConstants.CURSORP +
-                                            CommonClassNameConstants.HOVER_ENLARGE}
-                                 imgUrl="https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/131/image201812011104118.jpg"/>
-                </ImageWrapper>
-            </JumbotronWrapper>
+        return (
+
+                <JumbotronWrapper className={CommonClassNameConstants.COMMON_BORDER_RADIUS}>
+
+
+
+                    <Title className={CommonClassNameConstants.CURSORP}>
+                        {articleTitle}
+
+                    </Title>
+                    <Summary className={CommonClassNameConstants.CURSORP}>
+                        {articleSummary}
+                    </Summary>
+
+                    <Button color="black"
+                            backgroundColor="#eeeeee"
+                            margin="15px 0 0 0"
+                            borderColor="#DDDDDD" style={{width:'100px'}}>查看全文</Button>
+
+                    <ImageWrapper>
+                        <ImageFirst  className={CommonClassNameConstants.CURSORP +
+                        CommonClassNameConstants.HOVER_ENLARGE}
+                                     imgUrl={articlePreviewImages.get(0)}/>
+                        <ImageSecond  className={CommonClassNameConstants.CURSORP +
+                        CommonClassNameConstants.HOVER_ENLARGE}
+                                      imgUrl={articlePreviewImages.get(1)}/>
+                        <ImageThird  className={CommonClassNameConstants.CURSORP +
+                        CommonClassNameConstants.HOVER_ENLARGE}
+                                     imgUrl={articlePreviewImages.get(2)}/>
+                    </ImageWrapper>
+                </JumbotronWrapper>
+
+
         )
 
     }
 
+    componentDidMount() {
+        this.props.getData(this.props.jumbotronArticleId)
+    }
 
+    componentDidUpdate() {
+        this.props.dispatchRoadedAndShowJumbotronAction()
+    }
 }
 
-export default connect()(Jumbotron)
+const mapState = (state) => ({
+    articleTitle: state.get('jumbotron').get('articleTitle'),
+    articleAuthor: state.get('jumbotron').get('articleAuthor'),
+    articleSummary: state.get('jumbotron').get('articleSummary'),
+    articlePreviewImages: state.get('jumbotron').get('articlePreviewImages')
+})
+
+const mapActions = (dispatch) => ({
+    getData: (jumbotronArticleId) => {
+        let value = {
+            article_id: jumbotronArticleId
+        }
+        const action = actionCreators.createGetJumbotronDataAction(value)
+        dispatch(action)
+    },
+    dispatchRoadedAndShowJumbotronAction: () => {
+        const action = actionCreators.createRoadedAndShowJumbotronAction()
+        dispatch(action)
+    }
+})
+
+export default connect(mapState, mapActions)(Jumbotron)

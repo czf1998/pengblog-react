@@ -5,6 +5,10 @@ import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 
 class ForMore extends PureComponent{
+    constructor(props){
+        super(props)
+        this.clickHandler = this.clickHandler.bind(this)
+    }
 
     render() {
 
@@ -23,7 +27,8 @@ class ForMore extends PureComponent{
                                 <i className={'fa fa-spinner fa-pulse fa-2x'} style={{color:'black'}}/>
                             :
                                 <span className={CommonClassNameConstants.HOVER_UNDERLINE +
-                                                 CommonClassNameConstants.CURSORP}>
+                                                 CommonClassNameConstants.CURSORP}
+                                      onClick={this.clickHandler}>
                                     CLICK FOR MORE づ￣ 3￣)づ
                                 </span>
 
@@ -33,6 +38,10 @@ class ForMore extends PureComponent{
 
             </ForMoreWrapper>
         )
+    }
+
+    clickHandler() {
+        this.props.clickHandler(...this.props.meta)
     }
 }
 

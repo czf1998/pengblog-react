@@ -4,8 +4,9 @@ import store from './store'
 import './commonStyle'
 import { createObserveScrollTopOfElementElAction } from "./store/actionCreators";
 import { BrowserRouter, Route } from 'react-router-dom'
-
+import { CSSTransition } from 'react-transition-group'
 import Home from './pages/home'
+import { CommonClassNameConstants } from './commonStyle'
 
 import { Header, Footer, HeaderMobile } from './common'
 
@@ -33,7 +34,9 @@ class App extends Component {
                 isMobile ?
                     <HeaderMobile/>
                 :
-                    <Header/>
+                    <div className={CommonClassNameConstants.SLIDE_DOWN}>
+                        <Header/>
+                    </div>
             }
 
             <BrowserRouter>
@@ -43,14 +46,19 @@ class App extends Component {
                 </Fragment>
             </BrowserRouter>
 
-            <Footer/>
+            <div className={CommonClassNameConstants.FADE_IN}>
+                <Footer/>
+            </div>
+
+
+
 
         </Provider>
     );
   }
 
   componentDidMount() {
-      this.initRecordDocumentScrollTop()
+      //this.initRecordDocumentScrollTop()
       store.dispatch(createObserveScrollTopOfElementElAction())
   }
 
