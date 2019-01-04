@@ -19,3 +19,5 @@ export const DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE = 'deliverArticleDataToArticle
 export const NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY = 'noticeHomeStoreArticleListDataReady'
 
 export const NOTICE_HOME_STORE_JUMBOTRON_DATA_READY = 'noticeHomeStoreJumbotronDataReady'
+
+export const RESET_ARTICLE_PAGE_STORE = 'resetArticlePageStore'

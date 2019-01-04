@@ -28,7 +28,7 @@ class Home extends PureComponent {
                 animateTime} = this.props
 
         return (
-            <HomeWrapper>
+            <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
                 <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
 
                 {
@@ -49,7 +49,7 @@ class Home extends PureComponent {
                     </Fragment>
                 }
 
-                <TransitionGroup>
+                <TransitionGroup className={CommonClassNameConstants.TRANSITION_GROUP_PATCH}>
                     {
                         articleList.map((item, index) => {
                             if( !isMobile && index === 0)

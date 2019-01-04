@@ -2,33 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="435386c2-4738-4296-9e2d-0eb0c4eda9b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/store/actionCreators.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/store/reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/header/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/commonStyle/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonStyle/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/commonStyle/transition.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonStyle/transition.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/article/components/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/article/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/article/store/actionCreators.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/article/store/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/article/store/reducer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/article/style.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/store/actionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/store/actionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/store/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/components/articleSummary-alpha/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/components/articleSummary-alpha/style.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/home/components/jumbotrion/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/components/jumbotrion/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home/components/jumbotrion/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/components/jumbotrion/store/reducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/home/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/store/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/style.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/actionTypesWithSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actionTypesWithSaga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/saga.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -43,31 +32,31 @@
     <session id="-1402822164">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="1511" />
-          <entry key="js" value="24109" />
+          <entry key="css" value="1533" />
+          <entry key="js" value="26255" />
           <entry key="json" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="1511" />
+          <entry key="CSS" value="1533" />
           <entry key="JSON" value="3" />
-          <entry key="JavaScript" value="24109" />
+          <entry key="JavaScript" value="26255" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="25" />
-          <entry key="js" value="239" />
+          <entry key="css" value="27" />
+          <entry key="js" value="261" />
           <entry key="json" value="7" />
           <entry key="ts" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="25" />
+          <entry key="CSS" value="27" />
           <entry key="JSON" value="7" />
-          <entry key="JavaScript" value="239" />
+          <entry key="JavaScript" value="261" />
           <entry key="TypeScript" value="2" />
         </counts>
       </usages-collector>
@@ -89,10 +78,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/common/header/style.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
+            <state relative-caret-position="-153">
               <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
@@ -102,19 +100,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
+        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="48" column="10" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/home/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2793">
-              <caret line="133" selection-start-line="133" selection-end-line="133" />
+            <state relative-caret-position="567">
+              <caret line="51" column="2" selection-start-line="51" selection-start-column="2" selection-end-line="53" selection-end-column="5" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -123,34 +112,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/home/components/jumbotrion/index.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/store/actionCreators.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1155">
-              <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#52#0" expanded="true" />
-              </folding>
+            <state>
+              <caret column="32" selection-start-column="32" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/home/components/jumbotrion/store/reducer.js">
+        <entry file="file://$PROJECT_DIR$/src/common/header/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+            <state relative-caret-position="126">
+              <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -159,10 +133,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/index.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/home/components/jumbotrion/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="210">
+              <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -171,30 +145,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/store/reducer.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/home/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="630">
+              <caret line="30" column="83" selection-start-line="30" selection-start-column="83" selection-end-line="30" selection-end-column="83" />
               <folding>
-                <element signature="e#0#34#0" expanded="true" />
+                <element signature="e#0#52#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/commonStyle/transition.css">
+        <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+            <state relative-caret-position="372">
+              <caret line="19" column="45" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/commonStyle/base.css">
+        <entry file="file://$PROJECT_DIR$/src/store/actionTypesWithSaga.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="110" selection-start-line="110" selection-end-line="110" />
+            <state relative-caret-position="337">
+              <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/store/reducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -233,16 +223,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/pages/home/store/index.js" />
-        <option value="$PROJECT_DIR$/src/store/request/index.js" />
-        <option value="$PROJECT_DIR$/src/common/header/store/reducer.js" />
         <option value="$PROJECT_DIR$/package-lock.json" />
         <option value="$PROJECT_DIR$/src/pages/home/components/articleSummary-alpha/style.js" />
         <option value="$PROJECT_DIR$/src/commonStyle/formElement.css" />
         <option value="$PROJECT_DIR$/src/commonStyle/flexDisplay.css" />
         <option value="$PROJECT_DIR$/src/pages/home/components/articleSummary-alpha/index.js" />
         <option value="$PROJECT_DIR$/src/common/footer/style.js" />
-        <option value="$PROJECT_DIR$/src/common/header/style.js" />
         <option value="$PROJECT_DIR$/src/pages/home/components/index.js" />
         <option value="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js" />
         <option value="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/index.js" />
@@ -263,8 +249,6 @@
         <option value="$PROJECT_DIR$/src/common/button/index.js" />
         <option value="$PROJECT_DIR$/src/pages/home/components/jumbotrion/store/actionCreators.js" />
         <option value="$PROJECT_DIR$/src/pages/home/store/actionCreators.js" />
-        <option value="$PROJECT_DIR$/src/common/header/index.js" />
-        <option value="$PROJECT_DIR$/src/pages/home/style.js" />
         <option value="$PROJECT_DIR$/src/commonStyle/commonClassNameConstant.js" />
         <option value="$PROJECT_DIR$/src/pages/home/components/forMore/index.js" />
         <option value="$PROJECT_DIR$/src/pages/article/components/index.js" />
@@ -272,18 +256,24 @@
         <option value="$PROJECT_DIR$/src/pages/article/store/reducer.js" />
         <option value="$PROJECT_DIR$/src/pages/article/index.js" />
         <option value="$PROJECT_DIR$/src/store/reducer.js" />
-        <option value="$PROJECT_DIR$/src/store/actionTypesWithSaga.js" />
         <option value="$PROJECT_DIR$/src/store/actionCreators.js" />
         <option value="$PROJECT_DIR$/src/pages/home/components/jumbotrion/store/reducer.js" />
         <option value="$PROJECT_DIR$/src/pages/home/store/reducer.js" />
-        <option value="$PROJECT_DIR$/src/pages/home/components/jumbotrion/index.js" />
         <option value="$PROJECT_DIR$/src/store/saga.js" />
-        <option value="$PROJECT_DIR$/src/commonStyle/base.css" />
-        <option value="$PROJECT_DIR$/src/pages/home/index.js" />
-        <option value="$PROJECT_DIR$/src/commonStyle/transition.css" />
-        <option value="$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js" />
-        <option value="$PROJECT_DIR$/src/pages/articlePage/index.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/commonStyle/transition.css" />
+        <option value="$PROJECT_DIR$/src/pages/home/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/home/style.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/style.js" />
+        <option value="$PROJECT_DIR$/src/commonStyle/base.css" />
+        <option value="$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/home/components/jumbotrion/index.js" />
+        <option value="$PROJECT_DIR$/src/common/header/index.js" />
+        <option value="$PROJECT_DIR$/src/common/header/style.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/store/actionCreators.js" />
+        <option value="$PROJECT_DIR$/src/store/actionTypesWithSaga.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/store/reducer.js" />
       </list>
     </option>
   </component>
@@ -333,7 +323,8 @@
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="commonStyle" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="header" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
@@ -360,7 +351,25 @@
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="store" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="articleSummary" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -426,7 +435,7 @@
       <workItem from="1546090424577" duration="2425000" />
       <workItem from="1546092879883" duration="77296000" />
       <workItem from="1546583549797" duration="5555000" />
-      <workItem from="1546597460467" duration="8046000" />
+      <workItem from="1546597460467" duration="19439000" />
     </task>
     <task id="LOCAL-00001" summary="normal commit">
       <created>1545478161955</created>
@@ -519,17 +528,23 @@
       <option name="project" value="LOCAL" />
       <updated>1546588157026</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="normal commit">
+      <created>1546609270912</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1546609270912</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="207974000" />
+    <option name="totallyTimeSpent" value="219367000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17767504" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17767504" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -543,7 +558,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.24255319" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.24255319" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -587,34 +602,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="normal commit" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/common/footer/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="74" selection-start-line="9" selection-start-column="74" selection-end-line="9" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummary/style.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commonStyle/fontSize.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="33" column="16" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react/cjs/react.development.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="1820" column="2" selection-start-line="1820" selection-start-column="2" selection-end-line="1820" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/home/components/forMore/style.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -716,13 +703,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/components/jumbotrion/style.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-447">
-          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/home/components/jumbotrion/store/actionCreators.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -740,13 +720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/style.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/home/components/forMore/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
@@ -754,20 +727,6 @@
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/common/header/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/common/header/style.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -831,16 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/store/actionCreators.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/actionTypesWithSaga.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="20" column="79" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/home/store/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
@@ -861,12 +810,84 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="48" column="10" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commonStyle/transition.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/style.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/common/footer/style.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/components/jumbotrion/style.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commonStyle/fontSize.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummary/style.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commonStyle/commonClassNameConstant.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/style.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/commonStyle/base.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="121" selection-start-line="121" selection-end-line="121" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/home/store/reducer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-461">
+        <state relative-caret-position="357">
           <caret line="17" column="24" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="24" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/saga.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="798">
+          <caret line="38" column="84" selection-start-line="38" selection-start-column="84" selection-end-line="38" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -881,109 +902,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/saga.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="38" column="84" selection-start-line="38" selection-start-column="84" selection-end-line="38" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commonStyle/commonClassNameConstant.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commonStyle/base.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="110" selection-start-line="110" selection-end-line="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/commonStyle/transition.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/store/reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/home/components/jumbotrion/store/reducer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        <state relative-caret-position="210">
+          <caret line="28" selection-start-line="28" selection-end-line="38" selection-end-column="1" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/src/common/header/style.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="48" column="10" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="10" />
+        <state relative-caret-position="273">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/components/jumbotrion/index.js">
+    <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+        <state relative-caret-position="-153">
+          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
           <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
+            <element signature="e#0#49#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/home/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2793">
-          <caret line="133" selection-start-line="133" selection-end-line="133" />
+        <state relative-caret-position="630">
+          <caret line="30" column="83" selection-start-line="30" selection-start-column="83" selection-end-line="30" selection-end-column="83" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/home/components/jumbotrion/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+        <state relative-caret-position="210">
+          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
           <folding>
-            <element signature="e#0#49#0" expanded="true" />
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/common/header/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/store/actionCreators.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="32" selection-start-column="32" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="51" column="2" selection-start-line="51" selection-start-column="2" selection-end-line="53" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/actionTypesWithSaga.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="19" column="45" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/store/reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>

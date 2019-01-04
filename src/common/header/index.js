@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { Link } from 'react-keeper'
 import { HeaderWrapper, HeaderMainArea, LogoWrapper, Logo, NavItem, NavItemWrapper } from './style'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
@@ -10,16 +11,21 @@ class Header extends PureComponent {
     }
 
     render() {
+
         const { height, backgroundColor, basicUIFeatures } = this.props
+
+        const HOME_PATH = '/'
+
         return (
             <HeaderWrapper className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
                            height={height}
                            backgroundColor={backgroundColor}>
                 <HeaderMainArea widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
+                    <Link to={HOME_PATH}>
                         <Logo className={CommonClassNameConstants.FONT_LARGE +
-                                         CommonClassNameConstants.FONT_SONG +
-                                         CommonClassNameConstants.CURSORP +
-                                         CommonClassNameConstants.FLEX_COLUMN_CENTER}>
+                                        CommonClassNameConstants.FONT_SONG +
+                                        CommonClassNameConstants.CURSORP +
+                                        CommonClassNameConstants.FLEX_COLUMN_CENTER}>
                             <div>
                                 远方有鱼
                             </div>
@@ -28,6 +34,8 @@ class Header extends PureComponent {
                                 It's a Wonderful Life
                             </div>
                         </Logo>
+                    </Link>
+
                         <NavItemWrapper>
                             <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
                                                 CommonClassNameConstants.CURSORP}>

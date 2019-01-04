@@ -1,5 +1,6 @@
 import React, {Fragment, PureComponent} from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-keeper'
 import { JumbotronWrapper, JumbotronBackground, Title, Summary, ImageWrapper, ImageFirst, ImageSecond, ImageThird } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { Button } from "../../../../common/button";
@@ -18,6 +19,8 @@ class Jumbotron extends PureComponent {
                 articlePreviewImages
               } = this.props
 
+        const ARTICLE_PAGE_PATH = '/article/'
+
         return (
 
                 <JumbotronWrapper className={CommonClassNameConstants.COMMON_BORDER_RADIUS}>
@@ -25,17 +28,22 @@ class Jumbotron extends PureComponent {
 
 
                     <Title className={CommonClassNameConstants.CURSORP}>
-                        {article.get('article_title')}
+                        <h1>{article.get('article_title')}</h1>
 
                     </Title>
                     <Summary className={CommonClassNameConstants.CURSORP}>
                         {articleSummary}
                     </Summary>
 
-                    <Button color="black"
-                            backgroundColor="#eeeeee"
-                            margin="15px 0 0 0"
-                            borderColor="#DDDDDD" style={{width:'100px'}}>查看全文</Button>
+                    <Link to={ARTICLE_PAGE_PATH + article.get('article_id')}>
+                        <Button color="black"
+                                backgroundColor="#eeeeee"
+                                margin="15px 0 0 0"
+                                borderColor="#DDDDDD" style={{width:'100px'}}>
+                            查看全文
+                        </Button>
+                    </Link>
+
 
                     <ImageWrapper>
                         <ImageFirst  className={CommonClassNameConstants.CURSORP +
@@ -61,10 +69,6 @@ class Jumbotron extends PureComponent {
         this.props.getData(this.props.jumbotronArticleId)
     }
 
-    componentDidUpdate() {
-
-        this.props.dispatchRoadedAndShowJumbotronAction()
-    }
 }
 
 const mapState = (state) => ({

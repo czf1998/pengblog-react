@@ -13,16 +13,18 @@ class ArticleSummary extends PureComponent {
 
     render() {
 
-        const { basicUIFeatures, article, isMobile } = this.props
+        const { basicUIFeatures, article } = this.props
 
         const withPreviewImage = article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined
+
+        const ARTICLE_PAGE_PATH = '/article/'
 
         return (
 
             <ArticleSummaryWrapper className={CommonClassNameConstants.COMMON_PADDING +
                                               CommonClassNameConstants.COMMON_BORDER_RADIUS}
                                    widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
-                <Link to={'/article/' + article.get('article_id')}>
+                <Link to={ARTICLE_PAGE_PATH + article.get('article_id')}>
                     <Title className={CommonClassNameConstants.FONT_MIDDLE +
                                       CommonClassNameConstants.CURSORP}>
                         <span className={CommonClassNameConstants.HOVER_UNDERLINE}>

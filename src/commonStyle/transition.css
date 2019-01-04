@@ -4,7 +4,7 @@
 
 .slide-up-group-enter{
     opacity: 0.01;
-    transform: translateY(50%);
+    transform: translateY(30%);
 }
 
 .slide-up-group-enter-active {
@@ -14,7 +14,7 @@
 }
 
 .zoom-enter, .zoom-appear{
-    opacity: 0.9;
+    opacity: 0.01;
     transform: scale(0.95);
 }
 

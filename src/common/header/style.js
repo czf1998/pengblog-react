@@ -20,6 +20,7 @@ export const HeaderMainArea = styled.div`
     `*/
 
 export const Logo = styled.div`
+        height: 100%;
         padding: 0 20px;
         color: white;
     `
