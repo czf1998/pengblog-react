@@ -1,12 +1,11 @@
 import React, {Component, Fragment} from 'react';
 import { Provider } from 'react-redux'
+import { BrowserRouter, Route } from 'react-keeper'
 import store from './store'
 import './commonStyle'
 import { createObserveScrollTopOfElementElAction } from "./store/actionCreators";
-import { BrowserRouter, Route } from 'react-router-dom'
-import { CSSTransition } from 'react-transition-group'
 import Home from './pages/home'
-import Article from './pages/article'
+import ArticlePage from './pages/articlePage'
 import { CommonClassNameConstants } from './commonStyle'
 
 import { Header, Footer, HeaderMobile } from './common'
@@ -41,8 +40,8 @@ class App extends Component {
                                 <Header/>
                             </div>
                     }
-                    <Route path='/' exact component={Home}/>
-                    <Route path='/article/:article_id' exact component={Article}/>
+                    <Route path='/'  cache exact component={Home}/>
+                    <Route path='/article/:article_id' exact component={ArticlePage}/>
                 </Fragment>
             </BrowserRouter>
 

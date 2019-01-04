@@ -13,12 +13,12 @@
     transition: all var(--animate-time) ease;
 }
 
-.zoom-enter{
-    opacity: 0.01;
-    transform: scale(0.5);
+.zoom-enter, .zoom-appear{
+    opacity: 0.9;
+    transform: scale(0.95);
 }
 
-.zoom-enter-active{
+.zoom-enter-active, .zoom-appear-active{
     opacity: 1;
     transform: scale(1);
     transition: all var(--animate-time) ease;

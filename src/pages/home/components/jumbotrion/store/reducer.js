@@ -18,6 +18,8 @@ export default (state = defaultState, action) => {
     return state
 }
 
+
+
 const handleJumbotronSummary = (article_summary) => {
     let idx = article_summary.indexOf('。') < 0 ? article_summary.indexOf('.') : article_summary.indexOf('。')
     idx = idx < 0 ? 15 : idx

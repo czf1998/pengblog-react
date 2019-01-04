@@ -2,7 +2,9 @@ import { DELIVER_ARTICLE_LIST_DATA_TO_HOME,
          DELIVER_ARTICLE_DATA_TO_JUMBOTRON,
          RECORD_SCROLL_TOP_OF_ELEMENT_EL,
          OBSERVE_SCROLL_TOP_OF_ELEMENT_EL,
-         DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE } from './actionTypesWithSaga'
+         DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
+         NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY,
+         NOTICE_HOME_STORE_JUMBOTRON_DATA_READY } from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -31,4 +33,12 @@ export const createDeliverArticleDataToJumbotronAction = (value) => ({
 export const createDeliverArticleDataToArticlePage = (value) => ({
     type: DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
     value
+})
+
+export const createNoticeHomeStoreArticleListDataReadyAction = () => ({
+    type: NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY
+})
+
+export const createNoticeHomeStoreJumbotronDataReadyAction = () => ({
+    type: NOTICE_HOME_STORE_JUMBOTRON_DATA_READY
 })

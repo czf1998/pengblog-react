@@ -15,3 +15,7 @@ export const ROADED_AND_SHOW_JUMBOTRON = 'roadedAndShowJumbotron'
 export const GET_ARTICLE_PAGE_DATA = 'getArticlePageData'
 
 export const DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE = 'deliverArticleDataToArticlePage'
+
+export const NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY = 'noticeHomeStoreArticleListDataReady'
+
+export const NOTICE_HOME_STORE_JUMBOTRON_DATA_READY = 'noticeHomeStoreJumbotronDataReady'

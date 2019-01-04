@@ -13,7 +13,6 @@ class Home extends PureComponent {
 
     }
 
-
     render() {
 
         const {basicUIFeatures,
@@ -28,36 +27,29 @@ class Home extends PureComponent {
                 jumbotronArticleIdDefault,
                 animateTime} = this.props
 
-
-
         return (
-            <HomeWrapper className={CommonClassNameConstants.FADE_IN}>
+            <HomeWrapper>
                 <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
 
                 {
                     !isMobile &&
                     <Fragment>
                         <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
-
-                            <div>
                                 {
                                     jumbotronArticleId !== jumbotronArticleIdDefault
                                     &&
-                                        <div className={CommonClassNameConstants.ZOOM_IN}>
-                                            <Jumbotron jumbotronArticleId={jumbotronArticleId}/>
-                                        </div>
-
-
+                                    <CSSTransition in={true}
+                                                   classNames={CommonClassNameConstants.ZOOM}
+                                                   appear={true}
+                                                   timeout={animateTime}>
+                                        <Jumbotron jumbotronArticleId={jumbotronArticleId}/>
+                                    </CSSTransition>
                                 }
-                            </div>
-
-
                         <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
                     </Fragment>
                 }
 
-
-                <TransitionGroup className={CommonClassNameConstants.TRANSITION_GROUP_PATCH}>
+                <TransitionGroup>
                     {
                         articleList.map((item, index) => {
                             if( !isMobile && index === 0)
@@ -66,8 +58,7 @@ class Home extends PureComponent {
                                 <CSSTransition
                                     key={item.get('article_title')}
                                     timeout={animateTime}
-                                    classNames={CommonClassNameConstants.SLIDE_UP_GROUP}
-                                    appear>
+                                    classNames={CommonClassNameConstants.SLIDE_UP_GROUP}>
                                     <Fragment>
                                         {
                                             isMobile ?
@@ -97,12 +88,12 @@ class Home extends PureComponent {
     }
 
     componentDidMount() {
+        if(this.props.articleListDataIsReady)
+            return
         this.props.getData(this.props.startIndex, this.props.pageScale)
     }
 
 }
-
-
 
 const mapState = (state) => ({
         startIndex: state.get('home').get('startIndex'),
@@ -117,7 +108,8 @@ const mapState = (state) => ({
         isLoading: state.get('home').get('isLoading'),
         loadedAndShowJumbotron: state.get('home').get('loadedAndShowJumbotron'),
         animateTime: state.get('rootState').get('basicUIFeatures').get('animateTime'),
-        minHeight: state.get('rootState').get('heightOfBrowser')
+        minHeight: state.get('rootState').get('heightOfBrowser'),
+        articleListDataIsReady: state.get('home').get('articleListDataIsReady')
     })
 
 const mapActions = (dispatch) => {
@@ -138,7 +130,5 @@ const mapActions = (dispatch) => {
         }
     }
 }
-
-
 
 export default connect(mapState, mapActions)(Home)

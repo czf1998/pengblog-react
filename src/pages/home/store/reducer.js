@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 import {
     DELIVER_ARTICLE_LIST_DATA_TO_HOME,
-    GET_HOME_ARTICLE_LIST_DATA,
+    GET_HOME_ARTICLE_LIST_DATA, NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY, NOTICE_HOME_STORE_JUMBOTRON_DATA_READY,
     ROADED_AND_SHOW_JUMBOTRON
 } from '../../../store/actionTypesWithSaga'
 
@@ -14,7 +14,10 @@ const defaultState = fromJS({
     jumbotronArticleIdDefault: 0,
     jumbotronArticleId: 0,
     isLoading: false,
-    loadedAndShowJumbotron: false
+    loadedAndShowJumbotron: false,
+    jumbotronDataIsReady: false,
+    articleListDataIsReady: false,
+    isAllReady: false
 })
 
 export default (state = defaultState, action) => {
@@ -26,6 +29,16 @@ export default (state = defaultState, action) => {
             startIndex: (state.get('currentPage') + 1) * state.get('pageScale'),
             jumbotronArticleId: state.get('articleList').get(0) ? state.get('articleList').get(0).get('article_id') : action.value.articleList[0].article_id,
             isLoading: false
+        })
+    }
+    if(action.type === NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY) {
+        return state.merge({
+            articleListDataIsReady: true
+        })
+    }
+    if(action.type === NOTICE_HOME_STORE_JUMBOTRON_DATA_READY) {
+        return state.merge({
+            jumbotronDataIsReady: true
         })
     }
     if(action.type === GET_HOME_ARTICLE_LIST_DATA) {

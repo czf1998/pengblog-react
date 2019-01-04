@@ -7,10 +7,9 @@ const defaultState = fromJS({
 
 export default (state = defaultState, action) => {
     if(action.type === DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE) {
-        /*return state.merge({
+        return state.merge({
             article: fromJS(action.value)
-        })*/
-        console.log(action.value)
+        })
     }
     return state
 }

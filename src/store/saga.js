@@ -8,7 +8,9 @@ import {
 import { createDeliverArticleDataToHomeAction,
          createRecordScrollTopOfElementElAction,
          createDeliverArticleDataToJumbotronAction,
-        createDeliverArticleDataToArticlePage
+         createDeliverArticleDataToArticlePage,
+         createNoticeHomeStoreArticleListDataReadyAction,
+         createNoticeHomeStoreJumbotronDataReadyAction
         } from './actionCreators'
 import { ArticleRequest } from './request'
 
@@ -25,6 +27,8 @@ function* ajaxHomeArticleListData(action) {
         const res = yield ArticleRequest.RequestArticleListData(action.value.startIndex, action.value.pageScale)
         let appointDataAction = createDeliverArticleDataToHomeAction(res.data)
         yield put(appointDataAction)
+        let noticeAction = createNoticeHomeStoreArticleListDataReadyAction()
+        yield put(noticeAction)
     }catch (err) {
         console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_DATA  ERR: ' + err)
     }
@@ -35,6 +39,8 @@ function* ajaxJumbotronArticleData(action) {
         const res = yield ArticleRequest.RequestArticleData(action.value.article_id)
         let appointDataAction = createDeliverArticleDataToJumbotronAction(res.data)
         yield put(appointDataAction)
+        let noticeAction = createNoticeHomeStoreJumbotronDataReadyAction()
+        yield put(noticeAction)
     }catch (err) {
         console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_DATA  ERR: ' + err)
     }
