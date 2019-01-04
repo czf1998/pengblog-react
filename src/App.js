@@ -6,6 +6,7 @@ import { createObserveScrollTopOfElementElAction } from "./store/actionCreators"
 import { BrowserRouter, Route } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import Home from './pages/home'
+import Article from './pages/article'
 import { CommonClassNameConstants } from './commonStyle'
 
 import { Header, Footer, HeaderMobile } from './common'
@@ -30,19 +31,18 @@ class App extends Component {
 
     return (
         <Provider store={store}>
-            {
-                isMobile ?
-                    <HeaderMobile/>
-                :
-                    <div className={CommonClassNameConstants.SLIDE_DOWN}>
-                        <Header/>
-                    </div>
-            }
-
             <BrowserRouter>
                 <Fragment>
+                    {
+                        isMobile ?
+                            <HeaderMobile/>
+                            :
+                            <div className={CommonClassNameConstants.FADE_IN}>
+                                <Header/>
+                            </div>
+                    }
                     <Route path='/' exact component={Home}/>
-                    <Route path='/article' exact render={() => <div>article</div>}/>
+                    <Route path='/article/:article_id' exact component={Article}/>
                 </Fragment>
             </BrowserRouter>
 

@@ -10,11 +10,7 @@ class Home extends PureComponent {
 
     constructor(props) {
         super(props)
-        this.state = {
-            show: true
-        }
 
-        this.trigger = this.trigger.bind(this)
     }
 
 
@@ -30,11 +26,9 @@ class Home extends PureComponent {
                 currentPage,
                 jumbotronArticleId,
                 jumbotronArticleIdDefault,
-                loadedAndShowJumbotron,
                 animateTime} = this.props
 
 
-        const {show} = this.state
 
         return (
             <HomeWrapper className={CommonClassNameConstants.FADE_IN}>
@@ -106,15 +100,6 @@ class Home extends PureComponent {
         this.props.getData(this.props.startIndex, this.props.pageScale)
     }
 
-    componentDidUpdate() {
-        console.log('update')
-    }
-
-    trigger(){
-        this.setState({
-            show: !this.state.show
-        })
-    }
 }
 
 

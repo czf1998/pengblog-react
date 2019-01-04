@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { ArticleSummaryWrapper, Title, SummaryWrapper, ArticleInfoColumn, ArticleContent, PreviewImage } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 
@@ -22,14 +22,14 @@ class ArticleSummary extends PureComponent {
             <ArticleSummaryWrapper className={CommonClassNameConstants.COMMON_PADDING +
                                               CommonClassNameConstants.COMMON_BORDER_RADIUS}
                                    widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
-                <Link to='/article'>
+                <NavLink to={'/article/' + article.get('article_id')}>
                     <Title className={CommonClassNameConstants.FONT_MIDDLE +
                                       CommonClassNameConstants.CURSORP}>
                         <span className={CommonClassNameConstants.HOVER_UNDERLINE}>
                             {article.get('article_title')}
                         </span>
                     </Title>
-                </Link>
+                </NavLink>
 
 
 

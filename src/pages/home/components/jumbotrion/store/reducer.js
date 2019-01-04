@@ -2,18 +2,16 @@ import { fromJS } from 'immutable'
 import { DELIVER_ARTICLE_DATA_TO_JUMBOTRON } from '../../../../../store/actionTypesWithSaga'
 
 const defaultState = fromJS({
-    articleTitle:'',
+    article:{},
     articleSummary: '',
-    articleAuthor: '',
     articlePreviewImages: []
 })
 
 export default (state = defaultState, action) => {
     if(action.type === DELIVER_ARTICLE_DATA_TO_JUMBOTRON){
         return state.merge({
-            articleTitle: action.value.article_title,
+            article: fromJS(action.value),
             articleSummary: handleJumbotronSummary(action.value.article_summary),
-            articleAuthot: action.value.article_author,
             articlePreviewImages: fromJS(extractImageUrl(action.value.article_content))
         })
     }

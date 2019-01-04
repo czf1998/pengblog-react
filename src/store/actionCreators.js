@@ -2,7 +2,7 @@ import { DELIVER_ARTICLE_LIST_DATA_TO_HOME,
          DELIVER_ARTICLE_DATA_TO_JUMBOTRON,
          RECORD_SCROLL_TOP_OF_ELEMENT_EL,
          OBSERVE_SCROLL_TOP_OF_ELEMENT_EL,
-         ROADED_AND_SHOW_JUMBOTRON } from './actionTypesWithSaga'
+         DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE } from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -28,3 +28,7 @@ export const createDeliverArticleDataToJumbotronAction = (value) => ({
     value
 })
 
+export const createDeliverArticleDataToArticlePage = (value) => ({
+    type: DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
+    value
+})

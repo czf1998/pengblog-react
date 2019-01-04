@@ -13,7 +13,7 @@ class Jumbotron extends PureComponent {
 
     render() {
 
-        const { articleTitle,
+        const { article,
                 articleSummary,
                 articlePreviewImages
               } = this.props
@@ -25,7 +25,7 @@ class Jumbotron extends PureComponent {
 
 
                     <Title className={CommonClassNameConstants.CURSORP}>
-                        {articleTitle}
+                        {article.get('article_title')}
 
                     </Title>
                     <Summary className={CommonClassNameConstants.CURSORP}>
@@ -65,8 +65,7 @@ class Jumbotron extends PureComponent {
 }
 
 const mapState = (state) => ({
-    articleTitle: state.get('jumbotron').get('articleTitle'),
-    articleAuthor: state.get('jumbotron').get('articleAuthor'),
+    article: state.get('jumbotron').get('article'),
     articleSummary: state.get('jumbotron').get('articleSummary'),
     articlePreviewImages: state.get('jumbotron').get('articlePreviewImages')
 })
