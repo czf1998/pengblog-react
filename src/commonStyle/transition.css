@@ -91,7 +91,7 @@
 
 @keyframes zoom-in-animation {
     0%{
-        transform: scale(0.5);
+        transform: scale(0.9);
     }
 
     100%{

@@ -1,52 +1,73 @@
 import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
 import { ArticleSummary, ArticleSummaryMobile, Jumbotron, ForMore }from './components'
 import { ArticlePageWrapper, ArticleTitle, ArticleMainArea, ArticleMeta, ArticleContent } from './style'
 import { actionCreators } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
+import Placeholder from './placeholder'
+import { DateFormat } from "../../exJs";
 
 class ArticlePage extends PureComponent {
 
     constructor(props) {
         super(props)
+        window.scrollTo(0, 0);
     }
 
 
     render() {
 
-        const { article, widthOfMainArea } = this.props
+        const { article, widthOfMainArea, dataReady } = this.props
 
         return (
-            <ArticlePageWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
-                <ArticleMainArea widthOfMainArea={widthOfMainArea}>
 
-                    <ArticleTitle className={CommonClassNameConstants.COMMON_PADDING}>
-                        <h2>{article.get('article_title')}</h2>
-                    </ArticleTitle>
+                <ArticlePageWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
+                    <ArticleMainArea widthOfMainArea={widthOfMainArea}>
+                        {
+                            dataReady ?
 
-                    <ArticleMeta className={CommonClassNameConstants.COMMON_PADDING +
-                                            CommonClassNameConstants.FONT_DARK}>
-                        <span className={CommonClassNameConstants.CLICKABLE}>
-                            [{ article.get('article_label') }]
-                        </span>
-                        &nbsp;| 作者:&nbsp;
-                        <span>
-                            { article.get('article_author') }
-                        </span>
-                    </ArticleMeta>
+                            <div className={CommonClassNameConstants.FADE_IN}>
+                                    <ArticleTitle className={CommonClassNameConstants.COMMON_PADDING}>
+                                        <h2>{article.get('article_title')}</h2>
+                                    </ArticleTitle>
 
-                    <ArticleContent className={CommonClassNameConstants.COMMON_PADDING}
-                                    dangerouslySetInnerHTML={{__html:article.get('article_content')}}>
-                    </ArticleContent>
+                                    <ArticleMeta className={CommonClassNameConstants.COMMON_PADDING +
+                                                 CommonClassNameConstants.FONT_DARK}>
+                                        <span className={CommonClassNameConstants.CLICKABLE}>
+                                            [{ article.get('article_label') }]
+                                        </span>
+                                        &nbsp;| 作者:&nbsp;
+                                        <span>
+                                            { article.get('article_author') }
+                                        </span>
+                                    </ArticleMeta>
 
-                </ArticleMainArea>
-            </ArticlePageWrapper>
+                                    <ArticleContent className={CommonClassNameConstants.COMMON_PADDING}
+                                                    dangerouslySetInnerHTML={{__html:article.get('article_content')}}>
+                                    </ArticleContent>
 
+                                <ArticleMeta className={CommonClassNameConstants.COMMON_PADDING +
+                                             CommonClassNameConstants.FONT_DARK}>
+                                    发布于:&nbsp;
+                                    <span>
+                                            { DateFormat('yyyy-MM-dd', new Date(article.get('article_releaseTime'))) }
+                                    </span>
+                                </ArticleMeta>
+                            </div>
+                            :
+                            <Placeholder/>
+                        }
+
+
+                    </ArticleMainArea>
+                </ArticlePageWrapper>
         )
     }
 
     componentDidMount() {
-        this.props.getData(this.props.params.article_id)
+        this.props.getData(this.props.match.params.article_id)
     }
 
     componentWillUnmount() {
@@ -58,7 +79,8 @@ class ArticlePage extends PureComponent {
 
 const mapState = (state) => ({
         article: state.get('articlePage').get('article'),
-        widthOfMainArea: state.get('rootState').get('basicUIFeatures').get('widthOfMainArea')
+        widthOfMainArea: state.get('rootState').get('basicUIFeatures').get('widthOfMainArea'),
+        dataReady: state.get('articlePage').get('dataReady')
     })
 
 const mapActions = (dispatch) => {
@@ -79,4 +101,4 @@ const mapActions = (dispatch) => {
 
 
 
-export default connect(mapState, mapActions)(ArticlePage)
+export default connect(mapState, mapActions)(withRouter(ArticlePage))

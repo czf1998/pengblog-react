@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-keeper'
+//import { Link } from 'react-keeper'
+import { Link } from 'react-router-dom'
 import { ArticleSummaryWrapper, Title, SummaryWrapper, ArticleInfoColumn, ArticleContent, PreviewImage } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 
@@ -55,23 +56,25 @@ class ArticleSummary extends PureComponent {
                                 发布于: 2017年02月14日
                             </span>
                     </ArticleInfoColumn>
+                    <Link to={ARTICLE_PAGE_PATH + article.get('article_id')}>
+                        <ArticleContent className={CommonClassNameConstants.CURSORP +
+                                                   CommonClassNameConstants.OVER_3ROWS_HANDLE}
+                                        withPreviewImage={withPreviewImage}>
 
-                    <ArticleContent className={CommonClassNameConstants.CURSORP +
-                                               CommonClassNameConstants.OVER_3ROWS_HANDLE}
-                                    withPreviewImage={withPreviewImage}>
+                            {article.get('article_summary')}
 
-                        {article.get('article_summary')}
-
-                    </ArticleContent>
-
+                        </ArticleContent>
+                    </Link>
                 </SummaryWrapper>
 
                 {
                     withPreviewImage
                     &&
-                    <PreviewImage className={CommonClassNameConstants.CURSORP +
-                                             CommonClassNameConstants.HOVER_ENLARGE}
-                                  imageUrl={article.get('article_previewImageUrl')}/>
+                    <Link to={ARTICLE_PAGE_PATH + article.get('article_id')}>
+                        <PreviewImage className={CommonClassNameConstants.CURSORP +
+                                                 CommonClassNameConstants.HOVER_ENLARGE}
+                                      imageUrl={article.get('article_previewImageUrl')}/>
+                    </Link>
                 }
 
             </ArticleSummaryWrapper>

@@ -5,6 +5,8 @@ import {
     ROADED_AND_SHOW_JUMBOTRON
 } from '../../../store/actionTypesWithSaga'
 
+import { TRIGGER_HAS_BEEN_MOUNT_ONCE } from "./actionType";
+
 const defaultState = fromJS({
     startIndex: 0,
     pageScale: 4,
@@ -17,7 +19,7 @@ const defaultState = fromJS({
     loadedAndShowJumbotron: false,
     jumbotronDataIsReady: false,
     articleListDataIsReady: false,
-    isAllReady: false
+    hasBeenMountOnce: false
 })
 
 export default (state = defaultState, action) => {
@@ -49,6 +51,11 @@ export default (state = defaultState, action) => {
     if(action.type === ROADED_AND_SHOW_JUMBOTRON) {
         return state.merge({
             loadedAndShowJumbotron: true
+        })
+    }
+    if(action.type === TRIGGER_HAS_BEEN_MOUNT_ONCE) {
+        return state.merge({
+            hasBeenMountOnce: true
         })
     }
     return state

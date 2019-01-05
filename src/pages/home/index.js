@@ -1,10 +1,12 @@
 import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { withRouter } from 'react-router-dom'
 import { ArticleSummary, ArticleSummaryMobile, Jumbotron, ForMore }from './components'
 import { HomeWrapper, Gap } from './style'
 import { actionCreators } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
+import { Loading } from '../../common'
 
 class Home extends PureComponent {
 
@@ -25,64 +27,74 @@ class Home extends PureComponent {
                 currentPage,
                 jumbotronArticleId,
                 jumbotronArticleIdDefault,
-                animateTime} = this.props
+                animateTime,
+                hasBeenMountOnce,
+                articleListDataIsReady} = this.props
+
+        const jumbotronTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.ZOOM_IN
 
         return (
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
-                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
-
                 {
-                    !isMobile &&
-                    <Fragment>
+                    articleListDataIsReady ?
+
+                    <div className={hasBeenMountOnce ? '' : CommonClassNameConstants.FADE_IN}>
                         <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+
+                        {
+                            !isMobile &&
+                            <Fragment>
+                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
                                 {
                                     jumbotronArticleId !== jumbotronArticleIdDefault
                                     &&
-                                    <CSSTransition in={true}
-                                                   classNames={CommonClassNameConstants.ZOOM}
-                                                   appear={true}
-                                                   timeout={animateTime}>
+                                    <div className={jumbotronTransitionClassName}>
                                         <Jumbotron jumbotronArticleId={jumbotronArticleId}/>
-                                    </CSSTransition>
+                                    </div>
                                 }
-                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
-                    </Fragment>
+                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
+                            </Fragment>
+                        }
+
+                        <TransitionGroup className={CommonClassNameConstants.TRANSITION_GROUP_PATCH}>
+                            {
+                                articleList.map((item, index) => {
+                                    if( !isMobile && index === 0)
+                                        return
+                                    return (
+                                        <CSSTransition
+                                            key={item.get('article_title')}
+                                            timeout={animateTime}
+                                            classNames={CommonClassNameConstants.SLIDE_UP_GROUP}>
+                                            <Fragment>
+                                                {
+                                                    isMobile ?
+                                                        <ArticleSummaryMobile article={item}/>
+                                                        :
+                                                        <ArticleSummary article={item}/>
+                                                }
+                                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+                                            </Fragment>
+                                        </CSSTransition>
+                                    )
+                                })
+                            }
+                        </TransitionGroup>
+
+
+                        <ForMore isLoading={isLoading}
+                                 noMore={currentPage === maxPage}
+                                 clickHandler={this.props.getMoreArticleListData.bind(this)}
+                                 meta={[startIndex,
+                                     pageScale,
+                                     maxPage,
+                                     currentPage,
+                                     isLoading]}/>
+                    </div>
+                    :
+                    <Loading/>
                 }
 
-                <TransitionGroup className={CommonClassNameConstants.TRANSITION_GROUP_PATCH}>
-                    {
-                        articleList.map((item, index) => {
-                            if( !isMobile && index === 0)
-                                return
-                            return (
-                                <CSSTransition
-                                    key={item.get('article_title')}
-                                    timeout={animateTime}
-                                    classNames={CommonClassNameConstants.SLIDE_UP_GROUP}>
-                                    <Fragment>
-                                        {
-                                            isMobile ?
-                                                <ArticleSummaryMobile article={item}/>
-                                                :
-                                                <ArticleSummary article={item}/>
-                                        }
-                                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
-                                    </Fragment>
-                                </CSSTransition>
-                            )
-                        })
-                    }
-                </TransitionGroup>
-
-
-                <ForMore isLoading={isLoading}
-                         noMore={currentPage === maxPage}
-                         clickHandler={this.props.getMoreArticleListData.bind(this)}
-                         meta={[startIndex,
-                                pageScale,
-                                maxPage,
-                                currentPage,
-                                isLoading]}/>
             </HomeWrapper>
         )
     }
@@ -91,6 +103,10 @@ class Home extends PureComponent {
         if(this.props.articleListDataIsReady)
             return
         this.props.getData(this.props.startIndex, this.props.pageScale)
+    }
+
+    componentWillUnmount() {
+        this.props.triggerHasBeenMountOnce()
     }
 
 }
@@ -109,7 +125,8 @@ const mapState = (state) => ({
         loadedAndShowJumbotron: state.get('home').get('loadedAndShowJumbotron'),
         animateTime: state.get('rootState').get('basicUIFeatures').get('animateTime'),
         minHeight: state.get('rootState').get('heightOfBrowser'),
-        articleListDataIsReady: state.get('home').get('articleListDataIsReady')
+        articleListDataIsReady: state.get('home').get('articleListDataIsReady'),
+        hasBeenMountOnce: state.get('home').get('hasBeenMountOnce')
     })
 
 const mapActions = (dispatch) => {
@@ -123,12 +140,15 @@ const mapActions = (dispatch) => {
             dispatch(action)
         },
         getMoreArticleListData(startIndex, pageScale, maxPage, currentPage, isLoading){
-            console.log(this)
             if(maxPage === currentPage || isLoading)
                 return
             this.props.getData(startIndex, pageScale)
+        },
+        triggerHasBeenMountOnce() {
+            const action = actionCreators.createTriggerHasBeenMountOnce()
+            dispatch(action)
         }
     }
 }
 
-export default connect(mapState, mapActions)(Home)
+export default connect(mapState, mapActions)(withRouter(Home))

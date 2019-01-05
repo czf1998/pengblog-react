@@ -8,8 +8,8 @@ export const ArticlePageWrapper = styled.div`
 
 export const ArticleMainArea = styled.div`
         background: white;
-        width: ${props => props.widthOfMainArea};
-        @media(max-width:${props => props.widthOfMainArea}){
+        width: ${props => props.widthOfMainArea}px;
+        @media(max-width:${props => props.widthOfMainArea}px){
             width: 100%;
         }
     `
@@ -32,5 +32,5 @@ export const ArticleContent = styled.div`
 
 export const Gap = styled.div`
         height: ${props => props.gapHeight};
-        width: ${props => props.widthOfMainArea};
+        width: ${props => props.widthOfMainArea}px;
     `

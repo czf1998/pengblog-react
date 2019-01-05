@@ -1,15 +1,15 @@
 import React, {Component, Fragment} from 'react';
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route } from 'react-keeper'
+//import { BrowserRouter, Route } from 'react-keeper'
+import { BrowserRouter, Route } from 'react-router-dom'
 import store from './store'
 import './commonStyle'
 import { createObserveScrollTopOfElementElAction } from "./store/actionCreators";
-import Home from './pages/home'
-import ArticlePage from './pages/articlePage'
+import HomeLoadable from './pages/home/loadable'
+import ArticlePageLoadable from './pages/articlePage/loadable'
 import { CommonClassNameConstants } from './commonStyle'
-
-import { Header, Footer, HeaderMobile } from './common'
-
+import { Header, Footer, HeaderMobile, ScrollToTop } from './common'
+import Test from './pages/test'
 
 class App extends Component {
     constructor(props){
@@ -30,27 +30,25 @@ class App extends Component {
 
     return (
         <Provider store={store}>
+
             <BrowserRouter>
                 <Fragment>
                     {
                         isMobile ?
                             <HeaderMobile/>
                             :
-                            <div className={CommonClassNameConstants.FADE_IN}>
-                                <Header/>
-                            </div>
+                            <Header/>
                     }
-                    <Route path='/'  cache exact component={Home}/>
-                    <Route path='/article/:article_id' exact component={ArticlePage}/>
+                    <Route exact path='/article/:article_id' component={ArticlePageLoadable}/>
+
+                    <Route path='/'  exact component={HomeLoadable}/>
+                    <Route path='/test' exact component={Test}/>
                 </Fragment>
             </BrowserRouter>
 
             <div className={CommonClassNameConstants.FADE_IN}>
                 <Footer/>
             </div>
-
-
-
 
         </Provider>
     );

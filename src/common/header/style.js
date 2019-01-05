@@ -3,6 +3,9 @@ import styled from 'styled-components'
 const height = "70px"
 
 export const HeaderWrapper = styled.div`
+        z-index: 1;
+        position: sticky;
+        top: 0;
         height: ${height};
         background: ${props => props.backgroundColor};
     `
@@ -11,7 +14,7 @@ export const HeaderMainArea = styled.div`
         display: flex;
         justify-content: space-between;
         height: inherit;
-        width: ${props => props.widthOfMainArea};
+        width: ${props => props.widthOfMainArea}px;
     `
 
 /*export const LogoWrapper = styled.div`

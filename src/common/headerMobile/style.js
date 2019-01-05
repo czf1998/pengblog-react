@@ -12,7 +12,7 @@ export const HeaderMainArea = styled.div`
         display: flex;
         justify-content: space-between;
         height: inherit;
-        width: ${props => props.widthOfMainArea};
+        width: ${props => props.widthOfMainArea}px;
     `
 
 /*export const LogoWrapper = styled.div`

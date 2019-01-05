@@ -2,18 +2,21 @@ import { fromJS } from 'immutable'
 import { DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE, RESET_ARTICLE_PAGE_STORE } from '../../../store/actionTypesWithSaga'
 
 const defaultState = fromJS({
-    article: {}
+    article: {},
+    dataReady: false
 })
 
 export default (state = defaultState, action) => {
     if(action.type === DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE) {
         return state.merge({
-            article: fromJS(handleImgLabelWidth(action.value))
+            article: fromJS(handleImgLabelWidth(action.value)),
+            dataReady: true
         })
     }
     if(action.type === RESET_ARTICLE_PAGE_STORE) {
         return state.merge({
-            article: fromJS({})
+            article: fromJS({}),
+            dataReady: false
         })
     }
     return state

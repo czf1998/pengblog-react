@@ -12,8 +12,9 @@ const defaultState = fromJS({
     basicUIFeatures: {
         borderRadius: '4px',
         boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
-        widthOfMainArea: '750px',
-        animateTime: 1000
+        widthOfMainArea: 750,
+        animateTime: 1000,
+        placeholderSpeed: 1
     },
     scrollTopOfElementEl: 0,
     offsetTopOfElementEl: 0,
@@ -36,7 +37,7 @@ export default combineReducers({
                 widthOfBrowser: window.innerWidth,
                 basicUIFeatures: window.innerWidth > 750 ?
                     fromJS(state.get('basicUIFeatures').merge({
-                    widthOfMainArea: '750px'
+                    widthOfMainArea: 750
                 }))
                     :
                     fromJS(state.get('basicUIFeatures').merge({

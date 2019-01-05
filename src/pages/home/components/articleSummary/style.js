@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const ArticleSummaryWrapper = styled.div`
-        width: ${props => props.widthOfMainArea};
+        width: ${props => props.widthOfMainArea}px;
         position: relative;
         background: white;
         border: 1px solid #ebebeb;
@@ -21,6 +21,7 @@ export const ArticleInfoColumn = styled.div`
     `
 
 export const ArticleContent = styled.div`
+        color: black;
         line-height:1.5;
         -webkit-line-clamp: ${props => props.withPreviewImage ? '3' : '2'};
     `
