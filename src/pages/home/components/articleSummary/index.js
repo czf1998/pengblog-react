@@ -80,6 +80,7 @@ class ArticleSummary extends PureComponent {
             </ArticleSummaryWrapper>
         );
     }
+    
 }
 
 const mapState = (state) => {
