@@ -4,17 +4,23 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ArticleSummaryWrapper, Title, SummaryWrapper, ArticleInfoColumn, ArticleContent, PreviewImage } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
+import { GET_COUNT_OF_COMMENT } from '../../../../store/actionTypesWithSaga'
 
 
 class ArticleSummary extends PureComponent {
 
     constructor(props) {
         super(props)
+        this.state = {
+            countOfAllComment: 0
+        }
     }
 
     render() {
 
         const { basicUIFeatures, article } = this.props
+
+        const { countOfAllComment } = this.state
 
         const withPreviewImage = article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined
 
@@ -50,7 +56,7 @@ class ArticleSummary extends PureComponent {
                             </span>
                             &nbsp;|&nbsp;
                             <span className={CommonClassNameConstants.FONT_SMALL}>
-                                评论: <span className={CommonClassNameConstants.CLICKABLE}>6</span>
+                                评论: <span className={CommonClassNameConstants.CLICKABLE}>{countOfAllComment}</span>
                             </span>
                             <span style={{float:"right"}}>
                                 发布于: 2017年02月14日
@@ -80,15 +86,26 @@ class ArticleSummary extends PureComponent {
             </ArticleSummaryWrapper>
         );
     }
-    
-}
 
-const mapState = (state) => {
-    return  {
-        isMobile: state.get('rootState').get('isMobile'),
-        basicUIFeatures: state.get('rootState').get('basicUIFeatures')
+    componentDidMount() {
+        this.props.getCountOfAllComment(this.props.article.get('article_id'), this)
     }
 }
 
+const mapState = (state) => ({
+    isMobile: state.get('rootState').get('isMobile'),
+    basicUIFeatures: state.get('rootState').get('basicUIFeatures')
+})
 
-export default connect(mapState)(ArticleSummary)
+const mapActions = (dispatch) => ({
+    getCountOfAllComment: (article_id, _this) => {
+        const action = {
+            type: GET_COUNT_OF_COMMENT,
+            value: article_id,
+            host: _this
+        }
+        dispatch(action)
+    }
+})
+
+export default connect(mapState, mapActions)(ArticleSummary)

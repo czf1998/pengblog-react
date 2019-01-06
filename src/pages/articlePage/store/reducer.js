@@ -31,7 +31,8 @@ export default (state = defaultState, action) => {
     }
     if(action.type === DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE) {
         return state.merge({
-            commentList: fromJS(action.value.commentList)
+            commentList: fromJS(action.value.commentList),
+            countOfAllComment: action.value.countOfComment
         })
     }
     return state
