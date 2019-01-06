@@ -34,11 +34,8 @@ class Home extends PureComponent {
         const jumbotronTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.ZOOM_IN
 
         return (
+            articleListDataIsReady ?
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
-
-                {
-                    articleListDataIsReady ?
-                    <Fragment>
                         <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
 
                         {
@@ -56,31 +53,27 @@ class Home extends PureComponent {
                             </Fragment>
                         }
 
-                        <TransitionGroup className={CommonClassNameConstants.TRANSITION_GROUP_PATCH}>
                             {
                                 articleList.map((item, index) => {
                                     if( !isMobile && index === 0)
                                         return
                                     return (
-                                        <CSSTransition
-                                            key={item.get('article_title')}
-                                            timeout={animateTime}
-                                            classNames={CommonClassNameConstants.SLIDE_UP_GROUP}>
+                                        <div key={item.get('article_title')}>
                                             <Fragment>
                                                 {
                                                     isMobile ?
                                                         <ArticleSummaryMobile article={item}/>
                                                         :
-                                                        <ArticleSummary article={item}/>
+                                                        <div className={CommonClassNameConstants.SLIDE_UP}>
+                                                            <ArticleSummary article={item}/>
+                                                        </div>
                                                 }
                                                 <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
                                             </Fragment>
-                                        </CSSTransition>
+                                        </div>
                                     )
                                 })
                             }
-                        </TransitionGroup>
-
 
                         <ForMore isLoading={isLoading}
                                  noMore={currentPage === maxPage}
@@ -90,12 +83,9 @@ class Home extends PureComponent {
                                      maxPage,
                                      currentPage,
                                      isLoading]}/>
-                    </Fragment>
-                    :
-                    <Loading/>
-                }
-
             </HomeWrapper>
+            :
+            <Loading/>
         )
     }
 

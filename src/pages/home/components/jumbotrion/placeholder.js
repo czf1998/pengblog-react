@@ -19,7 +19,7 @@ class JumbotronLoader extends PureComponent{
 
         const width = widthOfMainArea - paddingRight * 2
 
-        const height = 350 - paddingTop * 2
+        const height = 400 - paddingTop * 2
 
         return (
             <ContentLoader

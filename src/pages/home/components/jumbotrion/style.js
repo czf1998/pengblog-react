@@ -5,7 +5,7 @@ export const JumbotronWrapper = styled.div`
         display:flex;
         flex-direction: column;
         justify-content: center;
-        min-height: 350px;
+        height: 400px;
         padding: 64px 32px;
         width: 750px;
         background: #eeeeee;
@@ -15,17 +15,31 @@ export const JumbotronWrapper = styled.div`
 
 export const Title = styled.div`
         font-size: 48px;
-        line-height: 1.2;
+        line-height: 60px;
+        height: 120px;
         margin-bottom: 10px;
         font-weight: lighter;
         width: 60%;
+        display: -webkit-box;
+        /* autoprefixer: off */
+        -webkit-box-orient: vertical;
+        /* autoprefixer: on */
+        -webkit-line-clamp: 2;
+        overflow: hidden;
     `
 
 export const Summary = styled.div`
         font-size: 20px;
-        line-height: 1.2;
+        line-height: 25px;
+        height: 100px;
         font-weight: 100;
         width: 60%;
+        display: -webkit-box;
+        /* autoprefixer: off */
+        -webkit-box-orient: vertical;
+        /* autoprefixer: on */
+        -webkit-line-clamp: 4;
+        overflow: hidden;
     `
 
 export const ImageWrapper = styled.div`
