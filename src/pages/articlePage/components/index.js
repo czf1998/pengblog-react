@@ -1,3 +1,3 @@
+import Comment from './comment'
 
-
-export {}
+export { Comment }

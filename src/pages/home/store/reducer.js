@@ -9,7 +9,7 @@ import { TRIGGER_HAS_BEEN_MOUNT_ONCE } from "./actionType";
 
 const defaultState = fromJS({
     startIndex: 0,
-    pageScale: 4,
+    pageScale: 7,
     maxPage: 1,
     currentPage: 0,
     articleList: [],

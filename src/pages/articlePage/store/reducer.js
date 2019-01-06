@@ -1,8 +1,18 @@
 import { fromJS } from 'immutable'
-import { DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE, RESET_ARTICLE_PAGE_STORE } from '../../../store/actionTypesWithSaga'
+import {
+    DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
+    DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
+    RESET_ARTICLE_PAGE_STORE
+} from '../../../store/actionTypesWithSaga'
 
 const defaultState = fromJS({
     article: {},
+    startIndex: 0,
+    pageScale: 5,
+    maxPage: 1,
+    currentPage: 0,
+    countOfAllComment: 0,
+    commentList: [],
     dataReady: false
 })
 
@@ -17,6 +27,11 @@ export default (state = defaultState, action) => {
         return state.merge({
             article: fromJS({}),
             dataReady: false
+        })
+    }
+    if(action.type === DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE) {
+        return state.merge({
+            commentList: fromJS(action.value.commentList)
         })
     }
     return state

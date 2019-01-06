@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { withRouter } from 'react-router-dom'
 import { ArticleSummary, ArticleSummaryMobile, Jumbotron, ForMore }from './components'
-import { HomeWrapper, Gap } from './style'
+import { HomeWrapper, Gap, CustomBackground } from './style'
 import { actionCreators } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
 import { Loading } from '../../common'
@@ -35,10 +35,10 @@ class Home extends PureComponent {
 
         return (
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
+
                 {
                     articleListDataIsReady ?
-
-                    <div className={hasBeenMountOnce ? '' : CommonClassNameConstants.FADE_IN}>
+                    <Fragment>
                         <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
 
                         {
@@ -90,7 +90,7 @@ class Home extends PureComponent {
                                      maxPage,
                                      currentPage,
                                      isLoading]}/>
-                    </div>
+                    </Fragment>
                     :
                     <Loading/>
                 }

@@ -19,7 +19,6 @@ export const Title = styled.div`
         margin-bottom: 10px;
         font-weight: lighter;
         width: 60%;
-
     `
 
 export const Summary = styled.div`

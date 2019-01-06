@@ -11,11 +11,11 @@ export function RequestArticleData(article_id) {
 }
 
 
-export const RequestArticleListData = (startIndex, pageScale) => {
+export const RequestArticleListData = (value) => {
     let config = {
         params: {
-            startIndex: startIndex,
-            pageScale: pageScale
+            startIndex: value.startIndex,
+            pageScale: value.pageScale
         }
     }
     return axios.get(Api.API_GET_ARTICLE_LIST_BY_LIMITINDEX, config)

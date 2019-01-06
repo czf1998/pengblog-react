@@ -59,3 +59,5 @@ export const SLIDE_UP = 'slide-up'
 export const FADE_IN = 'fade-in'
 
 export const ZOOM_IN = 'zoom-in'
+
+export const SLIDE_UP_FAST = 'slide-up-fast'

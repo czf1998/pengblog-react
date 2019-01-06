@@ -4,7 +4,8 @@ import { DELIVER_ARTICLE_LIST_DATA_TO_HOME,
          OBSERVE_SCROLL_TOP_OF_ELEMENT_EL,
          DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
          NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY,
-         NOTICE_HOME_STORE_JUMBOTRON_DATA_READY } from './actionTypesWithSaga'
+         NOTICE_HOME_STORE_JUMBOTRON_DATA_READY,
+         DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE } from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -41,4 +42,9 @@ export const createNoticeHomeStoreArticleListDataReadyAction = () => ({
 
 export const createNoticeHomeStoreJumbotronDataReadyAction = () => ({
     type: NOTICE_HOME_STORE_JUMBOTRON_DATA_READY
+})
+
+export const createDeliverCommentListDataToArticlePageAction = (value) => ({
+    type: DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
+    value
 })

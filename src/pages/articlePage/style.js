@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-
+const gapLineColor = '#E6E6E6'
 
 export const ArticlePageWrapper = styled.div`
         background: #f7f7f7;
@@ -33,4 +33,15 @@ export const ArticleContent = styled.div`
 export const Gap = styled.div`
         height: ${props => props.gapHeight};
         width: ${props => props.widthOfMainArea}px;
+    `
+
+export const CommentTitle = styled.div`
+        font-size: 22px;
+        font-weight: bold;
+    `
+
+export const GapLine = styled.div`
+        height: 1px;
+        margin: 0 30px;
+        border-bottom: solid 1px ${gapLineColor};
     `

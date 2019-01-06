@@ -63,10 +63,12 @@
 
 @keyframes slide-up-animation {
     0%{
-        transform: translateY(100%);
+        opacity: 0.01;
+        transform: translateY(15px);
     }
 
     100%{
+        opacity: 1;
         transform: translateY(0%);
     }
 }
