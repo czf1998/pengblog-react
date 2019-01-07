@@ -2,7 +2,7 @@ import { Button } from './button'
 import Footer from './footer'
 import Header from './header'
 import HeaderMobile from './headerMobile'
-import ScrollToTop from './scrollToTop'
 import Loading from './loading'
+import PrograssBar from './prograssBar'
 
-export { Button, Footer, Header, HeaderMobile, ScrollToTop, Loading }
+export { Button, Footer, Header, HeaderMobile, Loading, PrograssBar }

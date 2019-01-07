@@ -5,7 +5,8 @@ import { DELIVER_ARTICLE_LIST_DATA_TO_HOME,
          DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
          NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY,
          NOTICE_HOME_STORE_JUMBOTRON_DATA_READY,
-         DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE } from './actionTypesWithSaga'
+         DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
+         DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME } from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -47,4 +48,12 @@ export const createNoticeHomeStoreJumbotronDataReadyAction = () => ({
 export const createDeliverCommentListDataToArticlePageAction = (value) => ({
     type: DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
     value
+})
+
+export const createDeliverCountOfCommentDataToHomeAction = (article_id, countOfAllComment) => ({
+    type: DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME,
+    value: {
+        article_id: article_id,
+        countOfAllComment: countOfAllComment
+    }
 })

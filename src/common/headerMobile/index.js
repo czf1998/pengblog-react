@@ -12,7 +12,8 @@ class Header extends PureComponent {
     render() {
         const { height, backgroundColor, basicUIFeatures } = this.props
         return (
-            <HeaderWrapper className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER} height={height} backgroundColor={backgroundColor}>
+            <HeaderWrapper height={height} 
+                           backgroundColor={backgroundColor}>
                 <HeaderMainArea widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
                         <Logo className={CommonClassNameConstants.FONT_LARGE +
                                          CommonClassNameConstants.FONT_SONG +

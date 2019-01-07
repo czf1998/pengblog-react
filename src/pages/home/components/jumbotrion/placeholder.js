@@ -23,7 +23,7 @@ class JumbotronLoader extends PureComponent{
 
         return (
             <ContentLoader
-                    height={175}
+                    height={280}
                     width={width}
                     speed={speed}
                     primaryColor="#f3f3f3"
@@ -31,10 +31,12 @@ class JumbotronLoader extends PureComponent{
                 <rect x="0" y="0" rx="4" ry="4" width="380" height="50" />
                 <rect x="0" y="60" rx="4" ry="4" width="250" height="50" />
                 <rect x="0" y="120" rx="5" ry="5" width="380" height="25" />
-                <rect x="0" y="150" rx="5" ry="5" width="300" height="25" />
-                <rect x="410" y="0" rx="5" ry="5" width="250" height="100" />
-                <rect x="410" y="105" rx="5" ry="5" width="120" height="70" />
-                <rect x="540" y="105" rx="5" ry="5" width="120" height="70" />
+                <rect x="0" y="150" rx="5" ry="5" width="380" height="25" />
+                <rect x="0" y="180" rx="5" ry="5" width="300" height="25" />
+
+                <rect x="410" y="0" rx="5" ry="5" width="250" height="130" />
+                <rect x="410" y="135" rx="5" ry="5" width="120" height="70" />
+                <rect x="540" y="135" rx="5" ry="5" width="120" height="70" />
             </ContentLoader>
         )
     }

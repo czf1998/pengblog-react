@@ -2,7 +2,7 @@ import { fromJS } from 'immutable'
 import {
     DELIVER_ARTICLE_LIST_DATA_TO_HOME,
     GET_HOME_ARTICLE_LIST_DATA, NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY, NOTICE_HOME_STORE_JUMBOTRON_DATA_READY,
-    ROADED_AND_SHOW_JUMBOTRON
+    ROADED_AND_SHOW_JUMBOTRON, DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME
 } from '../../../store/actionTypesWithSaga'
 
 import { TRIGGER_HAS_BEEN_MOUNT_ONCE } from "./actionType";
@@ -31,6 +31,16 @@ export default (state = defaultState, action) => {
             startIndex: (state.get('currentPage') + 1) * state.get('pageScale'),
             jumbotronArticleId: state.get('articleList').get(0) ? state.get('articleList').get(0).get('article_id') : action.value.articleList[0].article_id,
             isLoading: false
+        })
+    }
+    if(action.type === DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME) {
+        return state.merge({
+            articleList: state.get('articleList').map((item) => {
+                if(item.get('article_id') === action.value.article_id) {
+                     return item.set('countOfAllComment', action.value.countOfAllComment)
+                }
+                return item
+            })
         })
     }
     if(action.type === NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY) {

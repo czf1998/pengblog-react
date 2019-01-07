@@ -12,7 +12,8 @@ import { createDeliverArticleDataToHomeAction,
          createDeliverArticleDataToArticlePage,
          createNoticeHomeStoreArticleListDataReadyAction,
          createNoticeHomeStoreJumbotronDataReadyAction,
-         createDeliverCommentListDataToArticlePageAction
+         createDeliverCommentListDataToArticlePageAction,
+         createDeliverCountOfCommentDataToHomeAction
         } from './actionCreators'
 import { ArticleRequest, CommentRequest } from './request'
 
@@ -29,9 +30,8 @@ function* mySaga() {
 function* ajaxCountOfComment(action) {
     try{
         const res = yield CommentRequest.RequestCountOfComment(action.value)
-        action.host.setState({
-            countOfAllComment:res.data
-        })
+        let appointDataAction = createDeliverCountOfCommentDataToHomeAction(action.value, res.data)
+        yield put(appointDataAction)
     }catch (err) {
         console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
     }

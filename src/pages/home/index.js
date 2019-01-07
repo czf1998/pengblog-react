@@ -32,6 +32,7 @@ class Home extends PureComponent {
                 articleListDataIsReady} = this.props
 
         const jumbotronTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.ZOOM_IN
+        const articleSummaryListTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.SLIDE_UP
 
         return (
             articleListDataIsReady ?
@@ -58,19 +59,17 @@ class Home extends PureComponent {
                                     if( !isMobile && index === 0)
                                         return
                                     return (
-                                        <div key={item.get('article_title')}>
-                                            <Fragment>
-                                                {
-                                                    isMobile ?
-                                                        <ArticleSummaryMobile article={item}/>
-                                                        :
-                                                        <div className={CommonClassNameConstants.SLIDE_UP}>
-                                                            <ArticleSummary article={item}/>
-                                                        </div>
-                                                }
-                                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
-                                            </Fragment>
-                                        </div>
+                                        <Fragment key={item.get('article_title')}>
+                                            {
+                                                isMobile ?
+                                                    <ArticleSummaryMobile article={item}/>
+                                                    :
+                                                    <div className={articleSummaryListTransitionClassName}>
+                                                        <ArticleSummary article={item}  className={articleSummaryListTransitionClassName}/>
+                                                    </div>
+                                            }
+                                            <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+                                        </Fragment>
                                     )
                                 })
                             }

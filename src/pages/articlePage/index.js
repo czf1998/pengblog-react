@@ -25,9 +25,8 @@ class ArticlePage extends PureComponent {
 
         return (
                 dataReady ?
-                <ArticlePageWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER +
-                                               CommonClassNameConstants.SLIDE_UP_FAST}>
-                    <ArticleMainArea widthOfMainArea={widthOfMainArea}>
+                <ArticlePageWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
+                    <ArticleMainArea widthOfMainArea={widthOfMainArea} className={CommonClassNameConstants.SLIDE_UP_FAST}>
                         <ArticleTitle className={CommonClassNameConstants.COMMON_PADDING}>
                             <h2>{article.get('article_title')}</h2>
                         </ArticleTitle>

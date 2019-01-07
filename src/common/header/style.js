@@ -8,6 +8,7 @@ export const HeaderWrapper = styled.div`
         top: 0;
         height: ${height};
         background: ${props => props.backgroundColor};
+        border-bottom: solid 1px #f0f0f0;
     `
 
 export const HeaderMainArea = styled.div`
@@ -25,7 +26,7 @@ export const HeaderMainArea = styled.div`
 export const Logo = styled.div`
         height: 100%;
         padding: 0 20px;
-        color: white;
+        color: ${props => props.metaColor};
     `
 
 export const NavItemWrapper = styled.div`
@@ -35,11 +36,11 @@ export const NavItemWrapper = styled.div`
     `
 
 export const NavItem = styled.div`
-        color: #E6E6E6;
+        color: grey;
         line-height: ${height};
         padding: 0 20px;
         &:hover{
-            color: white;
+            color: black;
         }
     `
 

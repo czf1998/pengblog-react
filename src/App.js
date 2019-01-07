@@ -8,7 +8,7 @@ import { createObserveScrollTopOfElementElAction } from "./store/actionCreators"
 import HomeLoadable from './pages/home/loadable'
 import ArticlePageLoadable from './pages/articlePage/loadable'
 import { CommonClassNameConstants } from './commonStyle'
-import { Header, Footer, HeaderMobile, ScrollToTop } from './common'
+import { Header, Footer, HeaderMobile, PrograssBar } from './common'
 import Test from './pages/test'
 
 class App extends Component {
@@ -30,6 +30,8 @@ class App extends Component {
 
     return (
         <Provider store={store}>
+
+            <PrograssBar/>
 
             <BrowserRouter>
                 <Fragment>

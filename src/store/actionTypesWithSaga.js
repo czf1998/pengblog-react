@@ -27,3 +27,5 @@ export const GET_COMMENT_LIST_DATA = 'getCommentListData'
 export const DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE = 'deliverCommentListDataToArticlePage'
 
 export const GET_COUNT_OF_COMMENT = 'getCountOfComment'
+
+export const DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME = 'deliverCountOfCommentDataToHome'

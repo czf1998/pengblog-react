@@ -11,16 +11,12 @@ class ArticleSummary extends PureComponent {
 
     constructor(props) {
         super(props)
-        this.state = {
-            countOfAllComment: 0
-        }
+
     }
 
     render() {
 
-        const { basicUIFeatures, article } = this.props
-
-        const { countOfAllComment } = this.state
+        const { basicUIFeatures, article, hasBeenMountOnce } = this.props
 
         const withPreviewImage = article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined
 
@@ -56,7 +52,7 @@ class ArticleSummary extends PureComponent {
                             </span>
                             &nbsp;|&nbsp;
                             <span className={CommonClassNameConstants.FONT_SMALL}>
-                                评论: <span className={CommonClassNameConstants.CLICKABLE}>{countOfAllComment}</span>
+                                评论: <span className={CommonClassNameConstants.CLICKABLE}>{article.get('countOfAllComment')}</span>
                             </span>
                             <span style={{float:"right"}}>
                                 发布于: 2017年02月14日
@@ -88,13 +84,16 @@ class ArticleSummary extends PureComponent {
     }
 
     componentDidMount() {
+        if(this.props.hasBeenMountOnce)
+            return
         this.props.getCountOfAllComment(this.props.article.get('article_id'), this)
     }
 }
 
 const mapState = (state) => ({
     isMobile: state.get('rootState').get('isMobile'),
-    basicUIFeatures: state.get('rootState').get('basicUIFeatures')
+    basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
+    hasBeenMountOnce: state.get('home').get('hasBeenMountOnce')
 })
 
 const mapActions = (dispatch) => ({
