@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import { Provider } from 'react-redux'
 //import { BrowserRouter, Route } from 'react-keeper'
+import Router from './router'
 import { BrowserRouter, Route } from 'react-router-dom'
 import store from './store'
 import './commonStyle'
@@ -33,20 +34,7 @@ class App extends Component {
 
             <PrograssBar/>
 
-            <BrowserRouter>
-                <Fragment>
-                    {
-                        isMobile ?
-                            <HeaderMobile/>
-                            :
-                            <Header/>
-                    }
-                    <Route exact path='/article/:article_id' component={ArticlePageLoadable}/>
-
-                    <Route path='/'  exact component={HomeLoadable}/>
-                    <Route path='/test' exact component={Test}/>
-                </Fragment>
-            </BrowserRouter>
+            <Router/>
 
             <div className={CommonClassNameConstants.FADE_IN}>
                 <Footer/>

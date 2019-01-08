@@ -75,6 +75,10 @@ class Jumbotron extends PureComponent {
         this.props.getData(this.props.jumbotronArticleId)
     }
 
+    componentDidUpdate() {
+        this.props.jumbotronDataIsReady && this.props.prograssBarHandler.next()
+    }
+
 }
 
 const mapState = (state) => ({
@@ -82,7 +86,8 @@ const mapState = (state) => ({
     articleSummary: state.get('jumbotron').get('articleSummary'),
     articlePreviewImages: state.get('jumbotron').get('articlePreviewImages'),
     jumbotronDataIsReady: state.get('home').get('jumbotronDataIsReady'),
-    hasBeenMountOnce: state.get('home').get('hasBeenMountOnce')
+    hasBeenMountOnce: state.get('home').get('hasBeenMountOnce'),
+    prograssBarHandler: state.get('prograssBar').get('prograssBarHandler')
 })
 
 const mapActions = (dispatch) => ({

@@ -82,6 +82,12 @@ class ArticlePage extends PureComponent {
     }
 
     componentDidMount() {
+        /*读取缓存*/
+        if(this.props.cacheArticle && (this.props.cacheArticle.get('article_id') == this.props.match.params.article_id)){
+            this.props.loadArticleCache()
+            return
+        }
+        
         this.props.getArticleData(this.props.match.params.article_id)
         this.props.getCommentListData(this.props.match.params.article_id, this.props.startIndex, this.props.pageScale)
     }
@@ -94,6 +100,7 @@ class ArticlePage extends PureComponent {
 
 
 const mapState = (state) => ({
+        cacheArticle: state.get('articlePage').get('cache').get('article'),
         article: state.get('articlePage').get('article'),
         widthOfMainArea: state.get('rootState').get('basicUIFeatures').get('widthOfMainArea'),
         dataReady: state.get('articlePage').get('dataReady'),
@@ -123,6 +130,10 @@ const mapActions = (dispatch) => {
         },
         resetStore() {
             const action = actionCreators.createResetArticlePageStoreAction()
+            dispatch(action)
+        },
+        loadArticleCache() {
+            const action = actionCreators.createLoadArticleCacheAction()
             dispatch(action)
         }
     }

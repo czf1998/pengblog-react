@@ -29,7 +29,8 @@ class Home extends PureComponent {
                 jumbotronArticleIdDefault,
                 animateTime,
                 hasBeenMountOnce,
-                articleListDataIsReady} = this.props
+                articleListDataIsReady,
+                prograssBarHandler} = this.props
 
         const jumbotronTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.ZOOM_IN
         const articleSummaryListTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.SLIDE_UP
@@ -38,6 +39,7 @@ class Home extends PureComponent {
             articleListDataIsReady ?
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
                         <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+
 
                         {
                             !isMobile &&
@@ -54,25 +56,25 @@ class Home extends PureComponent {
                             </Fragment>
                         }
 
-                            {
-                                articleList.map((item, index) => {
-                                    if( !isMobile && index === 0)
-                                        return
-                                    return (
-                                        <Fragment key={item.get('article_title')}>
-                                            {
-                                                isMobile ?
-                                                    <ArticleSummaryMobile article={item}/>
-                                                    :
-                                                    <div className={articleSummaryListTransitionClassName}>
-                                                        <ArticleSummary article={item}  className={articleSummaryListTransitionClassName}/>
-                                                    </div>
-                                            }
-                                            <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
-                                        </Fragment>
-                                    )
-                                })
-                            }
+                        {
+                            articleList.map((item, index) => {
+                                if( !isMobile && index === 0)
+                                    return
+                                return (
+                                    <Fragment key={item.get('article_title')}>
+                                        {
+                                            isMobile ?
+                                                <ArticleSummaryMobile article={item}/>
+                                                :
+                                                <div className={articleSummaryListTransitionClassName}>
+                                                    <ArticleSummary article={item}  className={articleSummaryListTransitionClassName}/>
+                                                </div>
+                                        }
+                                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+                                    </Fragment>
+                                )
+                            })
+                        }
 
                         <ForMore isLoading={isLoading}
                                  noMore={currentPage === maxPage}
@@ -92,6 +94,7 @@ class Home extends PureComponent {
         if(this.props.articleListDataIsReady)
             return
         this.props.getData(this.props.startIndex, this.props.pageScale)
+        this.props.prograssBarHandler.next()
     }
 
     componentWillUnmount() {
@@ -115,7 +118,8 @@ const mapState = (state) => ({
         animateTime: state.get('rootState').get('basicUIFeatures').get('animateTime'),
         minHeight: state.get('rootState').get('heightOfBrowser'),
         articleListDataIsReady: state.get('home').get('articleListDataIsReady'),
-        hasBeenMountOnce: state.get('home').get('hasBeenMountOnce')
+        hasBeenMountOnce: state.get('home').get('hasBeenMountOnce'),
+        prograssBarHandler: state.get('prograssBar').get('prograssBarHandler')
     })
 
 const mapActions = (dispatch) => {

@@ -1,6 +1,8 @@
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { actionCreators } from './store'
 const Nanobar = require('nanobar');
+
 
 class PrograssBar extends PureComponent {
 
@@ -9,16 +11,38 @@ class PrograssBar extends PureComponent {
     }
 
     render() {
+
+        const { prograssBarStatus } = this.props
+
         return (
-            <Fragment></Fragment>
+            <Fragment key={prograssBarStatus}>
+
+            </Fragment>
         )
     }
 
     componentDidMount() {
         let prograssBarHandler = handlePrograssBar()
-        this.props.appointPrograssBarHandler()
+        this.props.appointPrograssBarHandler(prograssBarHandler)
+    }
+
+    componentDidUpdata() {
+        console.log(this.props.prograssBarStatus)
     }
 }
+
+/*
+const prograssRunning = () => {
+    let prograssBarHandler =
+    prograssBarHandler.next()
+}
+
+const prograssEnding = () => {
+    let prograssBarHandler = handlePrograssBar()
+    prograssBarHandler.next()
+    prograssBarHandler.next()
+}
+*/
 
 function* handlePrograssBar(){
 
@@ -37,17 +61,28 @@ function* handlePrograssBar(){
         nanobar.go(postIndex)
     }
 
+    let timers = []
+
     yield milePost.forEach((item, index) => {
-            window.setTimeout(() => {checkMilePost(item)}, index * 100)
+        timers.push(window.setTimeout(() => {checkMilePost(item)}, index * 100))
+    })
+
+    timers.forEach((item) => {
+        clearTimeout(item)
     })
 
     yield nanobar.go(100)
 }
 
-const mapActions = (dispatch) => ({
-    appointPrograssBarHandler() {
+const mapState = (state) => ({
+    prograssBarStatus: state.get('prograssBar').get('prograssBarStatus')
+})
 
+const mapActions = (dispatch) => ({
+    appointPrograssBarHandler(prograssBarHandler) {
+        const action = actionCreators.createAppointPrograssBarHandlerAction(prograssBarHandler)
+        dispatch(action)
     }
 })
 
-export default connect(null, mapActions)(PrograssBar)
+export default connect(mapState, mapActions)(PrograssBar)
