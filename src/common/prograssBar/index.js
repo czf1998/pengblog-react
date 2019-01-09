@@ -16,73 +16,68 @@ class PrograssBar extends PureComponent {
 
         return (
             <Fragment key={prograssBarStatus}>
-
             </Fragment>
         )
     }
 
     componentDidMount() {
-        let prograssBarHandler = handlePrograssBar()
-        this.props.appointPrograssBarHandler(prograssBarHandler)
+        const nanobar = new Nanobar();
+        const nanobarManager = {
+            nanobar: nanobar,
+            nanobarGoToTheMilePost: nanobarGoToTheMilePost(nanobar, this.props.dispatcher),
+            nanobarGoToTheEnd: nanobarGoToTheEnd(nanobar)
+        }
+        this.props.appointNanobarManager(nanobarManager)
     }
 
-    componentDidUpdata() {
-        console.log(this.props.prograssBarStatus)
+    componentDidUpdate() {
+
+    }
+
+}
+
+const nanobarGoToTheMilePost = (nanobar, dispatcher) => {
+
+    return function(){
+        nanobar.go(40)
+
+        let i = 40
+
+        let prograssTimer = setInterval(() => {
+            i++
+            if(i < 90)
+                nanobar.go(i)
+        }, 500)
+
+        const recordTimerAction = actionCreators.createRecordNanobarTimerAction(prograssTimer)
+        dispatcher(recordTimerAction)
     }
 }
 
-/*
-const prograssRunning = () => {
-    let prograssBarHandler =
-    prograssBarHandler.next()
+const nanobarGoToTheEnd = (nanobar) => {
+    return function(nanobarTimer) {
+        clearInterval(nanobarTimer)
+        nanobar.go(100)
+    }
 }
 
-const prograssEnding = () => {
-    let prograssBarHandler = handlePrograssBar()
-    prograssBarHandler.next()
-    prograssBarHandler.next()
-}
-*/
-
-function* handlePrograssBar(){
-
-    let nanobar = new Nanobar();
-
-    let milePost = [25,30,35,40,45,50,55]
-
-    for(let i = 56; i < 70; i+=2){
-        milePost.push(i)
-    }
-    for(let i = 70; i < 90; i++){
-        milePost.push(i)
-    }
-
-    const checkMilePost = (postIndex) => {
-        nanobar.go(postIndex)
-    }
-
-    let timers = []
-
-    yield milePost.forEach((item, index) => {
-        timers.push(window.setTimeout(() => {checkMilePost(item)}, index * 100))
-    })
-
-    timers.forEach((item) => {
-        clearTimeout(item)
-    })
-
-    yield nanobar.go(100)
-}
-
-const mapState = (state) => ({
-    prograssBarStatus: state.get('prograssBar').get('prograssBarStatus')
-})
 
 const mapActions = (dispatch) => ({
-    appointPrograssBarHandler(prograssBarHandler) {
-        const action = actionCreators.createAppointPrograssBarHandlerAction(prograssBarHandler)
+    appointNanobarManager(nanobarManager) {
+        const action = actionCreators.createAppointNanobarManagerAction(nanobarManager)
+        dispatch(action)
+    },
+    appointNanobarGo(nanobar) {
+        const action = actionCreators.createAppointNanobarGoAction(nanobar)
+        dispatch(action)
+    },
+    resetPrograssBar() {
+        const action = actionCreators.createResetPrograssBarAction()
+        dispatch(action)
+    },
+    dispatcher(action) {
         dispatch(action)
     }
 })
 
-export default connect(mapState, mapActions)(PrograssBar)
+export default connect(null, mapActions)(PrograssBar)

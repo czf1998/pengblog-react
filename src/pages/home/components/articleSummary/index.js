@@ -59,8 +59,7 @@ class ArticleSummary extends PureComponent {
                             </span>
                     </ArticleInfoColumn>
                     <Link to={ARTICLE_PAGE_PATH + article.get('article_id')}>
-                        <ArticleContent className={CommonClassNameConstants.CURSORP +
-                                                   CommonClassNameConstants.OVER_3ROWS_HANDLE}
+                        <ArticleContent className={CommonClassNameConstants.CURSORP}
                                         withPreviewImage={withPreviewImage}>
 
                             {article.get('article_summary')}

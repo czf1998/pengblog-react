@@ -87,7 +87,7 @@ class ArticlePage extends PureComponent {
             this.props.loadArticleCache()
             return
         }
-        
+
         this.props.getArticleData(this.props.match.params.article_id)
         this.props.getCommentListData(this.props.match.params.article_id, this.props.startIndex, this.props.pageScale)
     }

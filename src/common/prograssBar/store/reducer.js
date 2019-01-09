@@ -1,20 +1,25 @@
 import { fromJS } from 'immutable'
-import {APPOINT_PROGRASS_BAR_HANDLER, RESET_PROGRASS_BAR} from "./actionType";
+import {
+    APPOINT_NANOBAR_MANAGER,
+    RECORD_NANOBAR_TIMER,
+} from "./actionType";
 
 const defaultState = fromJS({
-    prograssBarHandler: undefined,
-    prograssBarStatus: 0
+    nanobarManager: {},
+    nanobarGo: undefined
 })
 
 export default (state = defaultState, action) => {
-    if(action.type === APPOINT_PROGRASS_BAR_HANDLER) {
+    if(action.type === APPOINT_NANOBAR_MANAGER) {
         return state.merge({
-            prograssBarHandler: action.value
+            nanobarManager: fromJS(action.value)
         })
     }
-    if(action.type === RESET_PROGRASS_BAR) {
+    if(action.type === RECORD_NANOBAR_TIMER) {
         return state.merge({
-            prograssBarStatus: state.get('prograssBarStatus') + 1
+            nanobarManager: state.get('nanobarManager').merge({
+                nanobarTimer: action.value
+            })
         })
     }
     return state

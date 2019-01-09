@@ -76,7 +76,7 @@ class Jumbotron extends PureComponent {
     }
 
     componentDidUpdate() {
-        this.props.jumbotronDataIsReady && this.props.prograssBarHandler.next()
+        this.props.jumbotronDataIsReady && console.log(this.props.nanobarManager.get('nanobarGoToTheEnd')(this.props.nanobarManager.get('nanobarTimer')))
     }
 
 }
@@ -87,7 +87,7 @@ const mapState = (state) => ({
     articlePreviewImages: state.get('jumbotron').get('articlePreviewImages'),
     jumbotronDataIsReady: state.get('home').get('jumbotronDataIsReady'),
     hasBeenMountOnce: state.get('home').get('hasBeenMountOnce'),
-    prograssBarHandler: state.get('prograssBar').get('prograssBarHandler')
+    nanobarManager: state.get('prograssBar').get('nanobarManager')
 })
 
 const mapActions = (dispatch) => ({
@@ -96,10 +96,6 @@ const mapActions = (dispatch) => ({
             article_id: jumbotronArticleId
         }
         const action = actionCreators.createGetJumbotronDataAction(value)
-        dispatch(action)
-    },
-    dispatchRoadedAndShowJumbotronAction: () => {
-        const action = actionCreators.createRoadedAndShowJumbotronAction()
         dispatch(action)
     }
 })

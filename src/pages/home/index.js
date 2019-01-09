@@ -94,7 +94,7 @@ class Home extends PureComponent {
         if(this.props.articleListDataIsReady)
             return
         this.props.getData(this.props.startIndex, this.props.pageScale)
-        this.props.prograssBarHandler.next()
+        console.log(this.props.nanobarManager.get('nanobarGoToTheMilePost')())
     }
 
     componentWillUnmount() {
@@ -119,7 +119,7 @@ const mapState = (state) => ({
         minHeight: state.get('rootState').get('heightOfBrowser'),
         articleListDataIsReady: state.get('home').get('articleListDataIsReady'),
         hasBeenMountOnce: state.get('home').get('hasBeenMountOnce'),
-        prograssBarHandler: state.get('prograssBar').get('prograssBarHandler')
+        nanobarManager: state.get('prograssBar').get('nanobarManager')
     })
 
 const mapActions = (dispatch) => {

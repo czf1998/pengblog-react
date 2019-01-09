@@ -21,6 +21,11 @@ export const ArticleInfoColumn = styled.div`
     `
 
 export const ArticleContent = styled.div`
+        display: -webkit-box;
+        /* autoprefixer: off */
+        -webkit-box-orient: vertical;
+        /* autoprefixer: on */
+        overflow: hidden;
         color: black;
         line-height:1.5;
         -webkit-line-clamp: ${props => props.withPreviewImage ? '3' : '2'};

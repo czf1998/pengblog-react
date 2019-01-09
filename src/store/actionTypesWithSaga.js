@@ -30,3 +30,4 @@ export const GET_COUNT_OF_COMMENT = 'getCountOfComment'
 
 export const DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME = 'deliverCountOfCommentDataToHome'
 
+export const PUSH_PROGRASS = 'pushPrograss'
