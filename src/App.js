@@ -1,16 +1,12 @@
 import React, {Component, Fragment} from 'react';
 import { Provider } from 'react-redux'
-//import { BrowserRouter, Route } from 'react-keeper'
-import Router from './router'
-import { BrowserRouter, Route } from 'react-router-dom'
+import RouterComponent from './router'
 import store from './store'
 import './commonStyle'
+import './exJs/throttle'
 import { createObserveScrollTopOfElementElAction } from "./store/actionCreators";
-import HomeLoadable from './pages/home/loadable'
-import ArticlePageLoadable from './pages/articlePage/loadable'
 import { CommonClassNameConstants } from './commonStyle'
 import { Header, Footer, HeaderMobile, PrograssBar } from './common'
-import Test from './pages/test'
 
 class App extends Component {
     constructor(props){
@@ -34,7 +30,7 @@ class App extends Component {
 
             <PrograssBar/>
 
-            <Router/>
+            <RouterComponent/>
 
             <div className={CommonClassNameConstants.FADE_IN}>
                 <Footer/>
@@ -47,6 +43,7 @@ class App extends Component {
   componentDidMount() {
       //this.initRecordDocumentScrollTop()
       store.dispatch(createObserveScrollTopOfElementElAction())
+      store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
   }
 
   initRecordDocumentScrollTop() {

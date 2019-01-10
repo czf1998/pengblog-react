@@ -30,7 +30,9 @@ class Home extends PureComponent {
                 animateTime,
                 hasBeenMountOnce,
                 articleListDataIsReady,
-                prograssBarHandler} = this.props
+                prograssBarHandler,
+                jumbotronDataIsReady,
+                prograssBarManager} = this.props
 
         const jumbotronTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.ZOOM_IN
         const articleSummaryListTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.SLIDE_UP
@@ -38,52 +40,57 @@ class Home extends PureComponent {
         return (
             articleListDataIsReady ?
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
+                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+
+
+                {
+                    !isMobile &&
+                    <Fragment>
                         <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
-
-
                         {
-                            !isMobile &&
-                            <Fragment>
-                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+                            jumbotronArticleId !== jumbotronArticleIdDefault
+                            &&
+                            <div className={jumbotronTransitionClassName}>
+                                <Jumbotron jumbotronArticleId={jumbotronArticleId}/>
+                            </div>
+                        }
+                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
+                    </Fragment>
+                }
+
+                {
+                    articleList.map((item, index) => {
+                        if( !isMobile && index === 0)
+                            return
+                        return (
+                            <Fragment key={item.get('article_title')}>
                                 {
-                                    jumbotronArticleId !== jumbotronArticleIdDefault
-                                    &&
-                                    <div className={jumbotronTransitionClassName}>
-                                        <Jumbotron jumbotronArticleId={jumbotronArticleId}/>
-                                    </div>
+                                    isMobile ?
+                                        <ArticleSummaryMobile article={item}/>
+                                        :
+                                        <div className={articleSummaryListTransitionClassName}>
+                                            <ArticleSummary article={item}  className={articleSummaryListTransitionClassName}/>
+                                        </div>
                                 }
-                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
+                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
                             </Fragment>
-                        }
+                        )
+                    })
+                }
 
-                        {
-                            articleList.map((item, index) => {
-                                if( !isMobile && index === 0)
-                                    return
-                                return (
-                                    <Fragment key={item.get('article_title')}>
-                                        {
-                                            isMobile ?
-                                                <ArticleSummaryMobile article={item}/>
-                                                :
-                                                <div className={articleSummaryListTransitionClassName}>
-                                                    <ArticleSummary article={item}  className={articleSummaryListTransitionClassName}/>
-                                                </div>
-                                        }
-                                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
-                                    </Fragment>
-                                )
-                            })
-                        }
+                <ForMore isLoading={isLoading}
+                         noMore={currentPage === maxPage}
+                         clickHandler={this.props.getMoreArticleListData.bind(this)}
+                         meta={[startIndex,
+                             pageScale,
+                             maxPage,
+                             currentPage,
+                             isLoading]}/>
 
-                        <ForMore isLoading={isLoading}
-                                 noMore={currentPage === maxPage}
-                                 clickHandler={this.props.getMoreArticleListData.bind(this)}
-                                 meta={[startIndex,
-                                     pageScale,
-                                     maxPage,
-                                     currentPage,
-                                     isLoading]}/>
+                {
+                    jumbotronDataIsReady && prograssBarManager.get('prograssBarGoToTheEnd')(prograssBarManager.get('prograssTimer'))
+                }
+
             </HomeWrapper>
             :
             <Loading/>
@@ -94,7 +101,6 @@ class Home extends PureComponent {
         if(this.props.articleListDataIsReady)
             return
         this.props.getData(this.props.startIndex, this.props.pageScale)
-        console.log(this.props.nanobarManager.get('nanobarGoToTheMilePost')())
     }
 
     componentWillUnmount() {
@@ -113,13 +119,14 @@ const mapState = (state) => ({
         isMobile: state.get('rootState').get('isMobile'),
         jumbotronArticleId: state.get('home').get('jumbotronArticleId'),
         jumbotronArticleIdDefault: state.get('home').get('jumbotronArticleIdDefault'),
+        jumbotronDataIsReady: state.get('home').get('jumbotronDataIsReady'),
         isLoading: state.get('home').get('isLoading'),
         loadedAndShowJumbotron: state.get('home').get('loadedAndShowJumbotron'),
         animateTime: state.get('rootState').get('basicUIFeatures').get('animateTime'),
         minHeight: state.get('rootState').get('heightOfBrowser'),
         articleListDataIsReady: state.get('home').get('articleListDataIsReady'),
         hasBeenMountOnce: state.get('home').get('hasBeenMountOnce'),
-        nanobarManager: state.get('prograssBar').get('nanobarManager')
+        prograssBarManager: state.get('prograssBar').get('prograssBarManager')
     })
 
 const mapActions = (dispatch) => {

@@ -1,13 +1,15 @@
 import React, {PureComponent, Fragment} from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Router, Route } from 'react-router-dom'
+//import PreNavGuardRoute from './hocRoute/preNavGuardRoute'
 import { connect } from 'react-redux'
+import history from './history'
 import HomeLoadable from '../pages/home/loadable'
 import ArticlePageLoadable from '../pages/articlePage/loadable'
 import { CommonClassNameConstants } from '../commonStyle'
 import { Header, Footer, HeaderMobile, PrograssBar } from '../common'
 import Test from '../pages/test'
 
-class Router extends PureComponent {
+class RouterComponent extends PureComponent {
 
     constructor(props){
         super(props)
@@ -16,9 +18,9 @@ class Router extends PureComponent {
 
     render() {
 
-        const { isMobile } = this.props
+        const { isMobile, prograssBarManager } = this.props
         return (
-                <BrowserRouter>
+                <Router history={history}>
                     <Fragment>
                         {
                             isMobile ?
@@ -30,7 +32,7 @@ class Router extends PureComponent {
                         <Route path='/'  exact component={HomeLoadable}/>
                         <Route path='/test' exact component={Test}/>
                     </Fragment>
-                </BrowserRouter>
+                </Router>
         );
     }
 
@@ -38,7 +40,8 @@ class Router extends PureComponent {
 }
 
 const mapState = (state) => ({
-    isMobile: state.get('rootState').get('isMobile')
+    isMobile: state.get('rootState').get('isMobile'),
+    prograssBarManager: state.get('prograssBar').get('prograssBarManager')
 })
 
-export default connect()(Router);
+export default connect(mapState,null)(RouterComponent);

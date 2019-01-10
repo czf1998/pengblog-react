@@ -61,3 +61,7 @@ export const FADE_IN = 'fade-in'
 export const ZOOM_IN = 'zoom-in'
 
 export const SLIDE_UP_FAST = 'slide-up-fast'
+
+export const COMMON_PADDING_HORIZONTAL = 'common-padding-horizontal '
+
+export const COMMON_PADDING_VERTICAL = 'common-padding-vertical '

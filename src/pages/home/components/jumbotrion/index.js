@@ -75,10 +75,6 @@ class Jumbotron extends PureComponent {
         this.props.getData(this.props.jumbotronArticleId)
     }
 
-    componentDidUpdate() {
-        this.props.jumbotronDataIsReady && console.log(this.props.nanobarManager.get('nanobarGoToTheEnd')(this.props.nanobarManager.get('nanobarTimer')))
-    }
-
 }
 
 const mapState = (state) => ({
@@ -86,8 +82,7 @@ const mapState = (state) => ({
     articleSummary: state.get('jumbotron').get('articleSummary'),
     articlePreviewImages: state.get('jumbotron').get('articlePreviewImages'),
     jumbotronDataIsReady: state.get('home').get('jumbotronDataIsReady'),
-    hasBeenMountOnce: state.get('home').get('hasBeenMountOnce'),
-    nanobarManager: state.get('prograssBar').get('nanobarManager')
+    hasBeenMountOnce: state.get('home').get('hasBeenMountOnce')
 })
 
 const mapActions = (dispatch) => ({

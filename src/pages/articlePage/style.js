@@ -22,10 +22,11 @@ export const ArticleTitle = styled.div`
     `
 
 export const ArticleMeta = styled.div`
-    
+        
     `
 
 export const ArticleContent = styled.div`
+        padding-top: 0;
         font-size: 16px;
         line-height: 1.7;
     `

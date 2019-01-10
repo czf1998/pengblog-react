@@ -21,7 +21,7 @@ class ArticlePage extends PureComponent {
 
     render() {
 
-        const { article, widthOfMainArea, dataReady, countOfAllComment, commentList } = this.props
+        const { article, widthOfMainArea, dataReady, countOfAllComment, commentList, prograssBarManager } = this.props
 
         return (
                 dataReady ?
@@ -42,7 +42,7 @@ class ArticlePage extends PureComponent {
                             </span>
                         </ArticleMeta>
 
-                        <ArticleContent className={CommonClassNameConstants.COMMON_PADDING}
+                        <ArticleContent className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}
                                         dangerouslySetInnerHTML={{__html:article.get('article_content')}}>
                         </ArticleContent>
 
@@ -75,6 +75,9 @@ class ArticlePage extends PureComponent {
                         }
 
                     </ArticleMainArea>
+                    {
+                        article.get('article_id') && commentList.length !== 0 && prograssBarManager.get('prograssBarGoToTheEnd')(prograssBarManager.get('prograssTimer'))
+                    }
                 </ArticlePageWrapper>
                 :
                 <Loading/>
@@ -107,7 +110,8 @@ const mapState = (state) => ({
         countOfAllComment: state.get('articlePage').get('countOfAllComment'),
         startIndex: state.get('articlePage').get('startIndex'),
         pageScale: state.get('articlePage').get('pageScale'),
-        commentList: state.get('articlePage').get('commentList')
+        commentList: state.get('articlePage').get('commentList'),
+        prograssBarManager: state.get('prograssBar').get('prograssBarManager')
     })
 
 const mapActions = (dispatch) => {

@@ -2,15 +2,6 @@
     box-sizing: border-box;
 }
 
-.common-padding{
-    padding: 15px 30px;
-}
-
-@media (max-width: 750px) {
-    .common-padding{
-        padding: 15px;
-    }
-}
 
 .common-border-radius{
     border-radius: 4px
