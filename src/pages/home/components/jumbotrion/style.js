@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import jumbotronImageWrapper from '../../../../image/jumbotronWrapper2.png'
+//import jumbotronImageWrapper from '../../../../image/jumbotronWrapper2.png'
 
 export const JumbotronWrapper = styled.div`
         display:flex;
@@ -76,5 +76,11 @@ export const ImageThird = styled(ImageFirst)`
         bottom: 0px;
         left: 51%;
         right: 0px;
+    `
+
+export const PlaceholderWrapper = styled.div`
+        height: 285px;
+        width: 686px;
+        padding: 38px 10px;
     `
 

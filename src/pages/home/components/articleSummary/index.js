@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-//import { Link } from 'react-keeper'
 import { Link } from 'react-router-dom'
 import { ArticleSummaryWrapper, Title, SummaryWrapper, ArticleInfoColumn, ArticleContent, PreviewImage } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
@@ -9,14 +8,10 @@ import { GET_COUNT_OF_COMMENT } from '../../../../store/actionTypesWithSaga'
 
 class ArticleSummary extends PureComponent {
 
-    constructor(props) {
-        super(props)
-
-    }
 
     render() {
 
-        const { basicUIFeatures, article, hasBeenMountOnce } = this.props
+        const { basicUIFeatures, article } = this.props
 
         const withPreviewImage = article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined
 

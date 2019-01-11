@@ -1,12 +1,12 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux'
 import RouterComponent from './router'
 import store from './store'
 import './commonStyle'
-import './exJs/throttle'
+import './exJs'
 import { createObserveScrollTopOfElementElAction } from "./store/actionCreators";
 import { CommonClassNameConstants } from './commonStyle'
-import { Header, Footer, HeaderMobile, PrograssBar } from './common'
+import { Footer, PrograssBar } from './common'
 
 class App extends Component {
     constructor(props){
@@ -23,7 +23,6 @@ class App extends Component {
 
 
   render() {
-    const { isMobile } = this.state
 
     return (
         <Provider store={store}>
@@ -41,15 +40,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-      //this.initRecordDocumentScrollTop()
       store.dispatch(createObserveScrollTopOfElementElAction())
       store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
-  }
-
-  initRecordDocumentScrollTop() {
-      window.addEventListener('scroll', () => {
-          store.dispatch(createObserveScrollTopOfElementElAction())
-      })
   }
 
 }

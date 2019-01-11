@@ -1,15 +1,16 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-//import { Link } from 'react-keeper'
-import { Link } from 'react-router-dom'
 import { CommentWrapper, Visitor, Content, Meta } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
+import { GetDateDiff } from '../../../../exJs'
+import SubComment from '../subComment'
 
 
 class Comment extends PureComponent {
 
     constructor(props) {
         super(props)
+        this.redirectToVisitorSite = this.redirectToVisitorSite.bind(this)
     }
 
     render() {
@@ -18,9 +19,28 @@ class Comment extends PureComponent {
         return (
             <CommentWrapper className={CommonClassNameConstants.COMMON_PADDING}
                             widthOfMainArea={widthOfMainArea}>
-                <Visitor className={CommonClassNameConstants.FONT_SMALL}>
-                    {comment.get('comment_author').get('visitor_name')}
-                </Visitor>
+                {
+                    comment.get('comment_author').get('visitor_siteAddress')
+                    &&
+                    comment.get('comment_author').get('visitor_siteAddress') !== ''
+                    ?
+                    <Visitor className={CommonClassNameConstants.FONT_SMALL +
+                                        CommonClassNameConstants.CLICKABLE +
+                                        CommonClassNameConstants.HOVER_UNDERLINE}>
+                        <span onClick={this.redirectToVisitorSite}>
+                            {comment.get('comment_author').get('visitor_name')}
+                        </span>
+                    </Visitor>
+                    :
+                    <Visitor className={CommonClassNameConstants.FONT_SMALL}>
+                        {comment.get('comment_author').get('visitor_name')}
+                    </Visitor>
+                }
+
+                {
+                    comment.get('comment_referComment') && comment.get('comment_referComment') !== '' && <SubComment comment={comment.get('comment_referComment')}/>
+                }
+                {/*console.log(comment.get('comment_referComment').get('comment_author').get('visitor_name'))*/}
 
                 <Content className={CommonClassNameConstants.FONT_SMALL}>
                     {comment.get('comment_content')}
@@ -28,12 +48,18 @@ class Comment extends PureComponent {
 
                 <Meta className={CommonClassNameConstants.FONT_DARK +
                                  CommonClassNameConstants.FONT_SMALL}>
-                    2周前 | 引用
+                    {GetDateDiff(comment.get('comment_releaseTime'))} | <span className={CommonClassNameConstants.CLICKABLE}>引用</span>
                 </Meta>
             </CommentWrapper>
         );
     }
+
+     redirectToVisitorSite() {
+         window.open('http://' + this.props.comment.get('comment_author').get('visitor_siteAddress'))
+    }
 }
+
+
 
 const mapState = (state) => {
     return  {

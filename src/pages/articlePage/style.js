@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const gapLineColor = '#E6E6E6'
+const gapLineColor = '#F7F7F7'
 
 export const ArticlePageWrapper = styled.div`
         background: #f7f7f7;

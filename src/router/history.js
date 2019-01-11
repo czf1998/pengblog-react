@@ -3,14 +3,17 @@ import store from '../store'
 
 const history = createBrowserHistory()
 
-const unlisten = history.listen((location, action) => {
+history.listen((location, action) => {
     // location is an object like window.location
-    rebootPrograssBar()
+    //console.log(location)
+    //console.log(history)
+    if(action === 'PUSH'){
+        rebootPrograssBar()
+    }
 });
 
 export default history
 
 const rebootPrograssBar = () => {
-
     store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
 }

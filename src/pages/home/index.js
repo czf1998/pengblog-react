@@ -1,19 +1,13 @@
 import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { withRouter } from 'react-router-dom'
-import { ArticleSummary, ArticleSummaryMobile, Jumbotron, ForMore }from './components'
-import { HomeWrapper, Gap, CustomBackground } from './style'
+import { ArticleSummary, ArticleSummaryMobile, Jumbotron }from './components'
+import { HomeWrapper, Gap } from './style'
 import { actionCreators } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
-import { Loading } from '../../common'
+import { Loading, ForMore  } from '../../common'
 
 class Home extends PureComponent {
-
-    constructor(props) {
-        super(props)
-
-    }
 
     render() {
 
@@ -27,16 +21,11 @@ class Home extends PureComponent {
                 currentPage,
                 jumbotronArticleId,
                 jumbotronArticleIdDefault,
-                animateTime,
                 hasBeenMountOnce,
-                articleListDataIsReady,
-                prograssBarHandler,
-                jumbotronDataIsReady,
-                prograssBarManager} = this.props
+                articleListDataIsReady} = this.props
 
         const jumbotronTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.ZOOM_IN
         const articleSummaryListTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.SLIDE_UP
-
         return (
             articleListDataIsReady ?
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
@@ -60,8 +49,9 @@ class Home extends PureComponent {
 
                 {
                     articleList.map((item, index) => {
-                        if( !isMobile && index === 0)
-                            return
+                        if( !isMobile && index === 0){
+                            return null
+                        }
                         return (
                             <Fragment key={item.get('article_title')}>
                                 {
@@ -87,9 +77,6 @@ class Home extends PureComponent {
                              currentPage,
                              isLoading]}/>
 
-                {
-                    jumbotronDataIsReady && prograssBarManager.get('prograssBarGoToTheEnd')(prograssBarManager.get('prograssTimer'))
-                }
 
             </HomeWrapper>
             :
@@ -98,8 +85,11 @@ class Home extends PureComponent {
     }
 
     componentDidMount() {
-        if(this.props.articleListDataIsReady)
+        if(this.props.articleListDataIsReady) {
+            this.props.pushPrograssBarToEnd()
             return
+        }
+
         this.props.getData(this.props.startIndex, this.props.pageScale)
     }
 
@@ -119,14 +109,9 @@ const mapState = (state) => ({
         isMobile: state.get('rootState').get('isMobile'),
         jumbotronArticleId: state.get('home').get('jumbotronArticleId'),
         jumbotronArticleIdDefault: state.get('home').get('jumbotronArticleIdDefault'),
-        jumbotronDataIsReady: state.get('home').get('jumbotronDataIsReady'),
         isLoading: state.get('home').get('isLoading'),
-        loadedAndShowJumbotron: state.get('home').get('loadedAndShowJumbotron'),
-        animateTime: state.get('rootState').get('basicUIFeatures').get('animateTime'),
-        minHeight: state.get('rootState').get('heightOfBrowser'),
         articleListDataIsReady: state.get('home').get('articleListDataIsReady'),
         hasBeenMountOnce: state.get('home').get('hasBeenMountOnce'),
-        prograssBarManager: state.get('prograssBar').get('prograssBarManager')
     })
 
 const mapActions = (dispatch) => {
@@ -142,11 +127,16 @@ const mapActions = (dispatch) => {
         getMoreArticleListData(startIndex, pageScale, maxPage, currentPage, isLoading){
             if(maxPage === currentPage || isLoading)
                 return
+
             this.props.getData(startIndex, pageScale)
         },
         triggerHasBeenMountOnce() {
             const action = actionCreators.createTriggerHasBeenMountOnce()
             dispatch(action)
+        },
+        pushPrograssBarToEnd() {
+            const pushPrograssBarToEndAction = actionCreators.createPushPrograssToEndAction({page: 'home'})
+            dispatch(pushPrograssBarToEndAction)
         }
     }
 }

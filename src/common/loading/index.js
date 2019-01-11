@@ -2,9 +2,6 @@ import React, { PureComponent } from 'react'
 import { LoadingWrapper } from './style'
 import { CommonClassNameConstants } from '../../commonStyle'
 class Loading extends PureComponent{
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         return (

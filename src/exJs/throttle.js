@@ -1,13 +1,14 @@
-export const throttleByGap = (method, gap) => {
+export const throttleByGap = (method, gap, meta) => {
+    let methodIndex = method.toString() + JSON.stringify(meta)
     let now = Date.now()
-    if (!window.last) {
+    if (!window[methodIndex]) {
         method.call()
-        window.last = now
+        window[methodIndex] = now
         return
     }
-    if (now - window.last > gap) {
+    if (now - window[methodIndex] > gap) {
         method.call()
-        window.last = now
+        window[methodIndex] = now
     }
 }
 

@@ -1,14 +1,17 @@
 import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { CSSTransition } from 'react-transition-group'
-import { ArticleSummary, ArticleSummaryMobile, Jumbotron, ForMore }from './components'
-import { ArticlePageWrapper, ArticleTitle, ArticleMainArea, ArticleMeta, ArticleContent, CommentTitle, GapLine } from './style'
+import { ArticlePageWrapper,
+         ArticleTitle,
+         ArticleMainArea,
+         ArticleMeta,
+         ArticleContent,
+         CommentTitle,
+         GapLine } from './style'
 import { actionCreators } from './store'
-import { CommonClassNameConstants } from "../../commonStyle";
-import Placeholder from './placeholder'
-import { Loading } from '../../common'
-import { DateFormat } from "../../exJs";
+import { CommonClassNameConstants } from "../../commonStyle"
+import { Loading, ForMore } from '../../common'
+import { DateFormat } from "../../exJs"
 import { Comment } from './components'
 
 class ArticlePage extends PureComponent {
@@ -21,7 +24,18 @@ class ArticlePage extends PureComponent {
 
     render() {
 
-        const { article, widthOfMainArea, dataReady, countOfAllComment, commentList, prograssBarManager } = this.props
+        const { article,
+                widthOfMainArea,
+                dataReady,
+                countOfAllComment,
+                commentList,
+                isLoadingMoreComment,
+                startIndex,
+                pageScale,
+                maxPage,
+                currentPage } = this.props
+
+        const { article_id } = this.props.match.params
 
         return (
                 dataReady ?
@@ -64,7 +78,7 @@ class ArticlePage extends PureComponent {
 
                         {
 
-                            commentList.map((item, index) => {
+                            commentList.map((item) => {
                                 return (
                                     <Fragment key={item.get('comment_id')}>
                                         <GapLine/>
@@ -74,10 +88,18 @@ class ArticlePage extends PureComponent {
                             })
                         }
 
+                        <ForMore isLoading={isLoadingMoreComment}
+                                 noMore={currentPage === maxPage}
+                                 clickHandler={this.props.getMoreCommentListData.bind(this)}
+                                 meta={[article_id,
+                                        startIndex,
+                                        pageScale,
+                                        maxPage,
+                                        currentPage,
+                                        isLoadingMoreComment]}/>
+
                     </ArticleMainArea>
-                    {
-                        article.get('article_id') && commentList.length !== 0 && prograssBarManager.get('prograssBarGoToTheEnd')(prograssBarManager.get('prograssTimer'))
-                    }
+
                 </ArticlePageWrapper>
                 :
                 <Loading/>
@@ -86,8 +108,9 @@ class ArticlePage extends PureComponent {
 
     componentDidMount() {
         /*读取缓存*/
-        if(this.props.cacheArticle && (this.props.cacheArticle.get('article_id') == this.props.match.params.article_id)){
+        if(this.props.cacheArticle && (parseInt(this.props.cacheArticle.get('article_id')) === parseInt(this.props.match.params.article_id))){
             this.props.loadArticleCache()
+            this.props.pushPrograssBarToEnd()
             return
         }
 
@@ -108,10 +131,12 @@ const mapState = (state) => ({
         widthOfMainArea: state.get('rootState').get('basicUIFeatures').get('widthOfMainArea'),
         dataReady: state.get('articlePage').get('dataReady'),
         countOfAllComment: state.get('articlePage').get('countOfAllComment'),
+        commentList: state.get('articlePage').get('commentList'),
+        isLoadingMoreComment: state.get('articlePage').get('isLoadingMoreComment'),
         startIndex: state.get('articlePage').get('startIndex'),
         pageScale: state.get('articlePage').get('pageScale'),
-        commentList: state.get('articlePage').get('commentList'),
-        prograssBarManager: state.get('prograssBar').get('prograssBarManager')
+        maxPage: state.get('articlePage').get('maxPage'),
+        currentPage: state.get('articlePage').get('currentPage')
     })
 
 const mapActions = (dispatch) => {
@@ -139,6 +164,15 @@ const mapActions = (dispatch) => {
         loadArticleCache() {
             const action = actionCreators.createLoadArticleCacheAction()
             dispatch(action)
+        },
+        getMoreCommentListData(article_id, startIndex, pageScale, maxPage, currentPage, isLoadingMoreComment) {
+            if(maxPage === currentPage || isLoadingMoreComment)
+                return
+            this.props.getCommentListData(article_id, startIndex, pageScale)
+        },
+        pushPrograssBarToEnd() {
+            const pushPrograssBarToEndAction = actionCreators.createPushPrograssToEndAction({page: 'articlePage'})
+            dispatch(pushPrograssBarToEndAction)
         }
     }
 }

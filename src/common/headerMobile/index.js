@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react'
-import { HeaderWrapper, HeaderMainArea, LogoWrapper, Logo, NavItem, NavItemWrapper } from './style'
+import { HeaderWrapper, HeaderMainArea,  Logo, NavItem, NavItemWrapper } from './style'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
 
 class Header extends PureComponent {
 
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         const { height, backgroundColor, basicUIFeatures } = this.props

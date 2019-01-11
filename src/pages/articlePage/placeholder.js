@@ -5,10 +5,6 @@ import ContentLoader from "react-content-loader"
 
 class ArticlePageLoader extends PureComponent{
 
-    constructor(props){
-        super(props)
-    }
-
     render() {
 
         const { heightOfBrowser, widthOfMainArea, speed } = this.props

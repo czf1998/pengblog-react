@@ -1,18 +1,13 @@
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
-import { throttleByGap } from '../../exJs/throttle'
 
 
 const Nanobar = require('nanobar');
 
-
-
 class PrograssBar extends PureComponent {
 
-    constructor(props) {
-        super(props)
-    }
+
 
     render() {
 
@@ -29,7 +24,8 @@ class PrograssBar extends PureComponent {
         const nanobarManager = {
             nanobar: nanobar,
             prograssBarGoToTheMilePost: nanobarGoToTheMilePost(nanobar, this.props.dispatcher),
-            prograssBarGoToTheEnd: nanobarGoToTheEnd(nanobar)
+            prograssBarGoToTheEnd: nanobarGoToTheEnd(nanobar),
+            prograssBarGoToTheEndAtOnce: nanobarGoToTheEndAtOnce(nanobar)
         }
         this.props.appointNanobarManager(nanobarManager)
     }
@@ -65,6 +61,16 @@ const nanobarGoToTheEnd = (nanobar) => {
             clearInterval(nanobarTimer)
             nanobar.go(100)
         }, 500)
+
+    }
+}
+
+const nanobarGoToTheEndAtOnce = (nanobar) => {
+    return function(nanobarTimer, meta) {
+        window.throttleByGap(() => {
+            clearInterval(nanobarTimer)
+            nanobar.go(100)
+        }, 3600*1000*24*365, meta)
 
     }
 }

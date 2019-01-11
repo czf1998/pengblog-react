@@ -1,24 +1,19 @@
 import React, {PureComponent, Fragment} from 'react';
-import { BrowserRouter, Router, Route } from 'react-router-dom'
-//import PreNavGuardRoute from './hocRoute/preNavGuardRoute'
+import {  Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import history from './history'
 import HomeLoadable from '../pages/home/loadable'
 import ArticlePageLoadable from '../pages/articlePage/loadable'
-import { CommonClassNameConstants } from '../commonStyle'
-import { Header, Footer, HeaderMobile, PrograssBar } from '../common'
+import { Header,  HeaderMobile } from '../common'
 import Test from '../pages/test'
 
 class RouterComponent extends PureComponent {
 
-    constructor(props){
-        super(props)
-    }
 
 
     render() {
 
-        const { isMobile, prograssBarManager } = this.props
+        const { isMobile } = this.props
         return (
                 <Router history={history}>
                     <Fragment>
@@ -26,7 +21,7 @@ class RouterComponent extends PureComponent {
                             isMobile ?
                                 <HeaderMobile/>
                                 :
-                                <Header/>
+                                <Header history={history}/>
                         }
                         <Route exact path='/article/:article_id' component={ArticlePageLoadable}/>
                         <Route path='/'  exact component={HomeLoadable}/>

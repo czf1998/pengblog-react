@@ -14,7 +14,7 @@ import { createDeliverArticleDataToHomeAction,
          createNoticeHomeStoreJumbotronDataReadyAction,
          createDeliverCommentListDataToArticlePageAction,
          createDeliverCountOfCommentDataToHomeAction,
-         createPushPrograssAction
+         createPushPrograssToEndAction
         } from './actionCreators'
 import { ArticleRequest, CommentRequest } from './request'
 
@@ -68,8 +68,8 @@ function* ajaxJumbotronArticleData(action) {
         yield put(appointDataAction)
         let noticeAction = createNoticeHomeStoreJumbotronDataReadyAction()
         yield put(noticeAction)
-        let pushPrograssBarAction = createPushPrograssAction()
-        yield put(pushPrograssBarAction)
+        let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home'})
+        yield put(pushPrograssBarToEndAction)
     }catch (err) {
         console.log('ERR IN ACTION: GET_JUMBOTRON_ARTICLE_DATA  ERR: ' + err)
     }
@@ -86,6 +86,8 @@ function* ajaxArticleDataForArticlePageData(action) {
         const res = yield ArticleRequest.RequestArticleData(action.value.article_id)
         let appointDataAction = createDeliverArticleDataToArticlePage(res.data)
         yield put(appointDataAction)
+        let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'articlePage'})
+        yield put(pushPrograssBarToEndAction)
     }catch (err) {
         console.log('ERR IN ACTION: GET_ARTICLE_PAGE_DATA  ERR: ' + err)
     }

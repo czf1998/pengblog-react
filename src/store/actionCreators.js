@@ -7,7 +7,7 @@ import { DELIVER_ARTICLE_LIST_DATA_TO_HOME,
          NOTICE_HOME_STORE_JUMBOTRON_DATA_READY,
          DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
          DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME,
-         PUSH_PROGRASS } from './actionTypesWithSaga'
+        PUSH_PROGRASS_TO_END } from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -59,6 +59,7 @@ export const createDeliverCountOfCommentDataToHomeAction = (article_id, countOfA
     }
 })
 
-export const createPushPrograssAction = () => ({
-    type: PUSH_PROGRASS
+export const createPushPrograssToEndAction = (value) => ({
+    type: PUSH_PROGRASS_TO_END,
+    value
 })

@@ -1,18 +1,13 @@
-import React, {Fragment, PureComponent} from 'react'
+import React, { PureComponent} from 'react'
 import { connect } from 'react-redux'
-//import { Link } from 'react-keeper'
 import { Link } from 'react-router-dom'
-import { JumbotronWrapper, JumbotronBackground, Title, Summary, ImageWrapper, ImageFirst, ImageSecond, ImageThird } from './style'
+import { JumbotronWrapper, Title, Summary, ImageWrapper, ImageFirst, ImageSecond, ImageThird,PlaceholderWrapper } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { Button } from "../../../../common/button";
 import { actionCreators } from './store'
 import Placeholder from './placeholder'
 
 class Jumbotron extends PureComponent {
-    constructor(props) {
-        super(props)
-
-    }
 
     render() {
 
@@ -63,8 +58,11 @@ class Jumbotron extends PureComponent {
                             </ImageWrapper>
                         </div>
                         :
-                        <Placeholder/>
+                        <PlaceholderWrapper>
+                            <Placeholder/>
+                        </PlaceholderWrapper>
                     }
+
                 </JumbotronWrapper>
         )
     }

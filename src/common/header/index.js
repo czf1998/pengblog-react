@@ -1,33 +1,28 @@
 import React, { PureComponent } from 'react'
-//import { Link as ReactKeeperLink } from 'react-keeper'
-import { Link } from 'react-router-dom'
-import { HeaderWrapper, HeaderMainArea, LogoWrapper, Logo, NavItem, NavItemWrapper } from './style'
+import { HeaderWrapper, HeaderMainArea, Logo, NavItem, NavItemWrapper } from './style'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
-const Nanobar = require('nanobar');
+
+const HOME_PATH = '/'
 
 class Header extends PureComponent {
 
-    constructor(props) {
-        super(props)
-    }
 
     render() {
 
-        const { height, backgroundColor, basicUIFeatures, metaColor } = this.props
-
-        const HOME_PATH = '/'
+        const { history, height, backgroundColor, basicUIFeatures, metaColor } = this.props
 
         return (
             <HeaderWrapper id="_header" className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
                            height={height}
                            backgroundColor={backgroundColor}>
                 <HeaderMainArea   widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
-                    <Link to={HOME_PATH}>
+
+                    <div onClick={() => {redirectToHome(history)}}>
                         <Logo className={CommonClassNameConstants.FONT_LARGE +
-                                        CommonClassNameConstants.FONT_SONG +
-                                        CommonClassNameConstants.CURSORP +
-                                        CommonClassNameConstants.FLEX_COLUMN_CENTER}
+                        CommonClassNameConstants.FONT_SONG +
+                        CommonClassNameConstants.CURSORP +
+                        CommonClassNameConstants.FLEX_COLUMN_CENTER}
                               metaColor={metaColor}>
                             <div>
                                 远方有鱼
@@ -37,7 +32,9 @@ class Header extends PureComponent {
                                 It's a Wonderful Life
                             </div>
                         </Logo>
-                    </Link>
+                    </div>
+
+
 
                         <NavItemWrapper>
                             <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
@@ -58,6 +55,16 @@ class Header extends PureComponent {
         /*let nanobar = new Nanobar();
         nanobar.go(20)*/
     }
+
+}
+
+const redirectToHome = (history) => {
+    if(history.location.pathname === HOME_PATH){
+        return
+    }
+    history.push({
+        pathname: HOME_PATH,
+    })
 }
 
 const mapState = (state) => {

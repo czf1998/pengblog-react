@@ -25,9 +25,8 @@
 
 .over-3rows-handle{
     display: -webkit-box;
-    /* autoprefixer: off */
+    /* autoprefixer: ignore next */
     -webkit-box-orient: vertical;
-    /* autoprefixer: on */
     -webkit-line-clamp: 3;
     overflow: hidden;
 }
