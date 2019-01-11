@@ -5,5 +5,6 @@ import HeaderMobile from './headerMobile'
 import Loading from './loading'
 import PrograssBar from './prograssBar'
 import ForMore from './forMore'
+import { ScrollToThePositionOnMount } from './scrollBehaviour'
 
-export { Button, Footer, Header, HeaderMobile, Loading, PrograssBar, ForMore }
+export { Button, Footer, Header, HeaderMobile, Loading, PrograssBar, ForMore, ScrollToThePositionOnMount }

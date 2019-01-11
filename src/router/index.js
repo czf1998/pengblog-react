@@ -21,7 +21,7 @@ class RouterComponent extends PureComponent {
                             isMobile ?
                                 <HeaderMobile/>
                                 :
-                                <Header history={history}/>
+                                <Header/>
                         }
                         <Route exact path='/article/:article_id' component={ArticlePageLoadable}/>
                         <Route path='/'  exact component={HomeLoadable}/>

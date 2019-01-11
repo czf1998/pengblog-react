@@ -1,4 +1,4 @@
-import { put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { put, takeEvery, takeLatest, select } from 'redux-saga/effects'
 import {
     GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA,
     GET_COMMENT_LIST_DATA, GET_COUNT_OF_COMMENT,
@@ -56,6 +56,12 @@ function* ajaxHomeArticleListData(action) {
         yield put(appointDataAction)
         let noticeAction = createNoticeHomeStoreArticleListDataReadyAction()
         yield put(noticeAction)
+        const state = yield select();
+        const isMobile = state.get('rootState').get('isMobile')
+        if(isMobile) {
+            let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home-mobile'})
+            yield put(pushPrograssBarToEndAction)
+        }
     }catch (err) {
         console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_DATA  ERR: ' + err)
     }

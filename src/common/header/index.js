@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { HeaderWrapper, HeaderMainArea, Logo, NavItem, NavItemWrapper } from './style'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
+import { withRouter } from 'react-router-dom'
 
 const HOME_PATH = '/'
 
@@ -77,4 +78,4 @@ const mapState = (state) => {
 }
 
 
-export default connect(mapState)(Header)
+export default connect(mapState)(withRouter(Header))

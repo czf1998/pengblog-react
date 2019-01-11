@@ -1,20 +1,19 @@
 import styled from 'styled-components'
 
 export const ArticleSummaryWrapper = styled.div`
-        width: ${props => props.widthOfMainArea};
+        width: 100%;
         position: relative;
         background: white;
         border: 1px solid #ebebeb;
     `
 
 export const Title = styled.div`
-        line-height: 2; 
+        color: black;
+        font-size: 1.2rem;
+        line-height: 1.6; 
         font-weight: bold;
     `
 
-export const SummaryWrapper = styled.div`
-        width: ${props => props.withPreviewImage ? '70%' : 'inherits'};
-    `
 
 export const ArticleInfoColumn = styled.div`
         display: flex;
@@ -30,6 +29,8 @@ export const PreviewImage = styled.div`
     `
 
 export const ArticleContent = styled.div`
+        color: black;
+        margin: 0.4rem 0;
         line-height:1.5;
         -webkit-line-clamp: 3;
     `

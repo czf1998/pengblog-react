@@ -1,4 +1,4 @@
-import React, {PureComponent, Fragment} from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { ArticlePageWrapper,
@@ -10,16 +10,12 @@ import { ArticlePageWrapper,
          GapLine } from './style'
 import { actionCreators } from './store'
 import { CommonClassNameConstants } from "../../commonStyle"
-import { Loading, ForMore } from '../../common'
+import { Loading, ForMore, ScrollToThePositionOnMount } from '../../common'
 import { DateFormat } from "../../exJs"
 import { Comment } from './components'
 
 class ArticlePage extends PureComponent {
 
-    constructor(props) {
-        super(props)
-        window.scrollTo(0, 0);
-    }
 
 
     render() {
@@ -33,7 +29,8 @@ class ArticlePage extends PureComponent {
                 startIndex,
                 pageScale,
                 maxPage,
-                currentPage } = this.props
+                currentPage,
+                scrollPosition } = this.props
 
         const { article_id } = this.props.match.params
 
@@ -80,10 +77,11 @@ class ArticlePage extends PureComponent {
 
                             commentList.map((item) => {
                                 return (
-                                    <Fragment key={item.get('comment_id')}>
-                                        <GapLine/>
-                                        <Comment comment={item}/>
-                                    </Fragment>
+                                        <div key={item.get('comment_id')}
+                                             className={CommonClassNameConstants.SLIDE_UP_FAST}>
+                                            <GapLine/>
+                                            <Comment comment={item}/>
+                                        </div>
                                 )
                             })
                         }
@@ -100,11 +98,15 @@ class ArticlePage extends PureComponent {
 
                     </ArticleMainArea>
 
+                    <ScrollToThePositionOnMount scrollPosition={scrollPosition}/>
+
                 </ArticlePageWrapper>
                 :
                 <Loading/>
         )
     }
+
+
 
     componentDidMount() {
         /*读取缓存*/
@@ -120,6 +122,7 @@ class ArticlePage extends PureComponent {
 
     componentWillUnmount() {
         this.props.resetStore()
+        this.props.recordScrollTop()
     }
 }
 
@@ -136,7 +139,8 @@ const mapState = (state) => ({
         startIndex: state.get('articlePage').get('startIndex'),
         pageScale: state.get('articlePage').get('pageScale'),
         maxPage: state.get('articlePage').get('maxPage'),
-        currentPage: state.get('articlePage').get('currentPage')
+        currentPage: state.get('articlePage').get('currentPage'),
+        scrollPosition: state.get('articlePage').get('scrollPosition')
     })
 
 const mapActions = (dispatch) => {
@@ -162,8 +166,8 @@ const mapActions = (dispatch) => {
             dispatch(action)
         },
         loadArticleCache() {
-            const action = actionCreators.createLoadArticleCacheAction()
-            dispatch(action)
+            const loadArticleCacheAction = actionCreators.createLoadArticleCacheAction()
+            dispatch(loadArticleCacheAction)
         },
         getMoreCommentListData(article_id, startIndex, pageScale, maxPage, currentPage, isLoadingMoreComment) {
             if(maxPage === currentPage || isLoadingMoreComment)
@@ -173,6 +177,10 @@ const mapActions = (dispatch) => {
         pushPrograssBarToEnd() {
             const pushPrograssBarToEndAction = actionCreators.createPushPrograssToEndAction({page: 'articlePage'})
             dispatch(pushPrograssBarToEndAction)
+        },
+        recordScrollTop() {
+            const recordScrollTopOfArticlePageAction = actionCreators.createRecordScrollTopOfArticlePageAction()
+            dispatch(recordScrollTopOfArticlePageAction)
         }
     }
 }

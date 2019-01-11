@@ -6,8 +6,10 @@ export const HomeWrapper = styled.div`
     `
 export const Gap = styled.div`
         height: ${props => props.gapHeight};
-        width: ${props => props.widthOfMainArea};
-      
+        width: ${props => props.widthOfMainArea}px;
+        @media(max-width:${props => props.widthOfMainArea}px){
+            width:100%
+        }
     `
 
 export const CustomBackground = styled.div`

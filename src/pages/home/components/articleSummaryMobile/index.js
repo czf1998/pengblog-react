@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
 import { ArticleSummaryWrapper, Title, ArticleInfoColumn, ArticleContent, PreviewImage } from './style'
 import { connect } from 'react-redux'
-import * as commonClassName from '../../../../commonStyle/commonClassNameConstant'
+import { Link } from 'react-router-dom'
+import {CommonClassNameConstants} from '../../../../commonStyle'
 
 class ArticleSummary extends PureComponent {
 
@@ -11,16 +12,14 @@ class ArticleSummary extends PureComponent {
 
         const withPreviewImage = article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined
 
+        const ARTICLE_PAGE_PATH = '/article/' + article.get('article_id')
+
         return (
-            <ArticleSummaryWrapper className={commonClassName.COMMON_PADDING}
+            <Link to={ARTICLE_PAGE_PATH} style={{width:'100%'}}>
+            <ArticleSummaryWrapper className={CommonClassNameConstants.COMMON_PADDING}
                                    widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
 
-                <Title className={commonClassName.FONT_MIDDLE +
-                                  commonClassName.CURSORP}>
-                    <span className={commonClassName.CLICKABLE +
-                                     commonClassName.TAG}>
-                        {article.get('article_label')}
-                    </span>
+                <Title className={CommonClassNameConstants.CURSORP}>
                         {article.get('article_title')}
                 </Title>
 
@@ -28,22 +27,25 @@ class ArticleSummary extends PureComponent {
 
                 {
                     withPreviewImage &&  <PreviewImage imageUrl={article.get('article_previewImageUrl')}
-                                                       className={commonClassName.COMMON_BORDER_RADIUS}/>
+                                                       className={CommonClassNameConstants.COMMON_BORDER_RADIUS}/>
                 }
 
-                <ArticleContent className={commonClassName.CURSORP +
-                commonClassName.OVER_3ROWS_HANDLE}
+                <ArticleContent className={CommonClassNameConstants.CURSORP +
+                                           CommonClassNameConstants.OVER_3ROWS_HANDLE}
                                 withPreviewImage={withPreviewImage}>
 
                     {article.get('article_summary')}
 
                 </ArticleContent>
 
-                <ArticleInfoColumn className={commonClassName.FONT_DARK +
-                commonClassName.FONT_SMALL}>
-
-                    <span className={commonClassName.FONT_SMALL}>
-                                作者: {article.get('article_author')}
+                <ArticleInfoColumn className={CommonClassNameConstants.FONT_DARK +
+                                              CommonClassNameConstants.FONT_SMALL}>
+                    <span>
+                                <i className="fa fa-tag"></i> {article.get('article_label')}
+                    </span>
+                    &nbsp;&nbsp;
+                    <span>
+                                <i className="fa fa-pencil"></i> {article.get('article_author')}
                     </span>
                     &nbsp;&nbsp;
                     <span>
@@ -52,6 +54,7 @@ class ArticleSummary extends PureComponent {
                 </ArticleInfoColumn>
 
             </ArticleSummaryWrapper>
+            </Link>
         );
     }
 }

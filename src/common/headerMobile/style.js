@@ -5,14 +5,14 @@ const height = "60px"
 export const HeaderWrapper = styled.div`
         height: ${height};
         background: white;
-        border-bottom: solid 2px ${props => props.backgroundColor};
+        border-bottom: 1px solid rgba(26, 26, 26, 0.06);
     `
 
 export const HeaderMainArea = styled.div`
         display: flex;
         justify-content: space-between;
         height: inherit;
-        width: ${props => props.widthOfMainArea}px;
+        width: 100%;
     `
 
 /*export const LogoWrapper = styled.div`
@@ -22,7 +22,7 @@ export const HeaderMainArea = styled.div`
 
 export const Logo = styled.div`
         padding: 0 20px;
-        color: ${props => props.backgroundColor};
+        color: ${props => props.metaColor};
     `
 
 export const NavItemWrapper = styled.div`

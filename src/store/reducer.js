@@ -37,14 +37,6 @@ export default combineReducers({
                 offsetTopOfElementEl: document.body.offsetHeight,
                 heightOfBrowser: window.innerHeight,
                 widthOfBrowser: window.innerWidth,
-                basicUIFeatures: window.innerWidth > 750 ?
-                    fromJS(state.get('basicUIFeatures').merge({
-                    widthOfMainArea: 750
-                }))
-                    :
-                    fromJS(state.get('basicUIFeatures').merge({
-                    widthOfMainArea: '100%'
-                })),
                 isMobile: window.innerWidth > 750 ? false : true
             })
         }

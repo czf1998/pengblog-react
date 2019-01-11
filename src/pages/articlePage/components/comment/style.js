@@ -2,6 +2,9 @@ import styled from 'styled-components'
 
 export const CommentWrapper = styled.div`
         width: ${props => props.widthOfMainArea}px;
+        @media(max-width: ${props => props.widthOfMainArea}px) {
+            width: 100%;
+        }
     `
 
 export const Visitor = styled.div`

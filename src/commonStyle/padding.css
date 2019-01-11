@@ -1,23 +1,23 @@
 .common-padding{
-    padding: 15px 30px;
+    padding: 1rem 2rem;
 }
 
 .common-padding-horizontal{
-    padding-right: 30px;
-    padding-left: 30px;
+    padding-right: 2rem;
+    padding-left: 2rem;
 }
 
 .common-padding-vertical{
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 @media (max-width: 750px) {
     .common-padding{
-        padding: 15px;
+        padding: 1rem;
     }
     .common-padding-horizontal{
-        padding-right: 15px;
-        padding-left: 15x;
+        padding-right: 1rem;
+        padding-left: 1rem;
     }
 }

@@ -15,16 +15,15 @@ class ArticleSummary extends PureComponent {
 
         const withPreviewImage = article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined
 
-        const ARTICLE_PAGE_PATH = '/article/'
+        const ARTICLE_PAGE_PATH = '/article/' + article.get('article_id')
 
         return (
 
             <ArticleSummaryWrapper className={CommonClassNameConstants.COMMON_PADDING +
                                               CommonClassNameConstants.COMMON_BORDER_RADIUS}
                                    widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
-                <Link to={ARTICLE_PAGE_PATH + article.get('article_id')}>
-                    <Title className={CommonClassNameConstants.FONT_MIDDLE +
-                                      CommonClassNameConstants.CURSORP}>
+                <Link to={ARTICLE_PAGE_PATH}>
+                    <Title className={CommonClassNameConstants.CURSORP}>
                         <span className={CommonClassNameConstants.HOVER_UNDERLINE}>
                             {article.get('article_title')}
                         </span>
@@ -34,19 +33,17 @@ class ArticleSummary extends PureComponent {
 
 
                 <SummaryWrapper withPreviewImage={withPreviewImage}>
-                    <ArticleInfoColumn className={CommonClassNameConstants.FONT_DARK +
-                                                  CommonClassNameConstants.FONT_SMALL}>
+                    <ArticleInfoColumn className={CommonClassNameConstants.FONT_DARK}>
                             <span className={CommonClassNameConstants.CLICKABLE +
-                                             CommonClassNameConstants.FONT_SMALL +
                                              CommonClassNameConstants.TAG}>
                                 {article.get('article_label')}
                             </span>
                             &nbsp;|&nbsp;
-                            <span className={CommonClassNameConstants.FONT_SMALL}>
+                            <span>
                                 作者: {article.get('article_author')}
                             </span>
                             &nbsp;|&nbsp;
-                            <span className={CommonClassNameConstants.FONT_SMALL}>
+                            <span>
                                 评论: <span className={CommonClassNameConstants.CLICKABLE}>{article.get('countOfAllComment')}</span>
                             </span>
                             <span style={{float:"right"}}>

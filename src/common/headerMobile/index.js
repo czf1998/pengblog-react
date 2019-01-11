@@ -7,20 +7,20 @@ class Header extends PureComponent {
 
 
     render() {
-        const { height, backgroundColor, basicUIFeatures } = this.props
+        const { height, backgroundColor, basicUIFeatures, metaColor } = this.props
         return (
-            <HeaderWrapper height={height} 
-                           backgroundColor={backgroundColor}>
+            <HeaderWrapper height={height}
+                           metaColor={metaColor}>
                 <HeaderMainArea widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
                         <Logo className={CommonClassNameConstants.FONT_LARGE +
                                          CommonClassNameConstants.FONT_SONG +
                                          CommonClassNameConstants.CURSORP +
                                          CommonClassNameConstants.FLEX_COLUMN_CENTER}
-                              backgroundColor={backgroundColor}>
+                              backgroundColor={backgroundColor} metaColor={metaColor}>
                             <div>
                                 远方有鱼
                             </div>
-                            <div style={{borderTop: "solid 1px " + backgroundColor}}
+                            <div style={{borderTop: "solid 1px " + metaColor}}
                                  className={CommonClassNameConstants.FONT_TINY}>
                                 It's a Wonderful Life
                             </div>
@@ -45,6 +45,7 @@ const mapState = (state) => {
     return  {
         height: state.get('header').get('height'),
         backgroundColor: state.get('header').get('backgroundColor'),
+        metaColor: state.get('header').get('metaColor'),
         basicUIFeatures: state.get('rootState').get('basicUIFeatures')
     }
 }

@@ -4,7 +4,7 @@ import {
     DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE, GET_COMMENT_LIST_DATA,
     RESET_ARTICLE_PAGE_STORE
 } from '../../../store/actionTypesWithSaga'
-import {LOAD_ARTICLE_CACHE} from "./actionType";
+import {LOAD_ARTICLE_CACHE, RECORD_SCROLL_TOP_OF_ARTICLE_PAGE} from "./actionType";
 
 
 const defaultState = fromJS({
@@ -17,7 +17,8 @@ const defaultState = fromJS({
     countOfAllComment: 0,
     commentList: [],
     dataReady: false,
-    isLoadingMoreComment: false
+    isLoadingMoreComment: false,
+    scrollPosition: 0
 })
 
 const resetState = fromJS({
@@ -36,6 +37,11 @@ const resetState = fromJS({
 
 
 export default (state = defaultState, action) => {
+    if(action.type === RECORD_SCROLL_TOP_OF_ARTICLE_PAGE) {
+        return state.merge({
+            scrollPosition: action.value.scrollPosition
+        })
+    }
     if(action.type === GET_COMMENT_LIST_DATA) {
         return state.merge({
             isLoadingMoreComment: true
@@ -48,7 +54,8 @@ export default (state = defaultState, action) => {
                 article: fromJS(handleImgLabelWidth(action.value))
             })),
             article: fromJS(handleImgLabelWidth(action.value)),
-            dataReady: true
+            dataReady: true,
+            scrollPosition: 0
         })
     }
 
@@ -93,7 +100,7 @@ const handleImgLabelWidth = (article) => {
     el.innerHTML = article.article_content
     let imgs = el.getElementsByTagName('img')
     for(let i = 0; i < imgs.length; i++) {
-        if(imgs[i].attributes['width'] === undefined){
+        if(imgs[i].attributes['width'] === undefined || window.innerWidth <= 750){
             imgs[i].style.width = '100%'
         }
     }

@@ -8,10 +8,12 @@ export const ArticleSummaryWrapper = styled.div`
     `
 
 export const Title = styled.div`
+        font-size: 1.2rem;
         color: black;
         line-height: 2; 
         font-weight: bold;
     `
+
 export const SummaryWrapper = styled.div`
         width: ${props => props.withPreviewImage ? '70%' : 'inherits'};
     `
@@ -22,9 +24,8 @@ export const ArticleInfoColumn = styled.div`
 
 export const ArticleContent = styled.div`
         display: -webkit-box;
-        /* autoprefixer: off */
+        /* autoprefixer: next */
         -webkit-box-orient: vertical;
-        /* autoprefixer: on */
         overflow: hidden;
         color: black;
         line-height:1.5;
@@ -34,9 +35,9 @@ export const ArticleContent = styled.div`
 export const PreviewImage = styled.div`
         border-radius: 2px;
         position: absolute;
-        top: 45px;
-        bottom: 15px;
-        right: 30px;
+        top: 3rem;
+        bottom: 1rem;
+        right: 2rem;
         width: 180px;
         background: url(${props => props.imageUrl}) no-repeat center center;
         background-size: cover;

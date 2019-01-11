@@ -1,35 +1,23 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { SubCommentWrapper, QuotedVisitor, Content, Meta } from './style'
+import { CommentEditorWrapper, Name, Content } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
-import { GetDateDiff } from '../../../../exJs'
 
 
-class SubComment extends PureComponent {
+class CommentEditor extends PureComponent {
 
-    constructor(props) {
-        super(props)
-    }
 
     render() {
 
-        const { comment } = this.props
+        const { widthOfMainArea } = this.props
 
         return (
-            <SubCommentWrapper className={CommonClassNameConstants.COMMON_PADDING}>
-                <QuotedVisitor className={CommonClassNameConstants.FONT_SMALL}>
-                    引用&nbsp; <span style={{fontWeight:'bold'}}>{comment.get('comment_author').get('visitor_name')}</span> &nbsp;的留言:
-                </QuotedVisitor>
-
-                <Content className={CommonClassNameConstants.FONT_SMALL}>
-                    {comment.get('comment_content')}
-                </Content>
-
-                <Meta className={CommonClassNameConstants.FONT_DARK +
-                                 CommonClassNameConstants.FONT_SMALL}>
-                    {GetDateDiff(comment.get('comment_releaseTime'))} | <span className={CommonClassNameConstants.CLICKABLE}>引用</span>
-                </Meta>
-            </SubCommentWrapper>
+            <CommentEditorWrapper widthOfMainArea={widthOfMainArea}
+                                  className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
+                <Name>
+                    <input type="text" />
+                </Name>
+            </CommentEditorWrapper>
         );
     }
 }
@@ -37,8 +25,9 @@ class SubComment extends PureComponent {
 const mapState = (state) => {
     return  {
         isMobile: state.get('rootState').get('isMobile'),
+        widthOfMainArea: state.get('rootState').get('basicUIFeatures').get('widthOfMainArea')
     }
 }
 
 
-export default connect(mapState)(SubComment)
+export default connect(mapState)(CommentEditor)
