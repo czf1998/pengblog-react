@@ -21,9 +21,9 @@ class Header extends PureComponent {
 
                     <div onClick={() => {redirectToHome(history)}}>
                         <Logo className={CommonClassNameConstants.FONT_LARGE +
-                        CommonClassNameConstants.FONT_SONG +
-                        CommonClassNameConstants.CURSORP +
-                        CommonClassNameConstants.FLEX_COLUMN_CENTER}
+                                        CommonClassNameConstants.FONT_SONG +
+                                        CommonClassNameConstants.CURSORP +
+                                        CommonClassNameConstants.FLEX_COLUMN_CENTER}
                               metaColor={metaColor}>
                             <div>
                                 远方有鱼

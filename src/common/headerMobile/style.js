@@ -5,7 +5,7 @@ const height = "60px"
 export const HeaderWrapper = styled.div`
         height: ${height};
         background: white;
-        border-bottom: 1px solid rgba(26, 26, 26, 0.06);
+        border-bottom: 1px solid #ebebeb;
     `
 
 export const HeaderMainArea = styled.div`

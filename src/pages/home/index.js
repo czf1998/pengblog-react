@@ -30,13 +30,13 @@ class Home extends PureComponent {
         return (
             articleListDataIsReady ?
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
-                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+
 
 
                 {
                     !isMobile &&
                     <Fragment>
-                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
+                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
                         {
                             jumbotronArticleId !== jumbotronArticleIdDefault
                             &&
@@ -44,7 +44,7 @@ class Home extends PureComponent {
                                 <Jumbotron jumbotronArticleId={jumbotronArticleId}/>
                             </div>
                         }
-                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
+                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
                     </Fragment>
                 }
 
@@ -55,15 +55,17 @@ class Home extends PureComponent {
                         }
                         return (
                             <Fragment key={item.get('article_title')}>
+                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
                                 {
                                     isMobile ?
-                                        <ArticleSummaryMobile article={item}/>
+                                        <div className={articleSummaryListTransitionClassName} style={{width:'100%'}}>
+                                            <ArticleSummaryMobile article={item}/>
+                                        </div>
                                         :
                                         <div className={articleSummaryListTransitionClassName}>
-                                            <ArticleSummary article={item}  className={articleSummaryListTransitionClassName}/>
+                                            <ArticleSummary article={item}/>
                                         </div>
                                 }
-                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
                             </Fragment>
                         )
                     })

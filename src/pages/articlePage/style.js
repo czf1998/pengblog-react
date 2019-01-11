@@ -38,12 +38,6 @@ export const Gap = styled.div`
     `
 
 export const CommentTitle = styled.div`
-        font-size: 22px;
+        font-size: 1.3rem;
         font-weight: bold;
-    `
-
-export const GapLine = styled.div`
-        height: 1px;
-        margin: 0 30px;
-        border-bottom: solid 1px ${gapLineColor};
     `

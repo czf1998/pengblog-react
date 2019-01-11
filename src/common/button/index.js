@@ -8,7 +8,7 @@ export const Button = styled.button`
         text-align: center;
         white-space: nowrap;
         vertical-align: middle;
-        padding: 6px 12px;
+        padding: 0.4rem 0.6rem;
         background-color: ${props => props.backgroundColor ? props.backgroundColor : "white"};
         filter:brightness(1);
         color: ${props => props.color ? props.color : "black"};

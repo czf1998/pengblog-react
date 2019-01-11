@@ -6,13 +6,12 @@ import { ArticlePageWrapper,
          ArticleMainArea,
          ArticleMeta,
          ArticleContent,
-         CommentTitle,
-         GapLine } from './style'
+         CommentTitle } from './style'
 import { actionCreators } from './store'
 import { CommonClassNameConstants } from "../../commonStyle"
-import { Loading, ForMore, ScrollToThePositionOnMount } from '../../common'
+import { Loading, ForMore, ScrollToThePositionOnMount, GapLine } from '../../common'
 import { DateFormat } from "../../exJs"
-import { Comment } from './components'
+import { Comment, CommentEditor } from './components'
 
 class ArticlePage extends PureComponent {
 
@@ -66,11 +65,7 @@ class ArticlePage extends PureComponent {
                         </ArticleMeta>
 
                         <CommentTitle className={CommonClassNameConstants.COMMON_PADDING}>
-                            留言&nbsp;
-                            <span className={CommonClassNameConstants.FONT_MIDDLE +
-                                             CommonClassNameConstants.FONT_DARK}>
-                                ({countOfAllComment})
-                            </span>
+                            <i className={CommonClassNameConstants.FONT_DARK + 'fa fa-comments'}/>&nbsp;{countOfAllComment}条留言
                         </CommentTitle>
 
                         {
@@ -85,7 +80,7 @@ class ArticlePage extends PureComponent {
                                 )
                             })
                         }
-
+                        <GapLine/>
                         <ForMore isLoading={isLoadingMoreComment}
                                  noMore={currentPage === maxPage}
                                  clickHandler={this.props.getMoreCommentListData.bind(this)}
@@ -97,6 +92,8 @@ class ArticlePage extends PureComponent {
                                         isLoadingMoreComment]}/>
 
                     </ArticleMainArea>
+
+                    <CommentEditor/>
 
                     <ScrollToThePositionOnMount scrollPosition={scrollPosition}/>
 

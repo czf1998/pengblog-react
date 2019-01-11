@@ -2,16 +2,20 @@ import React, { PureComponent } from 'react'
 import { HeaderWrapper, HeaderMainArea,  Logo, NavItem, NavItemWrapper } from './style'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
+import {withRouter} from "react-router-dom";
 
-class Header extends PureComponent {
+const HOME_PATH = '/'
+
+class HeaderMobile extends PureComponent {
 
 
     render() {
-        const { height, backgroundColor, basicUIFeatures, metaColor } = this.props
+        const { height, backgroundColor, basicUIFeatures, metaColor, history } = this.props
         return (
             <HeaderWrapper height={height}
                            metaColor={metaColor}>
                 <HeaderMainArea widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
+                    <div onClick={() => {redirectToHome(history)}} className={CommonClassNameConstants.FLEX_ROW_CENTER}>
                         <Logo className={CommonClassNameConstants.FONT_LARGE +
                                          CommonClassNameConstants.FONT_SONG +
                                          CommonClassNameConstants.CURSORP +
@@ -25,6 +29,7 @@ class Header extends PureComponent {
                                 It's a Wonderful Life
                             </div>
                         </Logo>
+                    </div>
                         <NavItemWrapper>
                             <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
                                                 CommonClassNameConstants.CURSORP}>
@@ -41,6 +46,15 @@ class Header extends PureComponent {
     }
 }
 
+const redirectToHome = (history) => {
+    if(history.location.pathname === HOME_PATH){
+        return
+    }
+    history.push({
+        pathname: HOME_PATH,
+    })
+}
+
 const mapState = (state) => {
     return  {
         height: state.get('header').get('height'),
@@ -51,4 +65,4 @@ const mapState = (state) => {
 }
 
 
-export default connect(mapState)(Header)
+export default connect(mapState)(withRouter(HeaderMobile))
