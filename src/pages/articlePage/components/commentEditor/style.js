@@ -19,6 +19,7 @@ export const InputOfEditor = styled(Input)`
         width: 45%;
         background: #f7f7f7;
         font-size: 1rem;
+        margin-bottom: 1rem;
         @media(max-width: ${props => props.widthOfMainArea}px) {
             width: 100%;
         }
@@ -45,11 +46,29 @@ export const TextArea = styled.textarea`
 
 
 export const Name = styled.div`
-        margin-bottom: 20px;
     `
 
 export const Content = styled.div`
-        
+        position: relative;
     `
 
+export const EmojiButton = styled.div`
+        position: absolute;
+        bottom: 1rem;
+        right: 2.4em;
+        &:active{
+            filter:brightness(0.8);
+        }
+    `
 
+export const EmojiPickerWrapper = styled.div`
+        position: absolute;
+        top: 100%;
+        
+        right: 2.4rem;
+    `
+
+export const VisitorInfo = styled.div`
+        display: flex;
+        flex-direction: column;
+    `

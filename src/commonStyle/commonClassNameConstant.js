@@ -65,3 +65,5 @@ export const SLIDE_UP_FAST = 'slide-up-fast'
 export const COMMON_PADDING_HORIZONTAL = 'common-padding-horizontal '
 
 export const COMMON_PADDING_VERTICAL = 'common-padding-vertical '
+
+export const COMMON_MARGIN_BOTTOM = 'common-margin-bottom '

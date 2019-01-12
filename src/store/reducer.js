@@ -3,6 +3,8 @@ import { reducer as homeReducer } from '../pages/home/store'
 import { reducer as jumbotronReducer } from '../pages/home/components/jumbotrion/store'
 import { reducer as articlePageReducer } from '../pages/articlePage/store'
 import { reducer as prograssBarReducer } from '../common/prograssBar/store'
+import { reducer as commentEditorReducer } from '../pages/articlePage/components/commentEditor/store'
+import { reducer as emojiPickerReducer } from '../pages/articlePage/components/commentEditor/components/emojiPicker/store'
 import { fromJS } from 'immutable'
 import { RECORD_SCROLL_TOP_OF_ELEMENT_EL } from './actionTypesWithSaga'
 
@@ -15,7 +17,8 @@ const defaultState = fromJS({
         boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
         widthOfMainArea: 750,
         animateTime: 1000,
-        placeholderSpeed: 1
+        placeholderSpeed: 1,
+        metaColor: '#3367d6'
     },
     scrollTopOfElementEl: 0,
     offsetTopOfElementEl: 0,
@@ -30,6 +33,8 @@ export default combineReducers({
     jumbotron: jumbotronReducer,
     articlePage: articlePageReducer,
     prograssBar: prograssBarReducer,
+    commentEditor: commentEditorReducer,
+    emojiPicker: emojiPickerReducer,
     rootState:(state = defaultState, action) => {
         if(action.type === RECORD_SCROLL_TOP_OF_ELEMENT_EL){
             return state.merge({
