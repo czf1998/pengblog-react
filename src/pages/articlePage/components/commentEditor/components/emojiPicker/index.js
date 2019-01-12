@@ -48,6 +48,8 @@ const mapActions = (dispatch) => ({
 
         if(!event.path.some((pathItem) => {
             return pathItem.className === 'emoji-mart-emoji emoji-mart-emoji-native'
+        }) && event.path.some((pathItem) => {
+            return pathItem.className === 'emoji-mart'
         })){
             return
         }
@@ -57,21 +59,6 @@ const mapActions = (dispatch) => ({
         })){
             return
         }
-       /* if(event.path[0].tagName === 'svg'
-            ||
-            event.path[0].tagName === 'path'
-            ||
-            event.path[0].className === 'emoji-mart-anchor '
-            ||
-            event.path[0].className === 'emoji-mart-anchors'
-            ||
-            event.path[0].className === 'emoji-mart-anchor-icon'
-            ||
-            event.path[0].innerText === 'Smileys & People'
-            ||
-            event.path[0].className === 'emoji-mart-scroll'){
-            return
-        }*/
 
         const triggerShowEmojiPickerAction = createTriggerShowEmojiPickerAction()
         dispatch(triggerShowEmojiPickerAction)
