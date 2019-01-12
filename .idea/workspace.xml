@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="435386c2-4738-4296-9e2d-0eb0c4eda9b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/commonStyle/emojiPicker.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/commonStyle/margin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/components/emojiPicker/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/components/emojiPicker/store/actionCreators.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/components/emojiPicker/store/actionType.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/components/emojiPicker/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/components/emojiPicker/store/reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/components/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/store/actionCreators.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/store/actionType.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/store/reducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commonStyle/commonClassNameConstant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonStyle/commonClassNameConstant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commonStyle/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonStyle/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/components/emojiPicker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/components/emojiPicker/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -37,7 +19,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="1785" />
-          <entry key="js" value="53384" />
+          <entry key="js" value="53493" />
           <entry key="json" value="3" />
         </counts>
       </usages-collector>
@@ -45,7 +27,7 @@
         <counts>
           <entry key="CSS" value="1785" />
           <entry key="JSON" value="3" />
-          <entry key="JavaScript" value="53384" />
+          <entry key="JavaScript" value="53493" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -131,8 +113,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/components/emojiPicker/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="49" column="64" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
+            <state relative-caret-position="126">
+              <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -471,7 +453,7 @@
       <workItem from="1546662251081" duration="27439000" />
       <workItem from="1546739509198" duration="22268000" />
       <workItem from="1546791489121" duration="36907000" />
-      <workItem from="1547028143134" duration="85903000" />
+      <workItem from="1547028143134" duration="86977000" />
     </task>
     <task id="LOCAL-00001" summary="normal commit">
       <created>1545478161955</created>
@@ -662,11 +644,25 @@
       <option name="project" value="LOCAL" />
       <updated>1547225950627</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="normal commit">
+      <created>1547313337346</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1547313337346</updated>
+    </task>
+    <task id="LOCAL-00029" summary="normal commit">
+      <created>1547313783079</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1547313783079</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="394953000" />
+    <option name="totallyTimeSpent" value="396027000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1127,8 +1123,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/components/emojiPicker/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="49" column="64" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
+        <state relative-caret-position="126">
+          <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>

@@ -45,6 +45,11 @@ const mapState = (state) => ({
 const mapActions = (dispatch) => ({
 
     shutdownThisEmojiPicker(event){
+        if(!event.path){
+            const triggerShowEmojiPickerAction = createTriggerShowEmojiPickerAction()
+            dispatch(triggerShowEmojiPickerAction)
+            return
+        }
 
         if(!event.path.some((pathItem) => {
             return pathItem.className === 'emoji-mart-emoji emoji-mart-emoji-native'
