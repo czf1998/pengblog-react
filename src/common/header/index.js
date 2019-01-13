@@ -25,7 +25,7 @@ class Header extends PureComponent {
                                         CommonClassNameConstants.CURSORP +
                                         CommonClassNameConstants.FLEX_COLUMN_CENTER}
                               metaColor={metaColor}>
-                            <div>
+                            <div style={{color:'#175199'}}>
                                 远方有鱼
                             </div>
                             <div style={{borderTop: "solid 1px " + metaColor}}

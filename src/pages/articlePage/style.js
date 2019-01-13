@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-const gapLineColor = '#F7F7F7'
 
 export const ArticlePageWrapper = styled.div`
         background: #f7f7f7;
@@ -32,10 +31,6 @@ export const ArticleContent = styled.div`
         word-wrap:break-word;
     `
 
-export const Gap = styled.div`
-        height: ${props => props.gapHeight};
-        width: ${props => props.widthOfMainArea}px;
-    `
 
 export const CommentTitle = styled.div`
         font-size: 1.3rem;

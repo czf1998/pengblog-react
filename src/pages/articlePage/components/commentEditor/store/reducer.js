@@ -10,9 +10,21 @@ import {
 const defaultState = fromJS({
     showEmojiPicker: false,
     commentContent: '',
-    visitorName: '',
-    visitorEmail: '',
-    visitorSiteAddress: ''
+    visitorNameManager: fromJS({
+        value:'',
+        showWarn: false,
+        warnMsg: '格式有误'
+    }),
+    visitorEmailManager: fromJS({
+        value:'',
+        showWarn: false,
+        warnMsg: '格式有误'
+    }),
+    visitorSiteAddressManager: fromJS({
+        value:'',
+        showWarn: false,
+        warnMsg: '格式有误'
+    })
 })
 
 export default (state = defaultState, action) => {
@@ -31,19 +43,25 @@ export default (state = defaultState, action) => {
 
     if(action.type === REFRESH_VISITOR_NAME){
         return state.merge({
-            visitorName: action.value
+            visitorNameManager: state.get('visitorNameManager').merge({
+                value: action.value
+            })
         })
     }
 
     if(action.type === REFRESH_VISITOR_EMAIL){
         return state.merge({
-            visitorEmail: action.value
+            visitorEmailManager: state.get('visitorEmailManager').merge({
+                value: action.value
+            })
         })
     }
 
     if(action.type === REFRESH_VISITOR_SITE_ADDRESS){
         return state.merge({
-            visitorSiteAddress: action.value
+            visitorSiteAddressManager: state.get('visitorSiteAddressManager').merge({
+                value: action.value
+            })
         })
     }
 

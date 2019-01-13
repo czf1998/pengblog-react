@@ -19,13 +19,6 @@ export const Title = styled.div`
         font-weight: bold;
     `
 
-export const InputWrapper = styled.div`
-        position: relative;
-        width: 40%;
-        @media(max-width: ${widthOfMainArea}px) {
-            width: 100%;
-        }
-    `
 
 
 export const TextArea = styled.textarea`
@@ -101,8 +94,3 @@ export const SubmitButton = styled(Button)`
         } 
     `
 
-export const InputIcon = styled.div`
-        position:absolute;
-        top: 0.6rem;
-        left: 0.6rem;
-    `

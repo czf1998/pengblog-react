@@ -9,15 +9,12 @@ import { CommentEditorWrapper,
          Title,
          Name,
          Content,
-         InputOfEditor,
          TextArea,
          VisitorInfo,
          EmojiButton,
          EmojiPickerWrapper,
          SubmitButtonWrapper,
-         SubmitButton,
-         InputWrapper,
-         InputIcon } from './style'
+         SubmitButton } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GapLine, Input } from '../../../../common'
 import { EmojiPicker } from './components'
@@ -30,13 +27,14 @@ class CommentEditor extends PureComponent {
                 triggerShowEmojiPicker,
                 showEmojiPicker,
                 commentContent,
-                visitorName,
-                visitorEmail,
-                visitorSiteAddress,
+                visitorNameManager,
+                visitorEmailManager,
+                visitorSiteAddressManager,
                 refreshCommentContent,
                 refreshVisitorName,
                 refreshVisitorEmail,
-                refreshVisitorSiteAddress } = this.props
+                refreshVisitorSiteAddress,
+                submitComment } = this.props
 
         return (
             <CommentEditorWrapper>
@@ -48,10 +46,13 @@ class CommentEditor extends PureComponent {
                 </Title>
 
                 <Name className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
-                    <Input placeholder="设定好昵称"
-                             type="text"
-                             value={visitorName}
-                             onChange={refreshVisitorName} iconClassName="fa fa-user-o"/>
+                    <Input  placeholder="设定好昵称"
+                            type="text"
+                            value={visitorNameManager.get('value')}
+                            onChange={refreshVisitorName}
+                            showWarn={visitorNameManager.get('showWarn')}
+                            warnMsg={visitorNameManager.get('warnMsg')}
+                            iconClassName="fa fa-user-o"/>
                 </Name>
 
                 <Content className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL +
@@ -65,7 +66,7 @@ class CommentEditor extends PureComponent {
                     {
                         !isMobile &&
                         <EmojiButton className={CommonClassNameConstants.CURSORP}>
-                            <span onClick={triggerShowEmojiPicker}>🙂</span>
+                            <span onClick={triggerShowEmojiPicker} role="img" aria-label="emoji">🙂</span>
                         </EmojiButton>
                     }
 
@@ -80,26 +81,37 @@ class CommentEditor extends PureComponent {
 
                 <VisitorInfo className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
 
-                    <Input placeholder="留个邮箱"
-                             type="text"
-                             value={visitorEmail}
-                             onChange={refreshVisitorEmail}
-                             iconClassName="fa fa-envelope"/>
+                    <Input  placeholder="您的邮箱"
+                            type="text"
+                            value={visitorEmailManager.get('value')}
+                            onChange={refreshVisitorEmail}
+                            showWarn={visitorEmailManager.get('showWarn')}
+                            warnMsg={visitorEmailManager.get('warnMsg')}
+                            iconClassName="fa fa-envelope"/>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                     <Input placeholder="你也有个人网站？"
                              type="text"
-                             value={visitorSiteAddress}
+                             value={visitorSiteAddressManager.get('value')}
                              onChange={refreshVisitorSiteAddress}
+                             showWarn={visitorSiteAddressManager.get('showWarn')}
+                             warnMsg={visitorSiteAddressManager.get('warnMsg')}
                              iconClassName="fa fa-compass"/>
 
                 </VisitorInfo>
 
                 <SubmitButtonWrapper>
-                    <SubmitButton>
-                        <i className="fa fa-paper-plane"/>&nbsp;Submit&nbsp;
-                    </SubmitButton>
+
+                    <div onClick={() => {submitComment( visitorNameManager.get('value'),
+                                                        commentContent,
+                                                        visitorEmailManager.get('value'),
+                                                        visitorSiteAddressManager.get('value'))}}>
+                        <SubmitButton>
+                            <i className="fa fa-paper-plane"/>&nbsp;Submit&nbsp;
+                        </SubmitButton>
+                    </div>
+
                 </SubmitButtonWrapper>
             </CommentEditorWrapper>
         );
@@ -107,13 +119,14 @@ class CommentEditor extends PureComponent {
 
 }
 
+
 const mapState = (state) => ({
         isMobile: state.get('rootState').get('isMobile'),
         showEmojiPicker: state.get('commentEditor').get('showEmojiPicker'),
         commentContent: state.get('commentEditor').get('commentContent'),
-        visitorName: state.get('commentEditor').get('visitorName'),
-        visitorEmail: state.get('commentEditor').get('visitorEmail'),
-        visitorSiteAddress: state.get('commentEditor').get('visitorSiteAddress')
+        visitorNameManager: state.get('commentEditor').get('visitorNameManager'),
+        visitorEmailManager: state.get('commentEditor').get('visitorEmailManager'),
+        visitorSiteAddressManager: state.get('commentEditor').get('visitorSiteAddressManager')
 })
 
 const mapActions = (dispatch) => ({
@@ -136,6 +149,18 @@ const mapActions = (dispatch) => ({
         refreshVisitorSiteAddress(e) {
             const refreshVisitorSiteAddressAction = createRefreshVisitorSiteAddressAction(e.target.value)
             dispatch(refreshVisitorSiteAddressAction)
+        },
+        checkVisitorName(visitorName){
+
+        },
+        submitComment(visitorName,
+                      commentContent,
+                      visitorEmail,
+                      visitorSiteAddress){
+            console.log(visitorName)
+            console.log(commentContent)
+            console.log(visitorEmail)
+            console.log(visitorSiteAddress)
         }
 })
 
