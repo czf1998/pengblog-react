@@ -1,14 +1,13 @@
-import { createRefreshCommentContentAction,
-         createTriggerShowEmojiPickerAction,
-         createRefreshVisitorEmailAction,
-         createRefreshVisitorNameAction,
-         createRefreshVisitorSiteAddressAction} from './actionCreators'
+import {createRefreshCommentContentAction,
+        createTriggerShowEmojiPickerAction,
+        createAppointInputWarnAction,
+        createAppointInputValueAction} from './actionCreators'
 import reducer from './reducer'
 
 export { reducer }
 
-export { createRefreshCommentContentAction,
-         createTriggerShowEmojiPickerAction,
-         createRefreshVisitorEmailAction,
-         createRefreshVisitorNameAction,
-         createRefreshVisitorSiteAddressAction }
+export {createRefreshCommentContentAction,
+        createTriggerShowEmojiPickerAction,
+        createAppointInputWarnAction,
+        createAppointInputValueAction }
+

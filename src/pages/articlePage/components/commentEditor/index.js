@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { createRefreshCommentContentAction,
-         createTriggerShowEmojiPickerAction,
-         createRefreshVisitorNameAction,
-         createRefreshVisitorEmailAction,
-         createRefreshVisitorSiteAddressAction } from './store'
+import {createRefreshCommentContentAction,
+        createTriggerShowEmojiPickerAction,
+        createAppointInputValueAction,
+        createAppointInputWarnAction } from './store'
 import { CommentEditorWrapper,
          Title,
          Name,
@@ -31,10 +30,10 @@ class CommentEditor extends PureComponent {
                 visitorEmailManager,
                 visitorSiteAddressManager,
                 refreshCommentContent,
-                refreshVisitorName,
-                refreshVisitorEmail,
-                refreshVisitorSiteAddress,
+                appointInputValue,
                 submitComment } = this.props
+
+        const _this = this
 
         return (
             <CommentEditorWrapper>
@@ -49,7 +48,7 @@ class CommentEditor extends PureComponent {
                     <Input  placeholder="设定好昵称"
                             type="text"
                             value={visitorNameManager.get('value')}
-                            onChange={refreshVisitorName}
+                            onChange={(event) => {appointInputValue(event,'visitorName')}}
                             showWarn={visitorNameManager.get('showWarn')}
                             warnMsg={visitorNameManager.get('warnMsg')}
                             iconClassName="fa fa-user-o"/>
@@ -84,20 +83,20 @@ class CommentEditor extends PureComponent {
                     <Input  placeholder="您的邮箱"
                             type="text"
                             value={visitorEmailManager.get('value')}
-                            onChange={refreshVisitorEmail}
+                            onChange={(event) => {appointInputValue(event,'visitorEmail')}}
                             showWarn={visitorEmailManager.get('showWarn')}
                             warnMsg={visitorEmailManager.get('warnMsg')}
                             iconClassName="fa fa-envelope"/>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <Input placeholder="你也有个人网站？"
-                             type="text"
-                             value={visitorSiteAddressManager.get('value')}
-                             onChange={refreshVisitorSiteAddress}
-                             showWarn={visitorSiteAddressManager.get('showWarn')}
-                             warnMsg={visitorSiteAddressManager.get('warnMsg')}
-                             iconClassName="fa fa-compass"/>
+                    <Input  placeholder="你的个人网站？如果有"
+                            type="text"
+                            value={visitorSiteAddressManager.get('value')}
+                            onChange={(event) => {appointInputValue(event,'visitorSiteAddress')}}
+                            showWarn={visitorSiteAddressManager.get('showWarn')}
+                            warnMsg={visitorSiteAddressManager.get('warnMsg')}
+                            iconClassName="fa fa-compass"/>
 
                 </VisitorInfo>
 
@@ -106,7 +105,8 @@ class CommentEditor extends PureComponent {
                     <div onClick={() => {submitComment( visitorNameManager.get('value'),
                                                         commentContent,
                                                         visitorEmailManager.get('value'),
-                                                        visitorSiteAddressManager.get('value'))}}>
+                                                        visitorSiteAddressManager.get('value'),
+                                                        this)}}>
                         <SubmitButton>
                             <i className="fa fa-paper-plane"/>&nbsp;Submit&nbsp;
                         </SubmitButton>
@@ -138,29 +138,65 @@ const mapActions = (dispatch) => ({
             const refreshCommentContentAction = createRefreshCommentContentAction(e.target.value)
             dispatch(refreshCommentContentAction)
         },
-        refreshVisitorName(e) {
-            const refreshVisitorNameAction = createRefreshVisitorNameAction(e.target.value)
-            dispatch(refreshVisitorNameAction)
-        },
-        refreshVisitorEmail(e) {
-            const refreshVisitorEmailAction = createRefreshVisitorEmailAction(e.target.value)
-            dispatch(refreshVisitorEmailAction)
-        },
-        refreshVisitorSiteAddress(e) {
-            const refreshVisitorSiteAddressAction = createRefreshVisitorSiteAddressAction(e.target.value)
-            dispatch(refreshVisitorSiteAddressAction)
+        appointInputValue(event,input) {
+            const value = {
+                input: input,
+                inputValue: event.target.value
+            }
+            const appointInputValueAction = createAppointInputValueAction(value)
+            dispatch(appointInputValueAction)
         },
         checkVisitorName(visitorName){
-
+            if(visitorName.trim() === ''){
+                const value = {
+                    input: 'visitorName',
+                    showWarn: true,
+                    warnMsg: '昵称不能为空'
+                }
+                const appointInputWarnAction = createAppointInputWarnAction(value)
+                dispatch(appointInputWarnAction)
+            }
+            if(visitorName.getLength() > 14){
+                const value = {
+                    input: 'visitorName',
+                    showWarn: true,
+                    warnMsg: '昵称太长'
+                }
+                const appointInputWarnAction = createAppointInputWarnAction(value)
+                dispatch(appointInputWarnAction)
+            }
+        },
+        checkVisitorEmail(visitorEmail){
+            if(visitorEmail.trim() === ''){
+                const value = {
+                    input: 'visitorEmail',
+                    showWarn: true,
+                    warnMsg: '请填写您的邮箱地址'
+                }
+                const appointInputWarnAction = createAppointInputWarnAction(value)
+                dispatch(appointInputWarnAction)
+            }
+            if(visitorEmail.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/) == null){
+                const value = {
+                    input: 'visitorEmail',
+                    showWarn: true,
+                    warnMsg: '非法的邮件地址'
+                }
+                const appointInputWarnAction = createAppointInputWarnAction(value)
+                dispatch(appointInputWarnAction)
+            }
         },
         submitComment(visitorName,
                       commentContent,
                       visitorEmail,
-                      visitorSiteAddress){
-            console.log(visitorName)
+                      visitorSiteAddress,_this){
+            _this.props.checkVisitorName(visitorName)
+            _this.props.checkVisitorEmail(visitorEmail)
+
+            /*console.log(_this)
             console.log(commentContent)
             console.log(visitorEmail)
-            console.log(visitorSiteAddress)
+            console.log(visitorSiteAddress)*/
         }
 })
 
