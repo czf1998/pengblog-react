@@ -1,20 +1,45 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { createRefreshCommentContentAction, createTriggerShowEmojiPickerAction } from './store'
-import { CommentEditorWrapper, Title, Name, Content, InputOfEditor, TextArea, VisitorInfo, EmojiButton, EmojiPickerWrapper } from './style'
+import { createRefreshCommentContentAction,
+         createTriggerShowEmojiPickerAction,
+         createRefreshVisitorNameAction,
+         createRefreshVisitorEmailAction,
+         createRefreshVisitorSiteAddressAction } from './store'
+import { CommentEditorWrapper,
+         Title,
+         Name,
+         Content,
+         InputOfEditor,
+         TextArea,
+         VisitorInfo,
+         EmojiButton,
+         EmojiPickerWrapper,
+         SubmitButtonWrapper,
+         SubmitButton,
+         InputWrapper,
+         InputIcon } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
-import { GapLine } from '../../../../common'
+import { GapLine, Input } from '../../../../common'
 import { EmojiPicker } from './components'
 
 class CommentEditor extends PureComponent {
 
-
     render() {
 
-        const { isMobile, widthOfMainArea, triggerShowEmojiPicker, showEmojiPicker, commentContent, refreshCommentContent } = this.props
+        const { isMobile,
+                triggerShowEmojiPicker,
+                showEmojiPicker,
+                commentContent,
+                visitorName,
+                visitorEmail,
+                visitorSiteAddress,
+                refreshCommentContent,
+                refreshVisitorName,
+                refreshVisitorEmail,
+                refreshVisitorSiteAddress } = this.props
 
         return (
-            <CommentEditorWrapper widthOfMainArea={widthOfMainArea}>
+            <CommentEditorWrapper>
 
                 <GapLine/>
 
@@ -23,13 +48,20 @@ class CommentEditor extends PureComponent {
                 </Title>
 
                 <Name className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
-                    <InputOfEditor placeholder="设定好昵称" type="text" widthOfMainArea={widthOfMainArea}/>
+                    <Input placeholder="设定好昵称"
+                             type="text"
+                             value={visitorName}
+                             onChange={refreshVisitorName} iconClassName="fa fa-user-o"/>
                 </Name>
 
                 <Content className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL +
                                     CommonClassNameConstants.COMMON_MARGIN_BOTTOM}>
 
-                    <TextArea rows="5" placeholder="开始编辑您的留言" value={commentContent} onChange={refreshCommentContent}/>
+                    <TextArea rows="5"
+                              placeholder="开始编辑您的留言"
+                              value={commentContent}
+                              onChange={refreshCommentContent}/>
+
                     {
                         !isMobile &&
                         <EmojiButton className={CommonClassNameConstants.CURSORP}>
@@ -46,15 +78,29 @@ class CommentEditor extends PureComponent {
 
                 </Content>
 
-
-
                 <VisitorInfo className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
-                    <InputOfEditor placeholder="留个邮箱" type="text" widthOfMainArea={widthOfMainArea} style={{marginRight:'2rem'}}/>
-                    <InputOfEditor placeholder="你也有个人网站吗" type="text" widthOfMainArea={widthOfMainArea}/>
+
+                    <Input placeholder="留个邮箱"
+                             type="text"
+                             value={visitorEmail}
+                             onChange={refreshVisitorEmail}
+                             iconClassName="fa fa-envelope"/>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <Input placeholder="你也有个人网站？"
+                             type="text"
+                             value={visitorSiteAddress}
+                             onChange={refreshVisitorSiteAddress}
+                             iconClassName="fa fa-compass"/>
+
                 </VisitorInfo>
 
-                <div style={{width:'100%', height:'500px'}}></div>
-
+                <SubmitButtonWrapper>
+                    <SubmitButton>
+                        <i className="fa fa-paper-plane"/>&nbsp;Submit&nbsp;
+                    </SubmitButton>
+                </SubmitButtonWrapper>
             </CommentEditorWrapper>
         );
     }
@@ -63,9 +109,11 @@ class CommentEditor extends PureComponent {
 
 const mapState = (state) => ({
         isMobile: state.get('rootState').get('isMobile'),
-        widthOfMainArea: state.get('rootState').get('basicUIFeatures').get('widthOfMainArea'),
         showEmojiPicker: state.get('commentEditor').get('showEmojiPicker'),
-        commentContent: state.get('commentEditor').get('commentContent')
+        commentContent: state.get('commentEditor').get('commentContent'),
+        visitorName: state.get('commentEditor').get('visitorName'),
+        visitorEmail: state.get('commentEditor').get('visitorEmail'),
+        visitorSiteAddress: state.get('commentEditor').get('visitorSiteAddress')
 })
 
 const mapActions = (dispatch) => ({
@@ -76,6 +124,18 @@ const mapActions = (dispatch) => ({
         refreshCommentContent(e) {
             const refreshCommentContentAction = createRefreshCommentContentAction(e.target.value)
             dispatch(refreshCommentContentAction)
+        },
+        refreshVisitorName(e) {
+            const refreshVisitorNameAction = createRefreshVisitorNameAction(e.target.value)
+            dispatch(refreshVisitorNameAction)
+        },
+        refreshVisitorEmail(e) {
+            const refreshVisitorEmailAction = createRefreshVisitorEmailAction(e.target.value)
+            dispatch(refreshVisitorEmailAction)
+        },
+        refreshVisitorSiteAddress(e) {
+            const refreshVisitorSiteAddressAction = createRefreshVisitorSiteAddressAction(e.target.value)
+            dispatch(refreshVisitorSiteAddressAction)
         }
 })
 

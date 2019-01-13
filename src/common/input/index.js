@@ -1,14 +1,28 @@
-import styled from 'styled-components'
+import React, { Component } from 'react'
+import { InputWrapper, Inputer, InputIcon } from "./style";
+import * as CommonClassNameConstants from "../../commonStyle/commonClassNameConstant";
 
-export const Input = styled.input`
-      outline: none;
-      padding: 0.5em;
-      background: #f7f7f7;
-      border: solid 1px #f7f7f7;
-      border-radius: 3px;
-      transition: all 0.2s ease;
-      &:focus{
-        box-shadow: 0 0 8px #999999;
-        border: solid 1px #E6E6E6;
-      }
-`
+class Input extends Component{
+
+    render() {
+
+        const { type, placeholder, value, onChange, iconClassName } = this.props
+
+        return (
+            <InputWrapper>
+
+                <Inputer type={type}
+                       placeholder={placeholder}
+                       value={value}
+                       onChange={onChange}/>
+
+                <InputIcon>
+                    <i className={CommonClassNameConstants.FONT_DARK + iconClassName}/>
+                </InputIcon>
+
+            </InputWrapper>
+        )
+    }
+}
+
+export default Input

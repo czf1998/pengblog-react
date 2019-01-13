@@ -10,8 +10,6 @@ const HEIGHT_OF_EMOJI_MART_SCROLL = "175px"
 
 const EMOJI_MART_SCROLL_CLASSNAME = "emoji-mart-scroll"
 
-const EMOJI_MART_BAR_CLASSNAME = 'emoji-mart-bar'
-
 class EmojiPick extends PureComponent {
 
     render() {
