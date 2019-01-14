@@ -1,4 +1,17 @@
 import reducer from './reducer'
-import * as actionCreators from './actionCreators'
+import {createGetArticlePageDataAction,
+        createGetCommentListDataAction,
+        createLoadArticleCacheAction,
+        createPushPrograssToEndAction,
+        createRecordScrollTopOfArticlePageAction,
+        createResetArticlePageStoreAction,
+        createAppointReferCommentAction} from './actionCreators'
 
-export { reducer, actionCreators }
+export {reducer,
+        createGetArticlePageDataAction,
+        createGetCommentListDataAction,
+        createLoadArticleCacheAction,
+        createPushPrograssToEndAction,
+        createRecordScrollTopOfArticlePageAction,
+        createResetArticlePageStoreAction,
+        createAppointReferCommentAction }

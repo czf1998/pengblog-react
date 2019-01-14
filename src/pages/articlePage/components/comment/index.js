@@ -15,7 +15,9 @@ class Comment extends PureComponent {
 
     render() {
 
-        const { widthOfMainArea, comment } = this.props
+        const { widthOfMainArea,
+                comment,
+                clickReferHandler} = this.props
         return (
             <CommentWrapper className={CommonClassNameConstants.COMMON_PADDING}
                             widthOfMainArea={widthOfMainArea}>
@@ -40,7 +42,6 @@ class Comment extends PureComponent {
                 {
                     comment.get('comment_referComment') && comment.get('comment_referComment') !== '' && <SubComment comment={comment.get('comment_referComment')}/>
                 }
-                {/*console.log(comment.get('comment_referComment').get('comment_author').get('visitor_name'))*/}
 
                 <Content className={CommonClassNameConstants.FONT_SMALL}>
                     {comment.get('comment_content')}
@@ -48,7 +49,7 @@ class Comment extends PureComponent {
 
                 <Meta className={CommonClassNameConstants.FONT_DARK +
                                  CommonClassNameConstants.FONT_SMALL}>
-                    {GetDateDiff(comment.get('comment_releaseTime'))} | <span className={CommonClassNameConstants.CLICKABLE}>引用</span>
+                    {GetDateDiff(comment.get('comment_releaseTime'))} | <span className={CommonClassNameConstants.CLICKABLE} onClick={clickReferHandler}>引用</span>
                 </Meta>
             </CommentWrapper>
         );

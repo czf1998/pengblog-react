@@ -10,8 +10,10 @@ import {COMMENT_CONTENT,
         VISITOR_NAME,
         VISITOR_EMAIL,
         VISITOR_SITE_ADDRESS} from '../constant'
+import {APPOINT_REFER_COMMENT} from "../../../store/actionType";
 
 const defaultState = fromJS({
+    referComment:null,
     showEmojiPicker: false,
     commentContentManager: fromJS({
         value:'',
@@ -37,6 +39,12 @@ const defaultState = fromJS({
 })
 
 export default (state = defaultState, action) => {
+
+    if(action.type === APPOINT_REFER_COMMENT){
+        return state.merge({
+            referComment: fromJS(action.value)
+        })
+    }
 
     if(action.type === TRIGGER_HAS_ONCE_TRY_TO_SUBMIT){
         return state.merge({

@@ -209,7 +209,7 @@ const mapActions = (dispatch) => ({
             const visitorEmailPass = checkVisitorEmail(visitorEmail, dispatch)
             const visitorSiteAddressPass = checkVisitorSiteAddress(visitorSiteAddress, dispatch)
 
-            /*if(!(commentContentPass
+            if(!(commentContentPass
                 &&
                 visitorNamePass
                 &&
@@ -217,17 +217,17 @@ const mapActions = (dispatch) => ({
                 &&
                 visitorSiteAddressPass)){
                 return
-            }*/
+            }
+
+
+
+
 
             console.log(commentContentPass)
             console.log(visitorNamePass)
             console.log(visitorEmailPass)
             console.log(visitorSiteAddressPass)
             console.log(article_id)
-            /*console.log(_this)
-            console.log(commentContent)
-            console.log(visitorEmail)
-            console.log(visitorSiteAddress)*/
         }
 })
 

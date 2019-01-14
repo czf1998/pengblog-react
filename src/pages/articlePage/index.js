@@ -7,7 +7,13 @@ import { ArticlePageWrapper,
          ArticleMeta,
          ArticleContent,
          CommentTitle } from './style'
-import { actionCreators } from './store'
+import {createGetArticlePageDataAction,
+        createGetCommentListDataAction,
+        createLoadArticleCacheAction,
+        createPushPrograssToEndAction,
+        createRecordScrollTopOfArticlePageAction,
+        createResetArticlePageStoreAction,
+        createAppointReferCommentAction} from './store'
 import { CommonClassNameConstants } from "../../commonStyle"
 import { Loading, ForMore, ScrollToThePositionOnMount, GapLine } from '../../common'
 import { DateFormat } from "../../exJs"
@@ -29,7 +35,8 @@ class ArticlePage extends PureComponent {
                 pageScale,
                 maxPage,
                 currentPage,
-                scrollPosition } = this.props
+                scrollPosition,
+                referComment } = this.props
 
         const { article_id } = this.props.match.params
 
@@ -75,7 +82,7 @@ class ArticlePage extends PureComponent {
                                         <div key={item.get('comment_id')}
                                              className={CommonClassNameConstants.SLIDE_UP_FAST}>
                                             <GapLine/>
-                                            <Comment comment={item}/>
+                                            <Comment comment={item} clickReferHandler={() => {referComment(item)}}/>
                                         </div>
                                 )
                             })
@@ -146,7 +153,7 @@ const mapActions = (dispatch) => {
             let value = {
                 article_id: article_id
             }
-            const action = actionCreators.createGetArticlePageDataAction(value)
+            const action = createGetArticlePageDataAction(value)
             dispatch(action)
         },
         getCommentListData(article_id, startIndex, pageScale) {
@@ -155,15 +162,15 @@ const mapActions = (dispatch) => {
                 startIndex: startIndex,
                 pageScale: pageScale
             }
-            const action = actionCreators.createGetCommentListDataAction(value)
+            const action = createGetCommentListDataAction(value)
             dispatch(action)
         },
         resetStore() {
-            const action = actionCreators.createResetArticlePageStoreAction()
+            const action = createResetArticlePageStoreAction()
             dispatch(action)
         },
         loadArticleCache() {
-            const loadArticleCacheAction = actionCreators.createLoadArticleCacheAction()
+            const loadArticleCacheAction = createLoadArticleCacheAction()
             dispatch(loadArticleCacheAction)
         },
         getMoreCommentListData(article_id, startIndex, pageScale, maxPage, currentPage, isLoadingMoreComment) {
@@ -172,12 +179,16 @@ const mapActions = (dispatch) => {
             this.props.getCommentListData(article_id, startIndex, pageScale)
         },
         pushPrograssBarToEnd() {
-            const pushPrograssBarToEndAction = actionCreators.createPushPrograssToEndAction({page: 'articlePage'})
+            const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'articlePage'})
             dispatch(pushPrograssBarToEndAction)
         },
         recordScrollTop() {
-            const recordScrollTopOfArticlePageAction = actionCreators.createRecordScrollTopOfArticlePageAction()
+            const recordScrollTopOfArticlePageAction = createRecordScrollTopOfArticlePageAction()
             dispatch(recordScrollTopOfArticlePageAction)
+        },
+        referComment(subComment) {
+            const appointReferCommentAction = createAppointReferCommentAction(subComment)
+            dispatch(appointReferCommentAction)
         }
     }
 }
