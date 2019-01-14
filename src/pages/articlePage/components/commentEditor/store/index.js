@@ -1,13 +1,11 @@
-import {createRefreshCommentContentAction,
-        createTriggerShowEmojiPickerAction,
+import {createTriggerShowEmojiPickerAction,
         createAppointInputWarnAction,
         createAppointInputValueAction} from './actionCreators'
 import reducer from './reducer'
 
 export { reducer }
 
-export {createRefreshCommentContentAction,
-        createTriggerShowEmojiPickerAction,
+export {createTriggerShowEmojiPickerAction,
         createAppointInputWarnAction,
         createAppointInputValueAction }
 

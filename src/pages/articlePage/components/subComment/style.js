@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const SubCommentWrapper = styled.div`
         background: #f7f7f7;
+        border-left: solid 4px #eeeeee;
         padding: 20px 20px 35px 20px;
         margin-bottom: 10px;
     `
