@@ -31,7 +31,8 @@ class CommentEditor extends PureComponent {
 
     render() {
 
-        const { isMobile,
+        const { article_id,
+                isMobile,
                 triggerShowEmojiPicker,
                 showEmojiPicker,
                 commentContentManager,
@@ -124,7 +125,8 @@ class CommentEditor extends PureComponent {
                     <div onClick={() => {submitComment( visitorNameManager.get('value'),
                                                         commentContentManager.get('value'),
                                                         visitorEmailManager.get('value'),
-                                                        visitorSiteAddressManager.get('value'))}}>
+                                                        visitorSiteAddressManager.get('value'),
+                                                        article_id)}}>
                         <SubmitButton>
                             <i className="fa fa-paper-plane"/>&nbsp;Submit&nbsp;
                         </SubmitButton>
@@ -196,13 +198,32 @@ const mapActions = (dispatch) => ({
         submitComment(visitorName,
                       commentContent,
                       visitorEmail,
-                      visitorSiteAddress){
+                      visitorSiteAddress,
+                      article_id){
+
             const triggerHasOnceTryToSubmitAction = createTriggerHasOnceTryToSubmitActionn()
             dispatch(triggerHasOnceTryToSubmitAction)
-            checkCommentContent(commentContent, dispatch)
-            checkVisitorName(visitorName, dispatch)
-            checkVisitorEmail(visitorEmail, dispatch)
-            checkVisitorSiteAddress(visitorSiteAddress, dispatch)
+
+            const commentContentPass = checkCommentContent(commentContent, dispatch)
+            const visitorNamePass = checkVisitorName(visitorName, dispatch)
+            const visitorEmailPass = checkVisitorEmail(visitorEmail, dispatch)
+            const visitorSiteAddressPass = checkVisitorSiteAddress(visitorSiteAddress, dispatch)
+
+            /*if(!(commentContentPass
+                &&
+                visitorNamePass
+                &&
+                visitorEmailPass
+                &&
+                visitorSiteAddressPass)){
+                return
+            }*/
+
+            console.log(commentContentPass)
+            console.log(visitorNamePass)
+            console.log(visitorEmailPass)
+            console.log(visitorSiteAddressPass)
+            console.log(article_id)
             /*console.log(_this)
             console.log(commentContent)
             console.log(visitorEmail)
@@ -222,7 +243,9 @@ const checkCommentContent = (commentContent, dispatch) => {
         }
         const appointInputWarnAction = createAppointInputWarnAction(value)
         dispatch(appointInputWarnAction)
+        return false
     }
+    return true
 }
 
 const checkVisitorName = (visitorName, dispatch) => {
@@ -234,6 +257,7 @@ const checkVisitorName = (visitorName, dispatch) => {
         }
         const appointInputWarnAction = createAppointInputWarnAction(value)
         dispatch(appointInputWarnAction)
+        return false
     }
     if(CountLength(visitorName) > 14){
         const value = {
@@ -243,7 +267,9 @@ const checkVisitorName = (visitorName, dispatch) => {
         }
         const appointInputWarnAction = createAppointInputWarnAction(value)
         dispatch(appointInputWarnAction)
+        return false
     }
+    return true
 }
 
 const checkVisitorEmail = (visitorEmail, dispatch) => {
@@ -255,7 +281,7 @@ const checkVisitorEmail = (visitorEmail, dispatch) => {
         }
         const appointInputWarnAction = createAppointInputWarnAction(value)
         dispatch(appointInputWarnAction)
-        return
+        return false
     }
     if(visitorEmail.match(EMAIL_REGULAR) == null){
         const value = {
@@ -265,12 +291,14 @@ const checkVisitorEmail = (visitorEmail, dispatch) => {
         }
         const appointInputWarnAction = createAppointInputWarnAction(value)
         dispatch(appointInputWarnAction)
+        return false
     }
+    return true
 }
 
 const checkVisitorSiteAddress = (visitorSiteAddress, dispatch) => {
     if(visitorSiteAddress.trim() === EMPTYSTRING){
-        return
+        return true
     }
     if(visitorSiteAddress.match(SITE_ADDRESS_REGULAR) == null){
         const value = {
@@ -280,5 +308,7 @@ const checkVisitorSiteAddress = (visitorSiteAddress, dispatch) => {
         }
         const appointInputWarnAction = createAppointInputWarnAction(value)
         dispatch(appointInputWarnAction)
+        return false
     }
+    return true
 }

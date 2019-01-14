@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {TextareaWrapper,
         WarnPopover,
         PopoverArrow,Textarear} from "./style";
+import { CSSTransition } from 'react-transition-group'
+import { CommonClassNameConstants } from "../../commonStyle";
 
 class Textarea extends Component{
 
@@ -21,13 +23,14 @@ class Textarea extends Component{
                             onFocus={onFocus}/>
 
 
-                {
-                    showWarn &&
+                <CSSTransition in={showWarn}
+                               timeout={200}
+                               classNames={CommonClassNameConstants.SLIDE_ZOOM_LEFT} appear={true} unmountOnExit>
                     <WarnPopover>
                         {warnMsg ? warnMsg : '格式有误'}
                         <PopoverArrow/>
                     </WarnPopover>
-                }
+                </CSSTransition>
 
             </TextareaWrapper>
         )

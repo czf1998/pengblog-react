@@ -39,7 +39,7 @@
     transition: all var(--animate-time) ease;
 }
 
-.zoom-exit-active{
+.zoom-exit-done{
     opacity: 0;
 }
 

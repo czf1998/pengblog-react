@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import {InputWrapper,
         Inputer,
         InputIcon,
         WarnPopover,
         PopoverArrow} from "./style";
-import * as CommonClassNameConstants from "../../commonStyle/commonClassNameConstant";
+import {CommonClassNameConstants} from "../../commonStyle";
 
 class Input extends Component{
 
@@ -27,13 +28,16 @@ class Input extends Component{
                     <i className={CommonClassNameConstants.FONT_DARK + iconClassName}/>
                 </InputIcon>
 
-                {
-                    showWarn &&
-                    <WarnPopover>
-                        {warnMsg ? warnMsg : '格式有误'}
-                        <PopoverArrow/>
-                    </WarnPopover>
-                }
+
+                    <CSSTransition in={showWarn}
+                                   timeout={200}
+                                   classNames={CommonClassNameConstants.SLIDE_ZOOM_LEFT} appear={true} unmountOnExit>
+                        <WarnPopover>
+                            {warnMsg ? warnMsg : '格式有误'}
+                            <PopoverArrow/>
+                        </WarnPopover>
+                    </CSSTransition>
+
 
             </InputWrapper>
         )

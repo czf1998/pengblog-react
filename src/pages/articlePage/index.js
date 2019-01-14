@@ -93,7 +93,7 @@ class ArticlePage extends PureComponent {
 
                     </ArticleMainArea>
 
-                    <CommentEditor/>
+                    <CommentEditor article_id={article_id}/>
 
                     <ScrollToThePositionOnMount scrollPosition={scrollPosition}/>
 

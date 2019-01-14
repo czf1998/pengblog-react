@@ -67,3 +67,5 @@ export const COMMON_PADDING_HORIZONTAL = 'common-padding-horizontal '
 export const COMMON_PADDING_VERTICAL = 'common-padding-vertical '
 
 export const COMMON_MARGIN_BOTTOM = 'common-margin-bottom '
+
+export const SLIDE_ZOOM_LEFT = 'slide-zoom-left'
