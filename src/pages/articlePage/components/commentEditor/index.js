@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import {createTriggerShowEmojiPickerAction,
         createAppointInputValueAction,
-        createAppointInputWarnAction } from './store'
+        createAppointInputWarnAction,
+        createTriggerHasOnceTryToSubmitActionn } from './store'
 import { CommentEditorWrapper,
          Title,
          Name,
@@ -16,6 +17,15 @@ import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GapLine, Input, Textarea } from '../../../../common'
 import { EmojiPicker } from './components'
 import { CountLength } from "../../../../exJs";
+
+import {COMMENT_CONTENT,
+        VISITOR_NAME,
+        VISITOR_EMAIL,
+        VISITOR_SITE_ADDRESS,
+        EMPTYSTRING,
+        EMAIL_REGULAR,
+        SITE_ADDRESS_REGULAR} from './constant'
+
 
 class CommentEditor extends PureComponent {
 
@@ -47,11 +57,11 @@ class CommentEditor extends PureComponent {
                     <Input  placeholder="设定好昵称"
                             type="text"
                             value={visitorNameManager.get('value')}
-                            onChange={(event) => {appointInputValue(event,'visitorName')}}
+                            onChange={(event) => {appointInputValue(event,VISITOR_NAME)}}
                             showWarn={visitorNameManager.get('showWarn')}
                             warnMsg={visitorNameManager.get('warnMsg')}
-                            onFocus={() => {focusHandler('visitorName')}}
-                            onBlur={(event) => {blurHandler(event, 'visitorName')}}
+                            onFocus={() => {focusHandler(VISITOR_NAME)}}
+                            onBlur={(event) => {blurHandler(event, VISITOR_NAME, this)}}
                             iconClassName="fa fa-user-o"/>
                 </Name>
 
@@ -61,11 +71,11 @@ class CommentEditor extends PureComponent {
                     <Textarea rows={5}
                               placeholder="开始编辑您的留言"
                               value={commentContentManager.get('value')}
-                              onChange={(event) => {appointInputValue(event,'commentContent')}}
+                              onChange={(event) => {appointInputValue(event,COMMENT_CONTENT)}}
                               showWarn={commentContentManager.get('showWarn')}
                               warnMsg={commentContentManager.get('warnMsg')}
-                              onFocus={() => {focusHandler('commentContent')}}
-                              onBlur={(event) => {blurHandler(event, 'commentContent')}}/>
+                              onFocus={() => {focusHandler(COMMENT_CONTENT)}}
+                              onBlur={(event) => {blurHandler(event, COMMENT_CONTENT, this)}}/>
 
                     {
                         !isMobile &&
@@ -88,24 +98,24 @@ class CommentEditor extends PureComponent {
                     <Input  placeholder="您的邮箱"
                             type="text"
                             value={visitorEmailManager.get('value')}
-                            onChange={(event) => {appointInputValue(event,'visitorEmail')}}
+                            onChange={(event) => {appointInputValue(event,VISITOR_EMAIL)}}
                             showWarn={visitorEmailManager.get('showWarn')}
                             warnMsg={visitorEmailManager.get('warnMsg')}
                             iconClassName="fa fa-envelope"
-                            onFocus={() => {focusHandler('visitorEmail')}}
-                            onBlur={(event) => {blurHandler(event, 'visitorEmail')}}/>
+                            onFocus={() => {focusHandler(VISITOR_EMAIL)}}
+                            onBlur={(event) => {blurHandler(event, VISITOR_EMAIL, this)}}/>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                     <Input  placeholder="你的个人网站？如果有"
                             type="text"
                             value={visitorSiteAddressManager.get('value')}
-                            onChange={(event) => {appointInputValue(event,'visitorSiteAddress')}}
+                            onChange={(event) => {appointInputValue(event,VISITOR_SITE_ADDRESS)}}
                             showWarn={visitorSiteAddressManager.get('showWarn')}
                             warnMsg={visitorSiteAddressManager.get('warnMsg')}
                             iconClassName="fa fa-compass"
-                            onFocus={() => {focusHandler('visitorSiteAddress')}}
-                            onBlur={(event) => {blurHandler(event, 'visitorSiteAddress')}}/>
+                            onFocus={() => {focusHandler(VISITOR_SITE_ADDRESS)}}
+                            onBlur={(event) => {blurHandler(event, VISITOR_SITE_ADDRESS, this)}}/>
 
                 </VisitorInfo>
 
@@ -135,7 +145,8 @@ const mapState = (state) => ({
         commentContentManager: state.get('commentEditor').get('commentContentManager'),
         visitorNameManager: state.get('commentEditor').get('visitorNameManager'),
         visitorEmailManager: state.get('commentEditor').get('visitorEmailManager'),
-        visitorSiteAddressManager: state.get('commentEditor').get('visitorSiteAddressManager')
+        visitorSiteAddressManager: state.get('commentEditor').get('visitorSiteAddressManager'),
+        hasOnceTryToSubmit: state.get('commentEditor').get('hasOnceTryToSubmit')
 
 })
 
@@ -160,19 +171,22 @@ const mapActions = (dispatch) => ({
             const appointInputWarnAction = createAppointInputWarnAction(value)
             dispatch(appointInputWarnAction)
         },
-        blurHandler(event, inputId) {
+        blurHandler(event, inputId, _this) {
+            if((!_this.props.hasOnceTryToSubmit) && event.target.value === EMPTYSTRING){
+                return
+            }
             const stringToCheck = event.target.value
             switch (inputId) {
-                case "visitorName":
+                case VISITOR_NAME:
                     checkVisitorName(stringToCheck, dispatch)
                     break
-                case "commentContent":
+                case COMMENT_CONTENT:
                     checkCommentContent(stringToCheck, dispatch)
                     break
-                case "visitorEmail":
+                case VISITOR_EMAIL:
                     checkVisitorEmail(stringToCheck, dispatch)
                     break
-                case "visitorSiteAddress":
+                case VISITOR_SITE_ADDRESS:
                     stringToCheck.trim() !== '' && checkVisitorSiteAddress(stringToCheck, dispatch)
                     break
                 default:
@@ -183,6 +197,8 @@ const mapActions = (dispatch) => ({
                       commentContent,
                       visitorEmail,
                       visitorSiteAddress){
+            const triggerHasOnceTryToSubmitAction = createTriggerHasOnceTryToSubmitActionn()
+            dispatch(triggerHasOnceTryToSubmitAction)
             checkCommentContent(commentContent, dispatch)
             checkVisitorName(visitorName, dispatch)
             checkVisitorEmail(visitorEmail, dispatch)
@@ -198,9 +214,9 @@ const mapActions = (dispatch) => ({
 export default connect(mapState, mapActions)(CommentEditor)
 
 const checkCommentContent = (commentContent, dispatch) => {
-    if(commentContent.trim() === ''){
+    if(commentContent.trim() === EMPTYSTRING){
         const value = {
-            input: 'commentContent',
+            input: COMMENT_CONTENT,
             showWarn: true,
             warnMsg: '您还未填写任何留言内容'
         }
@@ -210,9 +226,9 @@ const checkCommentContent = (commentContent, dispatch) => {
 }
 
 const checkVisitorName = (visitorName, dispatch) => {
-    if(visitorName.trim() === ''){
+    if(visitorName.trim() === EMPTYSTRING){
         const value = {
-            input: 'visitorName',
+            input: VISITOR_NAME,
             showWarn: true,
             warnMsg: '昵称不能为空'
         }
@@ -221,7 +237,7 @@ const checkVisitorName = (visitorName, dispatch) => {
     }
     if(CountLength(visitorName) > 14){
         const value = {
-            input: 'visitorName',
+            input: VISITOR_NAME,
             showWarn: true,
             warnMsg: '昵称太长'
         }
@@ -231,9 +247,9 @@ const checkVisitorName = (visitorName, dispatch) => {
 }
 
 const checkVisitorEmail = (visitorEmail, dispatch) => {
-    if(visitorEmail.trim() === ''){
+    if(visitorEmail.trim() === EMPTYSTRING){
         const value = {
-            input: 'visitorEmail',
+            input: VISITOR_EMAIL,
             showWarn: true,
             warnMsg: '请填写您的邮箱地址'
         }
@@ -241,9 +257,9 @@ const checkVisitorEmail = (visitorEmail, dispatch) => {
         dispatch(appointInputWarnAction)
         return
     }
-    if(visitorEmail.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/) == null){
+    if(visitorEmail.match(EMAIL_REGULAR) == null){
         const value = {
-            input: 'visitorEmail',
+            input: VISITOR_EMAIL,
             showWarn: true,
             warnMsg: '非法的邮件地址'
         }
@@ -253,12 +269,12 @@ const checkVisitorEmail = (visitorEmail, dispatch) => {
 }
 
 const checkVisitorSiteAddress = (visitorSiteAddress, dispatch) => {
-    if(visitorSiteAddress.trim() === ''){
+    if(visitorSiteAddress.trim() === EMPTYSTRING){
         return
     }
-    if(visitorSiteAddress.match(/^((https|http|ftp|rtsp|mms){0,1}(:\/\/){0,1})(www\.){0,1}(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~/])+$/) == null){
+    if(visitorSiteAddress.match(SITE_ADDRESS_REGULAR) == null){
         const value = {
-            input: 'visitorSiteAddress',
+            input: VISITOR_SITE_ADDRESS,
             showWarn: true,
             warnMsg: '请填写正确格式的网址'
         }

@@ -3,8 +3,13 @@ import { APPEND_EMOJI_TO_COMMENT_CONTENT} from "../components/emojiPicker/store"
 import {
     TRIGGER_SHOW_EMOJIPICKER,
     APPOINT_INPUT_VALUE,
-    APPOINT_INPUT_WARN
+    APPOINT_INPUT_WARN, TRIGGER_HAS_ONCE_TRY_TO_SUBMIT
 } from './actionType'
+
+import {COMMENT_CONTENT,
+        VISITOR_NAME,
+        VISITOR_EMAIL,
+        VISITOR_SITE_ADDRESS} from '../constant'
 
 const defaultState = fromJS({
     showEmojiPicker: false,
@@ -27,10 +32,17 @@ const defaultState = fromJS({
         value:'',
         showWarn: false,
         warnMsg: '格式有误'
-    })
+    }),
+    hasOnceTryToSubmit: false
 })
 
 export default (state = defaultState, action) => {
+
+    if(action.type === TRIGGER_HAS_ONCE_TRY_TO_SUBMIT){
+        return state.merge({
+            hasOnceTryToSubmit: true
+        })
+    }
 
     if(action.type === TRIGGER_SHOW_EMOJIPICKER){
         return state.merge({
@@ -40,28 +52,28 @@ export default (state = defaultState, action) => {
 
     if(action.type === APPOINT_INPUT_VALUE){
         switch (action.value.input) {
-            case "commentContent":
+            case COMMENT_CONTENT:
                 return state.merge({
                     commentContentManager: state.get('commentContentManager').merge({
                         value: action.value.inputValue
                     })
                 })
 
-            case "visitorName":
+            case VISITOR_NAME:
                 return state.merge({
                     visitorNameManager: state.get('visitorNameManager').merge({
                         value: action.value.inputValue
                     })
                 })
 
-            case "visitorEmail":
+            case VISITOR_EMAIL:
                 return state.merge({
                     visitorEmailManager: state.get('visitorEmailManager').merge({
                         value: action.value.inputValue
                     })
                 })
 
-            case "visitorSiteAddress":
+            case VISITOR_SITE_ADDRESS:
                 return state.merge({
                     visitorSiteAddressManager: state.get('visitorSiteAddressManager').merge({
                         value: action.value.inputValue
@@ -74,34 +86,36 @@ export default (state = defaultState, action) => {
 
     if(action.type === APPEND_EMOJI_TO_COMMENT_CONTENT){
         return state.merge({
-            commentContent: state.get('commentContent') + action.value
+            commentContentManager: state.get('commentContentManager').merge({
+                value: state.get('commentContentManager').get('value') + action.value
+            })
         })
     }
 
     if(action.type === APPOINT_INPUT_WARN){
         switch (action.value.input) {
-            case "commentContent":
+            case COMMENT_CONTENT:
                 return state.merge({
                     commentContentManager: state.get('commentContentManager').merge({
                         showWarn: action.value.showWarn,
                         warnMsg: action.value.warnMsg ? action.value.warnMsg : state.get('commentContentManager').get('warnMsg')
                     })
                 })
-            case "visitorName":
+            case VISITOR_NAME:
                 return state.merge({
                     visitorNameManager: state.get('visitorNameManager').merge({
                         showWarn: action.value.showWarn,
                         warnMsg: action.value.warnMsg ? action.value.warnMsg : state.get('visitorNameManager').get('warnMsg')
                     })
                 })
-            case "visitorEmail":
+            case VISITOR_EMAIL:
                 return state.merge({
                     visitorEmailManager: state.get('visitorEmailManager').merge({
                         showWarn: action.value.showWarn,
                         warnMsg: action.value.warnMsg ? action.value.warnMsg : state.get('visitorEmailManager').get('warnMsg')
                     })
                 })
-            case "visitorSiteAddress":
+            case VISITOR_SITE_ADDRESS:
                 return state.merge({
                     visitorSiteAddressManager: state.get('visitorSiteAddressManager').merge({
                         showWarn: action.value.showWarn,
