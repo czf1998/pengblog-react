@@ -10,7 +10,7 @@ import {COMMENT_CONTENT,
         VISITOR_NAME,
         VISITOR_EMAIL,
         VISITOR_SITE_ADDRESS} from '../constant'
-import {APPOINT_REFER_COMMENT} from "../../../store/actionType";
+import {APPOINT_REFER_COMMENT, RESET_COMMENT_EDITOR} from "../../../store/actionType";
 
 const defaultState = fromJS({
     referComment:null,
@@ -133,6 +133,10 @@ export default (state = defaultState, action) => {
             default:
                 return state
         }
+    }
+
+    if(action.type === RESET_COMMENT_EDITOR){
+        return defaultState
     }
     return state
 }

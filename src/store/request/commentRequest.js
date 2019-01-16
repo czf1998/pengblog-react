@@ -11,7 +11,7 @@ export function RequestCountOfComment(value) {
 }
 
 
-export function RequestCommentListData(value) {
+export function RequestTopLevelCommentListData(value) {
     let config = {
         params: {
             article_id: value.article_id,
@@ -19,5 +19,5 @@ export function RequestCommentListData(value) {
             pageScale: value.pageScale
         }
     }
-    return axios.get(Api.API_GET_COMMENT_LIST_BY_LIMITINDEX, config)
+    return axios.get(Api.API_GET_TOP_LEVEL_COMMENT_LIST_BY_LIMITINDEX, config)
 }

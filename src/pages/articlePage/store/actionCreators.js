@@ -5,7 +5,8 @@ import {GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA,
 
 import {LOAD_ARTICLE_CACHE,
         RECORD_SCROLL_TOP_OF_ARTICLE_PAGE,
-        APPOINT_REFER_COMMENT } from './actionType'
+        APPOINT_REFER_COMMENT,
+        RESET_COMMENT_EDITOR } from './actionType'
 
 export const createRecordScrollTopOfArticlePageAction = () => {
     let scrollPosition = document.body.scrollTop === 0 ? document.documentElement.scrollTop : document.body.scrollTop
@@ -54,3 +55,6 @@ export const createAppointReferCommentAction = (value) => ({
     value
 })
 
+export const createResetCommentEditorAction = () => ({
+    type: RESET_COMMENT_EDITOR
+})

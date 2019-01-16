@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { CommentWrapper, Visitor, Content, Meta } from './style'
+import { CommentWrapper,Visitor,Content,Meta,VisitorInfo,AvatarWraper,Name,Gap,MultiContent,OperationBar,Avatar } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
 import SubComment from '../subComment'
@@ -17,10 +17,51 @@ class Comment extends PureComponent {
 
         const { widthOfMainArea,
                 comment,
-                clickReferHandler} = this.props
+                clickReferHandler,
+                colorPicker,
+                extractFeatureString} = this.props
+
+        const visitor_name = comment.get('comment_author').get('visitor_name')
+        const metaColor = colorPicker(visitor_name)
+        const featureString = extractFeatureString(visitor_name)
+
         return (
-            <CommentWrapper className={CommonClassNameConstants.COMMON_PADDING}
+            <CommentWrapper className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}
                             widthOfMainArea={widthOfMainArea}>
+
+
+                <VisitorInfo>
+
+                    <AvatarWraper>
+                        <Avatar className={CommonClassNameConstants.FLEX_ROW_CENTER} metaColor={metaColor}>
+                            {featureString}
+                        </Avatar>
+                    </AvatarWraper>
+
+                    <Name>
+                        {comment.get('comment_author').get('visitor_name')}
+                    </Name>
+
+                </VisitorInfo>
+
+                <Gap/>
+
+                <MultiContent>
+
+                    <Content>
+                        {comment.get('comment_content')}
+                    </Content>
+
+                    <OperationBar  className={CommonClassNameConstants.FONT_DARK }>
+                        {GetDateDiff(comment.get('comment_releaseTime'))}
+                        &nbsp;|&nbsp;
+                        <span className={CommonClassNameConstants.CLICKABLE} onClick={clickReferHandler}>
+                       <i className="fa fa-reply"/> 回复
+                    </span>
+                    </OperationBar>
+                </MultiContent>
+
+            {/*
                 {
                     comment.get('comment_author').get('visitor_siteAddress')
                     &&
@@ -49,8 +90,12 @@ class Comment extends PureComponent {
 
                 <Meta className={CommonClassNameConstants.FONT_DARK +
                                  CommonClassNameConstants.FONT_SMALL}>
-                    {GetDateDiff(comment.get('comment_releaseTime'))} | <span className={CommonClassNameConstants.CLICKABLE} onClick={clickReferHandler}>引用</span>
-                </Meta>
+                    {GetDateDiff(comment.get('comment_releaseTime'))}
+                    &nbsp;|&nbsp;
+                    <span className={CommonClassNameConstants.CLICKABLE} onClick={clickReferHandler}>
+                       <i className="fa fa-reply"/> 回复
+                    </span>
+                </Meta>*/}
             </CommentWrapper>
         );
     }
@@ -65,7 +110,9 @@ class Comment extends PureComponent {
 const mapState = (state) => {
     return  {
         isMobile: state.get('rootState').get('isMobile'),
-        widthOfMainArea: state.get('rootState').get('basicUIFeatures').get('widthOfMainArea')
+        widthOfMainArea: state.get('rootState').get('basicUIFeatures').get('widthOfMainArea'),
+        colorPicker: state.get('comment').get('colorPicker'),
+        extractFeatureString: state.get('comment').get('extractFeatureString')
     }
 }
 

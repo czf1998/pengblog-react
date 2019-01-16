@@ -13,7 +13,8 @@ import {createGetArticlePageDataAction,
         createPushPrograssToEndAction,
         createRecordScrollTopOfArticlePageAction,
         createResetArticlePageStoreAction,
-        createAppointReferCommentAction} from './store'
+        createAppointReferCommentAction,
+        createResetCommentEditorAction} from './store'
 import { CommonClassNameConstants } from "../../commonStyle"
 import { Loading, ForMore, ScrollToThePositionOnMount, GapLine } from '../../common'
 import { DateFormat } from "../../exJs"
@@ -72,7 +73,7 @@ class ArticlePage extends PureComponent {
                         </ArticleMeta>
 
                         <CommentTitle className={CommonClassNameConstants.COMMON_PADDING}>
-                            <i className={CommonClassNameConstants.FONT_DARK + 'fa fa-comments'}/>&nbsp;{countOfAllComment}条留言
+                            <span className="iconfont" style={{fontSize:'1.6rem'}}>&#xe625;</span>&nbsp;{countOfAllComment}条留言
                         </CommentTitle>
 
                         {
@@ -119,7 +120,7 @@ class ArticlePage extends PureComponent {
             this.props.pushPrograssBarToEnd()
             return
         }
-
+        this.props.resetCommentEditor()
         this.props.getArticleData(this.props.match.params.article_id)
         this.props.getCommentListData(this.props.match.params.article_id, this.props.startIndex, this.props.pageScale)
     }
@@ -189,6 +190,10 @@ const mapActions = (dispatch) => {
         referComment(subComment) {
             const appointReferCommentAction = createAppointReferCommentAction(subComment)
             dispatch(appointReferCommentAction)
+        },
+        resetCommentEditor() {
+            const resetCommentEditorAction = createResetCommentEditorAction()
+            dispatch(resetCommentEditorAction)
         }
     }
 }

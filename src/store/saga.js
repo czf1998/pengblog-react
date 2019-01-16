@@ -41,7 +41,7 @@ function* ajaxCountOfComment(action) {
 
 function* ajaxCommentListData(action) {
     try{
-        const res = yield CommentRequest.RequestCommentListData(action.value)
+        const res = yield CommentRequest.RequestTopLevelCommentListData(action.value)
         let appointDataAction = createDeliverCommentListDataToArticlePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {

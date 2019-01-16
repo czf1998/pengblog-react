@@ -4,6 +4,7 @@ import { reducer as jumbotronReducer } from '../pages/home/components/jumbotrion
 import { reducer as articlePageReducer } from '../pages/articlePage/store'
 import { reducer as prograssBarReducer } from '../common/prograssBar/store'
 import { reducer as commentEditorReducer } from '../pages/articlePage/components/commentEditor/store'
+import { reducer as commentReducer } from '../pages/articlePage/components/comment/store'
 import { fromJS } from 'immutable'
 import { RECORD_SCROLL_TOP_OF_ELEMENT_EL } from './actionTypesWithSaga'
 
@@ -33,6 +34,7 @@ export default combineReducers({
     articlePage: articlePageReducer,
     prograssBar: prograssBarReducer,
     commentEditor: commentEditorReducer,
+    comment: commentReducer,
     rootState:(state = defaultState, action) => {
         if(action.type === RECORD_SCROLL_TOP_OF_ELEMENT_EL){
             return state.merge({

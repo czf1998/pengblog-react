@@ -87,7 +87,7 @@ export const SubmitButtonWrapper = styled.div`
     `
 
 export const SubmitButton = styled(Button)`
-        height: 2.6em;
+        height: 2.2rem;
         width: 100%;
         @media(max-width:${widthOfMainArea}px){
              height: 3em;

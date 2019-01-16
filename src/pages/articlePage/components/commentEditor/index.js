@@ -51,7 +51,7 @@ class CommentEditor extends PureComponent {
                 <GapLine/>
 
                 <Title  className={CommonClassNameConstants.COMMON_PADDING}>
-                    <i className={CommonClassNameConstants.FONT_DARK + 'fa fa-edit'}/>&nbsp;说点什么
+                    <span className="iconfont" style={{fontSize:'1.6rem'}}>&#xe632;</span>&nbsp;说点什么
                 </Title>
 
                 <Name className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>

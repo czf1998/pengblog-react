@@ -1,7 +1,12 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { ArticleSummaryWrapper, Title, SummaryWrapper, ArticleInfoColumn, ArticleContent, PreviewImage } from './style'
+import {ArticleSummaryWrapper,
+        Title,
+        SummaryWrapper,
+        ArticleInfoColumn,
+        ArticleContent,
+        PreviewImage} from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GET_COUNT_OF_COMMENT } from '../../../../store/actionTypesWithSaga'
 
@@ -44,7 +49,8 @@ class ArticleSummary extends PureComponent {
                             </span>
                             &nbsp;|&nbsp;
                             <span>
-                                评论: <span className={CommonClassNameConstants.CLICKABLE}>{article.get('countOfAllComment')}</span>
+                                <span className="iconfont">&#xe634;</span>&nbsp;
+                                <span className={CommonClassNameConstants.CLICKABLE}>{article.get('countOfAllComment')}</span>
                             </span>
                             <span style={{float:"right"}}>
                                 发布于: 2017年02月14日
@@ -75,7 +81,7 @@ class ArticleSummary extends PureComponent {
     }
 
     componentDidMount() {
-        if(this.props.hasBeenMountOnce)
+        if(this.props.article.get('countOfAllComment') && this.props.hasBeenMountOnce)
             return
         this.props.getCountOfAllComment(this.props.article.get('article_id'), this)
     }

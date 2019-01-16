@@ -5,7 +5,8 @@ import {createGetArticlePageDataAction,
         createPushPrograssToEndAction,
         createRecordScrollTopOfArticlePageAction,
         createResetArticlePageStoreAction,
-        createAppointReferCommentAction} from './actionCreators'
+        createAppointReferCommentAction,
+        createResetCommentEditorAction} from './actionCreators'
 
 export {reducer,
         createGetArticlePageDataAction,
@@ -14,4 +15,5 @@ export {reducer,
         createPushPrograssToEndAction,
         createRecordScrollTopOfArticlePageAction,
         createResetArticlePageStoreAction,
-        createAppointReferCommentAction }
+        createAppointReferCommentAction,
+        createResetCommentEditorAction }
