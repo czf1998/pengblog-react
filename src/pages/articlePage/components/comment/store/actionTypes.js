@@ -1,0 +1,1 @@
+export const GET_SUB_COMMENT_LIST_DATA = 'getSubCommentListData'

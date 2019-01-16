@@ -15,23 +15,24 @@ export const VisitorInfo = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-width: 110px;
+        flex-shrink: 0;
+        width: 90px;
         @media(max-width: ${widthOfMainArea}px) {
-            min-width: auto
+            width: 65px;
         }
     `
 
 export const AvatarWraper = styled.div`
         margin-top: 0.8rem;
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
         border: solid 1px #F7F7F7;
         border-radius: 0.4rem;
         background: #F7F7F7;
     `
 
 export const Avatar = styled.div`
-        font-size: 1.45rem;
+        font-size: 1.2rem;
         font-weight: bold;
         color: ${props => props.metaColor};
         width: 100%;
@@ -50,13 +51,18 @@ export const Name = styled.div`
         
         margin: 1rem 0;
         padding: 0 1rem;
-        
     `
 
 export const Gap = styled.div`
         width: 1px;
         margin: 1rem 0;
         border-right: solid 1px #F7F7F7;
+    `
+
+export const GapH = styled.div`
+        height: 1px;
+        margin: 0 1rem;
+        border-bottom: solid 1px #F7F7F7;
     `
 
 export const MultiContent = styled.div`
@@ -66,6 +72,7 @@ export const MultiContent = styled.div`
     `
 
 export const Content = styled.div`
+        font-size: 0.9rem;
         line-height: 1.5;
         padding: 0.8rem 1rem;
         padding-right: 0;
@@ -74,18 +81,14 @@ export const Content = styled.div`
 
 export const OperationBar = styled.div`
         padding: 0.8rem 1rem;
+        font-size: 0.9rem;
         text-align: right;
     `
 
 
+
 export const Visitor = styled.div`
         font-weight: bold;
-        margin-bottom: 15px;
-    `
-
-export const Contentt = styled.div`
-        line-height: 1.5;
-        margin-left: 10px;
         margin-bottom: 15px;
     `
 

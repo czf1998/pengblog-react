@@ -1,6 +1,18 @@
 import * as Api from '../apiConstant'
 import axios from 'axios'
 
+export function RequestSubCommentListData(value) {
+    let config = {
+        params: {
+            comment_id: value.comment_id,
+            startIndex: value.startIndex,
+            pageScale: value.pageScale
+        }
+    }
+    return axios.get(Api.API_GET_SUB_COMMENT_LIST, config)
+}
+
+
 export function RequestCountOfComment(value) {
     let config = {
         params: {

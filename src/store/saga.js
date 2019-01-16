@@ -6,15 +6,17 @@ import {
     GET_JUMBOTRON_ARTICLE_DATA,
     OBSERVE_SCROLL_TOP_OF_ELEMENT_EL
 } from './actionTypesWithSaga'
-import { createDeliverArticleDataToHomeAction,
-         createRecordScrollTopOfElementElAction,
-         createDeliverArticleDataToJumbotronAction,
-         createDeliverArticleDataToArticlePage,
-         createNoticeHomeStoreArticleListDataReadyAction,
-         createNoticeHomeStoreJumbotronDataReadyAction,
-         createDeliverCommentListDataToArticlePageAction,
-         createDeliverCountOfCommentDataToHomeAction,
-         createPushPrograssToEndAction
+import { GET_SUB_COMMENT_LIST_DATA } from "../pages/articlePage/components/comment/store";
+import {createDeliverArticleDataToHomeAction,
+        createRecordScrollTopOfElementElAction,
+        createDeliverArticleDataToJumbotronAction,
+        createDeliverArticleDataToArticlePage,
+        createNoticeHomeStoreArticleListDataReadyAction,
+        createNoticeHomeStoreJumbotronDataReadyAction,
+        createDeliverCommentListDataToArticlePageAction,
+        createDeliverCountOfCommentDataToHomeAction,
+        createPushPrograssToEndAction,
+        createDeliverSubCommentListDataAction
         } from './actionCreators'
 import { ArticleRequest, CommentRequest } from './request'
 
@@ -26,6 +28,17 @@ function* mySaga() {
     yield takeEvery(GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA, ajaxArticleDataForArticlePageData)
     yield takeEvery(GET_COMMENT_LIST_DATA, ajaxCommentListData)
     yield takeEvery(GET_COUNT_OF_COMMENT, ajaxCountOfComment)
+    yield takeEvery(GET_SUB_COMMENT_LIST_DATA, ajaxSubCommentListData)
+}
+
+function* ajaxSubCommentListData(action) {
+    try{
+        const res = yield CommentRequest.RequestSubCommentListData(action.value)
+        let appointDataAction = createDeliverSubCommentListDataAction(action.value, res.data)
+        yield put(appointDataAction)
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+    }
 }
 
 function* ajaxCountOfComment(action) {

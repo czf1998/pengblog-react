@@ -31,3 +31,5 @@ export const GET_COUNT_OF_COMMENT = 'getCountOfComment'
 export const DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME = 'deliverCountOfCommentDataToHome'
 
 export const PUSH_PROGRASS_TO_END = 'pushPrograssToEnd'
+
+export const DELIVER_SUB_COMMENT_LIST_DATA = 'deliverSubCommentListData'

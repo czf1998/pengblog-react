@@ -1,22 +1,20 @@
 import styled from 'styled-components'
 
 export const SubCommentWrapper = styled.div`
-        background: #f7f7f7;
-        border-left: solid 4px #eeeeee;
-        padding: 20px 20px 35px 20px;
-        margin-bottom: 10px;
+        padding: 0.6rem 1rem;
     `
 
-export const QuotedVisitor = styled.div`
-        margin-bottom: 15px;
+export const SubCommentAuthor = styled.span`
+        font-size: 0.9rem;
     `
 
 export const Content = styled.div`
         line-height: 1.5;
-        margin-left: 10px;
-        margin-bottom: 15px;
+        font-size: 0.9rem;
     `
 
 export const Meta = styled.div`
+        font-size: 0.9rem;
+        line-height: 1.5;
         text-align: right;
     `

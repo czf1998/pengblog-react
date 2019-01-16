@@ -11,7 +11,7 @@ const defaultState = fromJS({
     cache: {},
     article: {},
     startIndex: 0,
-    pageScale: 3,
+    pageScale: 10,
     maxPage: 1,
     currentPage: 0,
     countOfAllComment: 0,

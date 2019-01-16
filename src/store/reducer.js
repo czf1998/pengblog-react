@@ -5,6 +5,7 @@ import { reducer as articlePageReducer } from '../pages/articlePage/store'
 import { reducer as prograssBarReducer } from '../common/prograssBar/store'
 import { reducer as commentEditorReducer } from '../pages/articlePage/components/commentEditor/store'
 import { reducer as commentReducer } from '../pages/articlePage/components/comment/store'
+import { reducer as subCommentReducer } from '../pages/articlePage/components/subComment/store'
 import { fromJS } from 'immutable'
 import { RECORD_SCROLL_TOP_OF_ELEMENT_EL } from './actionTypesWithSaga'
 
@@ -35,6 +36,7 @@ export default combineReducers({
     prograssBar: prograssBarReducer,
     commentEditor: commentEditorReducer,
     comment: commentReducer,
+    subComment: subCommentReducer,
     rootState:(state = defaultState, action) => {
         if(action.type === RECORD_SCROLL_TOP_OF_ELEMENT_EL){
             return state.merge({

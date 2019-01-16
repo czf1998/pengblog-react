@@ -1,13 +1,14 @@
-import { DELIVER_ARTICLE_LIST_DATA_TO_HOME,
-         DELIVER_ARTICLE_DATA_TO_JUMBOTRON,
-         RECORD_SCROLL_TOP_OF_ELEMENT_EL,
-         OBSERVE_SCROLL_TOP_OF_ELEMENT_EL,
-         DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
-         NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY,
-         NOTICE_HOME_STORE_JUMBOTRON_DATA_READY,
-         DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
-         DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME,
-        PUSH_PROGRASS_TO_END } from './actionTypesWithSaga'
+import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
+        DELIVER_ARTICLE_DATA_TO_JUMBOTRON,
+        RECORD_SCROLL_TOP_OF_ELEMENT_EL,
+        OBSERVE_SCROLL_TOP_OF_ELEMENT_EL,
+        DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
+        NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY,
+        NOTICE_HOME_STORE_JUMBOTRON_DATA_READY,
+        DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
+        DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME,
+        PUSH_PROGRASS_TO_END,
+        DELIVER_SUB_COMMENT_LIST_DATA} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -62,4 +63,12 @@ export const createDeliverCountOfCommentDataToHomeAction = (article_id, countOfA
 export const createPushPrograssToEndAction = (value) => ({
     type: PUSH_PROGRASS_TO_END,
     value
+})
+
+export const createDeliverSubCommentListDataAction = (actionValue, resData) => ({
+    type: DELIVER_SUB_COMMENT_LIST_DATA,
+    value: {
+        referCommentId: actionValue.comment_id,
+        ...resData
+    }
 })
