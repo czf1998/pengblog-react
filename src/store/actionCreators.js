@@ -8,7 +8,8 @@ import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
         DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
         DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME,
         PUSH_PROGRASS_TO_END,
-        DELIVER_SUB_COMMENT_LIST_DATA} from './actionTypesWithSaga'
+        DELIVER_SUB_COMMENT_LIST_DATA,
+        APPOINT_NOTICE_CONTENT} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -71,4 +72,9 @@ export const createDeliverSubCommentListDataAction = (actionValue, resData) => (
         referCommentId: actionValue.comment_id,
         ...resData
     }
+})
+
+export const createAppointNoticeContent = (value) => ({
+    type: APPOINT_NOTICE_CONTENT,
+    value
 })

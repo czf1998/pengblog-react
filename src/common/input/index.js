@@ -31,7 +31,9 @@ class Input extends Component{
 
                     <CSSTransition in={showWarn}
                                    timeout={200}
-                                   classNames={CommonClassNameConstants.SLIDE_ZOOM_LEFT} appear={true} unmountOnExit>
+                                   classNames={CommonClassNameConstants.SLIDE_ZOOM_LEFT}
+                                   appear={true}
+                                   unmountOnExit>
                         <WarnPopover>
                             {warnMsg ? warnMsg : '格式有误'}
                             <PopoverArrow/>

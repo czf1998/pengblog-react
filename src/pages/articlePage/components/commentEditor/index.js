@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import {createTriggerShowEmojiPickerAction,
         createAppointInputValueAction,
         createAppointInputWarnAction,
-        createTriggerHasOnceTryToSubmitActionn } from './store'
+        createTriggerHasOnceTryToSubmitAction,
+        createSubmitCommentAction,
+        createTriggerCommentEditorLoadingAction } from './store'
 import { CommentEditorWrapper,
          Title,
          Name,
@@ -32,6 +34,7 @@ class CommentEditor extends PureComponent {
     render() {
 
         const { article_id,
+                referCommentId,
                 isMobile,
                 triggerShowEmojiPicker,
                 showEmojiPicker,
@@ -42,7 +45,8 @@ class CommentEditor extends PureComponent {
                 appointInputValue,
                 submitComment,
                 focusHandler,
-                blurHandler } = this.props
+                blurHandler,
+                isLoading } = this.props
 
 
         return (
@@ -94,6 +98,7 @@ class CommentEditor extends PureComponent {
 
                 </Content>
 
+
                 <VisitorInfo className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
 
                     <Input  placeholder="您的邮箱"
@@ -122,13 +127,23 @@ class CommentEditor extends PureComponent {
 
                 <SubmitButtonWrapper>
 
-                    <div onClick={() => {submitComment( visitorNameManager.get('value'),
+                    <div onClick={() => {submitComment( article_id,
+                                                        referCommentId,
+                                                        visitorNameManager.get('value'),
                                                         commentContentManager.get('value'),
                                                         visitorEmailManager.get('value'),
-                                                        visitorSiteAddressManager.get('value'),
-                                                        article_id)}}>
+                                                        visitorSiteAddressManager.get('value'))}}>
                         <SubmitButton>
-                            <i className="fa fa-paper-plane"/>&nbsp;Submit&nbsp;
+                            {
+                                isLoading ?
+                                <span>
+                                    <i className={'fa fa-spinner fa-pulse'} style={{color:'black'}}/>&nbsp;Submitting&nbsp;
+                                </span>
+                                :
+                                <span>
+                                    <i className="fa fa-paper-plane"/>&nbsp;Submit&nbsp;
+                                </span>
+                            }
                         </SubmitButton>
                     </div>
 
@@ -148,8 +163,8 @@ const mapState = (state) => ({
         visitorNameManager: state.get('commentEditor').get('visitorNameManager'),
         visitorEmailManager: state.get('commentEditor').get('visitorEmailManager'),
         visitorSiteAddressManager: state.get('commentEditor').get('visitorSiteAddressManager'),
-        hasOnceTryToSubmit: state.get('commentEditor').get('hasOnceTryToSubmit')
-
+        hasOnceTryToSubmit: state.get('commentEditor').get('hasOnceTryToSubmit'),
+        isLoading: state.get('commentEditor').get('isLoading')
 })
 
 const mapActions = (dispatch) => ({
@@ -195,13 +210,14 @@ const mapActions = (dispatch) => ({
                     return
             }
         },
-        submitComment(visitorName,
+        submitComment(article_id,
+                      referCommentId,
+                      visitorName,
                       commentContent,
                       visitorEmail,
-                      visitorSiteAddress,
-                      article_id){
+                      visitorSiteAddress){
 
-            const triggerHasOnceTryToSubmitAction = createTriggerHasOnceTryToSubmitActionn()
+            const triggerHasOnceTryToSubmitAction = createTriggerHasOnceTryToSubmitAction()
             dispatch(triggerHasOnceTryToSubmitAction)
 
             const commentContentPass = checkCommentContent(commentContent, dispatch)
@@ -219,15 +235,20 @@ const mapActions = (dispatch) => ({
                 return
             }
 
+            const value = {
+                article_id:article_id,
+                referCommentId:referCommentId,
+                visitorName:visitorName,
+                commentContent:commentContent,
+                visitorEmail:visitorEmail,
+                visitorSiteAddress:visitorSiteAddress
+            }
 
+            const submitCommentAction = createSubmitCommentAction(value)
+            dispatch(submitCommentAction)
 
-
-
-            console.log(commentContentPass)
-            console.log(visitorNamePass)
-            console.log(visitorEmailPass)
-            console.log(visitorSiteAddressPass)
-            console.log(article_id)
+            const triggerCommentEditorLoadingAction = createTriggerCommentEditorLoadingAction(true)
+            dispatch(triggerCommentEditorLoadingAction)
         }
 })
 

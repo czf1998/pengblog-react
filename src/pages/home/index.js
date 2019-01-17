@@ -6,7 +6,7 @@ import { HomeWrapper, Gap } from './style'
 import { actionCreators } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
 import { Loading, ForMore  } from '../../common'
-
+    
 class Home extends PureComponent {
 
     render() {
@@ -30,7 +30,6 @@ class Home extends PureComponent {
         return (
             articleListDataIsReady ?
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
-
 
 
                 {

@@ -1,16 +1,16 @@
 import { fromJS } from 'immutable'
 import { APPEND_EMOJI_TO_COMMENT_CONTENT} from "../components/emojiPicker/store";
-import {
-    TRIGGER_SHOW_EMOJIPICKER,
-    APPOINT_INPUT_VALUE,
-    APPOINT_INPUT_WARN, TRIGGER_HAS_ONCE_TRY_TO_SUBMIT
-} from './actionType'
-
+import {TRIGGER_SHOW_EMOJIPICKER,
+        APPOINT_INPUT_VALUE,
+        APPOINT_INPUT_WARN,
+        TRIGGER_HAS_ONCE_TRY_TO_SUBMIT,
+        TRIGGER_COMMENT_EDITOR_LOADING} from './actionType'
 import {COMMENT_CONTENT,
         VISITOR_NAME,
         VISITOR_EMAIL,
         VISITOR_SITE_ADDRESS} from '../constant'
-import {APPOINT_REFER_COMMENT, RESET_COMMENT_EDITOR} from "../../../store/actionType";
+import {APPOINT_REFER_COMMENT,
+        RESET_COMMENT_EDITOR} from "../../../store/actionType";
 
 const defaultState = fromJS({
     referComment:null,
@@ -35,10 +35,17 @@ const defaultState = fromJS({
         showWarn: false,
         warnMsg: '格式有误'
     }),
-    hasOnceTryToSubmit: false
+    hasOnceTryToSubmit: false,
+    isLoading: false
 })
 
 export default (state = defaultState, action) => {
+
+    if(action.type === TRIGGER_COMMENT_EDITOR_LOADING) {
+        return state.merge({
+            isLoading: action.value
+        })
+    }
 
     if(action.type === APPOINT_REFER_COMMENT){
         return state.merge({

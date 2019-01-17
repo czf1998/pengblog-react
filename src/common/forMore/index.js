@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { ForMoreWrapper } from './style'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
+import loadingSpin from "../loading/svg/loading-spin.svg";
 
 class ForMore extends PureComponent{
     constructor(props){
@@ -23,7 +24,7 @@ class ForMore extends PureComponent{
                     :
                         (
                             isLoading ?
-                                <i className={'fa fa-spinner fa-pulse fa-2x'} style={{color:'black'}}/>
+                                <img src={loadingSpin} alt="Loading icon"/>
                             :
                                 <span className={CommonClassNameConstants.HOVER_UNDERLINE +
                                                  CommonClassNameConstants.CURSORP}

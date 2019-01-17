@@ -1,7 +1,10 @@
 import {createTriggerShowEmojiPickerAction,
         createAppointInputWarnAction,
         createAppointInputValueAction,
-        createTriggerHasOnceTryToSubmitActionn} from './actionCreators'
+        createTriggerHasOnceTryToSubmitAction,
+        createSubmitCommentAction,
+        createTriggerCommentEditorLoadingAction} from './actionCreators'
+
 import reducer from './reducer'
 
 export { reducer }
@@ -9,5 +12,7 @@ export { reducer }
 export {createTriggerShowEmojiPickerAction,
         createAppointInputWarnAction,
         createAppointInputValueAction,
-        createTriggerHasOnceTryToSubmitActionn }
+        createTriggerHasOnceTryToSubmitAction,
+        createSubmitCommentAction,
+        createTriggerCommentEditorLoadingAction }
 

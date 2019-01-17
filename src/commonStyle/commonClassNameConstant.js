@@ -52,8 +52,6 @@ export const ZOOM = 'zoom'
 
 export const TRANSITION_GROUP_PATCH = 'transition-group-patch '
 
-export const SLIDE_DOWN = 'slide-down'
-
 export const SLIDE_UP = 'slide-up'
 
 export const FADE_IN = 'fade-in'
@@ -69,3 +67,5 @@ export const COMMON_PADDING_VERTICAL = 'common-padding-vertical '
 export const COMMON_MARGIN_BOTTOM = 'common-margin-bottom '
 
 export const SLIDE_ZOOM_LEFT = 'slide-zoom-left'
+
+export const SLIDE_DOWN = 'slide-down'

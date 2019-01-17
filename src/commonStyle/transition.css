@@ -43,19 +43,6 @@
     opacity: 0;
 }
 
-.slide-down{
-    animation: slide-down-animation var(--animate-time) ease-out forwards;
-}
-
-@keyframes slide-down-animation {
-    0%{
-        transform: translateY(-100%);
-    }
-
-    100%{
-        transform: translateY(0%);
-    }
-}
 
 .slide-up{
     animation: slide-up-animation var(--animate-time) ease-out forwards;

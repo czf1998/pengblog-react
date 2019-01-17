@@ -6,7 +6,9 @@ import './commonStyle'
 import './exJs'
 import { createObserveScrollTopOfElementElAction } from "./store/actionCreators";
 import { CommonClassNameConstants } from './commonStyle'
-import { Footer, PrograssBar } from './common'
+import {Footer,
+        PrograssBar,
+        Notice } from './common'
 
 class App extends Component {
     constructor(props){
@@ -26,6 +28,7 @@ class App extends Component {
 
     return (
         <Provider store={store}>
+            <Notice/>
 
             <PrograssBar/>
 

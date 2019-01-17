@@ -16,9 +16,12 @@ import {createDeliverArticleDataToHomeAction,
         createDeliverCommentListDataToArticlePageAction,
         createDeliverCountOfCommentDataToHomeAction,
         createPushPrograssToEndAction,
-        createDeliverSubCommentListDataAction
-        } from './actionCreators'
+        createDeliverSubCommentListDataAction,
+        createAppointNoticeContent} from './actionCreators'
 import { ArticleRequest, CommentRequest } from './request'
+import {SUBMIT_COMMENT} from "../pages/articlePage/components/commentEditor/store/actionType";
+import {createTriggerShowNoticeAction} from "../common/notice/store";
+import {createTriggerCommentEditorLoadingAction} from "../pages/articlePage/components/commentEditor/store";
 
 
 function* mySaga() {
@@ -29,6 +32,23 @@ function* mySaga() {
     yield takeEvery(GET_COMMENT_LIST_DATA, ajaxCommentListData)
     yield takeEvery(GET_COUNT_OF_COMMENT, ajaxCountOfComment)
     yield takeEvery(GET_SUB_COMMENT_LIST_DATA, ajaxSubCommentListData)
+    yield takeEvery(SUBMIT_COMMENT, ajaxSubmitComment)
+}
+
+function* ajaxSubmitComment(action) {
+    try{
+        const res = yield CommentRequest.SubmitCommentListData(action.value)
+        if(res.status === 200){
+            const triggerCommentEditorLoadingAction = createTriggerCommentEditorLoadingAction(false)
+            yield put(triggerCommentEditorLoadingAction)
+            const appointNoticeContent = createAppointNoticeContent('评论提交成功！')
+            yield put(appointNoticeContent)
+            const triggerShowNoticeAction = createTriggerShowNoticeAction(true)
+            yield put(triggerShowNoticeAction)
+        }
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+    }
 }
 
 function* ajaxSubCommentListData(action) {

@@ -1,6 +1,19 @@
 import * as Api from '../apiConstant'
 import axios from 'axios'
 
+export function SubmitCommentListData(value) {
+    let commentData = {
+        comment_hostId: value.article_id,
+        comment_referComment: value.referCommentId,
+        visitor_name: value.visitorName,
+        comment_content: value.commentContent,
+        visitor_email: value.visitorEmail,
+        visitor_siteAddress: value.visitorSiteAddress
+    }
+    return axios.post(Api.API_POST_SUBMIT_COMMENT,commentData);
+}
+
+
 export function RequestSubCommentListData(value) {
     let config = {
         params: {

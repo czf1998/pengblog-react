@@ -33,3 +33,5 @@ export const DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME = 'deliverCountOfCommentDataT
 export const PUSH_PROGRASS_TO_END = 'pushPrograssToEnd'
 
 export const DELIVER_SUB_COMMENT_LIST_DATA = 'deliverSubCommentListData'
+
+export const APPOINT_NOTICE_CONTENT = 'appointNoticeContent'
