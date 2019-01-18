@@ -56,7 +56,7 @@ function* ajaxSubmitComment(action) {
             }
             const appointInputValueAction = createAppointInputValueAction(appointInputValue)
             yield put(appointInputValueAction)
-            const appendCommentJustSubmitAction = createAppendCommentJustSubmitAction(action.value)
+            const appendCommentJustSubmitAction = createAppendCommentJustSubmitAction(action.value, res.data.commentIdJustSubmit)
             yield put(appendCommentJustSubmitAction)
         }
     }catch (err) {

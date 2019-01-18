@@ -80,7 +80,10 @@ export const createAppointNoticeContent = (value) => ({
     value
 })
 
-export const createAppendCommentJustSubmitAction = (value) => ({
+export const createAppendCommentJustSubmitAction = (commentJustSubmit, commentIdJustSubmit) => ({
     type: APPEND_COMMENT_JUST_SUBMIT,
-    value
+    value: {
+        commentJustSubmit:commentJustSubmit,
+        commentIdJustSubmit:commentIdJustSubmit
+    }
 })

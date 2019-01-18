@@ -75,9 +75,7 @@ class ArticlePage extends PureComponent {
                         <CommentTitle className={CommonClassNameConstants.COMMON_PADDING}>
                             <span className="iconfont" style={{fontSize:'1.6rem'}}>&#xe625;</span>&nbsp;{countOfAllComment}条留言
                         </CommentTitle>
-
                         {
-
                             commentList.map((item) => {
                                 return (
                                         <div key={item.get('comment_id')}

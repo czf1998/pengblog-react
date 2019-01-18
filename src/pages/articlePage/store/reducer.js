@@ -12,7 +12,7 @@ const defaultState = fromJS({
     cache: {},
     article: {},
     startIndex: 0,
-    pageScale: 10,
+    pageScale: 5,
     maxPage: 1,
     currentPage: 0,
     countOfAllComment: 0,
@@ -65,15 +65,17 @@ export default (state = defaultState, action) => {
     }
 
     if(action.type === DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE) {
+       // console.log(state.get('commentList').concat(fromJS(action.value.commentList)))
+        //console.log(uniqueCommentList(state.get('commentList').concat(fromJS(action.value.commentList))))
         return state.merge({
             cache: state.get('cache').merge(fromJS({
-                commentList: state.get('commentList').concat(fromJS(action.value.commentList)),
+                commentList: uniqueCommentList(state.get('commentList').concat(fromJS(action.value.commentList))),
                 countOfAllComment: action.value.countOfComment,
                 startIndex: state.get('startIndex'),
                 maxPage: state.get('maxPage'),
                 currentPage: state.get('currentPage'),
             })),
-            commentList: state.get('commentList').concat(fromJS(action.value.commentList)),
+            commentList: uniqueCommentList(state.get('commentList').concat(fromJS(action.value.commentList))),
             countOfAllComment: action.value.countOfComment,
             maxPage: action.value.maxPage,
             currentPage: state.get('currentPage') + 1,
@@ -96,7 +98,8 @@ export default (state = defaultState, action) => {
 
     if(action.type === APPEND_COMMENT_JUST_SUBMIT) {
         return state.merge({
-            commentList: state.get('commentList').push(constructComment(action.value))
+            commentList: state.get('commentList').push(constructComment(action.value.commentJustSubmit,action.value.commentIdJustSubmit)),
+            countOfAllComment: state.get('countOfAllComment') + 1
         })
     }
     return state
@@ -115,7 +118,7 @@ const handleImgLabelWidth = (article) => {
     return article
 }
 
-const constructComment = (commentData) => {
+const constructComment = (commentData,commentId) => {
     const date = new Date()
     const comment = {
         comment_author: {
@@ -123,9 +126,25 @@ const constructComment = (commentData) => {
             visitor_siteAddress: commentData.visitorSiteAddress,
             visitor_email: commentData.visitorEmail
         },
-        comment_id: date.toString(),
+        comment_id: commentId,
         comment_content: commentData.commentContent,
         comment_releaseTime: date.toString()
     }
     return fromJS(comment)
+}
+
+const uniqueCommentList = (commentList) => {
+
+    let uniqueCommentList = []
+
+    commentList.forEach((listItem) => {
+        if(uniqueCommentList.every((uniqueListItem) => {
+            return uniqueListItem.get('comment_id') !== listItem.get('comment_id')
+        })){
+            uniqueCommentList.push(listItem)
+            //console.log(uniqueCommentList)
+        }
+    })
+    //console.log(uniqueCommentList)
+    return fromJS(uniqueCommentList)
 }
