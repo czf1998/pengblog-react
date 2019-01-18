@@ -35,3 +35,5 @@ export const PUSH_PROGRASS_TO_END = 'pushPrograssToEnd'
 export const DELIVER_SUB_COMMENT_LIST_DATA = 'deliverSubCommentListData'
 
 export const APPOINT_NOTICE_CONTENT = 'appointNoticeContent'
+
+export const APPEND_COMMENT_JUST_SUBMIT = 'appendCommentJustSubmit'

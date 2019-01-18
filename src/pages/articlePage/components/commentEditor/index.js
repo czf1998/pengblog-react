@@ -18,7 +18,7 @@ import { CommentEditorWrapper,
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GapLine, Input, Textarea } from '../../../../common'
 import { EmojiPicker } from './components'
-import { CountLength } from "../../../../exJs";
+import { CountLength,setCookie,deleteCookie } from "../../../../exJs";
 
 import {COMMENT_CONTENT,
         VISITOR_NAME,
@@ -152,6 +152,10 @@ class CommentEditor extends PureComponent {
         );
     }
 
+    componentDidMount(){
+        this.props.writeVisitorInfoSilently(this)
+    }
+
 }
 
 
@@ -168,6 +172,12 @@ const mapState = (state) => ({
 })
 
 const mapActions = (dispatch) => ({
+        writeVisitorInfoSilently(_this){
+            let cookieMap = readCookie()
+            cookieMap.visitorName && _this.props.appointInputValue(cookieMap.visitorName,VISITOR_NAME)
+            cookieMap.visitorEmail &&  _this.props.appointInputValue(cookieMap.visitorEmail,VISITOR_EMAIL)
+            cookieMap.visitorSiteAddress && _this.props.appointInputValue(cookieMap.visitorSiteAddress,VISITOR_SITE_ADDRESS)
+        },
         triggerShowEmojiPicker() {
             const triggerShowEmojiPickerAction = createTriggerShowEmojiPickerAction()
             dispatch(triggerShowEmojiPickerAction)
@@ -175,7 +185,7 @@ const mapActions = (dispatch) => ({
         appointInputValue(event,input) {
             const value = {
                 input: input,
-                inputValue: event.target.value
+                inputValue: event.target ? event.target.value : event
             }
             const appointInputValueAction = createAppointInputValueAction(value)
             dispatch(appointInputValueAction)
@@ -235,6 +245,10 @@ const mapActions = (dispatch) => ({
                 return
             }
 
+            rememberMe( visitorName,
+                        visitorEmail,
+                        visitorSiteAddress)
+
             const value = {
                 article_id:article_id,
                 referCommentId:referCommentId,
@@ -254,6 +268,27 @@ const mapActions = (dispatch) => ({
 
 
 export default connect(mapState, mapActions)(CommentEditor)
+
+const readCookie = () => {
+    let arrStr = document.cookie.split("; ");
+    let cookieMap = {}
+    for(let i = 0; i < arrStr.length; i++) {
+        let coupleStr = arrStr[i].split("=");
+        cookieMap[coupleStr[0]] = coupleStr[1]
+    }
+    return cookieMap
+}
+
+const rememberMe = (visitorName,
+                    visitorEmail,
+                    visitorSiteAddress) => {
+    deleteCookie(VISITOR_NAME)
+    deleteCookie(VISITOR_EMAIL)
+    deleteCookie(VISITOR_SITE_ADDRESS)
+    setCookie(VISITOR_NAME,visitorName,30)
+    setCookie(VISITOR_EMAIL,visitorEmail,30)
+    setCookie(VISITOR_SITE_ADDRESS,visitorSiteAddress,30)
+}
 
 const checkCommentContent = (commentContent, dispatch) => {
     if(commentContent.trim() === EMPTYSTRING){

@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable'
 import {
+    APPEND_COMMENT_JUST_SUBMIT,
     DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
     DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE, GET_COMMENT_LIST_DATA,
     RESET_ARTICLE_PAGE_STORE
@@ -92,6 +93,12 @@ export default (state = defaultState, action) => {
             dataReady: true
         })
     }
+
+    if(action.type === APPEND_COMMENT_JUST_SUBMIT) {
+        return state.merge({
+            commentList: state.get('commentList').push(constructComment(action.value))
+        })
+    }
     return state
 }
 
@@ -106,4 +113,19 @@ const handleImgLabelWidth = (article) => {
     }
     article.article_content = el.innerHTML
     return article
+}
+
+const constructComment = (commentData) => {
+    const date = new Date()
+    const comment = {
+        comment_author: {
+            visitor_name: commentData.visitorName,
+            visitor_siteAddress: commentData.visitorSiteAddress,
+            visitor_email: commentData.visitorEmail
+        },
+        comment_id: date.toString(),
+        comment_content: commentData.commentContent,
+        comment_releaseTime: date.toString()
+    }
+    return fromJS(comment)
 }

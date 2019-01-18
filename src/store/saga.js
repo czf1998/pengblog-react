@@ -17,11 +17,16 @@ import {createDeliverArticleDataToHomeAction,
         createDeliverCountOfCommentDataToHomeAction,
         createPushPrograssToEndAction,
         createDeliverSubCommentListDataAction,
-        createAppointNoticeContent} from './actionCreators'
+        createAppointNoticeContent,
+        createAppendCommentJustSubmitAction} from './actionCreators'
 import { ArticleRequest, CommentRequest } from './request'
 import {SUBMIT_COMMENT} from "../pages/articlePage/components/commentEditor/store/actionType";
 import {createTriggerShowNoticeAction} from "../common/notice/store";
-import {createTriggerCommentEditorLoadingAction} from "../pages/articlePage/components/commentEditor/store";
+import {
+    createAppointInputValueAction,
+    createTriggerCommentEditorLoadingAction
+} from "../pages/articlePage/components/commentEditor/store";
+import {COMMENT_CONTENT} from "../pages/articlePage/components/commentEditor/constant";
 
 
 function* mySaga() {
@@ -45,6 +50,14 @@ function* ajaxSubmitComment(action) {
             yield put(appointNoticeContent)
             const triggerShowNoticeAction = createTriggerShowNoticeAction(true)
             yield put(triggerShowNoticeAction)
+            const appointInputValue = {
+                input: COMMENT_CONTENT,
+                inputValue: ''
+            }
+            const appointInputValueAction = createAppointInputValueAction(appointInputValue)
+            yield put(appointInputValueAction)
+            const appendCommentJustSubmitAction = createAppendCommentJustSubmitAction(action.value)
+            yield put(appendCommentJustSubmitAction)
         }
     }catch (err) {
         console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
