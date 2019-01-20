@@ -1,4 +1,4 @@
 import Comment from './comment'
-import CommentEditor from './commentEditor'
+import {TopLevelCommentEditor} from './commentEditor'
 
-export { Comment, CommentEditor }
+export { Comment, TopLevelCommentEditor }

@@ -14,9 +14,9 @@ class EmojiPick extends PureComponent {
 
     render() {
 
-        const { metaColor, clickHandler } = this.props
+        const { metaColor, clickHandler, editorId } = this.props
 
-        return <Picker perLine={9} color={metaColor} showPreview={false} showSkinTones={false} native={true} onClick={clickHandler}/>
+        return <Picker perLine={9} color={metaColor} showPreview={false} showSkinTones={false} native={true} onClick={(emoji) => {clickHandler(emoji,editorId)}}/>
 
     }
 
@@ -67,8 +67,12 @@ const mapActions = (dispatch) => ({
         dispatch(triggerShowEmojiPickerAction)
     },
 
-    clickHandler(emoji){
-        const appendEmojiToCommentContentAction = createAppendEmojiToCommentContentAction(emoji.native)
+    clickHandler(emoji,editorId){
+        const value = {
+            editorId:editorId,
+            emoji:emoji.native
+        }
+        const appendEmojiToCommentContentAction = createAppendEmojiToCommentContentAction(value)
         dispatch(appendEmojiToCommentContentAction)
     }
 })

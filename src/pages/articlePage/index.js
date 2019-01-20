@@ -18,11 +18,9 @@ import {createGetArticlePageDataAction,
 import { CommonClassNameConstants } from "../../commonStyle"
 import { Loading, ForMore, ScrollToThePositionOnMount, GapLine } from '../../common'
 import { DateFormat } from "../../exJs"
-import { Comment, CommentEditor } from './components'
+import { Comment, TopLevelCommentEditor } from './components'
 
 class ArticlePage extends PureComponent {
-
-
 
     render() {
 
@@ -99,7 +97,7 @@ class ArticlePage extends PureComponent {
 
                     </ArticleMainArea>
 
-                    <CommentEditor article_id={article_id}/>
+                    <TopLevelCommentEditor article_id={article_id}/>
 
                     <ScrollToThePositionOnMount scrollPosition={scrollPosition}/>
 

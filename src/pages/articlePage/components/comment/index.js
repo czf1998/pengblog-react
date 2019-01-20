@@ -1,5 +1,6 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent,Fragment } from 'react'
 import { connect } from 'react-redux'
+import { CSSTransition } from 'react-transition-group'
 import {CommentWrapper,
         Content,
         VisitorInfo,
@@ -13,7 +14,8 @@ import {CommentWrapper,
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
 import SubComment from '../subComment'
-import { createGetSubCommentListDataAction } from './store'
+import {SubCommentEditor} from '../commentEditor'
+import { createGetSubCommentListDataAction,createAppointShowSubCommentEditorIndexAction } from './store'
 
 
 class Comment extends PureComponent {
@@ -27,10 +29,11 @@ class Comment extends PureComponent {
 
         const { widthOfMainArea,
                 comment,
-                clickReferHandler,
+                clickReplyHandler,
                 colorPicker,
                 extractFeatureString,
-                subComment} = this.props
+                subComment,
+                showSubCommentEditorIndex} = this.props
 
         const visitor_name = comment.get('comment_author').get('visitor_name')
         const metaColor = colorPicker(visitor_name)
@@ -66,9 +69,9 @@ class Comment extends PureComponent {
                     <OperationBar  className={CommonClassNameConstants.FONT_DARK }>
                         {GetDateDiff(comment.get('comment_releaseTime'))}
                         &nbsp;|&nbsp;
-                        <span className={CommonClassNameConstants.CLICKABLE} onClick={clickReferHandler}>
-                       <i className="fa fa-reply"/>
-                    </span>
+                        <span className={CommonClassNameConstants.CLICKABLE} onClick={() => {clickReplyHandler(comment.get('comment_id'))}}>
+                            <i className="fa fa-reply"/>
+                        </span>
                     </OperationBar>
 
                     {   subComment.get('subCommentMapper').get(comment.get('comment_id').toString())
@@ -82,6 +85,21 @@ class Comment extends PureComponent {
 
                             )
                         })
+                    }
+
+                    {
+                        showSubCommentEditorIndex === comment.get('comment_id')
+                        &&
+                        <CSSTransition in={showSubCommentEditorIndex === comment.get('comment_id')}
+                                       timeout={400}
+                                       classNames={CommonClassNameConstants.SLIDE_UP_CSSTRANSITION}
+                                       appear={true}
+                                       unmountOnExit>
+                            <div>
+                                <GapH/>
+                                <SubCommentEditor article_id={comment.get('comment_hostId')} comment_referComment={comment}/>
+                            </div>
+                        </CSSTransition>
                     }
 
                 </MultiContent>
@@ -115,7 +133,8 @@ const mapState = (state) => {
         widthOfMainArea: state.get('rootState').get('basicUIFeatures').get('widthOfMainArea'),
         colorPicker: state.get('comment').get('colorPicker'),
         extractFeatureString: state.get('comment').get('extractFeatureString'),
-        subComment: state.get('subComment')
+        subComment: state.get('subComment'),
+        showSubCommentEditorIndex: state.get('commentEditor').get('showSubCommentEditorIndex')
     }
 }
 
@@ -128,6 +147,10 @@ const mapActions = (dispatch) => ({
         }
         const getSubCommentListDataAction = createGetSubCommentListDataAction(value)
         dispatch(getSubCommentListDataAction)
+    },
+    clickReplyHandler(comment_id) {
+        const appointShowSubCommentEditorIndexAction = createAppointShowSubCommentEditorIndexAction(comment_id)
+        dispatch(appointShowSubCommentEditorIndexAction)
     }
 })
 

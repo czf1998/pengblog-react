@@ -1,0 +1,13 @@
+.zoom-in{
+    animation: zoom-in-animation var(--animate-time) ease forwards;
+}
+
+@keyframes zoom-in-animation {
+    0%{
+        transform: scale(0.9);
+    }
+
+    100%{
+        transform: scale(1);
+    }
+}

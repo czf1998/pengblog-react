@@ -1,1 +1,2 @@
 export const GET_SUB_COMMENT_LIST_DATA = 'getSubCommentListData'
+export const APPOINT_SHOW_SUB_COMMENT_EDITOR_INDEX = 'appointShowSubCommentEditorIndex'

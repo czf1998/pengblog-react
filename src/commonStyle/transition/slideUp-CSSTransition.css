@@ -1,0 +1,21 @@
+.slide-up-CSST-enter, .slide-up-CSST-appear{
+    opacity: 0.01;
+    transform: translateY(20%);
+}
+
+.slide-up-CSST-enter-active, .slide-up-CSST-appear-active{
+    opacity: 1;
+    transform: translateY(0%);
+    transition: all var(--animate-time-CSST)  ease;
+}
+
+
+.slide-up-CSST-exit{
+}
+
+.slide-up-CSST-exit-active{
+    opacity: 0.01;
+    transform: translateY(20%);
+    transition: all var(--animate-time-CSST) ease;
+}
+

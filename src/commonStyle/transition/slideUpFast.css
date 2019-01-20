@@ -1,5 +1,5 @@
 .slide-up-fast{
-    animation: slide-up-fast-animation 0.3s ease-out forwards;
+    animation: slide-up-fast-animation var(--animate-time-fast) ease-out forwards;
 }
 
 @keyframes slide-up-fast-animation {

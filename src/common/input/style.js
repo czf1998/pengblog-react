@@ -8,6 +8,7 @@ export const InputWrapper = styled.div`
     `
 
 export const Inputer = styled.input`
+        width: 100%;
         position: relative;
         background: #f7f7f7;
         font-size: 1rem;
@@ -20,9 +21,6 @@ export const Inputer = styled.input`
         &:focus{
         box-shadow: 1px 1px 2px #999999 inset;
         border: solid 1px #E6E6E6;
-        }
-        @media(max-width: ${widthOfMainArea}px){
-            width: 100%;
         }
 `
 

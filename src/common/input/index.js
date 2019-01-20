@@ -11,10 +11,10 @@ class Input extends Component{
 
     render() {
 
-        const { type, placeholder, value, onChange, iconClassName, showWarn, warnMsg, onBlur, onFocus } = this.props
+        const { type, placeholder, value, onChange, iconClassName, showWarn, warnMsg, onBlur, onFocus, style } = this.props
 
         return (
-            <InputWrapper>
+            <InputWrapper style={style}>
 
                 <Inputer    type={type}
                             placeholder={placeholder}

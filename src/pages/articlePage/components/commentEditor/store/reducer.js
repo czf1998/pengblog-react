@@ -5,93 +5,85 @@ import {TRIGGER_SHOW_EMOJIPICKER,
         APPOINT_INPUT_WARN,
         TRIGGER_HAS_ONCE_TRY_TO_SUBMIT,
         TRIGGER_COMMENT_EDITOR_LOADING} from './actionType'
-import {COMMENT_CONTENT,
-        VISITOR_NAME,
-        VISITOR_EMAIL,
-        VISITOR_SITE_ADDRESS} from '../constant'
-import {APPOINT_REFER_COMMENT,
-        RESET_COMMENT_EDITOR} from "../../../store/actionType";
+import {
+    COMMENT_CONTENT,
+    VISITOR_NAME,
+    VISITOR_EMAIL,
+    VISITOR_SITE_ADDRESS, TOP_LEVEL_COMMENT_EDITOR, SUB_COMMENT_EDITOR
+} from '../constant'
+import {RESET_COMMENT_EDITOR} from "../../../store/actionType";
+import {APPOINT_SHOW_SUB_COMMENT_EDITOR_INDEX} from "../../comment/store/actionTypes";
 
 const defaultState = fromJS({
-    referComment:null,
-    showEmojiPicker: false,
-    commentContentManager: fromJS({
-        value:'',
-        showWarn: false,
-        warnMsg: '格式有误'
+    topLevelCommentEditor: fromJS({
+        showEmojiPicker: false,
+        commentContentManager: fromJS({
+            value:'',
+            showWarn: false,
+            warnMsg: '格式有误'
+        }),
+        visitorNameManager: fromJS({
+            value:'',
+            showWarn: false,
+            warnMsg: '格式有误'
+        }),
+        visitorEmailManager: fromJS({
+            value:'',
+            showWarn: false,
+            warnMsg: '格式有误'
+        }),
+        visitorSiteAddressManager: fromJS({
+            value:'',
+            showWarn: false,
+            warnMsg: '格式有误'
+        }),
+        hasOnceTryToSubmit: false,
+        isLoading: false
     }),
-    visitorNameManager: fromJS({
-        value:'',
-        showWarn: false,
-        warnMsg: '格式有误'
+    subCommentEditor: fromJS({
+        showEmojiPicker: false,
+        commentContentManager: fromJS({
+            value:'',
+            showWarn: false,
+            warnMsg: '格式有误'
+        }),
+        visitorNameManager: fromJS({
+            value:'',
+            showWarn: false,
+            warnMsg: '格式有误'
+        }),
+        visitorEmailManager: fromJS({
+            value:'',
+            showWarn: false,
+            warnMsg: '格式有误'
+        }),
+        visitorSiteAddressManager: fromJS({
+            value:'',
+            showWarn: false,
+            warnMsg: '格式有误'
+        }),
+        hasOnceTryToSubmit: false,
+        isLoading: false,
     }),
-    visitorEmailManager: fromJS({
-        value:'',
-        showWarn: false,
-        warnMsg: '格式有误'
-    }),
-    visitorSiteAddressManager: fromJS({
-        value:'',
-        showWarn: false,
-        warnMsg: '格式有误'
-    }),
-    hasOnceTryToSubmit: false,
-    isLoading: false
+    showSubCommentEditorIndex:undefined
 })
 
 export default (state = defaultState, action) => {
+    const topLevelCommentEditor = state.get('topLevelCommentEditor')
+    const subCommentEditor = state.get('subCommentEditor')
 
     if(action.type === TRIGGER_COMMENT_EDITOR_LOADING) {
-        return state.merge({
-            isLoading: action.value
-        })
-    }
-
-    if(action.type === APPOINT_REFER_COMMENT){
-        return state.merge({
-            referComment: fromJS(action.value)
-        })
-    }
-
-    if(action.type === TRIGGER_HAS_ONCE_TRY_TO_SUBMIT){
-        return state.merge({
-            hasOnceTryToSubmit: true
-        })
-    }
-
-    if(action.type === TRIGGER_SHOW_EMOJIPICKER){
-        return state.merge({
-            showEmojiPicker: !state.get('showEmojiPicker')
-        })
-    }
-
-    if(action.type === APPOINT_INPUT_VALUE){
-        switch (action.value.input) {
-            case COMMENT_CONTENT:
+        switch (action.value.editorId) {
+            case TOP_LEVEL_COMMENT_EDITOR:
                 return state.merge({
-                    commentContentManager: state.get('commentContentManager').merge({
-                        value: action.value.inputValue
+                    topLevelCommentEditor: topLevelCommentEditor.merge({
+                        isLoading: action.value.loading
                     })
                 })
-
-            case VISITOR_NAME:
+            case SUB_COMMENT_EDITOR:
                 return state.merge({
-                    visitorNameManager: state.get('visitorNameManager').merge({
-                        value: action.value.inputValue
-                    })
-                })
-
-            case VISITOR_EMAIL:
-                return state.merge({
-                    visitorEmailManager: state.get('visitorEmailManager').merge({
-                        value: action.value.inputValue
-                    })
-                })
-
-            case VISITOR_SITE_ADDRESS:
-                return state.merge({
-                    visitorSiteAddressManager: state.get('visitorSiteAddressManager').merge({
-                        value: action.value.inputValue
+                    subCommentEditor: subCommentEditor.merge({
+                        isLoading: action.value.loading
                     })
                 })
             default:
@@ -99,51 +91,246 @@ export default (state = defaultState, action) => {
         }
     }
 
-    if(action.type === APPEND_EMOJI_TO_COMMENT_CONTENT){
-        return state.merge({
-            commentContentManager: state.get('commentContentManager').merge({
-                value: state.get('commentContentManager').get('value') + action.value
-            })
-        })
+    if(action.type === TRIGGER_HAS_ONCE_TRY_TO_SUBMIT){
+        switch (action.value) {
+            case TOP_LEVEL_COMMENT_EDITOR:
+                return state.merge({
+                    hasOnceTryToSubmit: true
+                })
+            case SUB_COMMENT_EDITOR:
+                return state.merge({
+                    hasOnceTryToSubmit: true
+                })
+            default:
+                return state
+        }
     }
 
-    if(action.type === APPOINT_INPUT_WARN){
-        switch (action.value.input) {
-            case COMMENT_CONTENT:
+    if(action.type === TRIGGER_SHOW_EMOJIPICKER){
+        switch (action.value) {
+            case TOP_LEVEL_COMMENT_EDITOR:
                 return state.merge({
-                    commentContentManager: state.get('commentContentManager').merge({
-                        showWarn: action.value.showWarn,
-                        warnMsg: action.value.warnMsg ? action.value.warnMsg : state.get('commentContentManager').get('warnMsg')
+                    topLevelCommentEditor: topLevelCommentEditor.merge({
+                        showEmojiPicker: !state.get('showEmojiPicker')
                     })
                 })
-            case VISITOR_NAME:
+            case SUB_COMMENT_EDITOR:
                 return state.merge({
-                    visitorNameManager: state.get('visitorNameManager').merge({
-                        showWarn: action.value.showWarn,
-                        warnMsg: action.value.warnMsg ? action.value.warnMsg : state.get('visitorNameManager').get('warnMsg')
-                    })
-                })
-            case VISITOR_EMAIL:
-                return state.merge({
-                    visitorEmailManager: state.get('visitorEmailManager').merge({
-                        showWarn: action.value.showWarn,
-                        warnMsg: action.value.warnMsg ? action.value.warnMsg : state.get('visitorEmailManager').get('warnMsg')
-                    })
-                })
-            case VISITOR_SITE_ADDRESS:
-                return state.merge({
-                    visitorSiteAddressManager: state.get('visitorSiteAddressManager').merge({
-                        showWarn: action.value.showWarn,
-                        warnMsg: action.value.warnMsg ? action.value.warnMsg : state.get('visitorSiteAddressManager').get('warnMsg')
+                    subCommentEditor: subCommentEditor.merge({
+                        showEmojiPicker: !state.get('showEmojiPicker')
                     })
                 })
             default:
                 return state
+        }
+    }
+
+    if(action.type === APPOINT_INPUT_VALUE){
+
+        if(action.value.editorId === TOP_LEVEL_COMMENT_EDITOR){
+            switch (action.value.input) {
+                case COMMENT_CONTENT:
+                    return state.merge({
+                        topLevelCommentEditor: topLevelCommentEditor.merge({
+                            commentContentManager: topLevelCommentEditor.get('commentContentManager').merge({
+                                value: action.value.inputValue
+                            })
+                        })
+                    })
+
+                case VISITOR_NAME:
+                    return state.merge({
+                        topLevelCommentEditor: topLevelCommentEditor.merge({
+                            visitorNameManager: topLevelCommentEditor.get('visitorNameManager').merge({
+                                value: action.value.inputValue
+                            })
+                        })
+                    })
+
+                case VISITOR_EMAIL:
+                    return state.merge({
+                        topLevelCommentEditor: topLevelCommentEditor.merge({
+                            visitorEmailManager: topLevelCommentEditor.get('visitorEmailManager').merge({
+                                value: action.value.inputValue
+                            })
+                        })
+                    })
+
+                case VISITOR_SITE_ADDRESS:
+                    return state.merge({
+                        topLevelCommentEditor: topLevelCommentEditor.merge({
+                            visitorSiteAddressManager: topLevelCommentEditor.get('visitorSiteAddressManager').merge({
+                                value: action.value.inputValue
+                            })
+                        })
+                    })
+                default:
+                    return state
+            }
+        }
+        if(action.value.editorId === SUB_COMMENT_EDITOR){
+            switch (action.value.input) {
+                case COMMENT_CONTENT:
+                    return state.merge({
+                        subCommentEditor: subCommentEditor.merge({
+                            commentContentManager: subCommentEditor.get('commentContentManager').merge({
+                                value: action.value.inputValue
+                            })
+                        })
+                    })
+
+                case VISITOR_NAME:
+                    return state.merge({
+                        subCommentEditor: subCommentEditor.merge({
+                            visitorNameManager: subCommentEditor.get('visitorNameManager').merge({
+                                value: action.value.inputValue
+                            })
+                        })
+                    })
+
+                case VISITOR_EMAIL:
+                    return state.merge({
+                        subCommentEditor: subCommentEditor.merge({
+                            visitorEmailManager: subCommentEditor.get('visitorEmailManager').merge({
+                                value: action.value.inputValue
+                            })
+                        })
+                    })
+
+                case VISITOR_SITE_ADDRESS:
+                    return state.merge({
+                        subCommentEditor: subCommentEditor.merge({
+                            visitorSiteAddressManager: subCommentEditor.get('visitorSiteAddressManager').merge({
+                                value: action.value.inputValue
+                            })
+                        })
+                    })
+                default:
+                    return state
+            }
+        }
+    }
+
+    if(action.type === APPEND_EMOJI_TO_COMMENT_CONTENT){
+        switch (action.value.editorId) {
+            case TOP_LEVEL_COMMENT_EDITOR:
+                return state.merge({
+                    topLevelCommentEditor:topLevelCommentEditor.merge({
+                        commentContentManager: topLevelCommentEditor.get('commentContentManager').merge({
+                            value: topLevelCommentEditor.get('commentContentManager').get('value') + action.value.emoji
+                         })
+                    })
+                })
+            case SUB_COMMENT_EDITOR:
+                return state.merge({
+                    subCommentEditor:subCommentEditor.merge({
+                        commentContentManager: subCommentEditor.get('commentContentManager').merge({
+                            value: subCommentEditor.get('commentContentManager').get('value') + action.value.emoji
+                        })
+                    })
+                })
+            default:
+                return state
+        }
+    }
+
+    if(action.type === APPOINT_INPUT_WARN){
+        if(action.value.editorId === TOP_LEVEL_COMMENT_EDITOR) {
+            switch (action.value.input) {
+                case COMMENT_CONTENT:
+                    return state.merge({
+                        topLevelCommentEditor: topLevelCommentEditor.merge({
+                            commentContentManager: topLevelCommentEditor.get('commentContentManager').merge({
+                                showWarn: action.value.showWarn,
+                                warnMsg: action.value.warnMsg ? action.value.warnMsg : topLevelCommentEditor.get('commentContentManager').get('warnMsg')
+                            })
+                        })
+                    })
+                case VISITOR_NAME:
+                    return state.merge({
+                        topLevelCommentEditor: topLevelCommentEditor.merge({
+                            visitorNameManager: topLevelCommentEditor.get('visitorNameManager').merge({
+                                showWarn: action.value.showWarn,
+                                warnMsg: action.value.warnMsg ? action.value.warnMsg : topLevelCommentEditor.get('visitorNameManager').get('warnMsg')
+                            })
+                        })
+                    })
+                case VISITOR_EMAIL:
+                    return state.merge({
+                        topLevelCommentEditor: topLevelCommentEditor.merge({
+                            visitorEmailManager: topLevelCommentEditor.get('visitorEmailManager').merge({
+                                showWarn: action.value.showWarn,
+                                warnMsg: action.value.warnMsg ? action.value.warnMsg : topLevelCommentEditor.get('visitorEmailManager').get('warnMsg')
+                            })
+                        })
+                    })
+                case VISITOR_SITE_ADDRESS:
+                    return state.merge({
+                        topLevelCommentEditor: topLevelCommentEditor.merge({
+                            visitorSiteAddressManager: topLevelCommentEditor.get('visitorSiteAddressManager').merge({
+                                showWarn: action.value.showWarn,
+                                warnMsg: action.value.warnMsg ? action.value.warnMsg : topLevelCommentEditor.get('visitorSiteAddressManager').get('warnMsg')
+                            })
+                        })
+                    })
+                default:
+                    return state
+            }
+        }
+        if(action.value.editorId === SUB_COMMENT_EDITOR) {
+            switch (action.value.input) {
+                case COMMENT_CONTENT:
+                    return state.merge({
+                        subCommentEditor: subCommentEditor.merge({
+                            commentContentManager: subCommentEditor.get('commentContentManager').merge({
+                                showWarn: action.value.showWarn,
+                                warnMsg: action.value.warnMsg ? action.value.warnMsg : subCommentEditor.get('commentContentManager').get('warnMsg')
+                            })
+                        })
+                    })
+                case VISITOR_NAME:
+                    return state.merge({
+                        subCommentEditor: subCommentEditor.merge({
+                            visitorNameManager: subCommentEditor.get('visitorNameManager').merge({
+                                showWarn: action.value.showWarn,
+                                warnMsg: action.value.warnMsg ? action.value.warnMsg : subCommentEditor.get('visitorNameManager').get('warnMsg')
+                            })
+                        })
+                    })
+                case VISITOR_EMAIL:
+                    return state.merge({
+                        subCommentEditor: subCommentEditor.merge({
+                            visitorEmailManager: subCommentEditor.get('visitorEmailManager').merge({
+                                showWarn: action.value.showWarn,
+                                warnMsg: action.value.warnMsg ? action.value.warnMsg : subCommentEditor.get('visitorEmailManager').get('warnMsg')
+                            })
+                        })
+                    })
+                case VISITOR_SITE_ADDRESS:
+                    return state.merge({
+                        subCommentEditor: subCommentEditor.merge({
+                            visitorSiteAddressManager: subCommentEditor.get('visitorSiteAddressManager').merge({
+                                showWarn: action.value.showWarn,
+                                warnMsg: action.value.warnMsg ? action.value.warnMsg : subCommentEditor.get('visitorSiteAddressManager').get('warnMsg')
+                            })
+                        })
+                    })
+                default:
+                    return state
+            }
         }
     }
 
     if(action.type === RESET_COMMENT_EDITOR){
         return defaultState
     }
+
+    if(action.type === APPOINT_SHOW_SUB_COMMENT_EDITOR_INDEX){
+        return state.merge({
+            subCommentEditor: defaultState.get('subCommentEditor'),
+            showSubCommentEditorIndex: action.value
+        })
+    }
+
     return state
 }

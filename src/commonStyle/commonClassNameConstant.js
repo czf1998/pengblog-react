@@ -69,3 +69,5 @@ export const COMMON_MARGIN_BOTTOM = 'common-margin-bottom '
 export const SLIDE_ZOOM_LEFT = 'slide-zoom-left'
 
 export const SLIDE_DOWN = 'slide-down'
+
+export const SLIDE_UP_CSSTRANSITION = 'slide-up-CSST'

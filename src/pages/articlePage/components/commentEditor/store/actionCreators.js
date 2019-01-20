@@ -5,8 +5,9 @@ import {TRIGGER_SHOW_EMOJIPICKER,
         SUBMIT_COMMENT,
         TRIGGER_COMMENT_EDITOR_LOADING} from './actionType'
 
-export const createTriggerShowEmojiPickerAction = () => ({
-    type: TRIGGER_SHOW_EMOJIPICKER
+export const createTriggerShowEmojiPickerAction = (value) => ({
+    type: TRIGGER_SHOW_EMOJIPICKER,
+    value
 })
 
 export const createAppointInputWarnAction = (value) => ({
@@ -19,8 +20,9 @@ export const createAppointInputValueAction = (value) => ({
     value
 })
 
-export const createTriggerHasOnceTryToSubmitAction = () => ({
-    type: TRIGGER_HAS_ONCE_TRY_TO_SUBMIT
+export const createTriggerHasOnceTryToSubmitAction = (value) => ({
+    type: TRIGGER_HAS_ONCE_TRY_TO_SUBMIT,
+    value
 })
 
 export const createSubmitCommentAction = (value) => ({

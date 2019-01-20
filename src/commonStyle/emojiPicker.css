@@ -6,3 +6,7 @@
     display: none;
 }
 
+.emoji-mart-anchor:nth-child(1){
+    display: none;
+}
+
