@@ -71,14 +71,14 @@ class TopLevelCommentEditorUI extends PureComponent{
                     {
                         !isMobile &&
                         <EmojiButton className={CommonClassNameConstants.CURSORP}>
-                            <span onClick={triggerShowEmojiPicker} role="img" aria-label="emoji">🙂</span>
+                            <span onClick={() => {triggerShowEmojiPicker(TOP_LEVEL_COMMENT_EDITOR)}} role="img" aria-label="emoji">🙂</span>
                         </EmojiButton>
                     }
 
                     {
                         showEmojiPicker &&
                         <EmojiPickerWrapper>
-                            <EmojiPicker/>
+                            <EmojiPicker editorId={TOP_LEVEL_COMMENT_EDITOR}/>
                         </EmojiPickerWrapper>
                     }
 

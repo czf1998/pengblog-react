@@ -3,7 +3,7 @@ import {
     SubCommentEditorWrapper,
     Content,
     EmojiButton,
-    EmojiPickerWrapper,
+    SubEmojiPickerWrapper,
     SubmitButton,
     SubmitButtonWrapper,
     SubVisitorInfo,
@@ -54,15 +54,15 @@ class SubCommentEditorUI extends PureComponent{
                     {
                         !isMobile &&
                         <EmojiButton className={CommonClassNameConstants.CURSORP}>
-                            <span onClick={triggerShowEmojiPicker} role="img" aria-label="emoji">🙂</span>
+                            <span onClick={() => {triggerShowEmojiPicker(SUB_COMMENT_EDITOR)}} role="img" aria-label="emoji">🙂</span>
                         </EmojiButton>
                     }
 
                     {
                         showEmojiPicker &&
-                        <EmojiPickerWrapper>
-                            <EmojiPicker/>
-                        </EmojiPickerWrapper>
+                        <SubEmojiPickerWrapper>
+                            <EmojiPicker editorId={SUB_COMMENT_EDITOR}/>
+                        </SubEmojiPickerWrapper>
                     }
 
                 </Content>

@@ -12,6 +12,7 @@ const EMOJI_MART_SCROLL_CLASSNAME = "emoji-mart-scroll"
 
 class EmojiPick extends PureComponent {
 
+
     render() {
 
         const { metaColor, clickHandler, editorId } = this.props
@@ -22,14 +23,15 @@ class EmojiPick extends PureComponent {
 
     componentDidMount() {
         document.getElementsByClassName(EMOJI_MART_SCROLL_CLASSNAME)[0].style.height=HEIGHT_OF_EMOJI_MART_SCROLL
+        window.emojiPickClickHandler = (event) => {this.props.shutdownThisEmojiPicker(event,this.props.editorId)}
         setTimeout(() => {
-            window.addEventListener('click', this.props.shutdownThisEmojiPicker)
+            window.addEventListener('click', window.emojiPickClickHandler)
         }, 100)
 
     }
 
     componentWillUnmount() {
-        window.removeEventListener('click', this.props.shutdownThisEmojiPicker)
+        window.removeEventListener('click', window.emojiPickClickHandler)
     }
 }
 
@@ -42,9 +44,9 @@ const mapState = (state) => ({
 
 const mapActions = (dispatch) => ({
 
-    shutdownThisEmojiPicker(event){
+    shutdownThisEmojiPicker(event,editorId){
         if(!event.path){
-            const triggerShowEmojiPickerAction = createTriggerShowEmojiPickerAction()
+            const triggerShowEmojiPickerAction = createTriggerShowEmojiPickerAction(editorId)
             dispatch(triggerShowEmojiPickerAction)
             return
         }
@@ -63,7 +65,7 @@ const mapActions = (dispatch) => ({
             return
         }
 
-        const triggerShowEmojiPickerAction = createTriggerShowEmojiPickerAction()
+        const triggerShowEmojiPickerAction = createTriggerShowEmojiPickerAction(editorId)
         dispatch(triggerShowEmojiPickerAction)
     },
 

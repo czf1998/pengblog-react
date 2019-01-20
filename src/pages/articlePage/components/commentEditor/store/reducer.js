@@ -12,7 +12,9 @@ import {
     VISITOR_SITE_ADDRESS, TOP_LEVEL_COMMENT_EDITOR, SUB_COMMENT_EDITOR
 } from '../constant'
 import {RESET_COMMENT_EDITOR} from "../../../store/actionType";
-import {APPOINT_SHOW_SUB_COMMENT_EDITOR_INDEX} from "../../comment/store/actionTypes";
+import {
+    APPOINT_SHOW_SUB_COMMENT_EDITOR_MANAGER
+} from "../../comment/store/actionTypes";
 
 const defaultState = fromJS({
     topLevelCommentEditor: fromJS({
@@ -65,7 +67,11 @@ const defaultState = fromJS({
         hasOnceTryToSubmit: false,
         isLoading: false,
     }),
-    showSubCommentEditorIndex:undefined
+    showSubCommentEditorIndex: undefined,
+    showSubCommentEditorManager: fromJS({
+        hostTopLevelCommentId: undefined,
+        triggerFromCommentId: undefined
+    })
 })
 
 export default (state = defaultState, action) => {
@@ -111,13 +117,13 @@ export default (state = defaultState, action) => {
             case TOP_LEVEL_COMMENT_EDITOR:
                 return state.merge({
                     topLevelCommentEditor: topLevelCommentEditor.merge({
-                        showEmojiPicker: !state.get('showEmojiPicker')
+                        showEmojiPicker: !topLevelCommentEditor.get('showEmojiPicker')
                     })
                 })
             case SUB_COMMENT_EDITOR:
                 return state.merge({
                     subCommentEditor: subCommentEditor.merge({
-                        showEmojiPicker: !state.get('showEmojiPicker')
+                        showEmojiPicker: !subCommentEditor.get('showEmojiPicker')
                     })
                 })
             default:
@@ -325,10 +331,31 @@ export default (state = defaultState, action) => {
         return defaultState
     }
 
-    if(action.type === APPOINT_SHOW_SUB_COMMENT_EDITOR_INDEX){
+    if(action.type === APPOINT_SHOW_SUB_COMMENT_EDITOR_MANAGER){
+        const showSubCommentEditorManager = state.get('showSubCommentEditorManager')
+        if(action.value.hostTopLevelCommentId === showSubCommentEditorManager.get('hostTopLevelCommentId')
+            &&
+            action.value.triggerFromCommentId === showSubCommentEditorManager.get('triggerFromCommentId')){
+            return state.merge({
+                showSubCommentEditorManager:defaultState.get('showSubCommentEditorManager')
+            })
+        }
         return state.merge({
-            subCommentEditor: defaultState.get('subCommentEditor'),
-            showSubCommentEditorIndex: action.value
+            subCommentEditor: action.value.replyingVisitorName ? subCommentEditor.merge({
+                    commentContentManager: subCommentEditor.get('commentContentManager').merge({
+                        value: '回复 ' + action.value.replyingVisitorName + ': '
+                    })
+                })
+                :
+                subCommentEditor.merge({
+                    commentContentManager: subCommentEditor.get('commentContentManager').merge({
+                        value: ''
+                    })
+                }),
+            showSubCommentEditorManager:showSubCommentEditorManager.merge({
+                hostTopLevelCommentId: action.value.hostTopLevelCommentId,
+                triggerFromCommentId: action.value.triggerFromCommentId
+            })
         })
     }
 

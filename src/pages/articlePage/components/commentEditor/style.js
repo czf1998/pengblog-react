@@ -26,6 +26,7 @@ export const Title = styled.div`
     `
 
 export const Name = styled.div`
+        width: 40%;
         margin-bottom: 1rem;
     `
 
@@ -45,11 +46,19 @@ export const EmojiButton = styled.div`
         }
     `
 
+
 export const EmojiPickerWrapper = styled.div`
         z-index:1;
         position: absolute;
         top: -10%;
         right: 10%;
+    `
+
+export const SubEmojiPickerWrapper = styled.div`
+        z-index:1;
+        position: absolute;
+        top: -10%;
+        right: 13%;
     `
 
 export const VisitorInfo = styled.div`

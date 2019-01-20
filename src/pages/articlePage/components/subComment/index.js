@@ -3,14 +3,36 @@ import { connect } from 'react-redux'
 import { SubCommentWrapper, SubCommentAuthor, Content, Meta } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
+import {} from "../comment/store";
+import {createAppointShowSubCommentEditorManagerAction} from "../comment/store";
+
+const REPLY_CLASSNAME = 'fa fa-reply'
+const RETRACT_CLASSNAME = 'fa fa-chevron-up'
+const REPLY_MSG = '回复'
+const RETRACT_MSG = '收起'
+
 
 
 class SubComment extends PureComponent {
-
+    constructor(props) {
+        super(props)
+    }
 
     render() {
 
-        const { comment } = this.props
+        const { comment,isMobile,clickReplyHandler,showSubCommentEditorManager } = this.props
+
+        const replyButtonIconClassName = showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_referComment').get('comment_id')
+                                         &&
+                                         showSubCommentEditorManager.get('triggerFromCommentId') === comment.get('comment_id')
+                                         ?
+                                         RETRACT_CLASSNAME : REPLY_CLASSNAME
+
+        const replyButtonMsg =  showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_referComment').get('comment_id')
+                                &&
+                                showSubCommentEditorManager.get('triggerFromCommentId') === comment.get('comment_id')
+                                ?
+                                RETRACT_MSG : REPLY_MSG
 
         return (
             <SubCommentWrapper>
@@ -24,7 +46,13 @@ class SubComment extends PureComponent {
 
                 <Meta className={CommonClassNameConstants.FONT_DARK}>
                     {GetDateDiff(comment.get('comment_releaseTime'))} | <span className={CommonClassNameConstants.CLICKABLE}>
-                    <i className="fa fa-reply"/>
+                    <span className={CommonClassNameConstants.CLICKABLE}
+                          onClick={() => {clickReplyHandler(comment.get('comment_referComment').get('comment_id'),comment.get('comment_id'),comment.get('comment_author').get('visitor_name'))}}>
+                        <i className={replyButtonIconClassName}/>&nbsp;
+                        {
+                            isMobile && replyButtonMsg
+                        }
+                    </span>
                 </span>
                 </Meta>
             </SubCommentWrapper>
@@ -35,8 +63,23 @@ class SubComment extends PureComponent {
 const mapState = (state) => {
     return  {
         isMobile: state.get('rootState').get('isMobile'),
+        showSubCommentEditorManager: state.get('commentEditor').get('showSubCommentEditorManager')
     }
 }
 
 
-export default connect(mapState)(SubComment)
+
+const mapActions = (dispatch) => ({
+    clickReplyHandler(hostTopLevelCommentId,triggerFromCommentId,replyingVisitorName) {
+        const value = {
+            hostTopLevelCommentId: hostTopLevelCommentId,
+            triggerFromCommentId: triggerFromCommentId,
+            replyingVisitorName:replyingVisitorName
+        }
+        const appointShowSubCommentEditorManagerAction = createAppointShowSubCommentEditorManagerAction(value)
+        dispatch(appointShowSubCommentEditorManagerAction)
+    }
+})
+
+
+export default connect(mapState, mapActions)(SubComment)

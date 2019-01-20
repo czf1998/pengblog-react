@@ -15,8 +15,12 @@ import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
 import SubComment from '../subComment'
 import {SubCommentEditor} from '../commentEditor'
-import { createGetSubCommentListDataAction,createAppointShowSubCommentEditorIndexAction } from './store'
+import { createGetSubCommentListDataAction,createAppointShowSubCommentEditorManagerAction } from './store'
 
+const REPLY_CLASSNAME = 'fa fa-reply'
+const RETRACT_CLASSNAME = 'fa fa-chevron-up'
+const REPLY_MSG = '回复'
+const RETRACT_MSG = '收起'
 
 class Comment extends PureComponent {
 
@@ -27,17 +31,32 @@ class Comment extends PureComponent {
 
     render() {
 
-        const { widthOfMainArea,
+        const { isMobile,
+                widthOfMainArea,
                 comment,
                 clickReplyHandler,
                 colorPicker,
                 extractFeatureString,
                 subComment,
-                showSubCommentEditorIndex} = this.props
+                showSubCommentEditorManager} = this.props
+
+
+        const replyButtonIconClassName = showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_id')
+                                         &&
+                                         showSubCommentEditorManager.get('hostTopLevelCommentId') === showSubCommentEditorManager.get('triggerFromCommentId')
+                                         ?
+                                         RETRACT_CLASSNAME : REPLY_CLASSNAME
+
+        const replyButtonMsg =  showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_id')
+                                &&
+                                showSubCommentEditorManager.get('hostTopLevelCommentId') === showSubCommentEditorManager.get('triggerFromCommentId')
+                                ?
+                                RETRACT_MSG : REPLY_MSG
 
         const visitor_name = comment.get('comment_author').get('visitor_name')
         const metaColor = colorPicker(visitor_name)
         const featureString = extractFeatureString(visitor_name)
+
 
         return (
             <CommentWrapper className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}
@@ -69,8 +88,12 @@ class Comment extends PureComponent {
                     <OperationBar  className={CommonClassNameConstants.FONT_DARK }>
                         {GetDateDiff(comment.get('comment_releaseTime'))}
                         &nbsp;|&nbsp;
-                        <span className={CommonClassNameConstants.CLICKABLE} onClick={() => {clickReplyHandler(comment.get('comment_id'))}}>
-                            <i className="fa fa-reply"/>
+                        <span className={CommonClassNameConstants.CLICKABLE}
+                              onClick={() => {clickReplyHandler(comment.get('comment_id'))}}>
+                            <i className={replyButtonIconClassName}/>&nbsp;
+                            {
+                                isMobile && replyButtonMsg
+                            }
                         </span>
                     </OperationBar>
 
@@ -78,7 +101,8 @@ class Comment extends PureComponent {
                         &&
                         subComment.get('subCommentMapper').get(comment.get('comment_id').toString()).map((item) => {
                             return (
-                                <div key={item.get('comment_id')} className={CommonClassNameConstants.SLIDE_UP_FAST}>
+                                <div key={item.get('comment_id')}
+                                     className={CommonClassNameConstants.SLIDE_UP_FAST}>
                                     <GapH/>
                                     <SubComment comment={item}/>
                                 </div>
@@ -88,16 +112,17 @@ class Comment extends PureComponent {
                     }
 
                     {
-                        showSubCommentEditorIndex === comment.get('comment_id')
+                        showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_id')
                         &&
-                        <CSSTransition in={showSubCommentEditorIndex === comment.get('comment_id')}
+                        <CSSTransition in={showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_id')}
                                        timeout={400}
                                        classNames={CommonClassNameConstants.SLIDE_UP_CSSTRANSITION}
                                        appear={true}
                                        unmountOnExit>
                             <div>
                                 <GapH/>
-                                <SubCommentEditor article_id={comment.get('comment_hostId')} comment_referComment={comment}/>
+                                <SubCommentEditor article_id={comment.get('comment_hostId')}
+                                                  comment_referComment={comment}/>
                             </div>
                         </CSSTransition>
                     }
@@ -134,7 +159,7 @@ const mapState = (state) => {
         colorPicker: state.get('comment').get('colorPicker'),
         extractFeatureString: state.get('comment').get('extractFeatureString'),
         subComment: state.get('subComment'),
-        showSubCommentEditorIndex: state.get('commentEditor').get('showSubCommentEditorIndex')
+        showSubCommentEditorManager: state.get('commentEditor').get('showSubCommentEditorManager')
     }
 }
 
@@ -149,10 +174,17 @@ const mapActions = (dispatch) => ({
         dispatch(getSubCommentListDataAction)
     },
     clickReplyHandler(comment_id) {
-        const appointShowSubCommentEditorIndexAction = createAppointShowSubCommentEditorIndexAction(comment_id)
-        dispatch(appointShowSubCommentEditorIndexAction)
+        const value = {
+            hostTopLevelCommentId: comment_id,
+            triggerFromCommentId: comment_id
+        }
+        const appointShowSubCommentEditorManagerAction = createAppointShowSubCommentEditorManagerAction(value)
+        dispatch(appointShowSubCommentEditorManagerAction)
     }
 })
+
+
+export { mapActions }
 
 
 export default connect(mapState, mapActions)(Comment)
