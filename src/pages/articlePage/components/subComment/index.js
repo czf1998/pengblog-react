@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { SubCommentWrapper, SubCommentAuthor, Content, Meta } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
-import {} from "../comment/store";
 import {createAppointShowSubCommentEditorManagerAction} from "../comment/store";
 
 const REPLY_CLASSNAME = 'fa fa-reply'
@@ -14,9 +13,6 @@ const RETRACT_MSG = '收起'
 
 
 class SubComment extends PureComponent {
-    constructor(props) {
-        super(props)
-    }
 
     render() {
 

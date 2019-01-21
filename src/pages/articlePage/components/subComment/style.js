@@ -1,7 +1,13 @@
 import styled from 'styled-components'
 
+const widthOfMainArea = 750
+
 export const SubCommentWrapper = styled.div`
         padding: 0.6rem 1rem;
+        padding-left: 2rem;
+        @media(max-width:${widthOfMainArea}px){
+            padding: 0.6rem 1rem;
+        }
     `
 
 export const SubCommentAuthor = styled.span`

@@ -5,22 +5,22 @@ import { CommonClassNameConstants } from '../../commonStyle'
 import loadingSpin from "../loading/svg/loading-spin.svg";
 
 class ForMore extends PureComponent{
-    constructor(props){
-        super(props)
-        this.clickHandler = this.clickHandler.bind(this)
-    }
 
     render() {
 
-        const { widthOfMainArea, isLoading, noMore } = this.props
+        const { widthOfMainArea, isLoading, noMore, height, forMoreText, noMoreText, fontSize } = this.props
 
         return (
             <ForMoreWrapper widthOfMainArea={widthOfMainArea}
-                            className={CommonClassNameConstants.FLEX_ROW_CENTER +
-                                       CommonClassNameConstants.FONT_MIDDLE}>
+                            className={CommonClassNameConstants.FLEX_ROW_CENTER}
+                            height={height} fontSize={fontSize}>
                 {
                     noMore ?
-                        <span  style={{color:'#BB0025'}}>NO MORE TO SHOW (￣﹁￣)</span>
+                        <span  style={{color:'#BB0025'}}>
+                            {
+                                noMoreText ? noMoreText : 'NO MORE TO SHOW (￣﹁￣)'
+                            }
+                        </span>
                     :
                         (
                             isLoading ?
@@ -28,8 +28,10 @@ class ForMore extends PureComponent{
                             :
                                 <span className={CommonClassNameConstants.HOVER_UNDERLINE +
                                                  CommonClassNameConstants.CURSORP}
-                                      onClick={this.clickHandler}>
-                                    CLICK FOR MORE づ￣ 3￣)づ
+                                      onClick={this._clickHandler.bind(this)}>
+                                    {
+                                        forMoreText ? forMoreText : 'CLICK FOR MORE づ￣ 3￣)づ'
+                                    }
                                 </span>
 
                         )
@@ -40,9 +42,12 @@ class ForMore extends PureComponent{
         )
     }
 
-    clickHandler() {
+    _clickHandler(){
+        if(this.props.isLoading || this.props.noMore)
+            return
         this.props.clickHandler(...this.props.meta)
     }
+
 }
 
 const mapState = (state) => {

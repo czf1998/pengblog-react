@@ -31,7 +31,6 @@ const mapState = (editorManagerId) => (state) => {
     }
 }
 
-//const topLevelCommentEditorMapState = mapStateBuilder(TOP_LEVEL_COMMENT_EDITOR)
 
 const mapActions = (dispatch) => ({
         writeVisitorInfoSilently(_this,editorId){
@@ -123,6 +122,7 @@ const mapActions = (dispatch) => ({
                         visitorSiteAddress)
 
             const value = {
+                editorId: editorId,
                 article_id:article_id,
                 referCommentId:referCommentId,
                 visitorName:visitorName,

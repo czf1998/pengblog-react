@@ -1,4 +1,4 @@
-import React, { PureComponent,Fragment } from 'react'
+import React, {Fragment, PureComponent} from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import {CommentWrapper,
@@ -16,6 +16,7 @@ import { GetDateDiff } from '../../../../exJs'
 import SubComment from '../subComment'
 import {SubCommentEditor} from '../commentEditor'
 import { createGetSubCommentListDataAction,createAppointShowSubCommentEditorManagerAction } from './store'
+import {ForMore} from "../../../../common";
 
 const REPLY_CLASSNAME = 'fa fa-reply'
 const RETRACT_CLASSNAME = 'fa fa-chevron-up'
@@ -27,6 +28,10 @@ class Comment extends PureComponent {
     constructor(props) {
         super(props)
         this.redirectToVisitorSite = this.redirectToVisitorSite.bind(this)
+        this.state = {
+            startIndex: 0,
+            currentPage: 1
+        }
     }
 
     render() {
@@ -37,17 +42,28 @@ class Comment extends PureComponent {
                 clickReplyHandler,
                 colorPicker,
                 extractFeatureString,
-                subComment,
-                showSubCommentEditorManager} = this.props
+                subCommentMaxPageMananger,
+                subCommentList,
+                showSubCommentEditorManager,
+                getMoreSubCommentListData,
+                pageScale,
+                isLoadingMoreSubComment} = this.props
+
+        const comment_id = comment.get('comment_id')
+        const currentPage = this.state.currentPage
+
+        let maxPage = subCommentMaxPageMananger.get(comment.get('comment_id').toString())
 
 
-        const replyButtonIconClassName = showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_id')
+
+
+        const replyButtonIconClassName = showSubCommentEditorManager.get('hostTopLevelCommentId') === comment_id
                                          &&
                                          showSubCommentEditorManager.get('hostTopLevelCommentId') === showSubCommentEditorManager.get('triggerFromCommentId')
                                          ?
                                          RETRACT_CLASSNAME : REPLY_CLASSNAME
 
-        const replyButtonMsg =  showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_id')
+        const replyButtonMsg =  showSubCommentEditorManager.get('hostTopLevelCommentId') === comment_id
                                 &&
                                 showSubCommentEditorManager.get('hostTopLevelCommentId') === showSubCommentEditorManager.get('triggerFromCommentId')
                                 ?
@@ -89,7 +105,7 @@ class Comment extends PureComponent {
                         {GetDateDiff(comment.get('comment_releaseTime'))}
                         &nbsp;|&nbsp;
                         <span className={CommonClassNameConstants.CLICKABLE}
-                              onClick={() => {clickReplyHandler(comment.get('comment_id'))}}>
+                              onClick={() => {clickReplyHandler(comment_id)}}>
                             <i className={replyButtonIconClassName}/>&nbsp;
                             {
                                 isMobile && replyButtonMsg
@@ -97,31 +113,51 @@ class Comment extends PureComponent {
                         </span>
                     </OperationBar>
 
-                    {   subComment.get('subCommentMapper').get(comment.get('comment_id').toString())
-                        &&
-                        subComment.get('subCommentMapper').get(comment.get('comment_id').toString()).map((item) => {
-                            return (
-                                <div key={item.get('comment_id')}
-                                     className={CommonClassNameConstants.SLIDE_UP_FAST}>
-                                    <GapH/>
-                                    <SubComment comment={item}/>
-                                </div>
+                    {
+                        subCommentList.map((item) => {
+                            if(item.get('comment_referComment').get('comment_id').toString() === comment_id.toString())
+                                return (
+                                    <div key={item.get('comment_id')}
+                                         className={CommonClassNameConstants.SLIDE_UP_FAST}>
+                                        <GapH/>
+                                        <SubComment comment={item}/>
+                                    </div>
 
-                            )
+                                )
+                            return null
                         })
                     }
 
                     {
-                        showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_id')
+                        comment.get('comment_haveSubComment') && currentPage !== maxPage &&
+                        <Fragment>
+                            <GapH/>
+                            <ForMore isLoading={isLoadingMoreSubComment}
+                                     noMore={currentPage === maxPage}
+                                     clickHandler={getMoreSubCommentListData}
+                                     height={60}
+                                     forMoreText='加载更多'
+                                     fontSize='0.9rem'
+                                     meta={[comment_id,
+                                         pageScale,
+                                         maxPage,
+                                         this]}/>
+                        </Fragment>
+
+                    }
+
+
+                    {
+                        showSubCommentEditorManager.get('hostTopLevelCommentId') === comment_id
                         &&
-                        <CSSTransition in={showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_id')}
+                        <CSSTransition in={showSubCommentEditorManager.get('hostTopLevelCommentId') === comment_id}
                                        timeout={400}
                                        classNames={CommonClassNameConstants.SLIDE_UP_CSSTRANSITION}
                                        appear={true}
                                        unmountOnExit>
                             <div>
                                 <GapH/>
-                                <SubCommentEditor article_id={comment.get('comment_hostId')}
+                                <SubCommentEditor article_id={comment.get('comment_hostArticle').get('article_id')}
                                                   comment_referComment={comment}/>
                             </div>
                         </CSSTransition>
@@ -138,15 +174,15 @@ class Comment extends PureComponent {
     }
 
     componentDidMount(){
-        const comment_id = this.props.comment.get('comment_id')
-        const startIndex = 0
-        const pageScale = this.props.subComment.get('pageScale')
+        const comment_id = this.props.comment.get('comment_id').toString()
 
-        this.props.subComment.get(comment_id) === undefined
-        &&
         this.props.comment.get('comment_haveSubComment') === true
         &&
-        this.props.getSubCommentListData(comment_id, startIndex, pageScale)
+        !this.props.subCommentList.some((item) => {
+            return item.get('comment_referComment').get('comment_id').toString() === comment_id
+        })
+        &&
+        this.props.getSubCommentListData(comment_id, 0, this.props.pageScale)
     }
 }
 
@@ -158,8 +194,11 @@ const mapState = (state) => {
         widthOfMainArea: state.get('rootState').get('basicUIFeatures').get('widthOfMainArea'),
         colorPicker: state.get('comment').get('colorPicker'),
         extractFeatureString: state.get('comment').get('extractFeatureString'),
-        subComment: state.get('subComment'),
-        showSubCommentEditorManager: state.get('commentEditor').get('showSubCommentEditorManager')
+        subCommentMaxPageMananger: state.get('subComment').get('subCommentMaxPageMananger'),
+        subCommentList: state.get('subComment').get('subCommentList'),
+        pageScale: state.get('subComment').get('pageScale'),
+        showSubCommentEditorManager: state.get('commentEditor').get('showSubCommentEditorManager'),
+        isLoadingMoreSubComment: state.get('subComment').get('isLoadingMoreSubComment')
     }
 }
 
@@ -172,6 +211,16 @@ const mapActions = (dispatch) => ({
         }
         const getSubCommentListDataAction = createGetSubCommentListDataAction(value)
         dispatch(getSubCommentListDataAction)
+    },
+    getMoreSubCommentListData(comment_id,
+                              pageScale,
+                              maxPage,
+                              _this){
+        _this.setState({
+            startIndex:_this.state.startIndex + pageScale,
+            currentPage:_this.state.currentPage + 1
+        })
+        _this.props.getSubCommentListData(comment_id, _this.state.startIndex + pageScale, pageScale)
     },
     clickReplyHandler(comment_id) {
         const value = {

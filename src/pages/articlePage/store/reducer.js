@@ -97,8 +97,13 @@ export default (state = defaultState, action) => {
     }
 
     if(action.type === APPEND_COMMENT_JUST_SUBMIT) {
+        if(action.value.referCommentId !== ''
+            &&
+            action.value.referCommentId !== undefined){
+            return state
+        }
         return state.merge({
-            commentList: state.get('commentList').push(constructComment(action.value.commentJustSubmit,action.value.commentIdJustSubmit)),
+            commentList: state.get('commentList').push(constructComment(action.value)),
             countOfAllComment: state.get('countOfAllComment') + 1
         })
     }
@@ -118,7 +123,7 @@ const handleImgLabelWidth = (article) => {
     return article
 }
 
-const constructComment = (commentData,commentId) => {
+export const constructComment = (commentData) => {
     const date = new Date()
     const comment = {
         comment_author: {
@@ -126,14 +131,17 @@ const constructComment = (commentData,commentId) => {
             visitor_siteAddress: commentData.visitorSiteAddress,
             visitor_email: commentData.visitorEmail
         },
-        comment_id: commentId,
+        comment_referComment: {
+            comment_id: commentData.referCommentId
+        },
+        comment_id: commentData.commentId,
         comment_content: commentData.commentContent,
         comment_releaseTime: date.toString()
     }
     return fromJS(comment)
 }
 
-const uniqueCommentList = (commentList) => {
+export const uniqueCommentList = (commentList) => {
 
     let uniqueCommentList = []
 

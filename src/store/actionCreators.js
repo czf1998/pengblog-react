@@ -67,12 +67,9 @@ export const createPushPrograssToEndAction = (value) => ({
     value
 })
 
-export const createDeliverSubCommentListDataAction = (actionValue, resData) => ({
+export const createDeliverSubCommentListDataAction = (value) => ({
     type: DELIVER_SUB_COMMENT_LIST_DATA,
-    value: {
-        referCommentId: actionValue.comment_id,
-        ...resData
-    }
+    value
 })
 
 export const createAppointNoticeContent = (value) => ({
@@ -80,10 +77,7 @@ export const createAppointNoticeContent = (value) => ({
     value
 })
 
-export const createAppendCommentJustSubmitAction = (commentJustSubmit, commentIdJustSubmit) => ({
+export const createAppendCommentJustSubmitAction = (value) => ({
     type: APPEND_COMMENT_JUST_SUBMIT,
-    value: {
-        commentJustSubmit:commentJustSubmit,
-        commentIdJustSubmit:commentIdJustSubmit
-    }
+    value
 })

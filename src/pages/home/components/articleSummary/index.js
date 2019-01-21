@@ -81,7 +81,7 @@ class ArticleSummary extends PureComponent {
     }
 
     componentDidMount() {
-        if(this.props.article.get('countOfAllComment') && this.props.hasBeenMountOnce)
+        if(this.props.article.get('countOfAllComment') !==undefined && this.props.hasBeenMountOnce)
             return
         this.props.getCountOfAllComment(this.props.article.get('article_id'), this)
     }

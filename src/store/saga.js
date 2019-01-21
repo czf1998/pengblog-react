@@ -6,7 +6,10 @@ import {
     GET_JUMBOTRON_ARTICLE_DATA,
     OBSERVE_SCROLL_TOP_OF_ELEMENT_EL
 } from './actionTypesWithSaga'
-import { GET_SUB_COMMENT_LIST_DATA } from "../pages/articlePage/components/comment/store";
+import {
+    createAppointShowSubCommentEditorManagerAction,
+    GET_SUB_COMMENT_LIST_DATA
+} from "../pages/articlePage/components/comment/store";
 import {createDeliverArticleDataToHomeAction,
         createRecordScrollTopOfElementElAction,
         createDeliverArticleDataToJumbotronAction,
@@ -44,20 +47,46 @@ function* ajaxSubmitComment(action) {
     try{
         const res = yield CommentRequest.SubmitCommentListData(action.value)
         if(res.status === 200){
-            const triggerCommentEditorLoadingAction = createTriggerCommentEditorLoadingAction(false)
+
+            /*结束submit按钮加载状态*/
+            const triggerCommentEditorLoadingActionValue = {
+                isLoading: false,
+                editorId: action.value.editorId
+            }
+            const triggerCommentEditorLoadingAction = createTriggerCommentEditorLoadingAction(triggerCommentEditorLoadingActionValue)
             yield put(triggerCommentEditorLoadingAction)
+
+            /*通知窗口提示提交成功*/
             const appointNoticeContent = createAppointNoticeContent('评论提交成功！')
             yield put(appointNoticeContent)
             const triggerShowNoticeAction = createTriggerShowNoticeAction(true)
             yield put(triggerShowNoticeAction)
+
+            /*重置文本编辑框正文value*/
             const appointInputValue = {
+                editorId: action.value.editorId,
                 input: COMMENT_CONTENT,
                 inputValue: ''
             }
             const appointInputValueAction = createAppointInputValueAction(appointInputValue)
             yield put(appointInputValueAction)
-            const appendCommentJustSubmitAction = createAppendCommentJustSubmitAction(action.value, res.data.commentIdJustSubmit)
+
+            /*挂载刚刚提交的留言*/
+            const appendCommentJustSubmitValue = {
+                commentId: res.data.commentIdJustSubmit,
+                ...action.value
+            }
+            const appendCommentJustSubmitAction = createAppendCommentJustSubmitAction(appendCommentJustSubmitValue)
             yield put(appendCommentJustSubmitAction)
+
+            //关闭subCommentEditor
+            const appointShowSubCommentEditorManagerActionValue = {
+                hostTopLevelCommentId: 0,
+                triggerFromCommentId: 0,
+                replyingVisitorName:''
+            }
+            const appointShowSubCommentEditorManagerAction = createAppointShowSubCommentEditorManagerAction(appointShowSubCommentEditorManagerActionValue)
+            yield put(appointShowSubCommentEditorManagerAction)
         }
     }catch (err) {
         console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
@@ -67,7 +96,11 @@ function* ajaxSubmitComment(action) {
 function* ajaxSubCommentListData(action) {
     try{
         const res = yield CommentRequest.RequestSubCommentListData(action.value)
-        let appointDataAction = createDeliverSubCommentListDataAction(action.value, res.data)
+        const value = {
+            referCommentId: action.value.comment_id,
+            ...res.data
+        }
+        let appointDataAction = createDeliverSubCommentListDataAction(value)
         yield put(appointDataAction)
     }catch (err) {
         console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)

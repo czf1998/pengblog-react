@@ -92,8 +92,7 @@ class ArticlePage extends PureComponent {
                                         startIndex,
                                         pageScale,
                                         maxPage,
-                                        currentPage,
-                                        isLoadingMoreComment]}/>
+                                        currentPage]}/>
 
                     </ArticleMainArea>
 
@@ -170,9 +169,7 @@ const mapActions = (dispatch) => {
             const loadArticleCacheAction = createLoadArticleCacheAction()
             dispatch(loadArticleCacheAction)
         },
-        getMoreCommentListData(article_id, startIndex, pageScale, maxPage, currentPage, isLoadingMoreComment) {
-            if(maxPage === currentPage || isLoadingMoreComment)
-                return
+        getMoreCommentListData(article_id, startIndex, pageScale) {
             this.props.getCommentListData(article_id, startIndex, pageScale)
         },
         pushPrograssBarToEnd() {

@@ -6,7 +6,7 @@ import { HomeWrapper, Gap } from './style'
 import { actionCreators } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
 import { Loading, ForMore  } from '../../common'
-    
+
 class Home extends PureComponent {
 
     render() {
@@ -74,10 +74,7 @@ class Home extends PureComponent {
                          noMore={currentPage === maxPage}
                          clickHandler={this.props.getMoreArticleListData.bind(this)}
                          meta={[startIndex,
-                             pageScale,
-                             maxPage,
-                             currentPage,
-                             isLoading]}/>
+                             pageScale]}/>
 
 
             </HomeWrapper>
@@ -126,10 +123,7 @@ const mapActions = (dispatch) => {
             const action = actionCreators.createGetHomeDataAction(value)
             dispatch(action)
         },
-        getMoreArticleListData(startIndex, pageScale, maxPage, currentPage, isLoading){
-            if(maxPage === currentPage || isLoading)
-                return
-
+        getMoreArticleListData(startIndex, pageScale){
             this.props.getData(startIndex, pageScale)
         },
         triggerHasBeenMountOnce() {

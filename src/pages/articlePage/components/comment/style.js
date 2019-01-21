@@ -75,8 +75,11 @@ export const Content = styled.div`
         font-size: 0.9rem;
         line-height: 1.5;
         padding: 0.8rem 1rem;
-        padding-right: 0;
-        flex-grow: 1;        
+        flex-grow: 1;    
+         @media(min-width: ${widthOfMainArea}px) {
+            padding-right: 0;
+
+        }    
     `
 
 export const OperationBar = styled.div`
