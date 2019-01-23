@@ -28,6 +28,9 @@ export const Title = styled.div`
 export const Name = styled.div`
         width: 40%;
         margin-bottom: 1rem;
+        @media(max-width: ${widthOfMainArea}px) {
+            width: 100%;
+        }
     `
 
 export const Content = styled.div`

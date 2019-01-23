@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import history from './history'
 import HomeLoadable from '../pages/home/loadable'
 import ArticlePageLoadable from '../pages/articlePage/loadable'
+import ArticleEditPageLoadable from '../pages/articleEditPage/loadable'
 import { Header,  HeaderMobile } from '../common'
 import Test from '../pages/test'
 
@@ -24,6 +25,7 @@ class RouterComponent extends PureComponent {
                                 <Header/>
                         }
                         <Route exact path='/article/:article_id' component={ArticlePageLoadable}/>
+                        <Route exact path='/edit' component={ArticleEditPageLoadable}/>
                         <Route path='/'  exact component={HomeLoadable}/>
                         <Route path='/test' exact component={Test}/>
                     </Fragment>

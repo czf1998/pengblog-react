@@ -22,7 +22,6 @@ export const HeaderMainArea = styled.div`
 
 export const Logo = styled.div`
         padding: 0 20px;
-        color: ${props => props.metaColor};
     `
 
 export const NavItemWrapper = styled.div`

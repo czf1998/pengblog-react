@@ -7,6 +7,8 @@ import { reducer as commentEditorReducer } from '../pages/articlePage/components
 import { reducer as commentReducer } from '../pages/articlePage/components/comment/store'
 import { reducer as subCommentReducer } from '../pages/articlePage/components/subComment/store'
 import { reducer as noticeReducer } from '../common/notice/store'
+import { reducer as articleEditPageReducer } from '../pages/articleEditPage/store'
+import { reducer as articleEditorReducer } from '../pages/articleEditPage/components/articleEditor/store'
 import { fromJS } from 'immutable'
 import { RECORD_SCROLL_TOP_OF_ELEMENT_EL } from './actionTypesWithSaga'
 
@@ -39,6 +41,8 @@ export default combineReducers({
     comment: commentReducer,
     subComment: subCommentReducer,
     notice: noticeReducer,
+    articleEditor: articleEditorReducer,
+    articleEditPage: articleEditPageReducer,
     rootState:(state = defaultState, action) => {
         if(action.type === RECORD_SCROLL_TOP_OF_ELEMENT_EL){
             return state.merge({

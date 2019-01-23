@@ -1,0 +1,7 @@
+.w-e-text{
+    min-height:300px;
+}
+
+.w-e-text::-webkit-scrollbar {
+    display: none;
+}

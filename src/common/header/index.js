@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
 import { withRouter } from 'react-router-dom'
 
-const HOME_PATH = '/'
 
 class Header extends PureComponent {
 
@@ -19,7 +18,7 @@ class Header extends PureComponent {
                            backgroundColor={backgroundColor}>
                 <HeaderMainArea   widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
 
-                    <div onClick={() => {redirectToHome(history)}}>
+                    <div onClick={() => {goTo(history,'/')}}>
                         <Logo className={CommonClassNameConstants.FONT_LARGE +
                                         CommonClassNameConstants.FONT_SONG +
                                         CommonClassNameConstants.CURSORP +
@@ -40,11 +39,15 @@ class Header extends PureComponent {
                         <NavItemWrapper>
                             <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
                                                 CommonClassNameConstants.CURSORP}>
-                                杂谈
+                                <span onClick={() => {goTo(history,'/')}}>杂谈</span>
                             </NavItem>
                             <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
                                                 CommonClassNameConstants.CURSORP}>
-                                索引
+                                <span onClick={() => {goTo(history,'/')}}>索引</span>
+                            </NavItem>
+                            <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
+                                                CommonClassNameConstants.CURSORP}>
+                                <span onClick={() => {goTo(history,'/edit')}}>写作</span>
                             </NavItem>
                         </NavItemWrapper>
                 </HeaderMainArea>
@@ -59,12 +62,12 @@ class Header extends PureComponent {
 
 }
 
-const redirectToHome = (history) => {
-    if(history.location.pathname === HOME_PATH){
+const goTo = (history,path) => {
+    if(history.location.pathname === path){
         return
     }
     history.push({
-        pathname: HOME_PATH,
+        pathname: path,
     })
 }
 

@@ -1,0 +1,1 @@
+export const APPOINT_ARTICLE_EDITOR_CONTENT = 'appointArticleEditorContent'

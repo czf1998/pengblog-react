@@ -28,7 +28,7 @@ export const AvatarWraper = styled.div`
         height: 55px;
         border: solid 1px #F7F7F7;
         border-radius: 0.4rem;
-        background: #F7F7F7;
+        background: #EEEEEE;
     `
 
 export const Avatar = styled.div`

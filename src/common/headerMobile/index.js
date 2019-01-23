@@ -22,7 +22,7 @@ class HeaderMobile extends PureComponent {
                                          CommonClassNameConstants.FLEX_COLUMN_CENTER}
                               backgroundColor={backgroundColor} metaColor={metaColor}>
                             <div>
-                                远方有鱼
+                                <span style={{color:metaColor, fontWeight:'bold', fontSize:'1.8rem'}}>遠</span>方有鱼
                             </div>
                             <div style={{borderTop: "solid 1px " + metaColor}}
                                  className={CommonClassNameConstants.FONT_TINY}>
