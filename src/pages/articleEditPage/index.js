@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {createPushPrograssToEndAction} from "../home/store";
-import {ArticleEditor} from './components'
-import {ArticleEditorPageWrapper,ArticleEditorWrapper,TitleImage,ArticleTitleTextArea,TitleLengthWarn} from "./style";
+import {ArticleEditor,TitleImage} from './components'
+import {ArticleEditorPageWrapper,ArticleEditorWrapper,TitleImageWrapper,ArticleTitleTextArea,TitleLengthWarn} from "./style";
 import * as CommonClassNameConstants from "../../commonStyle/commonClassNameConstant";
 import {AutoTextarea,CountLength} from "../../exJs";
 import {createAppointArticleEditTitleAction} from './store'
@@ -15,7 +15,10 @@ class ArticleEditPage extends PureComponent{
 
         return (
             <ArticleEditorPageWrapper  className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
-                <TitleImage/>
+
+                <TitleImageWrapper>
+                    <TitleImage></TitleImage>
+                </TitleImageWrapper>
 
                 <ArticleTitleTextArea rows="1"
                                       onKeyDown={keydownHandler}

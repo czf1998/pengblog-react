@@ -1,0 +1,1 @@
+export const APPOINT_TITLE_IMAGE_URL = 'appointTitleImageUrl'

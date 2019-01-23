@@ -10,11 +10,10 @@ export const ArticleEditorWrapper = styled.div`
         width: ${widthOfMainArea}px;
     `
 
-export const TitleImage = styled.div`
+export const TitleImageWrapper = styled.div`
         width: ${widthOfMainArea}px;
         margin-top: 2rem;
         height:220px;   
-        background-color: #F7F7F7;
     `
 
 export const ArticleTitleTextArea = styled.textarea`
