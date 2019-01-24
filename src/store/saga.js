@@ -59,8 +59,7 @@ function* ajaxSubmitComment(action) {
             /*通知窗口提示提交成功*/
             const appointNoticeContent = createAppointNoticeContent('评论提交成功！')
             yield put(appointNoticeContent)
-            const triggerShowNoticeAction = createTriggerShowNoticeAction(true)
-            yield put(triggerShowNoticeAction)
+
 
             /*重置文本编辑框正文value*/
             const appointInputValue = {

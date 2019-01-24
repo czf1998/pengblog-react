@@ -8,10 +8,12 @@ class TitleImage extends PureComponent{
 
     render(){
 
-        const {imageUrl} = this.props
+        const {imageUrl,sizeOfTitleImageFrame} = this.props
+
+        const heigthOfTitleImage = 700 * sizeOfTitleImageFrame.get('height') / sizeOfTitleImageFrame.get('width')
 
         return (
-            <TitleImageWrapper>
+            <TitleImageWrapper heightOfTitleImageFrame={heigthOfTitleImage}>
 
                 <TitleImageInputLabel htmlFor="titleImageInput"  className={CommonClassNameConstants.FLEX_ROW_CENTER +
                                                                             CommonClassNameConstants.CURSORP}>
@@ -24,13 +26,15 @@ class TitleImage extends PureComponent{
                 </TitleImageInputLabel>
 
                 <TitleImageFrame imageUrl={imageUrl}/>
+
             </TitleImageWrapper>
         )
     }
 }
 
 const mapState = (state) => ({
-    imageUrl: state.get('titleImage').get('imageUrl')
+    imageUrl: state.get('titleImage').get('imageUrl'),
+    sizeOfTitleImageFrame: state.get('titleImage').get('sizeOfTitleImageFrame')
 })
 
 const mapActions = (dispatch) => ({
@@ -43,10 +47,23 @@ const mapActions = (dispatch) => ({
 export default connect(mapState,mapActions)(TitleImage)
 
 const changeHandler = (event,appointTitleImageUrl) => {
+
     let image = event.target.files[0]
+    console.log(image)
     let fileReader = new FileReader()
-    fileReader.onload = function(e){
-        appointTitleImageUrl(fileReader.result)
+    let imageObj = new Image()
+    fileReader.onload = function(){
+        imageObj.src = fileReader.result
     }
     fileReader.readAsDataURL(image);
+    imageObj.onload = () => {
+        appointTitleImageUrl({
+            fileReaderResult:fileReader.result,
+            sizeOfTitleImageFrame:{
+                width:imageObj.width,
+                height:imageObj.height
+            }
+        })
+    }
+
 }

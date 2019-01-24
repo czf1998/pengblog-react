@@ -99,7 +99,9 @@ export default (state = defaultState, action) => {
     if(action.type === APPEND_COMMENT_JUST_SUBMIT) {
         if(action.value.referCommentId !== ''
             &&
-            action.value.referCommentId !== undefined){
+            action.value.referCommentId !== undefined
+            &&
+            action.value.referCommentId !== null ){
             return state
         }
         return state.merge({

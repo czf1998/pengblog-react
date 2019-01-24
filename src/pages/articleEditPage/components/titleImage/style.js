@@ -3,8 +3,8 @@ import styled from 'styled-components'
 export const TitleImageWrapper = styled.div`
         background-color: #F7F7F7;
         position: relative;
-        height: 100%;
-        ::after{
+        height: ${props => props.heightOfTitleImageFrame}px;
+        ::before{
             pointer-events: none;
             color: rgb(179, 179, 179);
             width: 100%;
@@ -17,7 +17,7 @@ export const TitleImageWrapper = styled.div`
             transform: translateY(-12px);
             transition: all 0.2s ease 0s;
         }
-         &:hover::after{
+         &:hover::before{
             opacity: 1;
             transform: translateY(0);
         }

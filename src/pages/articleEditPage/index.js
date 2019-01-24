@@ -2,9 +2,15 @@ import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {createPushPrograssToEndAction} from "../home/store";
 import {ArticleEditor,TitleImage} from './components'
-import {ArticleEditorPageWrapper,ArticleEditorWrapper,TitleImageWrapper,ArticleTitleTextArea,TitleLengthWarn} from "./style";
+import {ArticleEditorPageWrapper,
+        ArticleEditorWrapper,
+        TitleImageWrapper,
+        ArticleTitleTextArea,
+        TitleLengthWarn,
+        ArticleMetaWrapper,
+        ArticleMetaInput,Gap} from "./style";
 import * as CommonClassNameConstants from "../../commonStyle/commonClassNameConstant";
-import {AutoTextarea,CountLength} from "../../exJs";
+import {AutoInput, AutoTextarea, CountLength} from "../../exJs";
 import {createAppointArticleEditTitleAction} from './store'
 
 class ArticleEditPage extends PureComponent{
@@ -40,6 +46,11 @@ class ArticleEditPage extends PureComponent{
                     </TitleLengthWarn>
                 }
 
+                <ArticleMetaWrapper>
+                    <ArticleMetaInput id='labelInput' placeholder="标签" type="text" maxLength={11}/>
+                    <Gap>&nbsp;/&nbsp;</Gap>
+                    <ArticleMetaInput id='authorInput' placeholder="署名" type="text" maxLength={20}/>
+                </ArticleMetaWrapper>
 
                 <ArticleEditorWrapper>
                     <ArticleEditor/>
@@ -52,6 +63,7 @@ class ArticleEditPage extends PureComponent{
     componentDidMount(){
         this.props.pushPrograssBarToEnd()
         initTitleTextarea()
+        initMetaInput()
     }
 }
 
@@ -88,4 +100,11 @@ const keydownHandler = (event) => {
 const initTitleTextarea = () => {
     let titleTextarea = document.getElementById("titleTextarea")
     AutoTextarea(titleTextarea)
+}
+
+const initMetaInput = () => {
+    let labelInput = document.getElementById('labelInput')
+    let authorInput = document.getElementById('authorInput')
+    AutoInput(labelInput,26)
+    AutoInput(authorInput,26)
 }

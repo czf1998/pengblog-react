@@ -15,6 +15,7 @@ export default (state = defaultState, action) => {
     }
     if(action.type === APPOINT_NOTICE_CONTENT){
         return state.merge({
+            showNotice: true,
             noticeContent: action.value
         })
     }

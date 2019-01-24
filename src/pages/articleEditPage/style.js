@@ -13,7 +13,6 @@ export const ArticleEditorWrapper = styled.div`
 export const TitleImageWrapper = styled.div`
         width: ${widthOfMainArea}px;
         margin-top: 2rem;
-        height:220px;   
     `
 
 export const ArticleTitleTextArea = styled.textarea`
@@ -21,13 +20,13 @@ export const ArticleTitleTextArea = styled.textarea`
         margin: 1rem 0;
         min-height:2rem;
         font-size:2rem;
+        line-height: 1.5;
         word-break: break-all;
         font-weight: bold;
         font-family: Microsoft YaHei;
-        line-height: 1.5;
-        outline: none;
         overflow: hidden;
         display: block;
+        outline: none;
         border: none;
         resize: none;
         ::-webkit-scrollbar {
@@ -36,6 +35,28 @@ export const ArticleTitleTextArea = styled.textarea`
         ::-webkit-input-placeholder{
              color:#BBBBBB;   
         }
+    `
+
+export const ArticleMetaWrapper = styled.div`
+        width: ${widthOfMainArea}px;
+        margin-bottom: 0.4rem;
+    `
+
+export const ArticleMetaInput = styled.input`
+        outline: none;
+        border: none;
+        font-size: 26px;
+        width: 50px;
+        line-height: 1.5;
+        ::-webkit-input-placeholder{
+             color:#BBBBBB;   
+        }
+    `
+
+export const Gap = styled.span`
+        font-size: 1.6rem;
+        line-height: 1.5;
+        color:#BBBBBB; 
     `
 
 export const TitleLengthWarn = styled.div`

@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import E from 'wangeditor'
 import {ArticleEditorWrapper,ToolBar,TextArea,ToolBarWrapper} from './style'
 import {createAppointArticleEditorContent} from './store'
+import {API_UPLOAD_IMAGE} from "../../../../store/apiConstant";
+import {createAppointNoticeContent} from "../../../../store/actionCreators";
 
 class ArticleEditor extends PureComponent{
 
@@ -19,11 +21,30 @@ class ArticleEditor extends PureComponent{
     }
 
     componentDidMount(){
-        initEditor(this.refs.toolBar,this.refs.textArea,this.props.appointArticleEditorContent)
+        initEditor(this.refs.toolBar,this.refs.textArea,this.props.appointArticleEditorContent,this.props.failNotice)
     }
 }
 
-const initEditor = (toolBarElem, textAreaElem, changeHandler) => {
+const mapState = (state) => ({
+    content: state.get('articleEditor').get('content')
+})
+
+const mapActions = (dispatch) => ({
+    appointArticleEditorContent(content){
+        const appointArticleEditorContentAction = createAppointArticleEditorContent(content)
+        dispatch(appointArticleEditorContentAction)
+    },
+    failNotice(){
+        const appointNoticeContent = createAppointNoticeContent('图片上传失败，详情请查看控制台')
+        dispatch(appointNoticeContent)
+    }
+})
+
+export default connect(mapState,mapActions)(ArticleEditor)
+
+
+
+const initEditor = (toolBarElem, textAreaElem, changeHandler, failNotice) => {
     const articleEditor = new E(toolBarElem,textAreaElem)
     articleEditor.customConfig.onchange = (html) => {
         changeHandler(html)
@@ -49,18 +70,22 @@ const initEditor = (toolBarElem, textAreaElem, changeHandler) => {
         'code',  // 插入代码
         'undo'  // 撤销
     ]
+    articleEditor.customConfig.uploadImgServer = API_UPLOAD_IMAGE
+    articleEditor.customConfig.uploadFileName = 'img'
+    articleEditor.customConfig.uploadImgHooks = {
+
+        fail: function (xhr, editor, result) {
+            console.log(result)
+        },
+
+        customInsert: function (insertImg, result, editor) {
+            var url = result.imgUrl
+            insertImg(url)
+
+        }
+    }
+    articleEditor.customConfig.customAlert = function (info) {
+        failNotice()
+    }
     articleEditor.create()
 }
-
-const mapState = (state) => ({
-    content: state.get('articleEditor').get('content')
-})
-
-const mapActions = (dispatch) => ({
-    appointArticleEditorContent(content){
-        const appointArticleEditorContentAction = createAppointArticleEditorContent(content)
-        dispatch(appointArticleEditorContentAction)
-    }
-})
-
-export default connect(mapState,mapActions)(ArticleEditor)
