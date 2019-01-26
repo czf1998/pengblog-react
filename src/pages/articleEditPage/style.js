@@ -39,7 +39,7 @@ export const ArticleTitleTextArea = styled.textarea`
 
 export const ArticleMetaWrapper = styled.div`
         width: ${widthOfMainArea}px;
-        margin-bottom: 0.4rem;
+        margin-bottom: 1rem;
     `
 
 export const ArticleMetaInput = styled.input`

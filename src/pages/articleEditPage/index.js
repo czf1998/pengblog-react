@@ -9,21 +9,30 @@ import {ArticleEditorPageWrapper,
         TitleLengthWarn,
         ArticleMetaWrapper,
         ArticleMetaInput,Gap} from "./style";
-import * as CommonClassNameConstants from "../../commonStyle/commonClassNameConstant";
-import {AutoInput, AutoTextarea, CountLength} from "../../exJs";
-import {createAppointArticleEditTitleAction} from './store'
+import {CommonClassNameConstants} from "../../commonStyle";
+import {AutoInput, AutoTextarea} from "../../exJs";
+import {createAppointArticleEditInfoAction} from './store'
+import { TITLE,LABEL,AUTHOR} from './constant'
+
 
 class ArticleEditPage extends PureComponent{
 
     render(){
 
-        const {title,appointArticleEditTitle,remnantTitleLength} = this.props
+        const { title,
+                appointArticleEditInfo,
+                maxTitleLength,
+                label,
+                author} = this.props
+
+        let remnantTitleLength = maxTitleLength - title.length
+
 
         return (
             <ArticleEditorPageWrapper  className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
 
                 <TitleImageWrapper>
-                    <TitleImage></TitleImage>
+                    <TitleImage/>
                 </TitleImageWrapper>
 
                 <ArticleTitleTextArea rows="1"
@@ -31,7 +40,7 @@ class ArticleEditPage extends PureComponent{
                                       placeholder="请输入标题"
                                       id="titleTextarea"
                                       value={title}
-                                      onChange={(event) => {appointArticleEditTitle(event)}}/>
+                                      onChange={(event) => {appointArticleEditInfo(event, TITLE)}}/>
 
                 {
                     remnantTitleLength < 20 &&
@@ -47,9 +56,19 @@ class ArticleEditPage extends PureComponent{
                 }
 
                 <ArticleMetaWrapper>
-                    <ArticleMetaInput id='labelInput' placeholder="标签" type="text" maxLength={11}/>
+                    <ArticleMetaInput id='labelInput'
+                                      value={label}
+                                      onChange={(event) => {appointArticleEditInfo(event, LABEL)}}
+                                      placeholder="标签"
+                                      type="text"
+                                      maxLength={11}/>
                     <Gap>&nbsp;/&nbsp;</Gap>
-                    <ArticleMetaInput id='authorInput' placeholder="署名" type="text" maxLength={20}/>
+                    <ArticleMetaInput id='authorInput'
+                                      value={author}
+                                      onChange={(event) => {appointArticleEditInfo(event, AUTHOR)}}
+                                      placeholder="署名"
+                                      type="text"
+                                      maxLength={20}/>
                 </ArticleMetaWrapper>
 
                 <ArticleEditorWrapper>
@@ -69,7 +88,9 @@ class ArticleEditPage extends PureComponent{
 
 const mapState = (state) => ({
     title: state.get('articleEditPage').get('title'),
-    remnantTitleLength: state.get('articleEditPage').get('remnantTitleLength')
+    maxTitleLength: state.get('articleEditPage').get('maxTitleLength'),
+    label: state.get('articleEditPage').get('label'),
+    author: state.get('articleEditPage').get('author')
 })
 
 const mapActions = (dispatch) => ({
@@ -77,9 +98,13 @@ const mapActions = (dispatch) => ({
         const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'edit'})
         dispatch(pushPrograssBarToEndAction)
     },
-    appointArticleEditTitle(event) {
-        const appointArticleEditTitleAction = createAppointArticleEditTitleAction(event.target.value)
-        dispatch(appointArticleEditTitleAction)
+    appointArticleEditInfo(event, infoType) {
+        const appointArticleEditInfoActionValue = {
+            infoType: infoType,
+            infoValue: event.target.value
+        }
+        const appointArticleEditInfoAction = createAppointArticleEditInfoAction(appointArticleEditInfoActionValue)
+        dispatch(appointArticleEditInfoAction)
     }
 })
 

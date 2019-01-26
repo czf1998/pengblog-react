@@ -22,10 +22,10 @@ const mapState = (editorManagerId) => (state) => {
     return {
         isMobile: state.get('rootState').get('isMobile'),
         showEmojiPicker: state.get('commentEditor').get(editorManagerId).get('showEmojiPicker'),
-        commentContentManager: state.get('commentEditor').get(editorManagerId).get('commentContentManager'),
-        visitorNameManager: state.get('commentEditor').get(editorManagerId).get('visitorNameManager'),
-        visitorEmailManager: state.get('commentEditor').get(editorManagerId).get('visitorEmailManager'),
-        visitorSiteAddressManager: state.get('commentEditor').get(editorManagerId).get('visitorSiteAddressManager'),
+        commentContentManager: state.get('commentEditor').get(editorManagerId).get('commentContent'),
+        visitorNameManager: state.get('commentEditor').get(editorManagerId).get('visitorName'),
+        visitorEmailManager: state.get('commentEditor').get(editorManagerId).get('visitorEmail'),
+        visitorSiteAddressManager: state.get('commentEditor').get(editorManagerId).get('visitorSiteAddress'),
         hasOnceTryToSubmit: state.get('commentEditor').get(editorManagerId).get('hasOnceTryToSubmit'),
         isLoading: state.get('commentEditor').get(editorManagerId).get('isLoading')
     }

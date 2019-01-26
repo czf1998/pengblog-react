@@ -9,6 +9,8 @@ import { CommonClassNameConstants } from './commonStyle'
 import {Footer,
         PrograssBar,
         Notice } from './common'
+import history from './router/history'
+import {createAppointCurrentPathAction} from "./router/store";
 
 class App extends Component {
     constructor(props){
@@ -44,6 +46,7 @@ class App extends Component {
 
   componentDidMount() {
       store.dispatch(createObserveScrollTopOfElementElAction())
+      store.dispatch(createAppointCurrentPathAction(history.location.pathname))
       store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
   }
 

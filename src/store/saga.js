@@ -24,7 +24,6 @@ import {createDeliverArticleDataToHomeAction,
         createAppendCommentJustSubmitAction} from './actionCreators'
 import { ArticleRequest, CommentRequest } from './request'
 import {SUBMIT_COMMENT} from "../pages/articlePage/components/commentEditor/store/actionType";
-import {createTriggerShowNoticeAction} from "../common/notice/store";
 import {
     createAppointInputValueAction,
     createTriggerCommentEditorLoadingAction

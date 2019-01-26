@@ -1,6 +1,6 @@
-import {APPOINT_ARTICLE_EDIT_TITLE} from './actionTypes'
+import {APPOINT_ARTICLE_EDIT_INFO} from './actionTypes'
 
-export const createAppointArticleEditTitleAction = (value) => ({
-    type: APPOINT_ARTICLE_EDIT_TITLE,
+export const createAppointArticleEditInfoAction = (value) => ({
+    type: APPOINT_ARTICLE_EDIT_INFO,
     value
 })

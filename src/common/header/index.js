@@ -1,8 +1,13 @@
 import React, { PureComponent } from 'react'
-import { HeaderWrapper, HeaderMainArea, Logo, NavItem, NavItemWrapper } from './style'
+import {HeaderWrapper,
+        HeaderMainArea,
+        Logo,
+        NavItem,
+        NavItemWrapper } from './style'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
 import { withRouter } from 'react-router-dom'
+import {ArticleEditPageNav} from '../../router/navItem'
 
 
 class Header extends PureComponent {
@@ -10,7 +15,11 @@ class Header extends PureComponent {
 
     render() {
 
-        const { history, height, backgroundColor, basicUIFeatures, metaColor } = this.props
+        const { history,
+                height,
+                backgroundColor,
+                basicUIFeatures,
+                metaColor } = this.props
 
         return (
             <HeaderWrapper id="_header" className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
@@ -39,15 +48,7 @@ class Header extends PureComponent {
                         <NavItemWrapper>
                             <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
                                                 CommonClassNameConstants.CURSORP}>
-                                <span onClick={() => {goTo(history,'/')}}>杂谈</span>
-                            </NavItem>
-                            <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
-                                                CommonClassNameConstants.CURSORP}>
-                                <span onClick={() => {goTo(history,'/')}}>索引</span>
-                            </NavItem>
-                            <NavItem className={CommonClassNameConstants.FONT_MIDDLE +
-                                                CommonClassNameConstants.CURSORP}>
-                                <span onClick={() => {goTo(history,'/edit')}}>写作</span>
+                                <ArticleEditPageNav/>
                             </NavItem>
                         </NavItemWrapper>
                 </HeaderMainArea>

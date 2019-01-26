@@ -30,14 +30,17 @@ export const Logo = styled.div`
 
 export const NavItemWrapper = styled.div`
         display: flex;
+        align-items: center;
         height: inherit;
         float: right;
     `
 
 export const NavItem = styled.div`
+        height:100%;
+        display:flex;
+        align-items: center;
         color: grey;
-        line-height: ${height};
-        padding: 0 20px;
+        padding: 0 1rem;
         &:hover{
             color: black;
         }

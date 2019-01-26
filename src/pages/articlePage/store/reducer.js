@@ -133,6 +133,9 @@ export const constructComment = (commentData) => {
             visitor_siteAddress: commentData.visitorSiteAddress,
             visitor_email: commentData.visitorEmail
         },
+        comment_hostArticle: {
+            article_id: commentData.article_id,
+        },
         comment_referComment: {
             comment_id: commentData.referCommentId
         },

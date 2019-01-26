@@ -1,1 +1,1 @@
-export const APPOINT_ARTICLE_EDIT_TITLE = 'appointArticleEditTitle'
+export const APPOINT_ARTICLE_EDIT_INFO = 'appointArticleEditTitle'

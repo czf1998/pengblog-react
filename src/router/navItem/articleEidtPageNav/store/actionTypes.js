@@ -1,0 +1,1 @@
+export const TRIGGER_IS_SAVING_ARTICLE = 'triggerIsSavingArticle'

@@ -47,9 +47,7 @@ const mapActions = (dispatch) => ({
 export default connect(mapState,mapActions)(TitleImage)
 
 const changeHandler = (event,appointTitleImageUrl) => {
-
     let image = event.target.files[0]
-    console.log(image)
     let fileReader = new FileReader()
     let imageObj = new Image()
     fileReader.onload = function(){
@@ -65,5 +63,4 @@ const changeHandler = (event,appointTitleImageUrl) => {
             }
         })
     }
-
 }
