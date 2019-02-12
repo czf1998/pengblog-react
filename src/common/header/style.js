@@ -27,11 +27,14 @@ export const NavItemWrapper = styled.div`
 
 export const NavItem = styled.div`
         font-size: 1.2rem;
-        height:100%;
         display:flex;
         align-items: center;
         color: grey;
-        padding: 0 1rem;
+        margin: 0 1rem;
+        ${props => props.cursorp ? 'cursor:pointer;':''}
+        &:hover{
+            ${props => props.cursorp ? 'color:black;':''}
+        }
     `
 
 export const LogoWrapper = styled.div`

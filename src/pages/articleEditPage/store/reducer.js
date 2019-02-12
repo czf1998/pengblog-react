@@ -1,7 +1,8 @@
 import {fromJS} from 'immutable'
-import {APPOINT_ARTICLE_EDIT_INFO, TRIGGER_ARTICLE_SUBMITABLE} from "./actionTypes";
+import {APPOINT_ARTICLE_EDIT_INFO, TRIGGER_ARTICLE_SUBMITABLE, TRIGGER_SHOW_SAVE_TAG} from "./actionTypes";
 import {TRIGGER_IS_SAVING_DRAFT} from "./actionTypes";
 import {DELIVER_DRAFT_DATA} from "../../../store/actionTypesWithSaga";
+import {TRIGGER_IS_SAVING_ARTICLE} from "../../../common/header/store/actionTypes";
 
 const defaultState = fromJS({
     title:'',
@@ -9,7 +10,11 @@ const defaultState = fromJS({
     author: '',
     maxTitleLength: 50,
     isSaving: false,
-    submitable: false
+    submitable: false,
+    articleEditPageHeader: fromJS({
+        showSaveTag: false,
+        isSavingArticle: false
+    })
 })
 
 export default (state = defaultState, action) => {
@@ -23,16 +28,27 @@ export default (state = defaultState, action) => {
         setTimeout(() => {
             dispatchKeyupForMetaInput()
         }, 100)
+
         return state.merge({
-            title: action.value.article_title,
-            label: action.value.article_label,
-            author: action.value.article_author,
-            id: action.value.article_id
+            title: action.value.article_title ? action.value.article_title : '',
+            label: action.value.article_label ? action.value.article_label : '',
+            author: action.value.article_author ? action.value.article_author : '',
+            id: action.value.article_id ? action.value.article_id : undefined
         })
     }
     if(action.type === TRIGGER_ARTICLE_SUBMITABLE){
         return state.merge({
             submitable: action.value
+        })
+    }
+    if(action.type === TRIGGER_SHOW_SAVE_TAG) {
+        return state.merge({
+            articleEditPageHeader: state.get('articleEditPageHeader').set('showSaveTag',action.value)
+        })
+    }
+    if(action.type === TRIGGER_IS_SAVING_ARTICLE){
+        return state.merge({
+            articleEditPageHeader: state.get('articleEditPageHeader').set('isSavingArticle',action.value)
         })
     }
     return state

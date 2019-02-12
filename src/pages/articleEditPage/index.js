@@ -112,8 +112,6 @@ const mapActions = (dispatch) => ({
 
             saveArticle(dispatch, 'draft')
 
-
-
         },500,{page:'articleEditPage'})
 
         window.throttleByDelay(() => {
@@ -164,8 +162,11 @@ export const saveArticle = (dispatch, articleType) => {
             goTo: store.getState().get('router').get('goTo')
         }
 
-        const saveArticleAction = createSaveArticleAction(articleData)
-        dispatch(saveArticleAction)
+        setTimeout(() => {
+            const saveArticleAction = createSaveArticleAction(articleData)
+            dispatch(saveArticleAction)
+        },300)
+
 
         if(articleType === 'draft'){
 

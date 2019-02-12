@@ -13,6 +13,7 @@ import { withRouter } from 'react-router-dom'
 import {Logo} from './components'
 import {saveArticle} from "../../pages/articleEditPage";
 import {createTriggerIsSavingArticleAction} from "./store";
+import loadingSpin from "../loading/svg/loading-spin.svg";
 
 
 class ArticleEditPageHeader extends PureComponent {
@@ -28,7 +29,7 @@ class ArticleEditPageHeader extends PureComponent {
             isSaving,
             showSaveTag,
             submitable,
-            submitArticle} = this.props
+            submitArticle,isSavingArticle} = this.props
 
         return (
             <HeaderWrapper id="_header" className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
@@ -60,8 +61,11 @@ class ArticleEditPageHeader extends PureComponent {
 
                         {
                             showSaveTag && (isSaving ?
-                                <NavItem style={{fontSize:'1rem'}}>
-                                    草稿保存中 . . .
+                                <NavItem style={{fontSize:'1rem',position:'relative'}}>
+                                    <img src={loadingSpin} alt="Loading icon" style={{transform:'scale(0.6)',
+                                                                                        position:'absolute',
+                                                                                        left:'-1.7rem'}}/>
+                                    草稿保存中. . .
                                 </NavItem>
                                 :
                                 <NavItem style={{fontSize:'1rem'}}>
@@ -77,14 +81,24 @@ class ArticleEditPageHeader extends PureComponent {
 
                     <NavItemWrapper>
                         <NavItem>
-                                <SubmitButton submitable={submitable}>
-                                    <span className="iconfont"
-                                          style={{fontSize:'1.4rem'}}
-                                          onClick={submitArticle}>&#xe600;</span>
-                                    <Info onClick={submitArticle}>
-                                        发布
-                                    </Info>
-                                </SubmitButton>
+                            {
+                                isSavingArticle ?
+                                    <Fragment>
+                                        <img src={loadingSpin} alt="Loading icon" style={{transform:'scale(0.7)'}}/>
+                                        <Info onClick={submitArticle}>
+                                            发布中. . .
+                                        </Info>
+                                    </Fragment>
+                                    :
+                                    <SubmitButton submitable={submitable}>
+                                        <span className="iconfont"
+                                              style={{fontSize:'1.4rem'}}
+                                              onClick={submitArticle}>&#xe600;</span>
+                                        <Info onClick={submitArticle}>
+                                            发布
+                                        </Info>
+                                    </SubmitButton>
+                            }
                         </NavItem>
                     </NavItemWrapper>
                 </HeaderMainArea>
@@ -102,18 +116,21 @@ const mapState = (state) => {
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
         widthOfBrowser: state.get('rootState').get('widthOfBrowser'),
         isSaving: state.get('articleEditPage').get('isSaving'),
-        showSaveTag: state.get('header').get('articleEditPageHeader').get('showSaveTag'),
+        showSaveTag: state.get('articleEditPage').get('articleEditPageHeader').get('showSaveTag'),
         currentPath: state.get('router').get('currentPath'),
         submitable: state.get('articleEditPage').get('submitable'),
-        goTo: state.get('router').get('goTo')
+        goTo: state.get('router').get('goTo'),
+        isSavingArticle: state.get('articleEditPage').get('articleEditPageHeader').get('isSavingArticle')
     }
 }
 
 const mapActions = (dispatch) => ({
     submitArticle(){
-        saveArticle(dispatch,'article')
         const triggerIsSavingArticleAction = createTriggerIsSavingArticleAction(true)
         dispatch(triggerIsSavingArticleAction)
+        setTimeout(() => {
+            saveArticle(dispatch,'article')
+        },2000)
     }
 })
 

@@ -52,9 +52,9 @@ export default (state = defaultState, action) => {
     if(action.type === DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE) {
         return state.merge({
             cache: state.get('cache').merge(fromJS({
-                article: fromJS(handleImgLabelWidth(action.value))
+                article: fromJS(action.value)
             })),
-            article: fromJS(handleImgLabelWidth(action.value)),
+            article: fromJS(action.value),
             dataReady: true,
             scrollPosition: 0
         })

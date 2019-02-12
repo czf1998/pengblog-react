@@ -31,7 +31,7 @@ class CommonHeader extends PureComponent {
                     <Logo/>
 
                     <NavItemWrapper>
-                        <NavItem>
+                        <NavItem cursorp={true}>
                             <span className="iconfont"
                                   onClick={() => {goTo('/edit')}}
                                   style={{fontSize:'1.6rem'}}>&#xe67f;</span>
