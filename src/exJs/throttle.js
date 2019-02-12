@@ -12,4 +12,14 @@ export const throttleByGap = (method, gap, meta) => {
     }
 }
 
+export const throttleByDelay = (method, delay, meta) => {
+    let methodDelayTimer = method.toString() + JSON.stringify(meta)
+    clearTimeout(window[methodDelayTimer])
+    window[methodDelayTimer] = setTimeout(() => {
+        method.call()
+    },delay)
+}
+
+
 window.throttleByGap = throttleByGap
+window.throttleByDelay = throttleByDelay

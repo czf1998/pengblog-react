@@ -7,3 +7,9 @@ export const GapLine = styled.div`
         margin: 0 2rem;
         border-bottom: solid 2px ${gapLineColor};
     `
+
+export const GapLineVertical = styled.div`
+        width: 2px;
+        padding: 1rem 0;
+        border-left: solid 2px ${gapLineColor};
+    `

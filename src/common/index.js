@@ -8,12 +8,13 @@ import ForMore from './forMore'
 import { ScrollToThePositionOnMount } from './scrollBehaviour'
 import Input from './input'
 import Textarea from './textarea'
-import { GapLine } from './gapLine'
+import { GapLine, GapLineVertical } from './gapLine'
 import Notice from './notice'
 
 export {Button,
         Input,
         GapLine,
+        GapLineVertical,
         Footer,
         Header,
         HeaderMobile,

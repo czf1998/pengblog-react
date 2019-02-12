@@ -1,0 +1,21 @@
+.slide-from-left-CSST-enter, .slide-from-left-CSST-appear{
+    opacity: 0.01;
+    transform: translateX(20%);
+}
+
+.slide-from-left-CSST-enter-active, .slide-from-left-CSST-appear-active{
+    opacity: 1;
+    transform: translateX(0%);
+    transition: all var(--animate-time-CSST)  ease;
+}
+
+
+.slide-from-left-CSST-exit{
+}
+
+.slide-from-left-CSST-exit-active{
+    opacity: 0.01;
+    transform: translateX(-20%);
+    transition: all var(--animate-time-CSST) ease;
+}
+

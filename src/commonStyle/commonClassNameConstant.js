@@ -71,3 +71,5 @@ export const SLIDE_ZOOM_LEFT = 'slide-zoom-left'
 export const SLIDE_DOWN = 'slide-down'
 
 export const SLIDE_UP_CSSTRANSITION = 'slide-up-CSST'
+
+export const SLIDE_FROM_LEFT_CSSTRANSITION = 'slide-from-left-CSST'

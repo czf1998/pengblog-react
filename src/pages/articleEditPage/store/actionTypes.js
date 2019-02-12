@@ -1,1 +1,6 @@
 export const APPOINT_ARTICLE_EDIT_INFO = 'appointArticleEditTitle'
+export const GET_DRAFT_DATA = 'getDraftData'
+export const SAVE_ARTICLE_ACTION = 'saveArticleAction'
+export const TRIGGER_ARTICLE_SUBMITABLE = 'triggerArticleSubmitable'
+export const TRIGGER_SHOW_SAVE_TAG = 'triggerShowSaveTag'
+export const TRIGGER_IS_SAVING_DRAFT = 'triggerIsSavingDraft'

@@ -5,7 +5,7 @@ import history from './history'
 import HomeLoadable from '../pages/home/loadable'
 import ArticlePageLoadable from '../pages/articlePage/loadable'
 import ArticleEditPageLoadable from '../pages/articleEditPage/loadable'
-import { Header,  HeaderMobile } from '../common'
+import { Header } from '../common'
 import Test from '../pages/test'
 
 class RouterComponent extends PureComponent {
@@ -14,20 +14,14 @@ class RouterComponent extends PureComponent {
 
     render() {
 
-        const { isMobile } = this.props
         return (
                 <Router history={history}>
                     <Fragment>
-                        {
-                            isMobile ?
-                                <HeaderMobile/>
-                                :
-                                <Header/>
-                        }
+                        <Header/>
                         <Route exact path='/article/:article_id' component={ArticlePageLoadable}/>
                         <Route exact path='/edit' component={ArticleEditPageLoadable}/>
-                        <Route path='/'  exact component={HomeLoadable}/>
-                        <Route path='/test' exact component={Test}/>
+                        <Route exact path='/' component={HomeLoadable}/>
+                        <Route exact path='/test' component={Test}/>
                     </Fragment>
                 </Router>
         );

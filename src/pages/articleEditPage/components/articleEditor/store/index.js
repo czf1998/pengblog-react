@@ -1,6 +1,6 @@
 import reducer from './reducer'
-import {createAppointArticleEditorContent} from './actionCreators'
+import {createAppointArticleEditorContent,createAppointArticleEditorAction} from './actionCreators'
 
 export {reducer}
 
-export {createAppointArticleEditorContent}
+export {createAppointArticleEditorContent,createAppointArticleEditorAction}

@@ -18,16 +18,6 @@ export const HeaderMainArea = styled.div`
         width: ${props => props.widthOfMainArea}px;
     `
 
-/*export const LogoWrapper = styled.div`
-        height: inherit;
-        width: 200px;
-    `*/
-
-export const Logo = styled.div`
-        height: 100%;
-        padding: 0 20px;
-    `
-
 export const NavItemWrapper = styled.div`
         display: flex;
         align-items: center;
@@ -36,14 +26,32 @@ export const NavItemWrapper = styled.div`
     `
 
 export const NavItem = styled.div`
+        font-size: 1.2rem;
         height:100%;
         display:flex;
         align-items: center;
         color: grey;
         padding: 0 1rem;
+    `
+
+export const LogoWrapper = styled.div`
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        bottom: 0;
+    `
+
+export const SubmitButton = styled.div`
+        display:flex;
+        align-items: center;
+        ${props => props.submitable ? '' : 'color: #EEEEEE;'};
+        cursor: ${props => props.submitable ? 'pointer' : 'default'};
         &:hover{
-            color: black;
+            ${props => props.submitable ? 'color: black;' : ''};
         }
     `
 
-
+export const Info = styled.div`
+        height: auto;
+        font-size: 1.2rem;
+    `

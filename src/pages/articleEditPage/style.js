@@ -46,8 +46,9 @@ export const ArticleMetaInput = styled.input`
         outline: none;
         border: none;
         font-size: 26px;
-        width: 50px;
+        width: 55px;
         line-height: 1.5;
+        transition: all 0.4s ease;
         ::-webkit-input-placeholder{
              color:#BBBBBB;   
         }
@@ -56,7 +57,7 @@ export const ArticleMetaInput = styled.input`
 export const Gap = styled.span`
         font-size: 1.6rem;
         line-height: 1.5;
-        color:#BBBBBB; 
+        color: #BBBBBB; 
     `
 
 export const TitleLengthWarn = styled.div`

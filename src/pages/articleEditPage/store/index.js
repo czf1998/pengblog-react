@@ -1,5 +1,15 @@
 import reducer from './reducer'
-import {createAppointArticleEditInfoAction} from './actionCreators'
+import {createAppointArticleEditInfoAction,
+        createGetDraftDataAction,
+        createSaveArticleAction,
+        createTriggerArticleSubmitableAction,
+        createTriggerShowSaveTagAction,
+        createTriggerIsSavingDraftAction} from './actionCreators'
 
 export {reducer}
-export {createAppointArticleEditInfoAction}
+export {createAppointArticleEditInfoAction,
+        createGetDraftDataAction,
+        createSaveArticleAction,
+        createTriggerArticleSubmitableAction,
+        createTriggerShowSaveTagAction,
+        createTriggerIsSavingDraftAction}

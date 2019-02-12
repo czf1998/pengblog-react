@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
-import {createPushPrograssToEndAction} from "../home/store";
 import {ArticleEditor,TitleImage} from './components'
 import {ArticleEditorPageWrapper,
         ArticleEditorWrapper,
@@ -11,9 +10,16 @@ import {ArticleEditorPageWrapper,
         ArticleMetaInput,Gap} from "./style";
 import {CommonClassNameConstants} from "../../commonStyle";
 import {AutoInput, AutoTextarea} from "../../exJs";
-import {createAppointArticleEditInfoAction} from './store'
+import {createAppointArticleEditInfoAction,
+        createGetDraftDataAction,
+        createSaveArticleAction,
+        createTriggerArticleSubmitableAction,
+        createTriggerShowSaveTagAction,
+        createTriggerIsSavingDraftAction} from './store'
 import { TITLE,LABEL,AUTHOR} from './constant'
+import store from '../../store'
 
+console.log(store)
 
 class ArticleEditPage extends PureComponent{
 
@@ -25,7 +31,7 @@ class ArticleEditPage extends PureComponent{
                 label,
                 author} = this.props
 
-        let remnantTitleLength = maxTitleLength - title.length
+        let remnantTitleLength = maxTitleLength - (title ? title.length : 0)
 
 
         return (
@@ -80,9 +86,9 @@ class ArticleEditPage extends PureComponent{
     }
 
     componentDidMount(){
-        this.props.pushPrograssBarToEnd()
         initTitleTextarea()
         initMetaInput()
+        this.props.initDraftData()
     }
 }
 
@@ -90,14 +96,11 @@ const mapState = (state) => ({
     title: state.get('articleEditPage').get('title'),
     maxTitleLength: state.get('articleEditPage').get('maxTitleLength'),
     label: state.get('articleEditPage').get('label'),
-    author: state.get('articleEditPage').get('author')
+    author: state.get('articleEditPage').get('author'),
+    id: state.get('articleEditPage').get('id')
 })
 
 const mapActions = (dispatch) => ({
-    pushPrograssBarToEnd() {
-        const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'edit'})
-        dispatch(pushPrograssBarToEndAction)
-    },
     appointArticleEditInfo(event, infoType) {
         const appointArticleEditInfoActionValue = {
             infoType: infoType,
@@ -105,12 +108,33 @@ const mapActions = (dispatch) => ({
         }
         const appointArticleEditInfoAction = createAppointArticleEditInfoAction(appointArticleEditInfoActionValue)
         dispatch(appointArticleEditInfoAction)
+
+        window.throttleByDelay(() => {
+
+            saveArticle(dispatch, 'draft')
+
+            const triggerIsSavingArticleAction = createTriggerIsSavingDraftAction(true)
+            dispatch(triggerIsSavingArticleAction)
+
+            const triggerShowSaveTagAction = createTriggerShowSaveTagAction(true)
+            dispatch(triggerShowSaveTagAction)
+
+        },500,{page:'articleEditPage'})
+
+        window.throttleByDelay(() => {
+            checkIfSubmitable(dispatch)
+        },500,{page:'articleEditPage',method: 'checkIfSubmitable'})
+    },
+    initDraftData() {
+        const getDraftDataAction = createGetDraftDataAction()
+        dispatch(getDraftDataAction)
+    },
+    test(){
+        console.log('test')
     }
 })
 
 export default connect(mapState,mapActions)(ArticleEditPage)
-
-
 
 const keydownHandler = (event) => {
     if(event.keyCode === 13){
@@ -133,3 +157,42 @@ const initMetaInput = () => {
     AutoInput(labelInput,26)
     AutoInput(authorInput,26)
 }
+
+export const saveArticle = (dispatch, articleType) => {
+        let articleData = {
+            article_id: store.getState().get('articleEditPage').get('id'),
+            article_title: store.getState().get('articleEditPage').get('title'),
+            article_author: store.getState().get('articleEditPage').get('author'),
+            article_label: store.getState().get('articleEditPage').get('label'),
+            article_content: store.getState().get('articleEditor').get('content') ? store.getState().get('articleEditor').get('content') : '',
+            article_type: articleType,
+            goTo: store.getState().get('router').get('goTo')
+        }
+
+        const saveArticleAction = createSaveArticleAction(articleData)
+        dispatch(saveArticleAction)
+}
+
+export const checkIfSubmitable = (dispatch) => {
+
+        let article_title = store.getState().get('articleEditPage').get('title')
+        let article_author = store.getState().get('articleEditPage').get('author')
+        let article_label = store.getState().get('articleEditPage').get('label')
+        let article_content = store.getState().get('articleEditor').get('content') ? store.getState().get('articleEditor').get('content') : ''
+
+        if(checkItemLength(article_title, 0, 50) 
+            && checkItemLength(article_author, 1, 15)
+            && checkItemLength(article_label, 1, 10)
+            && checkItemLength(article_content, 20, 20000)){
+            const triggerArticleSubmitableAction = createTriggerArticleSubmitableAction(true)
+            dispatch(triggerArticleSubmitableAction)
+        }else{
+            const triggerArticleSubmitableAction = createTriggerArticleSubmitableAction(false)
+            dispatch(triggerArticleSubmitableAction)
+        }
+}
+
+const checkItemLength = (item, leftPoint, rightPoint) => {
+    return item.length > leftPoint && item.length <= rightPoint
+}
+

@@ -2,41 +2,55 @@ import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import E from 'wangeditor'
 import {ArticleEditorWrapper,ToolBar,TextArea,ToolBarWrapper} from './style'
-import {createAppointArticleEditorContent} from './store'
+import {createAppointArticleEditorContent,createAppointArticleEditorAction} from './store'
 import {API_UPLOAD_IMAGE} from "../../../../store/apiConstant";
 import {createAppointNoticeContent} from "../../../../store/actionCreators";
+import {checkIfSubmitable, saveArticle} from "../../index";
 
 class ArticleEditor extends PureComponent{
 
     render(){
+
         return (
            <ArticleEditorWrapper>
                <ToolBarWrapper>
                    <ToolBar ref="toolBar"></ToolBar>
                </ToolBarWrapper>
 
-               <TextArea ref="textArea"></TextArea>
+               <TextArea ref="textArea">
+               </TextArea>
            </ArticleEditorWrapper>
         )
     }
 
     componentDidMount(){
-        initEditor(this.refs.toolBar,this.refs.textArea,this.props.appointArticleEditorContent,this.props.failNotice)
+        initEditor( this.refs.toolBar,
+                    this.refs.textArea,
+                    this.props.appointArticleEditorContent,
+                    this.props.failNotice,
+                    this.props.appointArticleEditor)
     }
 }
 
 const mapState = (state) => ({
-    content: state.get('articleEditor').get('content')
+    content: state.get('articleEditor').get('content'),
+    articleEditor: state.get('articleEditor').get('editor')
 })
 
 const mapActions = (dispatch) => ({
     appointArticleEditorContent(content){
         const appointArticleEditorContentAction = createAppointArticleEditorContent(content)
         dispatch(appointArticleEditorContentAction)
+        saveArticle(dispatch,'draft')
+        checkIfSubmitable(dispatch)
     },
     failNotice(){
         const appointNoticeContent = createAppointNoticeContent('图片上传失败，详情请查看控制台')
         dispatch(appointNoticeContent)
+    },
+    appointArticleEditor(editor){
+        const appointArticleEditorAction = createAppointArticleEditorAction(editor)
+        dispatch(appointArticleEditorAction)
     }
 })
 
@@ -44,7 +58,11 @@ export default connect(mapState,mapActions)(ArticleEditor)
 
 
 
-const initEditor = (toolBarElem, textAreaElem, changeHandler, failNotice) => {
+const initEditor = (toolBarElem,
+                    textAreaElem,
+                    changeHandler,
+                    failNotice,
+                    articleEditorAppointer) => {
     const articleEditor = new E(toolBarElem,textAreaElem)
     articleEditor.customConfig.onchange = (html) => {
         changeHandler(html)
@@ -87,4 +105,6 @@ const initEditor = (toolBarElem, textAreaElem, changeHandler, failNotice) => {
         failNotice()
     }
     articleEditor.create()
+
+    articleEditorAppointer(articleEditor)
 }

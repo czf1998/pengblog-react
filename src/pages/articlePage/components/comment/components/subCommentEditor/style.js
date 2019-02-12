@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import {Button} from "../../../../../../common/button";
 
-const background = '#F7F7F7'
 const widthOfMainArea = 750
 
 export const SubCommentEditorWrapper = styled.div`

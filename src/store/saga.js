@@ -1,4 +1,5 @@
 import { put, takeEvery, takeLatest, select } from 'redux-saga/effects'
+
 import {
     GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA,
     GET_COMMENT_LIST_DATA, GET_COUNT_OF_COMMENT,
@@ -21,14 +22,19 @@ import {createDeliverArticleDataToHomeAction,
         createPushPrograssToEndAction,
         createDeliverSubCommentListDataAction,
         createAppointNoticeContent,
-        createAppendCommentJustSubmitAction} from './actionCreators'
-import { ArticleRequest, CommentRequest } from './request'
+        createAppendCommentJustSubmitAction,
+        createDeliverDraftDataAction} from './actionCreators'
+import {ArticleRequest,
+        CommentRequest} from './request'
 import {SUBMIT_COMMENT} from "../pages/articlePage/components/commentEditor/store/actionType";
 import {
     createAppointInputValueAction,
     createTriggerCommentEditorLoadingAction
 } from "../pages/articlePage/components/commentEditor/store";
 import {COMMENT_CONTENT} from "../pages/articlePage/components/commentEditor/constant";
+import {GET_DRAFT_DATA, SAVE_ARTICLE_ACTION} from "../pages/articleEditPage/store/actionTypes";
+import {createTriggerIsSavingDraftAction} from "../pages/articleEditPage/store";
+import {createTriggerIsSavingArticleAction} from "../common/header/store";
 
 
 function* mySaga() {
@@ -40,6 +46,43 @@ function* mySaga() {
     yield takeEvery(GET_COUNT_OF_COMMENT, ajaxCountOfComment)
     yield takeEvery(GET_SUB_COMMENT_LIST_DATA, ajaxSubCommentListData)
     yield takeEvery(SUBMIT_COMMENT, ajaxSubmitComment)
+    yield takeEvery(GET_DRAFT_DATA, ajaxDraft)
+    yield takeEvery(SAVE_ARTICLE_ACTION, ajaxSaveArticle)
+}
+
+function* ajaxSaveArticle(action) {
+    try{
+        yield ArticleRequest.SaveArticle(action.value)
+        const triggerIsSavingArticleAction = createTriggerIsSavingDraftAction(false)
+        yield put(triggerIsSavingArticleAction)
+        const triggerIsSavingDraftAction = createTriggerIsSavingArticleAction(false)
+        yield put(triggerIsSavingDraftAction)
+
+        if(action.value.article_type === 'article'){
+            /*通知窗口提示提交成功*/
+            const appointNoticeContent = createAppointNoticeContent('文章发布成功！即将跳转')
+            yield put(appointNoticeContent)
+            setTimeout(() => {
+                action.value.goTo('/article/' + action.value.article_id)
+            },2000)
+        }
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+    }
+}
+
+function* ajaxDraft() {
+    try{
+        const res = yield ArticleRequest.RequestDraftData()
+        let appointDataAction = createDeliverDraftDataAction(res.data)
+        yield put(appointDataAction)
+
+        //推进进度条
+        let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'edit'})
+        yield put(pushPrograssBarToEndAction)
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+    }
 }
 
 function* ajaxSubmitComment(action) {

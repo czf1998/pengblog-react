@@ -15,5 +15,9 @@ export const API_GET_SUB_COMMENT_LIST = server + 'comment/sub_comment_list.do';
 
 export const API_POST_SUBMIT_COMMENT = server + 'comment/submit_comment.do';
 
+export const API_GET_DRAFT = server + 'article/draft.do '
+
 export const API_UPLOAD_IMAGE = server + 'image/image_upload.do'
+
+export const API_SAVE_ARTICLE = server + 'article/upload_article.do'
 

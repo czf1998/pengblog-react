@@ -10,7 +10,6 @@ export function RequestArticleData(article_id) {
     return axios.get(Api.API_GET_ARTICLE_BY_ID, config)
 }
 
-
 export const RequestArticleListData = (value) => {
     let config = {
         params: {
@@ -19,4 +18,12 @@ export const RequestArticleListData = (value) => {
         }
     }
     return axios.get(Api.API_GET_ARTICLE_LIST_BY_LIMITINDEX, config)
+}
+
+export const RequestDraftData = () => {
+    return axios.get(Api.API_GET_DRAFT)
+}
+
+export const SaveArticle = (value) => {
+    return axios.post(Api.API_SAVE_ARTICLE,value)
 }
