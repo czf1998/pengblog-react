@@ -104,6 +104,9 @@ const initEditor = (toolBarElem,
     articleEditor.customConfig.customAlert = function (info) {
         failNotice()
     }
+
+    articleEditor.customConfig.zIndex = 1
+
     articleEditor.create()
 
     articleEditorAppointer(articleEditor)

@@ -3,11 +3,11 @@ import styled from 'styled-components'
 const height = "70px"
 
 export const HeaderWrapper = styled.div`
-        z-index: 1;
+        z-index: 3;
         position: sticky;
         top: 0;
         height: ${height};
-        background: ${props => props.backgroundColor};
+        background: ${props => props.backgroundColor ? props.backgroundColor : 'white'};
         border-bottom: solid 1px #f0f0f0;
     `
 

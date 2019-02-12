@@ -5,7 +5,8 @@ export const ArticleEditorWrapper = styled.div`
     `
 
 export const ToolBarWrapper = styled.div`
-        padding: 0.25rem 0;
+        padding: 0.5rem 0;
+        margin-bottom: 2rem;
         border-top: 1px solid #EBEBEB;    
         border-bottom: 1px solid #EBEBEB;
     `

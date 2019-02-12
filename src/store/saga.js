@@ -53,10 +53,10 @@ function* mySaga() {
 function* ajaxSaveArticle(action) {
     try{
         yield ArticleRequest.SaveArticle(action.value)
-        const triggerIsSavingArticleAction = createTriggerIsSavingDraftAction(false)
-        yield put(triggerIsSavingArticleAction)
-        const triggerIsSavingDraftAction = createTriggerIsSavingArticleAction(false)
+        const triggerIsSavingDraftAction = createTriggerIsSavingDraftAction(false)
         yield put(triggerIsSavingDraftAction)
+        const triggerIsSavingArticleAction = createTriggerIsSavingArticleAction(false)
+        yield put(triggerIsSavingArticleAction)
 
         if(action.value.article_type === 'article'){
             /*通知窗口提示提交成功*/

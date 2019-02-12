@@ -8,11 +8,12 @@ export const ArticleEditorPageWrapper = styled.div`
 
 export const ArticleEditorWrapper = styled.div`
         width: ${widthOfMainArea}px;
+        margin-bottom: 10rem;
     `
 
 export const TitleImageWrapper = styled.div`
         width: ${widthOfMainArea}px;
-        margin-top: 2rem;
+        margin-top: 3rem;
     `
 
 export const ArticleTitleTextArea = styled.textarea`

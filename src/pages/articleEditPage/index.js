@@ -19,7 +19,6 @@ import {createAppointArticleEditInfoAction,
 import { TITLE,LABEL,AUTHOR} from './constant'
 import store from '../../store'
 
-console.log(store)
 
 class ArticleEditPage extends PureComponent{
 
@@ -113,11 +112,7 @@ const mapActions = (dispatch) => ({
 
             saveArticle(dispatch, 'draft')
 
-            const triggerIsSavingArticleAction = createTriggerIsSavingDraftAction(true)
-            dispatch(triggerIsSavingArticleAction)
 
-            const triggerShowSaveTagAction = createTriggerShowSaveTagAction(true)
-            dispatch(triggerShowSaveTagAction)
 
         },500,{page:'articleEditPage'})
 
@@ -171,6 +166,16 @@ export const saveArticle = (dispatch, articleType) => {
 
         const saveArticleAction = createSaveArticleAction(articleData)
         dispatch(saveArticleAction)
+
+        if(articleType === 'draft'){
+
+            const triggerIsSavingDraftAction = createTriggerIsSavingDraftAction(true)
+            dispatch(triggerIsSavingDraftAction)
+
+            const triggerShowSaveTagAction = createTriggerShowSaveTagAction(true)
+            dispatch(triggerShowSaveTagAction)
+        }
+
 }
 
 export const checkIfSubmitable = (dispatch) => {
