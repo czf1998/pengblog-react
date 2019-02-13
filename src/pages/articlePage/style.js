@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+const widthOfMainArea = '750'
 
 export const ArticlePageWrapper = styled.div`
         background: #f7f7f7;
@@ -13,6 +14,13 @@ export const ArticleMainArea = styled.div`
         }
     `
 
+export const ArticleTitleImage = styled.div`
+        ${props => props.titleImageUrl ? '' : 'display:none;'}
+        background: url(${props => props.titleImageUrl}) no-repeat center center;
+        background-size: cover;
+        height: ${props => props.titleImageSize.get('height') * widthOfMainArea / props.titleImageSize.get('width')}px;
+        max-height: 320px;
+    `
 export const ArticleTitle = styled.div`
         font-size: 36px;
         line-height: 1.5;

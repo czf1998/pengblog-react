@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { ArticlePageWrapper,
+         ArticleTitleImage,
          ArticleTitle,
          ArticleMainArea,
          ArticleMeta,
@@ -19,6 +20,7 @@ import { CommonClassNameConstants } from "../../commonStyle"
 import { Loading, ForMore, ScrollToThePositionOnMount, GapLine } from '../../common'
 import { DateFormat } from "../../exJs"
 import { Comment, TopLevelCommentEditor } from './components'
+import {createAppointSizeOfTitleImageFrameAction} from "../articleEditPage/components/titleImage/store";
 
 class ArticlePage extends PureComponent {
 
@@ -35,14 +37,20 @@ class ArticlePage extends PureComponent {
                 maxPage,
                 currentPage,
                 scrollPosition,
-                referComment } = this.props
+                referComment,
+                titleImageSize } = this.props
 
         const { article_id } = this.props.match.params
+
+        const heigthOfTitleImage = 750 * titleImageSize.get('height') / titleImageSize.get('width')
 
         return (
                 dataReady ?
                 <ArticlePageWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
                     <ArticleMainArea widthOfMainArea={widthOfMainArea} className={CommonClassNameConstants.SLIDE_UP_FAST}>
+
+                        <ArticleTitleImage titleImageUrl={article.get('article_titleImageUrl')} titleImageSize={titleImageSize}/>
+
                         <ArticleTitle className={CommonClassNameConstants.COMMON_PADDING}>
                             <h2>{article.get('article_title')}</h2>
                         </ArticleTitle>
@@ -106,8 +114,6 @@ class ArticlePage extends PureComponent {
         )
     }
 
-
-
     componentDidMount() {
         /*读取缓存*/
         if(this.props.cacheArticle && (parseInt(this.props.cacheArticle.get('article_id')) === parseInt(this.props.match.params.article_id))){
@@ -124,6 +130,20 @@ class ArticlePage extends PureComponent {
         this.props.resetStore()
         this.props.recordScrollTop()
     }
+
+    componentDidUpdate(){
+
+        let imageObj = new Image()
+
+        imageObj.src = this.props.article.get('article_titleImageUrl')
+
+        imageObj.onload = () => {
+
+            this.props.appointSizeOfTitleImage(imageObj)
+
+        }
+
+    }
 }
 
 const mapState = (state) => ({
@@ -138,7 +158,8 @@ const mapState = (state) => ({
         pageScale: state.get('articlePage').get('pageScale'),
         maxPage: state.get('articlePage').get('maxPage'),
         currentPage: state.get('articlePage').get('currentPage'),
-        scrollPosition: state.get('articlePage').get('scrollPosition')
+        scrollPosition: state.get('articlePage').get('scrollPosition'),
+        titleImageSize: state.get('articlePage').get('titleImageSize')
     })
 
 const mapActions = (dispatch) => {
@@ -185,6 +206,14 @@ const mapActions = (dispatch) => {
         resetCommentEditor() {
             const resetCommentEditorAction = createResetCommentEditorAction()
             dispatch(resetCommentEditorAction)
+        },
+        appointSizeOfTitleImage(imageObj) {
+            const value = {
+                width:imageObj.width,
+                height:imageObj.height
+            }
+            const appointSizeOfTitleImageFrameAction = createAppointSizeOfTitleImageFrameAction(value)
+            dispatch(appointSizeOfTitleImageFrameAction)
         }
     }
 }

@@ -121,7 +121,7 @@ const mapActions = (dispatch) => ({
         const triggerIsSavingArticleAction = createTriggerIsSavingArticleAction(true)
         dispatch(triggerIsSavingArticleAction)
         setTimeout(() => {
-            saveArticle(dispatch,'article')
+            saveArticle(dispatch,'article',true)
         },2000)
     }
 })

@@ -151,21 +151,23 @@ const initMetaInput = () => {
     AutoInput(authorInput,26)
 }
 
-export const saveArticle = (dispatch, articleType) => {
+export const saveArticle = (dispatch, articleType, clickToSave) => {
 
-        const draftCache = store.getState().get('articleEditPage').get('draftCache')
+        if(!clickToSave){
+            const draftCache = store.getState().get('articleEditPage').get('draftCache')
 
-
-        if(draftCache.get('article_title') === store.getState().get('articleEditPage').get('title')
+            if(draftCache.get('article_title') === store.getState().get('articleEditPage').get('title')
             &&
-           draftCache.get('article_author') === store.getState().get('articleEditPage').get('author')
+            draftCache.get('article_author') === store.getState().get('articleEditPage').get('author')
             &&
-           draftCache.get('article_label') === store.getState().get('articleEditPage').get('label')
+            draftCache.get('article_label') === store.getState().get('articleEditPage').get('label')
             &&
-           draftCache.get('article_content') === store.getState().get('articleEditor').get('content') ? store.getState().get('articleEditor').get('content') : ''
-        ){
-            return
+            draftCache.get('article_content') === store.getState().get('articleEditor').get('content') ? store.getState().get('articleEditor').get('content') : ''
+            ){
+                return
+            }
         }
+
 
         let articleData = {
             article_id: store.getState().get('articleEditPage').get('id'),
@@ -183,7 +185,6 @@ export const saveArticle = (dispatch, articleType) => {
             dispatch(saveArticleAction)
         },300)
 
-
         if(articleType === 'draft'){
 
             const triggerIsSavingDraftAction = createTriggerIsSavingDraftAction(true)
@@ -192,7 +193,6 @@ export const saveArticle = (dispatch, articleType) => {
             const triggerShowSaveTagAction = createTriggerShowSaveTagAction(true)
             dispatch(triggerShowSaveTagAction)
         }
-
 }
 
 export const checkIfSubmitable = (dispatch) => {

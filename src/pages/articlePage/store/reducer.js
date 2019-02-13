@@ -6,11 +6,13 @@ import {
     RESET_ARTICLE_PAGE_STORE
 } from '../../../store/actionTypesWithSaga'
 import {LOAD_ARTICLE_CACHE, RECORD_SCROLL_TOP_OF_ARTICLE_PAGE} from "./actionType";
+import {APPOINT_SIZE_OF_TITLE_IMAGE} from "../../articleEditPage/components/titleImage/store/actionTypes";
 
 
 const defaultState = fromJS({
     cache: {},
     article: {},
+    titleImageSize: fromJS({}),
     startIndex: 0,
     pageScale: 5,
     maxPage: 1,
@@ -23,7 +25,7 @@ const defaultState = fromJS({
 })
 
 const resetState = fromJS({
-    article: {},
+    article: fromJS({}),
     startIndex: 0,
     pageScale: 3,
     maxPage: 1,
@@ -107,6 +109,14 @@ export default (state = defaultState, action) => {
         return state.merge({
             commentList: state.get('commentList').push(constructComment(action.value)),
             countOfAllComment: state.get('countOfAllComment') + 1
+        })
+    }
+    if(action.type === APPOINT_SIZE_OF_TITLE_IMAGE){
+        return state.merge({
+            titleImageSize: state.get('titleImageSize').merge({
+                width: action.value.width,
+                height: action.value.height
+            })
         })
     }
     return state
