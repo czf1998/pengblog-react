@@ -23,9 +23,11 @@ import {createDeliverArticleDataToHomeAction,
         createDeliverSubCommentListDataAction,
         createAppointNoticeContent,
         createAppendCommentJustSubmitAction,
-        createDeliverDraftDataAction} from './actionCreators'
+        createDeliverDraftDataAction,
+        createDeliverTitleImageUrlAction} from './actionCreators'
 import {ArticleRequest,
-        CommentRequest} from './request'
+        CommentRequest,
+        ImageRequest} from './request'
 import {SUBMIT_COMMENT} from "../pages/articlePage/components/commentEditor/store/actionType";
 import {
     createAppointInputValueAction,
@@ -35,6 +37,8 @@ import {COMMENT_CONTENT} from "../pages/articlePage/components/commentEditor/con
 import {GET_DRAFT_DATA, SAVE_ARTICLE_ACTION} from "../pages/articleEditPage/store/actionTypes";
 import {createTriggerIsSavingDraftAction} from "../pages/articleEditPage/store";
 import {createTriggerIsSavingArticleAction} from "../common/header/store";
+import {UPLOAD_TITLE_IMAGE} from "../pages/articleEditPage/components/titleImage/store/actionTypes";
+import {createAppointSizeOfTitleImageFrameAction} from "../pages/articleEditPage/components/titleImage/store";
 
 
 function* mySaga() {
@@ -48,6 +52,17 @@ function* mySaga() {
     yield takeEvery(SUBMIT_COMMENT, ajaxSubmitComment)
     yield takeEvery(GET_DRAFT_DATA, ajaxDraft)
     yield takeEvery(SAVE_ARTICLE_ACTION, ajaxSaveArticle)
+    yield takeEvery(UPLOAD_TITLE_IMAGE, ajaxUploadImage)
+}
+
+function* ajaxUploadImage(action) {
+    try{
+        const res = yield ImageRequest.UploadImage(action.value)
+        let appointTitleImageUrlAction = createDeliverTitleImageUrlAction(res.data.imgUrl)
+        yield put(appointTitleImageUrlAction)
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+    }
 }
 
 function* ajaxSaveArticle(action) {

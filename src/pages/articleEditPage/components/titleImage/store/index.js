@@ -1,5 +1,9 @@
 import reducer from './reducer'
-import {createAppointTitleImageUrlAction} from './actionCreators'
+import {createAppointTitleImageUrlBase64Action,
+        createUploadTitleImageAction,
+        createAppointSizeOfTitleImageFrameAction} from './actionCreators'
 
 export {reducer}
-export {createAppointTitleImageUrlAction}
+export {createAppointTitleImageUrlBase64Action,
+        createUploadTitleImageAction,
+        createAppointSizeOfTitleImageFrameAction}

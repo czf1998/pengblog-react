@@ -42,8 +42,6 @@ class ArticleEditPageHeader extends PureComponent {
                     </LogoWrapper>
                 }
 
-
-
                 <HeaderMainArea   widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
                     <NavItemWrapper>
                         {
@@ -53,7 +51,6 @@ class ArticleEditPageHeader extends PureComponent {
                                 <GapLineVertical/>
                             </Fragment>
                         }
-
 
                             <NavItem style={{fontWeight:'bold'}}>
                                 写文章
@@ -71,13 +68,9 @@ class ArticleEditPageHeader extends PureComponent {
                                 <NavItem style={{fontSize:'1rem'}}>
                                     草稿已保存
                                 </NavItem>)
-
                         }
 
                     </NavItemWrapper>
-
-
-
 
                     <NavItemWrapper>
                         <NavItem>
@@ -108,7 +101,6 @@ class ArticleEditPageHeader extends PureComponent {
 
 }
 
-
 const mapState = (state) => {
     return  {
         height: state.get('header').get('height'),
@@ -133,6 +125,5 @@ const mapActions = (dispatch) => ({
         },2000)
     }
 })
-
 
 export default connect(mapState,mapActions)(withRouter(ArticleEditPageHeader))

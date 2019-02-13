@@ -39,3 +39,5 @@ export const APPOINT_NOTICE_CONTENT = 'appointNoticeContent'
 export const APPEND_COMMENT_JUST_SUBMIT = 'appendCommentJustSubmit'
 
 export const DELIVER_DRAFT_DATA = 'deliverDraftData'
+
+export const DELIVER_TITLE_IMAGE_URL = 'deliverTitleImageUrl'

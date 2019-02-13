@@ -21,3 +21,5 @@ export const API_UPLOAD_IMAGE = server + 'image/image_upload.do'
 
 export const API_SAVE_ARTICLE = server + 'article/upload_article.do'
 
+export const API_POST_IMAGE = server + 'image/image_upload.do'
+

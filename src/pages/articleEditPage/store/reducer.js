@@ -14,7 +14,8 @@ const defaultState = fromJS({
     articleEditPageHeader: fromJS({
         showSaveTag: false,
         isSavingArticle: false
-    })
+    }),
+    draftCache: undefined
 })
 
 export default (state = defaultState, action) => {
@@ -33,7 +34,8 @@ export default (state = defaultState, action) => {
             title: action.value.article_title ? action.value.article_title : '',
             label: action.value.article_label ? action.value.article_label : '',
             author: action.value.article_author ? action.value.article_author : '',
-            id: action.value.article_id ? action.value.article_id : undefined
+            id: action.value.article_id ? action.value.article_id : undefined,
+            draftCache: fromJS(action.value)
         })
     }
     if(action.type === TRIGGER_ARTICLE_SUBMITABLE){

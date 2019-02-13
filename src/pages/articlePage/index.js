@@ -126,8 +126,6 @@ class ArticlePage extends PureComponent {
     }
 }
 
-
-
 const mapState = (state) => ({
         cacheArticle: state.get('articlePage').get('cache').get('article'),
         article: state.get('articlePage').get('article'),
@@ -190,7 +188,5 @@ const mapActions = (dispatch) => {
         }
     }
 }
-
-
 
 export default connect(mapState, mapActions)(withRouter(ArticlePage))

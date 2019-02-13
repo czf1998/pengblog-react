@@ -11,7 +11,8 @@ import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
         DELIVER_SUB_COMMENT_LIST_DATA,
         APPOINT_NOTICE_CONTENT,
         APPEND_COMMENT_JUST_SUBMIT,
-        DELIVER_DRAFT_DATA} from './actionTypesWithSaga'
+        DELIVER_DRAFT_DATA,
+        DELIVER_TITLE_IMAGE_URL} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -85,5 +86,10 @@ export const createAppendCommentJustSubmitAction = (value) => ({
 
 export const createDeliverDraftDataAction = (value) => ({
     type: DELIVER_DRAFT_DATA,
+    value
+})
+
+export const createDeliverTitleImageUrlAction = (value) => ({
+    type: DELIVER_TITLE_IMAGE_URL,
     value
 })
