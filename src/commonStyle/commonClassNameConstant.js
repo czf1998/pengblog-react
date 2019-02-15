@@ -73,3 +73,5 @@ export const SLIDE_DOWN = 'slide-down'
 export const SLIDE_UP_CSSTRANSITION = 'slide-up-CSST'
 
 export const SLIDE_FROM_LEFT_CSSTRANSITION = 'slide-from-left-CSST'
+
+export const FADE_IN_CSSTRANSITION = 'fade-in-CSST'

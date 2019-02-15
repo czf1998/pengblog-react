@@ -3,7 +3,10 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { ArticleSummary, ArticleSummaryMobile, Jumbotron }from './components'
 import { HomeWrapper, Gap } from './style'
-import { actionCreators } from './store'
+import {createTriggerHasBeenMountOnce,
+        createGetHomeDataAction,
+        createPushPrograssToEndAction,
+        createTriggerIsLoadingHomeArticleListAction } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
 import { Loading, ForMore  } from '../../common'
 
@@ -116,22 +119,29 @@ const mapState = (state) => ({
 const mapActions = (dispatch) => {
     return {
         getData(startIndex, pageScale) {
+            const triggerIsLoadingHomeArticleListAction = createTriggerIsLoadingHomeArticleListAction(true)
+            dispatch(triggerIsLoadingHomeArticleListAction)
+
             let value = {
                 startIndex: startIndex,
                 pageScale: pageScale
             }
-            const action = actionCreators.createGetHomeDataAction(value)
+            const action = createGetHomeDataAction(value)
             dispatch(action)
         },
         getMoreArticleListData(startIndex, pageScale){
-            this.props.getData(startIndex, pageScale)
+            const triggerIsLoadingHomeArticleListAction = createTriggerIsLoadingHomeArticleListAction(true)
+            dispatch(triggerIsLoadingHomeArticleListAction)
+            setTimeout(() => {
+                this.props.getData(startIndex, pageScale)
+            },1500)
         },
         triggerHasBeenMountOnce() {
-            const action = actionCreators.createTriggerHasBeenMountOnce()
+            const action = createTriggerHasBeenMountOnce()
             dispatch(action)
         },
         pushPrograssBarToEnd() {
-            const pushPrograssBarToEndAction = actionCreators.createPushPrograssToEndAction({page: 'home'})
+            const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home'})
             dispatch(pushPrograssBarToEndAction)
         }
     }

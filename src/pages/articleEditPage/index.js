@@ -78,9 +78,12 @@ class ArticleEditPage extends PureComponent{
                                padding="0.6rem 0.6rem"
                                maxLength={11}
                                backgroundColor="rgba(0, 132, 255, 0.1)"
-                               disableFocusStyle={true} iconClassName="fa fa-tag"/>
+                               disableFocusStyle={true}
+                               iconClassName="fa fa-tag"
+                               iconColor="rgba(0, 132, 255, 1)"
+                               fontColor="rgba(0, 132, 255, 1)"/>
 
-                        <Gap>&nbsp;/&nbsp;</Gap>
+                        <Gap>&nbsp;&nbsp;</Gap>
 
                         {/*<ArticleMetaInput id='authorInput'
                                           value={author}
@@ -98,7 +101,10 @@ class ArticleEditPage extends PureComponent{
                                padding="0.6rem 0.6rem"
                                maxLength={11}
                                backgroundColor="rgba(0, 255, 132, 0.1)"
-                               disableFocusStyle={true} iconClassName="fa fa-pencil"/>
+                               disableFocusStyle={true}
+                               iconClassName="fa fa-pencil"
+                               iconColor="#44BB44"
+                               fontColor="#44BB44"/>
                     </ArticleMetaWrapper>
 
                     <ArticleEditorWrapper>

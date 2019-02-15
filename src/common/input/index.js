@@ -11,25 +11,46 @@ class Input extends Component{
 
     render() {
 
-        const { id, maxLenght, type, placeholder, fontSize, padding,value, onChange, iconClassName, showWarn, warnMsg, onBlur, onFocus, style,backgroundColor,disableFocusStyle } = this.props
+        const {id,
+                maxLenght,
+                type,
+                placeholder,
+                fontSize,
+                padding,
+                value,
+                onChange,
+                iconClassName,
+                iconColor,
+                showWarn,
+                warnMsg,
+                onBlur,
+                onFocus,
+                style,
+                backgroundColor,
+                disableFocusStyle,
+                fontColor } = this.props
 
         return (
             <InputWrapper style={style}>
 
-                <Inputer   id={id}
-                           type={type}
-                            placeholder={placeholder}
-                            value={value}
-                            onChange={onChange}
-                            onFocus={onFocus}
-                            onBlur={onBlur}
-                            showWarn={showWarn} fontSize={fontSize} padding={padding}
-                           maxLenght={maxLenght}
-                           backgroundColor={backgroundColor} disableFocusStyle={disableFocusStyle}/>
+                <Inputer id={id}
+                        type={type}
+                        placeholder={placeholder}
+                        value={value}
+                        onChange={onChange}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                        showWarn={showWarn}
+                        fontSize={fontSize}
+                        padding={padding}
+                        maxLenght={maxLenght}
+                        backgroundColor={backgroundColor}
+                        disableFocusStyle={disableFocusStyle}
+                        fontColor={fontColor}/>
 
                 <InputIconWrapper>
-                    <InputIcon>
-                        <i className={CommonClassNameConstants.FONT_DARK + iconClassName}/>
+                    <InputIcon iconColor={iconColor}>
+                        <i className={iconClassName}/>
                     </InputIcon>
                 </InputIconWrapper>
 

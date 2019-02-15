@@ -10,6 +10,7 @@ import Input from './input'
 import Textarea from './textarea'
 import { GapLine, GapLineVertical } from './gapLine'
 import Notice from './notice'
+import Modal from './modal'
 
 export {Button,
         Input,
@@ -23,4 +24,5 @@ export {Button,
         ForMore,
         ScrollToThePositionOnMount,
         Textarea,
-        Notice }
+        Notice,
+        Modal }

@@ -8,7 +8,8 @@ import { createObserveScrollTopOfElementElAction } from "./store/actionCreators"
 import { CommonClassNameConstants } from './commonStyle'
 import {Footer,
         PrograssBar,
-        Notice } from './common'
+        Notice,
+        Modal } from './common'
 import history from './router/history'
 import {createAppointCurrentPathAction} from "./router/store";
 
@@ -32,6 +33,8 @@ class App extends Component {
         <Provider store={store}>
 
             <Notice/>
+
+            <Modal/>
 
             <PrograssBar/>
 

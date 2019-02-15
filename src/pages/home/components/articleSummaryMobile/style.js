@@ -21,18 +21,27 @@ export const ArticleInfoColumn = styled.div`
         line-height: 2;
     `
 
-export const PreviewImage = styled.div`
-        margin: 5px 0;
-        height: 150px;
-        background: url(${props => props.imageUrl}) no-repeat center center;
-        background-size: cover;
+export const ArticleMultipleContent = styled.div`
+        position: relative;
+        padding: 0.4rem 0;
     `
 
 export const ArticleContent = styled.div`
+        width: ${props => props.withPreviewImage ? '62%' : '100%'};
         color: black;
-        margin: 0.4rem 0;
         line-height:1.5;
         -webkit-line-clamp: 3;
+    `
+
+
+export const PreviewImage = styled.div`
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 35%;
+        background: url(${props => props.imageUrl}) no-repeat center center;
+        background-size: cover;
     `
 
 

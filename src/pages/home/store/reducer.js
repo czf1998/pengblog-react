@@ -5,7 +5,7 @@ import {
     ROADED_AND_SHOW_JUMBOTRON, DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME
 } from '../../../store/actionTypesWithSaga'
 
-import { TRIGGER_HAS_BEEN_MOUNT_ONCE } from "./actionType";
+import {TRIGGER_HAS_BEEN_MOUNT_ONCE, TRIGGER_ISLOADING_HOME_ARTICLE_LIST} from "./actionType";
 
 const defaultState = fromJS({
     startIndex: 0,
@@ -66,6 +66,11 @@ export default (state = defaultState, action) => {
     if(action.type === TRIGGER_HAS_BEEN_MOUNT_ONCE) {
         return state.merge({
             hasBeenMountOnce: true
+        })
+    }
+    if(action.type === TRIGGER_ISLOADING_HOME_ARTICLE_LIST){
+        return state.merge({
+            isLoading: action.value
         })
     }
     return state

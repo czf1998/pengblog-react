@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { ArticleSummaryWrapper, Title, ArticleInfoColumn, ArticleContent, PreviewImage } from './style'
+import { ArticleSummaryWrapper, Title, ArticleInfoColumn, ArticleMultipleContent, ArticleContent, PreviewImage } from './style'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {CommonClassNameConstants} from '../../../../commonStyle'
@@ -25,18 +25,20 @@ class ArticleSummary extends PureComponent {
 
 
 
-                {
-                    withPreviewImage &&  <PreviewImage imageUrl={article.get('article_previewImageUrl')}
-                                                       className={CommonClassNameConstants.COMMON_BORDER_RADIUS}/>
-                }
 
-                <ArticleContent className={CommonClassNameConstants.CURSORP +
-                                           CommonClassNameConstants.OVER_3ROWS_HANDLE}
-                                withPreviewImage={withPreviewImage}>
+                <ArticleMultipleContent>
+                    <ArticleContent className={CommonClassNameConstants.CURSORP +
+                                                CommonClassNameConstants.OVER_3ROWS_HANDLE}
+                                    withPreviewImage={withPreviewImage}>
+                        {article.get('article_summary')}
+                    </ArticleContent>
 
-                    {article.get('article_summary')}
+                    {
+                        withPreviewImage &&  <PreviewImage imageUrl={article.get('article_previewImageUrl')}
+                                                           className={CommonClassNameConstants.COMMON_BORDER_RADIUS}/>
+                    }
+                </ArticleMultipleContent>
 
-                </ArticleContent>
 
                 <ArticleInfoColumn className={CommonClassNameConstants.FONT_DARK +
                                               CommonClassNameConstants.FONT_SMALL}>

@@ -19,7 +19,7 @@ import {createGetArticlePageDataAction,
 import { CommonClassNameConstants } from "../../commonStyle"
 import { Loading, ForMore, ScrollToThePositionOnMount, GapLine } from '../../common'
 import { DateFormat } from "../../exJs"
-import { Comment, TopLevelCommentEditor } from './components'
+import { Comment, TopLevelCommentEditor,Share } from './components'
 import {createAppointSizeOfTitleImageFrameAction} from "../articleEditPage/components/titleImage/store";
 
 class ArticlePage extends PureComponent {
@@ -75,6 +75,8 @@ class ArticlePage extends PureComponent {
                                     { DateFormat('yyyy-MM-dd', new Date(article.get('article_releaseTime'))) }
                             </span>
                         </ArticleMeta>
+
+                        <Share/>
 
                         <CommentTitle className={CommonClassNameConstants.COMMON_PADDING}>
                             <span className="iconfont" style={{fontSize:'1.6rem'}}>&#xe625;</span>&nbsp;{countOfAllComment}条留言

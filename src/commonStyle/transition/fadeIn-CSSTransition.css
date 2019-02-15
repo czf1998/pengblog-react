@@ -1,0 +1,19 @@
+.fade-in-CSST-enter, .fade-in-CSST-appear{
+    opacity: 0.01;
+}
+
+.fade-in-CSST-enter-active, .fade-in-CSST-appear-active{
+    opacity: 1;
+    transition: all var(--animate-time-CSST)  ease;
+}
+
+
+.fade-in-CSST-exit{
+    opacity: 1;
+}
+
+.fade-in-CSST-exit-active{
+    opacity: 0.01;
+    transition: all var(--animate-time-CSST) ease;
+}
+

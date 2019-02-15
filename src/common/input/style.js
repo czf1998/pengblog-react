@@ -8,6 +8,7 @@ export const InputWrapper = styled.div`
     `
 
 export const Inputer = styled.input`
+        color:${props => props.fontColor ? props.fontColor : 'black'};
         width: 100%;
         position: relative;
         background: ${props => props.backgroundColor ? props.backgroundColor : '#F7F7F7'};
@@ -35,7 +36,7 @@ export const InputIconWrapper = styled.div`
     `
 
 export const InputIcon = styled.div`
-       
+       color:${props => props.iconColor ? props.iconColor : '#BBBBBB'};
     `
 
 export const WarnPopover = styled.div`

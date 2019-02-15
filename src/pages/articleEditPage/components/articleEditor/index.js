@@ -98,7 +98,6 @@ const initEditor = (toolBarElem,
         menus.push(allMenus[i/36])
     }
 
-    console.log(window.screen.width * window.devicePixelRatio)
     articleEditor.customConfig.menus = menus
 
     articleEditor.customConfig.uploadImgServer = API_UPLOAD_IMAGE
@@ -112,7 +111,6 @@ const initEditor = (toolBarElem,
         customInsert: function (insertImg, result, editor) {
             var url = result.imgUrl
             insertImg(url)
-
         }
     }
     articleEditor.customConfig.customAlert = function (info) {

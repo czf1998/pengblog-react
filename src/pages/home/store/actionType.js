@@ -1,1 +1,2 @@
 export const TRIGGER_HAS_BEEN_MOUNT_ONCE = 'triggerHasBeenMountOnce'
+export const TRIGGER_ISLOADING_HOME_ARTICLE_LIST = 'triggerIsLoadingHomeArticleList'
