@@ -25,7 +25,6 @@ export const ArticleTitle = styled.div`
         font-size: 36px;
         line-height: 1.5;
         font-weight: bold;
-        margin-top: 20px;
     `
 
 export const ArticleMeta = styled.div`

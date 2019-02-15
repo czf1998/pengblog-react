@@ -210,7 +210,8 @@ const mapActions = (dispatch) => {
         appointSizeOfTitleImage(imageObj) {
             const value = {
                 width:imageObj.width,
-                height:imageObj.height
+                height:imageObj.height,
+                page:'articlePage'
             }
             const appointSizeOfTitleImageFrameAction = createAppointSizeOfTitleImageFrameAction(value)
             dispatch(appointSizeOfTitleImageFrameAction)

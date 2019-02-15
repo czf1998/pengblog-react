@@ -26,12 +26,13 @@ export default (state = defaultState, action) => {
         })
     }
     if(action.type === APPOINT_SIZE_OF_TITLE_IMAGE){
-        return state.merge({
-            sizeOfTitleImageFrame: state.get('sizeOfTitleImageFrame').merge({
-                width: action.value.width,
-                heigth: action.value.height
+        if(!action.value.page)
+            return state.merge({
+                sizeOfTitleImageFrame: state.get('sizeOfTitleImageFrame').merge({
+                    width: action.value.width,
+                    heigth: action.value.height
+                })
             })
-        })
     }
     return state
 }
