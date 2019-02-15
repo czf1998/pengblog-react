@@ -38,7 +38,6 @@ import {GET_DRAFT_DATA, SAVE_ARTICLE_ACTION} from "../pages/articleEditPage/stor
 import {createTriggerIsSavingDraftAction} from "../pages/articleEditPage/store";
 import {createTriggerIsSavingArticleAction} from "../common/header/store";
 import {UPLOAD_TITLE_IMAGE} from "../pages/articleEditPage/components/titleImage/store/actionTypes";
-import {createAppointSizeOfTitleImageFrameAction} from "../pages/articleEditPage/components/titleImage/store";
 
 
 function* mySaga() {
@@ -82,7 +81,10 @@ function* ajaxSaveArticle(action) {
             },2000)
         }
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        console.log('ERR IN ACTION: SAVE_ARTICLE  ERR: ' + err)
+        /*通知窗口提示提交成功*/
+        const appointNoticeContent = createAppointNoticeContent('文章发布失败: ' + err)
+        yield put(appointNoticeContent)
     }
 }
 
@@ -145,7 +147,16 @@ function* ajaxSubmitComment(action) {
             yield put(appointShowSubCommentEditorManagerAction)
         }
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        const appointNoticeContent = createAppointNoticeContent('评论提交失败: ' + err.response.data.msg)
+        yield put(appointNoticeContent)
+
+        /*结束submit按钮加载状态*/
+        const triggerCommentEditorLoadingActionValue = {
+            isLoading: false,
+            editorId: action.value.editorId
+        }
+        const triggerCommentEditorLoadingAction = createTriggerCommentEditorLoadingAction(triggerCommentEditorLoadingActionValue)
+        yield put(triggerCommentEditorLoadingAction)
     }
 }
 

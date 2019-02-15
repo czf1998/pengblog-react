@@ -5,7 +5,7 @@ import {HeaderWrapper,
         NavItemWrapper,
         LogoWrapper,
         SubmitButton,
-        Info } from './style'
+        Info} from './style'
 import { connect } from 'react-redux'
 import {GapLineVertical} from '../../common'
 import { CommonClassNameConstants } from '../../commonStyle'
@@ -18,23 +18,24 @@ import loadingSpin from "../loading/svg/loading-spin.svg";
 
 class ArticleEditPageHeader extends PureComponent {
 
-
     render() {
 
-        const {
-            height,
-            backgroundColor,
-            basicUIFeatures,
-            widthOfBrowser,
-            isSaving,
-            showSaveTag,
-            submitable,
-            submitArticle,isSavingArticle} = this.props
+        const { height,
+                backgroundColor,
+                basicUIFeatures,
+                widthOfBrowser,
+                isSaving,
+                showSaveTag,
+                submitable,
+                submitArticle,
+                isSavingArticle,
+                isMobile } = this.props
 
         return (
             <HeaderWrapper id="_header" className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
                            height={height}
-                           backgroundColor={backgroundColor}>
+                           backgroundColor={backgroundColor}
+                           zIndex={3}>
                 {
                     widthOfBrowser > 1030 &&
                     <LogoWrapper>
@@ -57,7 +58,7 @@ class ArticleEditPageHeader extends PureComponent {
                             </NavItem>
 
                         {
-                            showSaveTag && (isSaving ?
+                            !isMobile && showSaveTag && (isSaving ?
                                 <NavItem style={{fontSize:'1rem',position:'relative'}}>
                                     <img src={loadingSpin} alt="Loading icon" style={{transform:'scale(0.6)',
                                                                                         position:'absolute',
@@ -112,7 +113,8 @@ const mapState = (state) => {
         currentPath: state.get('router').get('currentPath'),
         submitable: state.get('articleEditPage').get('submitable'),
         goTo: state.get('router').get('goTo'),
-        isSavingArticle: state.get('articleEditPage').get('articleEditPageHeader').get('isSavingArticle')
+        isSavingArticle: state.get('articleEditPage').get('articleEditPageHeader').get('isSavingArticle'),
+        isMobile: state.get('rootState').get('isMobile')
     }
 }
 

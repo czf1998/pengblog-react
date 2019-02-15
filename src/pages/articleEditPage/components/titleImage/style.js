@@ -1,9 +1,13 @@
 import styled from 'styled-components'
 
+const widthOfMainArea = 700
+
+const maxMobileWidth = 750
+
 export const TitleImageWrapper = styled.div`
         background-color: #F7F7F7;
         position: relative;
-        height: ${props => props.heightOfTitleImageFrame}px;
+        height: ${props => widthOfMainArea * props.sizeOfTitleImageFrame.get('height') / props.sizeOfTitleImageFrame.get('width')}px;
         ::before{
             pointer-events: none;
             color: rgb(179, 179, 179);
@@ -20,6 +24,9 @@ export const TitleImageWrapper = styled.div`
          &:hover::before{
             opacity: 1;
             transform: translateY(0);
+        }
+        @media(max-width:${maxMobileWidth}px){
+            height: ${props => props.widthOfBrowser * props.sizeOfTitleImageFrame.get('height') / props.sizeOfTitleImageFrame.get('width')}px;
         }
     `
 

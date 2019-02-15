@@ -2,8 +2,10 @@ import styled from 'styled-components'
 
 const height = "70px"
 
+const iphone5Width = 320
+
 export const HeaderWrapper = styled.div`
-        z-index: 3;
+        z-index: ${props => props.zIndex ? props.zIndex : '1'};
         position: sticky;
         top: 0;
         height: ${height};
@@ -34,6 +36,9 @@ export const NavItem = styled.div`
         ${props => props.cursorp ? 'cursor:pointer;':''}
         &:hover{
             ${props => props.cursorp ? 'color:black;':''}
+        }
+        @media(max-width:${iphone5Width}px){
+            margin: 0 0.4rem;
         }
     `
 

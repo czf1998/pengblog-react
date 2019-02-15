@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from 'react'
+import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {TitleImageWrapper,ButtonIcon,TitleImageInput,TitleImageInputLabel,TitleImageFrame} from './style'
 import {CommonClassNameConstants} from "../../../../commonStyle";
@@ -8,16 +8,15 @@ import {createAppointTitleImageUrlBase64Action,
 import {saveArticle} from "../../index";
 import store from '../../../../store'
 
-class TitleImage extends Component{
+class TitleImage extends PureComponent{
 
     render(){
 
-        const {imageUrl,imageUrlBase64,sizeOfTitleImageFrame} = this.props
+        const {imageUrl,imageUrlBase64,sizeOfTitleImageFrame,widthOfBrowser} = this.props
 
-        const heigthOfTitleImage = 700 * sizeOfTitleImageFrame.get('height') / sizeOfTitleImageFrame.get('width')
 
         return (
-            <TitleImageWrapper heightOfTitleImageFrame={heigthOfTitleImage}>
+            <TitleImageWrapper sizeOfTitleImageFrame={sizeOfTitleImageFrame} widthOfBrowser={widthOfBrowser}>
 
                 <TitleImageInputLabel htmlFor="titleImageInput"  className={CommonClassNameConstants.FLEX_ROW_CENTER +
                                                                             CommonClassNameConstants.CURSORP}>
@@ -36,9 +35,7 @@ class TitleImage extends Component{
     }
 
 
-    componentDidUpdate(){
-
-        saveArticle(store.dispatch,'draft')
+    componentDidUpdate(preProps){
 
         let imageObj = new Image()
 
@@ -49,13 +46,22 @@ class TitleImage extends Component{
             this.props.appointSizeOfTitleImageFrame(imageObj)
 
         }
+
+        //判断是否需要触发saveArticle，当组件更新是由读取草稿以及其他非上传新图所致，将不触发saveArticle
+        /*if(this.props.imageUrl === preProps.imageUrl
+            ||
+            this.props.imageUrl === store.getState().get('articleEditPage').get('draftCache').get('article_titleImageUrl')){
+            return
+        }*/
+        saveArticle(store.dispatch,'draft')
     }
 }
 
 const mapState = (state) => ({
     imageUrl: state.get('titleImage').get('imageUrl'),
     imageUrlBase64: state.get('titleImage').get('imageUrlBase64'),
-    sizeOfTitleImageFrame: state.get('titleImage').get('sizeOfTitleImageFrame')
+    sizeOfTitleImageFrame: state.get('titleImage').get('sizeOfTitleImageFrame'),
+    widthOfBrowser: state.get('rootState').get('widthOfBrowser')
 })
 
 const mapActions = (dispatch) => ({

@@ -108,27 +108,24 @@ class SubCommentEditorUI extends PureComponent{
                 </SubVisitorInfo>
 
                 <SubmitButtonWrapper>
-                    <div onClick={() => {submitComment( article_id,
-                                        comment_referComment.get('comment_id'),
-                                        visitorNameManager.get('value'),
-                                        commentContentManager.get('value'),
-                                        visitorEmailManager.get('value'),
-                                        visitorSiteAddressManager.get('value'),
-                                        SUB_COMMENT_EDITOR)}}>
-                        <SubmitButton>
+                        <SubmitButton onClick={() => {!isLoading && window.throttleByGap(() => {submitComment( article_id,
+                                                                                                        comment_referComment.get('comment_id'),
+                                                                                                        visitorNameManager.get('value'),
+                                                                                                        commentContentManager.get('value'),
+                                                                                                        visitorEmailManager.get('value'),
+                                                                                                        visitorSiteAddressManager.get('value'),
+                                                                                                        SUB_COMMENT_EDITOR)}, 500, {page:'articlePage',method:'submitComment'})}}>
                             {
                                 isLoading ?
-                                    <span>
+                                <span>
                                     <i className={'fa fa-spinner fa-pulse'} style={{color:'black'}}/>&nbsp;Submitting&nbsp;
                                 </span>
-                                    :
-                                    <span>
+                                :
+                                <span>
                                     <i className="fa fa-paper-plane"/>&nbsp;Submit&nbsp;
                                 </span>
                             }
                         </SubmitButton>
-                    </div>
-
                 </SubmitButtonWrapper>
             </SubCommentEditorWrapper>
         )

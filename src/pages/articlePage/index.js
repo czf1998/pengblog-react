@@ -42,8 +42,6 @@ class ArticlePage extends PureComponent {
 
         const { article_id } = this.props.match.params
 
-        const heigthOfTitleImage = 750 * titleImageSize.get('height') / titleImageSize.get('width')
-
         return (
                 dataReady ?
                 <ArticlePageWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>

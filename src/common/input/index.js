@@ -4,29 +4,35 @@ import {InputWrapper,
         Inputer,
         InputIcon,
         WarnPopover,
-        PopoverArrow} from "./style";
+        PopoverArrow,InputIconWrapper} from "./style";
 import {CommonClassNameConstants} from "../../commonStyle";
 
 class Input extends Component{
 
     render() {
 
-        const { type, placeholder, value, onChange, iconClassName, showWarn, warnMsg, onBlur, onFocus, style } = this.props
+        const { id, maxLenght, type, placeholder, fontSize, padding,value, onChange, iconClassName, showWarn, warnMsg, onBlur, onFocus, style,backgroundColor,disableFocusStyle } = this.props
 
         return (
             <InputWrapper style={style}>
 
-                <Inputer    type={type}
+                <Inputer   id={id}
+                           type={type}
                             placeholder={placeholder}
                             value={value}
                             onChange={onChange}
                             onFocus={onFocus}
                             onBlur={onBlur}
-                            showWarn={showWarn}/>
+                            showWarn={showWarn} fontSize={fontSize} padding={padding}
+                           maxLenght={maxLenght}
+                           backgroundColor={backgroundColor} disableFocusStyle={disableFocusStyle}/>
 
-                <InputIcon>
-                    <i className={CommonClassNameConstants.FONT_DARK + iconClassName}/>
-                </InputIcon>
+                <InputIconWrapper>
+                    <InputIcon>
+                        <i className={CommonClassNameConstants.FONT_DARK + iconClassName}/>
+                    </InputIcon>
+                </InputIconWrapper>
+
 
 
                     <CSSTransition in={showWarn}

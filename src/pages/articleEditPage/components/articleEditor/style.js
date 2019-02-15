@@ -12,6 +12,8 @@ export const ToolBarWrapper = styled.div`
     `
 
 export const ToolBar = styled.div`
+        display: flex;
+        justify-content: center;
     `
 
 export const TextArea = styled.div`

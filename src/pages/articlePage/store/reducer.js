@@ -122,18 +122,7 @@ export default (state = defaultState, action) => {
     return state
 }
 
-const handleImgLabelWidth = (article) => {
-    var el = document.createElement('html')
-    el.innerHTML = article.article_content
-    let imgs = el.getElementsByTagName('img')
-    for(let i = 0; i < imgs.length; i++) {
-        if(imgs[i].attributes['width'] === undefined || window.innerWidth <= 750){
-            imgs[i].style.width = '100%'
-        }
-    }
-    article.article_content = el.innerHTML
-    return article
-}
+
 
 export const constructComment = (commentData) => {
     const date = new Date()

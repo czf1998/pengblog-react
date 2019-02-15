@@ -10,24 +10,32 @@ export const InputWrapper = styled.div`
 export const Inputer = styled.input`
         width: 100%;
         position: relative;
-        background: #f7f7f7;
-        font-size: 1rem;
+        background: ${props => props.backgroundColor ? props.backgroundColor : '#F7F7F7'};
+        font-size: ${props => props.fontSize ? props.fontSize + 'px' : '1rem'};
         outline: none;
-        padding: 0.5em;
+        padding: ${props => props.padding ? props.padding : '0.5rem'}   ;
         padding-left: 2rem;
         border: solid 1px ${props => props.showWarn ? 'red' : backgroundColor};
-        border-radius: 3px;
+        border-radius: 0.4rem;
         transition: all 0.2s ease;
-        &:focus{
-        box-shadow: 1px 1px 2px #999999 inset;
-        border: solid 1px #E6E6E6;
-        }
+        ${props => props.disableFocusStyle ? '' : ' &:focus{\n        box-shadow: 1px 1px 2px #999999 inset;\n        border: solid 1px #E6E6E6;\n        }'}
+    
 `
 
-export const InputIcon = styled.div`
+export const InputIconWrapper = styled.div`
         position: absolute;
-        top: 0.6rem;
-        left: 0.6rem;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        padding-left: 0.8em;
+        pointer-events: none;
+    `
+
+export const InputIcon = styled.div`
+       
     `
 
 export const WarnPopover = styled.div`

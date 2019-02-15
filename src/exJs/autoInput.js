@@ -7,6 +7,6 @@ export const AutoInput = (inputElem,fontSize) => {
         let rect = virtualSpan.getBoundingClientRect()
         let width = rect.width < 53 ? 53 : rect.width
         document.body.removeChild(virtualSpan)
-        inputElem.style.width = width + 2 + 'px'
+        inputElem.style.width = width + 50 + 'px'
     })
 }

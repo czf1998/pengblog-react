@@ -28,13 +28,15 @@ class ArticleEditor extends PureComponent{
                     this.refs.textArea,
                     this.props.appointArticleEditorContent,
                     this.props.failNotice,
-                    this.props.appointArticleEditor)
+                    this.props.appointArticleEditor,
+                    this.props.widthOfBrowser)
     }
 }
 
 const mapState = (state) => ({
     content: state.get('articleEditor').get('content'),
-    articleEditor: state.get('articleEditor').get('editor')
+    articleEditor: state.get('articleEditor').get('editor'),
+    widthOfBrowser: state.get('rootState').get('widthOfBrowser')
 })
 
 const mapActions = (dispatch) => ({
@@ -62,31 +64,43 @@ const initEditor = (toolBarElem,
                     textAreaElem,
                     changeHandler,
                     failNotice,
-                    articleEditorAppointer) => {
+                    articleEditorAppointer,
+                    widthOfBrowser) => {
     const articleEditor = new E(toolBarElem,textAreaElem)
     articleEditor.customConfig.onchange = (html) => {
         changeHandler(html)
     }
-    articleEditor.customConfig.menus = [
+
+    let allMenus = [
         'head',  // 标题
         'bold',  // 粗体
         'fontSize',  // 字号
         'fontName',  // 字体
+        'image',  // 插入图片
+        'code',  // 插入代码
         'italic',  // 斜体
         'underline',  // 下划线
         'strikeThrough',  // 删除线
         'foreColor',  // 文字颜色
+        'justify',  // 对齐方式
         'backColor',  // 背景颜色
         'link',  // 插入链接
-        'list',  // 列表
-        'justify',  // 对齐方式
         'quote',  // 引用
-        'image',  // 插入图片
-        'table',  // 表格
         'video',  // 插入视频
-        'code',  // 插入代码
-        'undo'  // 撤销
+        'undo',  // 撤销
+        'table',  // 表格
+        'list',  // 列表
     ]
+
+    let menus = []
+
+    for(let i = 0; i < widthOfBrowser - 36; i += 36){
+        menus.push(allMenus[i/36])
+    }
+
+    console.log(window.screen.width * window.devicePixelRatio)
+    articleEditor.customConfig.menus = menus
+
     articleEditor.customConfig.uploadImgServer = API_UPLOAD_IMAGE
     articleEditor.customConfig.uploadFileName = 'img'
     articleEditor.customConfig.uploadImgHooks = {
