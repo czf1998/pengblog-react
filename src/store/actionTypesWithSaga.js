@@ -41,3 +41,5 @@ export const APPEND_COMMENT_JUST_SUBMIT = 'appendCommentJustSubmit'
 export const DELIVER_DRAFT_DATA = 'deliverDraftData'
 
 export const DELIVER_TITLE_IMAGE_URL = 'deliverTitleImageUrl'
+
+export const RECORD_CURRENT_BROWSER_EDITION = 'recordCurrentBrowserEdition'

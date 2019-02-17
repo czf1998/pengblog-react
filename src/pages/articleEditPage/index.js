@@ -9,7 +9,7 @@ import {ArticleEditorPageWrapper,ArticleEditorPageMainArea,
         ArticleMetaWrapper,
         Gap} from "./style";
 import {CommonClassNameConstants} from "../../commonStyle";
-import {Input} from '../../common'
+import {Input, ScrollToThePositionOnMount} from '../../common'
 import {AutoInput, AutoTextarea} from "../../exJs";
 import {createAppointArticleEditInfoAction,
         createGetDraftDataAction,
@@ -112,6 +112,9 @@ class ArticleEditPage extends PureComponent{
                     </ArticleEditorWrapper>
 
                 </ArticleEditorPageMainArea>
+
+                <ScrollToThePositionOnMount/>
+
             </ArticleEditorPageWrapper>
         )
     }
@@ -129,7 +132,8 @@ const mapState = (state) => ({
     label: state.get('articleEditPage').get('label'),
     author: state.get('articleEditPage').get('author'),
     id: state.get('articleEditPage').get('id'),
-    isMobile: state.get('rootState').get('isMobile')
+    isMobile: state.get('rootState').get('isMobile'),
+    articleEditor: state.get('articleEditor').get('editor')
 })
 
 const mapActions = (dispatch) => ({

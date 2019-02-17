@@ -4,7 +4,7 @@ import RouterComponent from './router'
 import store from './store'
 import './commonStyle'
 import './exJs'
-import { createObserveScrollTopOfElementElAction } from "./store/actionCreators";
+import { createObserveScrollTopOfElementElAction,createRecordCurrentBrowserEdition } from "./store/actionCreators";
 import { CommonClassNameConstants } from './commonStyle'
 import {Footer,
         PrograssBar,
@@ -36,13 +36,13 @@ class App extends Component {
 
             <Modal/>
 
-            <PrograssBar/>
+            {/*<PrograssBar/>*/}
 
             <RouterComponent/>
 
-            <div className={CommonClassNameConstants.FADE_IN}>
+            {/*<div className={CommonClassNameConstants.FADE_IN}>
                 <Footer/>
-            </div>
+            </div>*/}
 
         </Provider>
     );
@@ -51,7 +51,8 @@ class App extends Component {
   componentDidMount() {
       store.dispatch(createObserveScrollTopOfElementElAction())
       store.dispatch(createAppointCurrentPathAction(history.location.pathname))
-      store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
+      store.dispatch(createRecordCurrentBrowserEdition())
+      //store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
   }
 
 }

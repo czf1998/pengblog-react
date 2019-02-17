@@ -6,7 +6,7 @@ const maxMobileWidth = 750
 export const ShareWrapper = styled.div`
         display: flex;
         padding: 1rem 2rem;
-        width: ${widthOfMainArea}px;
+        width: 100%;
         @media(max-width:${maxMobileWidth}px){
             width: 100%;
         }

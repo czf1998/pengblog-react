@@ -1,10 +1,12 @@
 import styled from 'styled-components'
 
 export const ArticleSummaryWrapper = styled.div`
+        padding: 0.5rem 2rem;
         width: 100%;
         position: relative;
-        background: white;
+        background: ${props => props.isFocus ? '#EEEEEE' : 'white'};
         border: 1px solid #ebebeb;
+        border-top: none;
     `
 
 export const Title = styled.div`
@@ -37,8 +39,8 @@ export const ArticleContent = styled.div`
 export const PreviewImage = styled.div`
         position: absolute;
         right: 0;
-        top: 0;
-        height: 100%;
+        top: 5%;
+        height: 90%;
         width: 35%;
         background: url(${props => props.imageUrl}) no-repeat center center;
         background-size: cover;

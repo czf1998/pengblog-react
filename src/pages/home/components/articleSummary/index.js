@@ -27,7 +27,8 @@ class ArticleSummary extends PureComponent {
             <ArticleSummaryWrapper className={CommonClassNameConstants.COMMON_PADDING +
                                               CommonClassNameConstants.COMMON_BORDER_RADIUS}
                                    widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
-                <Link to={ARTICLE_PAGE_PATH}>
+
+                <Link to={this.props.match.url + '/article/' + article.get('article_id')}>
                     <Title className={CommonClassNameConstants.CURSORP}>
                         <span className={CommonClassNameConstants.HOVER_UNDERLINE}>
                             {article.get('article_title')}
@@ -56,7 +57,7 @@ class ArticleSummary extends PureComponent {
                                 发布于: 2017年02月14日
                             </span>
                     </ArticleInfoColumn>
-                    <Link to={ARTICLE_PAGE_PATH + article.get('article_id')}>
+                    <Link to={this.props.match.url + '/article/' + article.get('article_id')}>
                         <ArticleContent className={CommonClassNameConstants.CURSORP}
                                         withPreviewImage={withPreviewImage}>
 

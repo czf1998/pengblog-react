@@ -30,6 +30,7 @@ class ArticleEditor extends PureComponent{
                     this.props.failNotice,
                     this.props.appointArticleEditor,
                     this.props.widthOfBrowser)
+
     }
 }
 
@@ -121,5 +122,8 @@ const initEditor = (toolBarElem,
 
     articleEditor.create()
 
+    articleEditor.$textElem.attr('contenteditable', false)
+
     articleEditorAppointer(articleEditor)
+
 }

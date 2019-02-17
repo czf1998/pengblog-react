@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const ArticleSummaryWrapper = styled.div`
-        width: ${props => props.widthOfMainArea}px;
+        width: 100%;
         position: relative;
         background: white;
         border: 1px solid #ebebeb;

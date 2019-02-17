@@ -13,7 +13,7 @@ import { reducer as titleImageReducer } from '../pages/articleEditPage/component
 import { reducer as routerReducer } from '../router/store'
 import { reducer as modalReducer } from '../common/modal/store'
 import { fromJS } from 'immutable'
-import { RECORD_SCROLL_TOP_OF_ELEMENT_EL } from './actionTypesWithSaga'
+import {RECORD_CURRENT_BROWSER_EDITION, RECORD_SCROLL_TOP_OF_ELEMENT_EL} from './actionTypesWithSaga'
 
 import { combineReducers } from 'redux-immutable'
 
@@ -31,7 +31,8 @@ const defaultState = fromJS({
     offsetTopOfElementEl: 0,
     heightOfBrowser: 0,
     widthOfBrowser: 0,
-    isMobile: false
+    isMobile: false,
+    browser: undefined
 })
 
 export default combineReducers({
@@ -58,6 +59,29 @@ export default combineReducers({
                 widthOfBrowser: window.innerWidth,
                 isMobile: window.innerWidth > 750 ? false : true
             })
+        }
+        if(action.type === RECORD_CURRENT_BROWSER_EDITION){
+            const userAgent =  window.navigator.userAgent
+            if (userAgent.indexOf('Firefox') !== -1){
+                return state.merge({
+                    browser: 'Firefox'
+                })
+            }
+            if (userAgent.indexOf('Edge') !== -1){
+                return state.merge({
+                    browser: 'Edge'
+                })
+            }
+            if (userAgent.indexOf('Chrome') !== -1){
+                return state.merge({
+                    browser: 'Chrome'
+                })
+            }
+            if (userAgent.indexOf('Safari') !== -1){
+                return state.merge({
+                    browser: 'Safari'
+                })
+            }
         }
         return state
     }

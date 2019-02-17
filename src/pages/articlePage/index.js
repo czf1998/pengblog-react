@@ -7,7 +7,7 @@ import { ArticlePageWrapper,
          ArticleMainArea,
          ArticleMeta,
          ArticleContent,
-         CommentTitle } from './style'
+         CommentTitle,LoadingWrapper } from './style'
 import {createGetArticlePageDataAction,
         createGetCommentListDataAction,
         createLoadArticleCacheAction,
@@ -38,92 +38,95 @@ class ArticlePage extends PureComponent {
                 currentPage,
                 scrollPosition,
                 referComment,
-                titleImageSize } = this.props
+                titleImageSize,heightOfBrowser } = this.props
 
         const { article_id } = this.props.match.params
 
         return (
-                dataReady ?
-                <ArticlePageWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
-                    <ArticleMainArea widthOfMainArea={widthOfMainArea} className={CommonClassNameConstants.SLIDE_UP_FAST}>
+                    dataReady ?
+                    <ArticlePageWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
+                        <ArticleMainArea widthOfMainArea={widthOfMainArea} className={CommonClassNameConstants.SLIDE_UP_FAST}>
 
-                        <ArticleTitleImage titleImageUrl={article.get('article_titleImageUrl')} titleImageSize={titleImageSize}/>
+                            <ArticleTitleImage titleImageUrl={article.get('article_titleImageUrl')} titleImageSize={titleImageSize}/>
 
-                        <ArticleTitle className={CommonClassNameConstants.COMMON_PADDING}>
-                            <h2>{article.get('article_title')}</h2>
-                        </ArticleTitle>
+                            <ArticleTitle className={CommonClassNameConstants.COMMON_PADDING}>
+                                <h2>{article.get('article_title')}</h2>
+                            </ArticleTitle>
 
-                        <ArticleMeta className={CommonClassNameConstants.COMMON_PADDING +
-                                     CommonClassNameConstants.FONT_DARK}>
-                            <span className={CommonClassNameConstants.CLICKABLE}>
-                                [{ article.get('article_label') }]
-                            </span>
-                            &nbsp;| 作者:&nbsp;
-                            <span>
-                                { article.get('article_author') }
-                            </span>
-                        </ArticleMeta>
+                            <ArticleMeta className={CommonClassNameConstants.COMMON_PADDING +
+                            CommonClassNameConstants.FONT_DARK}>
+                        <span className={CommonClassNameConstants.CLICKABLE}>
+                            [{ article.get('article_label') }]
+                        </span>
+                                &nbsp;| 作者:&nbsp;
+                                <span>
+                            { article.get('article_author') }
+                        </span>
+                            </ArticleMeta>
 
-                        <ArticleContent className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}
-                                        dangerouslySetInnerHTML={{__html:article.get('article_content')}}>
-                        </ArticleContent>
+                            <ArticleContent className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}
+                                            dangerouslySetInnerHTML={{__html:article.get('article_content')}}>
+                            </ArticleContent>
 
-                        <ArticleMeta className={CommonClassNameConstants.COMMON_PADDING +
-                                     CommonClassNameConstants.FONT_DARK}>
-                            发布于:&nbsp;
-                            <span>
-                                    { DateFormat('yyyy-MM-dd', new Date(article.get('article_releaseTime'))) }
-                            </span>
-                        </ArticleMeta>
+                            <ArticleMeta className={CommonClassNameConstants.COMMON_PADDING +
+                            CommonClassNameConstants.FONT_DARK}>
+                                发布于:&nbsp;
+                                <span>
+                                { DateFormat('yyyy-MM-dd', new Date(article.get('article_releaseTime'))) }
+                        </span>
+                            </ArticleMeta>
 
-                        <Share/>
+                            <Share/>
 
-                        <CommentTitle className={CommonClassNameConstants.COMMON_PADDING}>
-                            <span className="iconfont" style={{fontSize:'1.6rem'}}>&#xe625;</span>&nbsp;{countOfAllComment}条留言
-                        </CommentTitle>
-                        {
-                            commentList.map((item) => {
-                                return (
+                            <CommentTitle className={CommonClassNameConstants.COMMON_PADDING}>
+                                <span className="iconfont" style={{fontSize:'1.6rem'}}>&#xe625;</span>&nbsp;{countOfAllComment}条留言
+                            </CommentTitle>
+                            {
+                                commentList.map((item) => {
+                                    return (
                                         <div key={item.get('comment_id')}
                                              className={CommonClassNameConstants.SLIDE_UP_FAST}>
                                             <GapLine/>
                                             <Comment comment={item} clickReferHandler={() => {referComment(item)}}/>
                                         </div>
-                                )
-                            })
-                        }
-                        <GapLine/>
-                        <ForMore isLoading={isLoadingMoreComment}
-                                 noMore={currentPage === maxPage}
-                                 clickHandler={this.props.getMoreCommentListData.bind(this)}
-                                 meta={[article_id,
-                                        startIndex,
-                                        pageScale,
-                                        maxPage,
-                                        currentPage]}/>
+                                    )
+                                })
+                            }
+                            <GapLine/>
+                            <ForMore isLoading={isLoadingMoreComment}
+                                     noMore={currentPage === maxPage}
+                                     clickHandler={this.props.getMoreCommentListData.bind(this)}
+                                     meta={[article_id,
+                                         startIndex,
+                                         pageScale,
+                                         maxPage,
+                                         currentPage]}/>
 
-                    </ArticleMainArea>
+                        </ArticleMainArea>
 
-                    <TopLevelCommentEditor article_id={article_id}/>
+                        <TopLevelCommentEditor article_id={article_id}/>
 
-                    <ScrollToThePositionOnMount scrollPosition={scrollPosition}/>
+                        <ScrollToThePositionOnMount scrollPosition={scrollPosition}/>
 
-                </ArticlePageWrapper>
-                :
-                <Loading/>
-        )
+                    </ArticlePageWrapper>
+                    :
+                   <LoadingWrapper heightOfBrowser={heightOfBrowser}>
+                       <Loading/>
+                   </LoadingWrapper>
+                )
     }
+
 
     componentDidMount() {
         /*读取缓存*/
-        if(this.props.cacheArticle && (parseInt(this.props.cacheArticle.get('article_id')) === parseInt(this.props.match.params.article_id))){
+        /*if(this.props.cacheArticle && (parseInt(this.props.cacheArticle.get('article_id')) === parseInt(this.props.match.params.article_id))){
             this.props.loadArticleCache()
             this.props.pushPrograssBarToEnd()
             return
-        }
+        }*/
         this.props.resetCommentEditor()
         this.props.getArticleData(this.props.match.params.article_id)
-        this.props.getCommentListData(this.props.match.params.article_id, this.props.startIndex, this.props.pageScale)
+        this.props.getCommentListData(this.props.match.params.article_id, 0, this.props.pageScale)
     }
 
     componentWillUnmount() {
@@ -131,7 +134,16 @@ class ArticlePage extends PureComponent {
         this.props.recordScrollTop()
     }
 
-    componentDidUpdate(){
+    componentDidUpdate(preProps){
+
+        if(preProps.match.params.article_id !== this.props.match.params.article_id){
+
+            this.props.resetStore()
+
+            this.props.getArticleData(this.props.match.params.article_id)
+
+            this.props.getCommentListData(this.props.match.params.article_id, 0, this.props.pageScale)
+        }
 
         let imageObj = new Image()
 
@@ -159,7 +171,8 @@ const mapState = (state) => ({
         maxPage: state.get('articlePage').get('maxPage'),
         currentPage: state.get('articlePage').get('currentPage'),
         scrollPosition: state.get('articlePage').get('scrollPosition'),
-        titleImageSize: state.get('articlePage').get('titleImageSize')
+        titleImageSize: state.get('articlePage').get('titleImageSize'),
+        heightOfBrowser: state.get('rootState').get('heightOfBrowser')
     })
 
 const mapActions = (dispatch) => {
@@ -219,4 +232,5 @@ const mapActions = (dispatch) => {
     }
 }
 
-export default connect(mapState, mapActions)(withRouter(ArticlePage))
+export default
+connect(mapState, mapActions)(withRouter(ArticlePage))

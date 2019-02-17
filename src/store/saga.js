@@ -77,7 +77,7 @@ function* ajaxSaveArticle(action) {
             const appointNoticeContent = createAppointNoticeContent('文章发布成功！即将跳转')
             yield put(appointNoticeContent)
             setTimeout(() => {
-                action.value.goTo('/article/' + action.value.article_id)
+                action.value.goTo('/home/article/' + action.value.article_id)
             },2000)
         }
     }catch (err) {
@@ -204,10 +204,10 @@ function* ajaxHomeArticleListData(action) {
         yield put(noticeAction)
         const state = yield select();
         const isMobile = state.get('rootState').get('isMobile')
-        if(isMobile) {
+       /* if(isMobile) {
             let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home-mobile'})
             yield put(pushPrograssBarToEndAction)
-        }
+        }*/
     }catch (err) {
         console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_DATA  ERR: ' + err)
     }
@@ -238,8 +238,8 @@ function* ajaxArticleDataForArticlePageData(action) {
         const res = yield ArticleRequest.RequestArticleData(action.value.article_id)
         let appointDataAction = createDeliverArticleDataToArticlePage(res.data)
         yield put(appointDataAction)
-        let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'articlePage'})
-        yield put(pushPrograssBarToEndAction)
+      /*  let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'articlePage'})
+        yield put(pushPrograssBarToEndAction)*/
     }catch (err) {
         console.log('ERR IN ACTION: GET_ARTICLE_PAGE_DATA  ERR: ' + err)
     }

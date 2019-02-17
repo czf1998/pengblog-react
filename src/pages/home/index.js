@@ -35,7 +35,7 @@ class Home extends PureComponent {
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
 
 
-                {
+              {/*  {
                     !isMobile &&
                     <Fragment>
                         <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
@@ -48,24 +48,21 @@ class Home extends PureComponent {
                         }
                         <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
                     </Fragment>
-                }
+                }*/}
 
                 {
                     articleList.map((item, index) => {
-                        if( !isMobile && index === 0){
-                            return null
-                        }
+
                         return (
                             <Fragment key={item.get('article_title')}>
-                                <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
                                 {
                                     isMobile ?
                                         <div className={articleSummaryListTransitionClassName} style={{width:'100%'}}>
                                             <ArticleSummaryMobile article={item}/>
                                         </div>
                                         :
-                                        <div className={articleSummaryListTransitionClassName}>
-                                            <ArticleSummary article={item}/>
+                                        <div className={articleSummaryListTransitionClassName} style={{width:'100%'}}>
+                                            <ArticleSummaryMobile article={item}/>
                                         </div>
                                 }
                             </Fragment>
@@ -88,7 +85,7 @@ class Home extends PureComponent {
 
     componentDidMount() {
         if(this.props.articleListDataIsReady) {
-            this.props.pushPrograssBarToEnd()
+            //this.props.pushPrograssBarToEnd()
             return
         }
 

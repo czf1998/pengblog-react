@@ -5,7 +5,7 @@ export const HomeWrapper = styled.div`
     `
 export const Gap = styled.div`
         height: ${props => props.gapHeight};
-        width: ${props => props.widthOfMainArea}px;
+        width: 100%;
         @media(max-width:${props => props.widthOfMainArea}px){
             width:100%
         }

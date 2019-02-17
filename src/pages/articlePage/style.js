@@ -3,12 +3,13 @@ import styled from 'styled-components'
 const widthOfMainArea = '750'
 
 export const ArticlePageWrapper = styled.div`
+        width: 100%;
         background: #f7f7f7;
     `
 
 export const ArticleMainArea = styled.div`
         background: white;
-        width: ${props => props.widthOfMainArea}px;
+        width: 100%;
         @media(max-width:${props => props.widthOfMainArea}px){
             width: 100%;
         }
@@ -42,4 +43,8 @@ export const ArticleContent = styled.div`
 export const CommentTitle = styled.div`
         font-size: 1.3rem;
         font-weight: bold;
+    `
+
+export const LoadingWrapper = styled.div`
+        height: ${props => props.heightOfBrowser - 70}px;
     `

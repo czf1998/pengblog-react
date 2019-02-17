@@ -7,7 +7,7 @@ const widthOfMainArea = 750
 
 export const CommentEditorWrapper = styled.div`
         position: relative;
-        width: ${widthOfMainArea}px;
+        width: 100%;
         background: white;
         @media(max-width: ${widthOfMainArea}px) {
             width: 100%;

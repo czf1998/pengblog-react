@@ -5,7 +5,7 @@ const widthOfMainArea = 750
 export const CommentWrapper = styled.div`
         display: flex;
         align-items: stretch;
-        width: ${props => props.widthOfMainArea}px;
+        width: 100%;
         @media(max-width: ${props => props.widthOfMainArea}px) {
             width: 100%;
         }
