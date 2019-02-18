@@ -155,6 +155,10 @@ class ArticlePage extends PureComponent {
 
         }
 
+        if(preProps.dataReady === false && this.props.dataReady) {
+            this.props.pushPrograssBarToEnd()
+        }
+
     }
 }
 

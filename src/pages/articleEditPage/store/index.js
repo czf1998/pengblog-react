@@ -4,7 +4,8 @@ import {createAppointArticleEditInfoAction,
         createSaveArticleAction,
         createTriggerArticleSubmitableAction,
         createTriggerShowSaveTagAction,
-        createTriggerIsSavingDraftAction} from './actionCreators'
+        createTriggerIsSavingDraftAction,
+        createUpdateDraftCacheAction} from './actionCreators'
 
 export {reducer}
 export {createAppointArticleEditInfoAction,
@@ -12,4 +13,5 @@ export {createAppointArticleEditInfoAction,
         createSaveArticleAction,
         createTriggerArticleSubmitableAction,
         createTriggerShowSaveTagAction,
-        createTriggerIsSavingDraftAction}
+        createTriggerIsSavingDraftAction,
+        createUpdateDraftCacheAction}

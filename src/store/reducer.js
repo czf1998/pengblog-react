@@ -12,6 +12,7 @@ import { reducer as articleEditorReducer } from '../pages/articleEditPage/compon
 import { reducer as titleImageReducer } from '../pages/articleEditPage/components/titleImage/store'
 import { reducer as routerReducer } from '../router/store'
 import { reducer as modalReducer } from '../common/modal/store'
+import { reducer as searchBarReducer } from '../pages/managePage/components/searchBar/store'
 import { fromJS } from 'immutable'
 import {RECORD_CURRENT_BROWSER_EDITION, RECORD_SCROLL_TOP_OF_ELEMENT_EL} from './actionTypesWithSaga'
 
@@ -50,6 +51,7 @@ export default combineReducers({
     titleImage: titleImageReducer,
     router: routerReducer,
     modal: modalReducer,
+    searchBar: searchBarReducer,
     rootState:(state = defaultState, action) => {
         if(action.type === RECORD_SCROLL_TOP_OF_ELEMENT_EL){
             return state.merge({

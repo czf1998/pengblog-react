@@ -17,7 +17,9 @@ export const HeaderMainArea = styled.div`
         display: flex;
         justify-content: space-between;
         height: inherit;
-        width: ${props => props.widthOfMainArea}px;
+        width: 100%;
+        padding-left: 1rem;
+        padding-right: 2rem;
     `
 
 export const NavItemWrapper = styled.div`
@@ -42,12 +44,7 @@ export const NavItem = styled.div`
         }
     `
 
-export const LogoWrapper = styled.div`
-        position: absolute;
-        left: 1rem;
-        top: 0;
-        bottom: 0;
-    `
+
 
 export const SubmitButton = styled.div`
         display:flex;

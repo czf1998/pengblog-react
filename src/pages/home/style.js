@@ -11,4 +11,9 @@ export const Gap = styled.div`
         }
     `
 
+export const LoadingWrapper = styled.div`
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    `
 

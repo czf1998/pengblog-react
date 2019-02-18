@@ -19,7 +19,12 @@ export const Inputer = styled.input`
         border: solid 1px ${props => props.showWarn ? 'red' : backgroundColor};
         border-radius: 0.4rem;
         transition: all 0.2s ease;
-        ${props => props.disableFocusStyle ? '' : ' &:focus{\n        box-shadow: 1px 1px 2px #999999 inset;\n        border: solid 1px #E6E6E6;\n        }'}
+        ${props => props.disableFocusStyle ? '' : `
+         &:focus{
+            box-shadow: 1px 1px 2px #999999 inset;
+            border: solid 1px #E6E6E6;
+         }
+        `}
     
 `
 

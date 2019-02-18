@@ -3,7 +3,8 @@ import {APPOINT_ARTICLE_EDIT_INFO,
         SAVE_ARTICLE_ACTION,
         TRIGGER_ARTICLE_SUBMITABLE,
         TRIGGER_SHOW_SAVE_TAG,
-        TRIGGER_IS_SAVING_DRAFT} from './actionTypes'
+        TRIGGER_IS_SAVING_DRAFT,
+        UPDATE_DRAFT_CACHE} from './actionTypes'
 
 export const createAppointArticleEditInfoAction = (value) => ({
     type: APPOINT_ARTICLE_EDIT_INFO,
@@ -31,5 +32,10 @@ export const createTriggerShowSaveTagAction = (value) => ({
 
 export const createTriggerIsSavingDraftAction = (value) => ({
     type: TRIGGER_IS_SAVING_DRAFT,
+    value
+})
+
+export const createUpdateDraftCacheAction = (value) => ({
+    type: UPDATE_DRAFT_CACHE,
     value
 })

@@ -16,9 +16,11 @@ import {createAppointArticleEditInfoAction,
         createSaveArticleAction,
         createTriggerArticleSubmitableAction,
         createTriggerShowSaveTagAction,
-        createTriggerIsSavingDraftAction} from './store'
+        createTriggerIsSavingDraftAction,
+        createUpdateDraftCacheAction} from './store'
 import { TITLE,LABEL,AUTHOR} from './constant'
 import store from '../../store'
+import {createPushPrograssToEndAction} from "../articlePage/store";
 
 
 class ArticleEditPage extends PureComponent{
@@ -124,6 +126,12 @@ class ArticleEditPage extends PureComponent{
         initMetaInput()
         this.props.initDraftData()
     }
+
+    componentDidUpdate(preProps){
+        if(preProps.draftCache === undefined && this.props.draftCache !== undefined){
+            this.props.pushPrograssBarToEnd()
+        }
+    }
 }
 
 const mapState = (state) => ({
@@ -133,7 +141,8 @@ const mapState = (state) => ({
     author: state.get('articleEditPage').get('author'),
     id: state.get('articleEditPage').get('id'),
     isMobile: state.get('rootState').get('isMobile'),
-    articleEditor: state.get('articleEditor').get('editor')
+    articleEditor: state.get('articleEditor').get('editor'),
+    draftCache: state.get('articleEditPage').get('draftCache')
 })
 
 const mapActions = (dispatch) => ({
@@ -161,7 +170,11 @@ const mapActions = (dispatch) => ({
     },
     test(){
         console.log('test')
-    }
+    },
+    pushPrograssBarToEnd() {
+        const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'articleEditPage'})
+        dispatch(pushPrograssBarToEndAction)
+    },
 })
 
 export default connect(mapState,mapActions)(ArticleEditPage)
@@ -231,6 +244,9 @@ export const saveArticle = (dispatch, articleType, clickToSave) => {
         article_titleImageUrl: store.getState().get('titleImage').get('imageUrl'),
         goTo: store.getState().get('router').get('goTo')
     }
+
+    const updataDraftCacheAction = createUpdateDraftCacheAction(articleData)
+    dispatch(updataDraftCacheAction)
 
     setTimeout(() => {
         const saveArticleAction = createSaveArticleAction(articleData)

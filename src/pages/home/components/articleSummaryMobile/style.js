@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+const maxMobileWidth = 750
+
 export const ArticleSummaryWrapper = styled.div`
         padding: 0.5rem 2rem;
         width: 100%;
@@ -7,6 +9,9 @@ export const ArticleSummaryWrapper = styled.div`
         background: ${props => props.isFocus ? '#EEEEEE' : 'white'};
         border: 1px solid #ebebeb;
         border-top: none;
+        @media(max-width:${maxMobileWidth}px){
+            padding: 0.5rem 1rem;
+        }
     `
 
 export const Title = styled.div`

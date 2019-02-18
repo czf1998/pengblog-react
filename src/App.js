@@ -36,7 +36,7 @@ class App extends Component {
 
             <Modal/>
 
-            {/*<PrograssBar/>*/}
+            <PrograssBar/>
 
             <RouterComponent/>
 
@@ -52,7 +52,7 @@ class App extends Component {
       store.dispatch(createObserveScrollTopOfElementElAction())
       store.dispatch(createAppointCurrentPathAction(history.location.pathname))
       store.dispatch(createRecordCurrentBrowserEdition())
-      //store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
+      store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
   }
 
 }

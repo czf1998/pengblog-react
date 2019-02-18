@@ -1,8 +1,8 @@
 import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { ArticleSummary, ArticleSummaryMobile, Jumbotron }from './components'
-import { HomeWrapper, Gap } from './style'
+import { ArticleSummaryMobile}from './components'
+import { HomeWrapper,LoadingWrapper} from './style'
 import {createTriggerHasBeenMountOnce,
         createGetHomeDataAction,
         createPushPrograssToEndAction,
@@ -79,17 +79,24 @@ class Home extends PureComponent {
 
             </HomeWrapper>
             :
-            <Loading/>
+            <LoadingWrapper>
+                <Loading/>
+            </LoadingWrapper>
         )
     }
 
     componentDidMount() {
         if(this.props.articleListDataIsReady) {
-            //this.props.pushPrograssBarToEnd()
+            this.props.pushPrograssBarToEnd()
             return
         }
-
         this.props.getData(this.props.startIndex, this.props.pageScale)
+    }
+
+    componentDidUpdate(preProps){
+        if(preProps.articleListDataIsReady === false && this.props.articleListDataIsReady) {
+            this.props.pushPrograssBarToEnd()
+        }
     }
 
     componentWillUnmount() {

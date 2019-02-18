@@ -7,14 +7,14 @@ const history = createBrowserHistory()
 history.listen((location, action) => {
     registerCurrentPath(location)
     if(action === 'PUSH'){
-        //rebootPrograssBar()
+        rebootPrograssBar()
     }
 });
 
 export default history
 
 const rebootPrograssBar = () => {
-    //store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
+    store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
 }
 
 export const registerCurrentPath = (location) => {

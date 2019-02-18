@@ -23,7 +23,6 @@ class ArticleEditPageHeader extends PureComponent {
         const { height,
                 backgroundColor,
                 basicUIFeatures,
-                widthOfBrowser,
                 isSaving,
                 showSaveTag,
                 submitable,
@@ -36,22 +35,13 @@ class ArticleEditPageHeader extends PureComponent {
                            height={height}
                            backgroundColor={backgroundColor}
                            zIndex={3}>
-                {
-                    widthOfBrowser > 1030 &&
-                    <LogoWrapper>
-                        <Logo/>
-                    </LogoWrapper>
-                }
 
-                <HeaderMainArea   widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
+                <HeaderMainArea>
                     <NavItemWrapper>
-                        {
-                            widthOfBrowser < 1030 &&
-                            <Fragment>
-                                <Logo/>
-                                <GapLineVertical/>
-                            </Fragment>
-                        }
+
+                            <Logo/>
+                            <GapLineVertical/>
+
 
                             <NavItem style={{fontWeight:'bold'}}>
                                 写文章
@@ -107,7 +97,6 @@ const mapState = (state) => {
         height: state.get('header').get('height'),
         backgroundColor: state.get('header').get('backgroundColor'),
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
-        widthOfBrowser: state.get('rootState').get('widthOfBrowser'),
         isSaving: state.get('articleEditPage').get('isSaving'),
         showSaveTag: state.get('articleEditPage').get('articleEditPageHeader').get('showSaveTag'),
         currentPath: state.get('router').get('currentPath'),

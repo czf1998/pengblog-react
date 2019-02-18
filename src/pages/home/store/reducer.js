@@ -30,7 +30,8 @@ export default (state = defaultState, action) => {
             currentPage: state.get('currentPage') + 1,
             startIndex: (state.get('currentPage') + 1) * state.get('pageScale'),
             jumbotronArticleId: state.get('articleList').get(0) ? state.get('articleList').get(0).get('article_id') : action.value.articleList[0].article_id,
-            isLoading: false
+            isLoading: false,
+            articleListDataIsReady: true
         })
     }
     if(action.type === DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME) {
@@ -41,11 +42,6 @@ export default (state = defaultState, action) => {
                 }
                 return item
             })
-        })
-    }
-    if(action.type === NOTICE_HOME_STORE_ARTICLE_LIST_DATA_READY) {
-        return state.merge({
-            articleListDataIsReady: true
         })
     }
     if(action.type === NOTICE_HOME_STORE_JUMBOTRON_DATA_READY) {

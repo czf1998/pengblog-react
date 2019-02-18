@@ -1,5 +1,10 @@
 import {fromJS} from 'immutable'
-import {APPOINT_ARTICLE_EDIT_INFO, TRIGGER_ARTICLE_SUBMITABLE, TRIGGER_SHOW_SAVE_TAG} from "./actionTypes";
+import {
+    APPOINT_ARTICLE_EDIT_INFO,
+    TRIGGER_ARTICLE_SUBMITABLE,
+    TRIGGER_SHOW_SAVE_TAG,
+    UPDATE_DRAFT_CACHE
+} from "./actionTypes";
 import {TRIGGER_IS_SAVING_DRAFT} from "./actionTypes";
 import {DELIVER_DRAFT_DATA} from "../../../store/actionTypesWithSaga";
 import {TRIGGER_IS_SAVING_ARTICLE} from "../../../common/header/store/actionTypes";
@@ -51,6 +56,11 @@ export default (state = defaultState, action) => {
     if(action.type === TRIGGER_IS_SAVING_ARTICLE){
         return state.merge({
             articleEditPageHeader: state.get('articleEditPageHeader').set('isSavingArticle',action.value)
+        })
+    }
+    if(action.type === UPDATE_DRAFT_CACHE){
+        return state.merge({
+            draftCache: fromJS(action.value)
         })
     }
     return state

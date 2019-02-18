@@ -1,0 +1,1 @@
+export const TRIGGER_SEARCH_INPUT_IS_FOCUS = 'triggerSearchInputIsFocus'

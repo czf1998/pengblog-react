@@ -200,8 +200,6 @@ function* ajaxHomeArticleListData(action) {
         const res = yield ArticleRequest.RequestArticleListData(action.value)
         let appointDataAction = createDeliverArticleDataToHomeAction(res.data)
         yield put(appointDataAction)
-        let noticeAction = createNoticeHomeStoreArticleListDataReadyAction()
-        yield put(noticeAction)
         const state = yield select();
         const isMobile = state.get('rootState').get('isMobile')
        /* if(isMobile) {

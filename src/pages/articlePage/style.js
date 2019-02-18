@@ -46,5 +46,5 @@ export const CommentTitle = styled.div`
     `
 
 export const LoadingWrapper = styled.div`
-        height: ${props => props.heightOfBrowser - 70}px;
+        height: ${props => props.heightOfBrowser - 70   }px;
     `

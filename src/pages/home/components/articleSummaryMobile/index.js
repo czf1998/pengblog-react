@@ -9,20 +9,18 @@ class ArticleSummary extends PureComponent {
 
     render() {
 
-        const { basicUIFeatures,article,currentArticleId } = this.props
+        const { basicUIFeatures,article,currentArticleId,isMobile,goTo } = this.props
 
         const withPreviewImage = article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined
 
         const baseUrl = this.props.match.url.match(/\/$/) === null ? this.props.match.url : this.props.match.url.substring(0, this.props.match.url.length - 1)
 
-        const ARTICLE_PAGE_PATH = baseUrl + '/article/' + article.get('article_id')
+        const ARTICLE_PAGE_PATH = isMobile ?  '/article/' + article.get('article_id') : baseUrl + '/article/' + article.get('article_id')
 
         const isFocus = article.get('article_id') === currentArticleId
 
         return (
-            <Link to={ARTICLE_PAGE_PATH} style={{width:'100%'}}>
-
-                <ArticleSummaryWrapper
+                <ArticleSummaryWrapper onClick={() => {goTo(ARTICLE_PAGE_PATH)}}
                                        widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}
                                        isFocus={isFocus}>
 
@@ -63,7 +61,6 @@ class ArticleSummary extends PureComponent {
                     </ArticleInfoColumn>
 
                 </ArticleSummaryWrapper>
-            </Link>
         );
     }
 }
@@ -71,7 +68,9 @@ class ArticleSummary extends PureComponent {
 const mapState = (state) => {
     return  {
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
-        currentArticleId: state.get('articlePage').get('article').get('article_id')
+        currentArticleId: state.get('articlePage').get('article').get('article_id'),
+        isMobile: state.get('rootState').get('isMobile'),
+        goTo: state.get('router').get('goTo')
     }
 }
 
