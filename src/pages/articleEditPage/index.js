@@ -21,6 +21,7 @@ import {createAppointArticleEditInfoAction,
 import { TITLE,LABEL,AUTHOR} from './constant'
 import store from '../../store'
 import {createPushPrograssToEndAction} from "../articlePage/store";
+import {createAppointArticleEditorAction} from "./components/articleEditor/store";
 
 
 class ArticleEditPage extends PureComponent{
@@ -31,7 +32,8 @@ class ArticleEditPage extends PureComponent{
                 appointArticleEditInfo,
                 maxTitleLength,
                 label,
-                author} = this.props
+                author,
+                isMobile,articleEditor} = this.props
 
         let remnantTitleLength = maxTitleLength - (title ? title.length : 0)
 
@@ -39,9 +41,13 @@ class ArticleEditPage extends PureComponent{
         return (
             <ArticleEditorPageWrapper  className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
                 <ArticleEditorPageMainArea>
-                    <TitleImageWrapper>
-                        <TitleImage/>
-                    </TitleImageWrapper>
+                    {
+                        !isMobile &&
+                        <TitleImageWrapper>
+                            <TitleImage/>
+                        </TitleImageWrapper>
+                    }
+
 
                     <ArticleTitleTextArea rows="1"
                                           onKeyDown={keydownHandler}
@@ -125,10 +131,15 @@ class ArticleEditPage extends PureComponent{
         initTitleTextarea()
         initMetaInput()
         this.props.initDraftData()
+        if(this.props.draftCache !== undefined && this.props.articleEditor !== undefined){
+            this.props.pushPrograssBarToEnd()
+        }
     }
 
     componentDidUpdate(preProps){
-        if(preProps.draftCache === undefined && this.props.draftCache !== undefined){
+        if((preProps.draftCache === undefined && this.props.draftCache !== undefined && this.props.articleEditor !== undefined)
+            ||
+            (this.props.draftCache !== undefined && preProps.articleEditor === undefined && this.props.articleEditor !== undefined)){
             this.props.pushPrograssBarToEnd()
         }
     }
@@ -174,7 +185,7 @@ const mapActions = (dispatch) => ({
     pushPrograssBarToEnd() {
         const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'articleEditPage'})
         dispatch(pushPrograssBarToEndAction)
-    },
+    }
 })
 
 export default connect(mapState,mapActions)(ArticleEditPage)
@@ -202,6 +213,7 @@ const initMetaInput = () => {
 }
 
 export const saveArticle = (dispatch, articleType, clickToSave) => {
+
 
     //判断系由点击发布按钮触发还是由input的change事件触发，如果是后者,则需要判断是否与获取的草稿数据是否一致，如果一致，则无需上传新的文章数据
     if(!clickToSave){
@@ -283,6 +295,9 @@ export const checkIfSubmitable = (dispatch) => {
 }
 
 const checkItemLength = (item, leftPoint, rightPoint) => {
+    if(!item){
+        return false
+    }
     return item.length > leftPoint && item.length <= rightPoint
 }
 

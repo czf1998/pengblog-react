@@ -94,9 +94,6 @@ function* ajaxDraft() {
         let appointDataAction = createDeliverDraftDataAction(res.data)
         yield put(appointDataAction)
 
-        //推进进度条
-        let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'edit'})
-        yield put(pushPrograssBarToEndAction)
     }catch (err) {
         console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
     }

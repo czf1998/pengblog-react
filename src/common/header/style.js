@@ -6,7 +6,7 @@ const iphone5Width = 320
 
 export const HeaderWrapper = styled.div`
         z-index: ${props => props.zIndex ? props.zIndex : '1'};
-        position: sticky;
+        position: ${props => props.isMobile ? 'static' : 'sticky'};
         top: 0;
         height: ${height};
         background: ${props => props.backgroundColor ? props.backgroundColor : 'white'};

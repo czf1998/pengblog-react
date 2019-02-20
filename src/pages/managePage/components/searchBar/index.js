@@ -13,9 +13,13 @@ class SearchBar extends PureComponent {
 
         return (
           <SearchBarWrapper >
-              <Input onFocus={() => {triggerIsFocus(true)}} onBlur={() => {triggerIsFocus(false)}}/>
-              <SubmitButton isFocus={isFocus}><i className='fa fa-search'/></SubmitButton>
-              <SearchTitle isFocus={isFocus}>搜索</SearchTitle>
+              <Input placeholder="标题、作者、标签" onFocus={() => {triggerIsFocus(true)}} onBlur={() => {triggerIsFocus(false)}}/>
+              <SubmitButton isFocus={isFocus}>
+                {
+                    isFocus ? <i className='fa fa-search'/> : ' Search'
+                }
+              </SubmitButton>
+              {/*<SearchTitle isFocus={isFocus}>搜索</SearchTitle>*/}
           </SearchBarWrapper>
         );
     }

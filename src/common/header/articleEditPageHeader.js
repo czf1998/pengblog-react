@@ -31,10 +31,12 @@ class ArticleEditPageHeader extends PureComponent {
                 isMobile } = this.props
 
         return (
-            <HeaderWrapper id="_header" className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
+            <HeaderWrapper id="_header"
+                           className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
                            height={height}
                            backgroundColor={backgroundColor}
-                           zIndex={3}>
+                           zIndex={3}
+                           isMobile={isMobile}>
 
                 <HeaderMainArea>
                     <NavItemWrapper>

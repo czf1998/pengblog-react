@@ -2,11 +2,12 @@ import React, {PureComponent, Fragment} from 'react';
 import {  Router, Route ,Redirect} from 'react-router-dom'
 import { connect } from 'react-redux'
 import history from './history'
-import HomeLoadable from '../pages/home/loadable'
 import ArticlePageLoadable from '../pages/articlePage/loadable'
 import ArticleEditPageLoadable from '../pages/articleEditPage/loadable'
 import HomeEXLoadable from '../pages/homeEx/loadable'
+import HomeEX from '../pages/homeEx'
 import ManagePageLoadable from '../pages/managePage/loadable'
+import ManagePage from '../pages/managePage'
 import { Header } from '../common'
 import Test from '../pages/test'
 

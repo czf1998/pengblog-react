@@ -10,7 +10,7 @@ import {DELIVER_DRAFT_DATA} from "../../../store/actionTypesWithSaga";
 import {TRIGGER_IS_SAVING_ARTICLE} from "../../../common/header/store/actionTypes";
 
 const defaultState = fromJS({
-    title:'',
+    title:undefined,
     label:'',
     author: '',
     maxTitleLength: 50,
@@ -36,10 +36,10 @@ export default (state = defaultState, action) => {
         }, 100)
 
         return state.merge({
-            title: action.value.article_title ? action.value.article_title : '',
-            label: action.value.article_label ? action.value.article_label : '',
-            author: action.value.article_author ? action.value.article_author : '',
-            id: action.value.article_id ? action.value.article_id : undefined,
+            title: action.value.article_title,
+            label: action.value.article_label,
+            author: action.value.article_author,
+            id: action.value.article_id,
             draftCache: fromJS(action.value)
         })
     }

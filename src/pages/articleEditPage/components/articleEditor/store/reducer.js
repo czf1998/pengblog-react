@@ -14,18 +14,19 @@ export default (state = defaultState, action) => {
         })
     }
     if(action.type === DELIVER_DRAFT_DATA){
-        state.get('editor').$textElem.attr('contenteditable', true)
-        state.get('editor').cmd.do('insertHTML', action.value.article_content)
-        state.get('editor').$textElem.attr('contenteditable', false)
-        setTimeout(() => {
-            state.get('editor').$textElem.attr('contenteditable', true)
-        },200)
+        if(state.get('editor') !== undefined){
+            state.get('editor').cmd.do('insertHTML',  action.value.article_content)
+        }
         return state.merge({
             content: action.value.article_content
         })
     }
     if(action.type === APPOINT_ARTICLE_EDITOR){
+        if(state.get('content') !== ''){
+            action.value && action.value.cmd.do('insertHTML', state.get('content'))
+        }
         return state.merge({
+            content:'',
             editor: action.value
         })
     }

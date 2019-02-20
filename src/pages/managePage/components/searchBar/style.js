@@ -12,13 +12,16 @@ export const SearchBarWrapper = styled.div`
     `
 
 export const Input = styled.input`
+        -webkit-appearance:none;
         color:${props => props.fontColor ? props.fontColor : 'black'};
-        width: 80%;
+        width: 100%;
+        height: 100%;
         background: ${props => props.backgroundColor ? props.backgroundColor : '#F7F7F7'};
-        font-size: ${props => props.fontSize ? props.fontSize + 'px' : '1rem'};
+        font-size: 1rem;
         outline: none;
         border-radius: 0.4rem;
-        padding: ${props => props.padding ? props.padding : '0.5rem'};
+        padding: 0.5rem;
+        padding-left: 1rem;
         border: solid 1px ${props => props.showWarn ? 'red' : backgroundColor};
         transition: all 0.4s ease;
          &:focus{
@@ -26,24 +29,31 @@ export const Input = styled.input`
             border: solid 1px #E6E6E6;
             width: 100%;
          }
+         &:focus::-webkit-input-placeholder{
+            opacity:0;  
+         }
+         
     `
 
 export const SubmitButton = styled.button`
-        padding: 0 0.8rem;
+        -webkit-appearance:none;
+        padding: 0 0.6rem;
         outline: none;
         cursor: pointer;
         position: absolute;
-        right: ${props => props.isFocus ? '2rem' : 'calc(16% + 2rem)'};
+        right: 2rem;
         color: white;
         height: calc(100% - 2rem);
-        background: #0084FF;
-        border: 1px solid ${props => props.borderColor ? props.borderColor : "#0084FF"};
+        width: ${props => props.isFocus ? '2.4rem' : '4.6rem'};
+        background: ${props => props.isFocus ? '#0084FF' : 'gray'};
+        border: 1px solid ${props => props.isFocus ? '#0084FF' : 'gray'};
         border-radius: 0.4rem;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-         transition: all 0.4s ease;
+        transition: all 0.4s ease;
          &:hover{
             background: hsl(209, 100%, 45%);
+            border: 1px solid #0084FF;
          }
     `
 
@@ -66,3 +76,4 @@ export const SearchTitle = styled.div`
             color: black;
         }
     `
+

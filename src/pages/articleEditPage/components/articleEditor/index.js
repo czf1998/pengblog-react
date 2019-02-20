@@ -11,10 +11,11 @@ class ArticleEditor extends PureComponent{
 
     render(){
 
+        const {isMobile} = this.props
         return (
            <ArticleEditorWrapper>
-               <ToolBarWrapper>
-                   <ToolBar ref="toolBar"></ToolBar>
+               <ToolBarWrapper isMobile={isMobile}>
+                   <ToolBar ref="toolBar" isMobile={isMobile}/>
                </ToolBarWrapper>
 
                <TextArea ref="textArea">
@@ -23,21 +24,25 @@ class ArticleEditor extends PureComponent{
         )
     }
 
-    componentDidMount(){
-        initEditor( this.refs.toolBar,
-                    this.refs.textArea,
-                    this.props.appointArticleEditorContent,
-                    this.props.failNotice,
-                    this.props.appointArticleEditor,
-                    this.props.widthOfBrowser)
+    componentWillUnmount(){
+        this.props.appointArticleEditor(undefined)
+    }
 
+    componentDidMount(){
+            initEditor( this.refs.toolBar,
+                this.refs.textArea,
+                this.props.appointArticleEditorContent,
+                this.props.failNotice,
+                this.props.appointArticleEditor,
+                this.props.widthOfBrowser)
     }
 }
 
 const mapState = (state) => ({
     content: state.get('articleEditor').get('content'),
     articleEditor: state.get('articleEditor').get('editor'),
-    widthOfBrowser: state.get('rootState').get('widthOfBrowser')
+    widthOfBrowser: state.get('rootState').get('widthOfBrowser'),
+    isMobile: state.get('rootState').get('isMobile')
 })
 
 const mapActions = (dispatch) => ({
@@ -93,13 +98,14 @@ const initEditor = (toolBarElem,
         'list',  // 列表
     ]
 
-    let menus = []
-
-    for(let i = 0; i < widthOfBrowser - 36; i += 36){
-        menus.push(allMenus[i/36])
+    if(widthOfBrowser <= 750){
+        allMenus = [
+            'image',
+            'video'
+        ]
     }
 
-    articleEditor.customConfig.menus = menus
+    articleEditor.customConfig.menus = allMenus
 
     articleEditor.customConfig.uploadImgServer = API_UPLOAD_IMAGE
     articleEditor.customConfig.uploadFileName = 'img'
@@ -120,10 +126,14 @@ const initEditor = (toolBarElem,
 
     articleEditor.customConfig.zIndex = 1
 
-    articleEditor.create()
+    setTimeout(() => {
 
-    articleEditor.$textElem.attr('contenteditable', false)
+        articleEditor.create()
 
-    articleEditorAppointer(articleEditor)
+        //articleEditor.$textElem.attr('contenteditable', false)
+
+        articleEditorAppointer(articleEditor)
+
+    }, 500)
 
 }
