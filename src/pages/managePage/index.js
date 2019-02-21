@@ -6,20 +6,27 @@ import {CentralController,
         ArticleListFixer,
         Title,
         Header,
+        HeaderArticleTitle,
         ArticleTitle,
         ArticleAuthor,
         ArticleLabel,
-        ArticleReleaseTime} from './style'
-import {SearchBar,ArticleFiling,ArticleClassification} from './components'
+        ArticleReleaseTime,
+        ArticleItemWrapper,
+        DeleteButton} from './style'
+import {SearchBar,
+        ArticleFiling,
+        ArticleClassification,
+        ArticleItem} from './components'
 import {createPushPrograssToEndAction} from "../articlePage/store";
 import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataAction} from "./store";
+import {DateFormat} from "../../exJs";
 
 class ManagePage extends PureComponent {
 
     render() {
 
-        const {browser} = this.props
+        const {articleList} = this.props
 
         return (
             <Fragment>
@@ -34,34 +41,40 @@ class ManagePage extends PureComponent {
 
                         <Title>所有文章</Title>
                         <Header>
-                            <ArticleTitle>文章标题</ArticleTitle>
+                            <HeaderArticleTitle>文章标题</HeaderArticleTitle>
                             <ArticleAuthor>作者</ArticleAuthor>
                             <ArticleLabel>标签</ArticleLabel>
                             <ArticleReleaseTime>发表时间</ArticleReleaseTime>
                         </Header>
 
-
+                        {
+                            articleList && articleList.map((item, index) => {
+                                return (
+                                    <ArticleItem key={item.get('article_id')} article={item}/>
+                                )
+                            })
+                        }
 
                     </ArticleListFixer>
                 </ArticleListWrapper>
             </Fragment>
-        )
+    )
+}
+
+componentDidMount() {
+    setTimeout(() => {
+        this.props.pushPrograssBarToEnd()
+    },500)
+    this.props.getData(0,10)
+}
+
+componentWillUnmount() {
+
     }
-
-    componentDidMount() {
-        setTimeout(() => {
-            this.props.pushPrograssBarToEnd()
-        },500)
-    }
-
-    componentWillUnmount() {
-
-    }
-
 }
 
 const mapState = (state) => ({
-        browser:state.get('rootState').get('browser')
+        articleList: state.get('managePage').get('articleList')
     })
 
 const mapActions = (dispatch) => {
@@ -79,8 +92,8 @@ const mapActions = (dispatch) => {
                 pageScale: pageScale
             }
 
-            const getManagePageArticleListDataaction = createGetManagePageArticleListDataAction(value)
-            dispatch(getManagePageArticleListDataaction)
+            const getManagePageArticleListDataAction = createGetManagePageArticleListDataAction(value)
+            dispatch(getManagePageArticleListDataAction)
         },
     }
 }

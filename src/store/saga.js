@@ -24,7 +24,8 @@ import {createDeliverArticleDataToHomeAction,
         createAppointNoticeContent,
         createAppendCommentJustSubmitAction,
         createDeliverDraftDataAction,
-        createDeliverTitleImageUrlAction} from './actionCreators'
+        createDeliverTitleImageUrlAction,
+        createDeliverArticleDataToManagePageAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest} from './request'
@@ -38,6 +39,7 @@ import {GET_DRAFT_DATA, SAVE_ARTICLE_ACTION} from "../pages/articleEditPage/stor
 import {createTriggerIsSavingDraftAction} from "../pages/articleEditPage/store";
 import {createTriggerIsSavingArticleAction} from "../common/header/store";
 import {UPLOAD_TITLE_IMAGE} from "../pages/articleEditPage/components/titleImage/store/actionTypes";
+import {GET_MANAGE_PAGE_ARTICLE_LIST_DATA} from "../pages/managePage/store/actionType";
 
 
 function* mySaga() {
@@ -52,6 +54,17 @@ function* mySaga() {
     yield takeEvery(GET_DRAFT_DATA, ajaxDraft)
     yield takeEvery(SAVE_ARTICLE_ACTION, ajaxSaveArticle)
     yield takeEvery(UPLOAD_TITLE_IMAGE, ajaxUploadImage)
+    yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA, ajaxManagePageArticleListData)
+}
+
+function* ajaxManagePageArticleListData(action) {
+    try{
+        const res = yield ArticleRequest.RequestArticleListData(action.value)
+        let appointDataAction = createDeliverArticleDataToManagePageAction(res.data)
+        yield put(appointDataAction)
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+    }
 }
 
 function* ajaxUploadImage(action) {

@@ -55,26 +55,65 @@ export const Header = styled.div`
         display: flex;
         padding-bottom: 1rem;
         margin-top: 1rem;
-        margin-bottom: 1rem;
-        border-bottom: solid 1px #EEEEEE;
+        border-bottom: solid 2px #EEEEEE;
         color: grey;
     `
 
-export const ArticleTitle = styled.div`
-        width: 50%;
+export const HeaderArticleTitle = styled.div`
+        width: 55%;
         display: flex;
         justify-content: center;
+        align-items: center;
+        padding-left: 2rem;
+        padding-right: 1rem;
+        line-height: 1.4;
     `
 
-export const ArticleAuthor = styled(ArticleTitle)`
+export const ArticleTitle = styled(HeaderArticleTitle)`
+        position: relative;
+        justify-content: flex-start;
+        color: black;
+        cursor: pointer;
+        padding-right:3rem;
+        &:hover{
+            color: #3367d6;
+        }
+    `
+
+export const DeleteButton = styled.div`
+        position: absolute;
+        height: 100%;
+        top: 0;
+        right: 1rem;
+        display: flex;
+        padding: 0.5rem;
+        align-items: center;
+        color: black;       
+    `
+
+
+export const ArticleAuthor = styled.div`
         width: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 1rem;
+        line-height: 1.4;
     `
 
-export const ArticleLabel = styled(ArticleTitle)`
+export const ArticleLabel = styled(ArticleAuthor)`
         width: 10%;
     `
 
-export const ArticleReleaseTime = styled(ArticleTitle)`
-        width: 25%;
+export const ArticleReleaseTime = styled(ArticleAuthor)`
+        width: 20%;
     `
 
+
+export const ArticleItemWrapper = styled(Header)`
+        padding-top: 1rem;
+        margin-top: 0;
+        margin-bottom: 0;
+        background: ${props => props.isBeingHover ? '#F7F7F7' : 'white'};
+        border-bottom: solid 1px #EEEEEE;
+    `

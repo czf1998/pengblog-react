@@ -13,7 +13,8 @@ import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
         APPEND_COMMENT_JUST_SUBMIT,
         DELIVER_DRAFT_DATA,
         DELIVER_TITLE_IMAGE_URL,
-        RECORD_CURRENT_BROWSER_EDITION} from './actionTypesWithSaga'
+        RECORD_CURRENT_BROWSER_EDITION,
+        DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -97,4 +98,9 @@ export const createDeliverTitleImageUrlAction = (value) => ({
 
 export const createRecordCurrentBrowserEdition = () => ({
     type: RECORD_CURRENT_BROWSER_EDITION
+})
+
+export const createDeliverArticleDataToManagePageAction = (value) => ({
+    type: DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE,
+    value
 })

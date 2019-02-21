@@ -14,6 +14,7 @@ import { reducer as routerReducer } from '../router/store'
 import { reducer as modalReducer } from '../common/modal/store'
 import { reducer as searchBarReducer } from '../pages/managePage/components/searchBar/store'
 import { reducer as selectReducer } from '../common/select/store'
+import { reducer as managePageReducer } from '../pages/managePage/store'
 import { fromJS } from 'immutable'
 import {RECORD_CURRENT_BROWSER_EDITION, RECORD_SCROLL_TOP_OF_ELEMENT_EL} from './actionTypesWithSaga'
 
@@ -54,6 +55,7 @@ export default combineReducers({
     modal: modalReducer,
     searchBar: searchBarReducer,
     select: selectReducer,
+    managePage: managePageReducer,
     rootState:(state = defaultState, action) => {
         if(action.type === RECORD_SCROLL_TOP_OF_ELEMENT_EL){
             return state.merge({
