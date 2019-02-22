@@ -15,7 +15,6 @@ import {createDeliverArticleDataToHomeAction,
         createRecordScrollTopOfElementElAction,
         createDeliverArticleDataToJumbotronAction,
         createDeliverArticleDataToArticlePage,
-        createNoticeHomeStoreArticleListDataReadyAction,
         createNoticeHomeStoreJumbotronDataReadyAction,
         createDeliverCommentListDataToArticlePageAction,
         createDeliverCountOfCommentDataToHomeAction,
@@ -25,7 +24,9 @@ import {createDeliverArticleDataToHomeAction,
         createAppendCommentJustSubmitAction,
         createDeliverDraftDataAction,
         createDeliverTitleImageUrlAction,
-        createDeliverArticleDataToManagePageAction} from './actionCreators'
+        createDeliverArticleListDataToManagePageAction,
+        createDeliverArticleFilingDataToManagePageAction,
+        createDeliverArticleLabelDataToManagePageAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest} from './request'
@@ -39,7 +40,11 @@ import {GET_DRAFT_DATA, SAVE_ARTICLE_ACTION} from "../pages/articleEditPage/stor
 import {createTriggerIsSavingDraftAction} from "../pages/articleEditPage/store";
 import {createTriggerIsSavingArticleAction} from "../common/header/store";
 import {UPLOAD_TITLE_IMAGE} from "../pages/articleEditPage/components/titleImage/store/actionTypes";
-import {GET_MANAGE_PAGE_ARTICLE_LIST_DATA} from "../pages/managePage/store/actionType";
+import {
+    GET_MANAGE_PAGE_ARTICLE_FILING_DATA,
+    GET_MANAGE_PAGE_ARTICLE_LABEL_DATA,
+    GET_MANAGE_PAGE_ARTICLE_LIST_DATA
+} from "../pages/managePage/store/actionType";
 
 
 function* mySaga() {
@@ -55,12 +60,34 @@ function* mySaga() {
     yield takeEvery(SAVE_ARTICLE_ACTION, ajaxSaveArticle)
     yield takeEvery(UPLOAD_TITLE_IMAGE, ajaxUploadImage)
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA, ajaxManagePageArticleListData)
+    yield takeEvery(GET_MANAGE_PAGE_ARTICLE_FILING_DATA, ajaxManagePageArticleFilingData)
+    yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LABEL_DATA, ajaxManagePageArticleLabelData)
+}
+
+function* ajaxManagePageArticleLabelData() {
+    try{
+        const res = yield ArticleRequest.RequestArticleLabelData()
+        let appointDataAction = createDeliverArticleLabelDataToManagePageAction(res.data)
+        yield put(appointDataAction)
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+    }
+}
+
+function* ajaxManagePageArticleFilingData() {
+    try{
+        const res = yield ArticleRequest.RequestArticleFilingData()
+        let appointDataAction = createDeliverArticleFilingDataToManagePageAction(res.data)
+        yield put(appointDataAction)
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+    }
 }
 
 function* ajaxManagePageArticleListData(action) {
     try{
         const res = yield ArticleRequest.RequestArticleListData(action.value)
-        let appointDataAction = createDeliverArticleDataToManagePageAction(res.data)
+        let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
         console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)

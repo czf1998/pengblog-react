@@ -1,79 +1,71 @@
 import styled from 'styled-components'
+import {Header, HeaderArticleTitle} from "../../style";
 
-const widthOfMainArea = 750
-const maxMobileWidth = 750
 
-const backgroundColor = '#F7F7F7'
-
-export const SearchBarWrapper = styled.div`
-        width: 100%;
+export const ArticleTitle = styled.div`
+        width: 55%;
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        padding-left: 2rem;
+        padding-right:3rem;
+        line-height: 1.4;
         position: relative;
-        padding: 1rem 2rem;
+        justify-content: flex-start;
+        color: black;
+        cursor: pointer;
     `
 
-export const Input = styled.input`
-        -webkit-appearance:none;
-        color:${props => props.fontColor ? props.fontColor : 'black'};
-        width: 100%;
+export const ArticleTitleInner = styled.span`
+        &:hover{
+            color: #3367d6;
+        }
+    `
+
+export const DeleteButton = styled.div`
+        position: absolute;
         height: 100%;
-        background: ${props => props.backgroundColor ? props.backgroundColor : '#F7F7F7'};
-        font-size: 1rem;
-        outline: none;
-        border-radius: 0.4rem;
+        top: 0;
+        right: 1rem;
+        display: flex;
         padding: 0.5rem;
-        padding-left: 1rem;
-        border: solid 1px ${props => props.showWarn ? 'red' : backgroundColor};
-        transition: all 0.4s ease;
-         &:focus{
-            background: white;
-            border: solid 1px #E6E6E6;
-            width: 100%;
-         }
-         &:focus::-webkit-input-placeholder{
-            opacity:0;  
-         }
-         
+        align-items: center;
+        color: black;  
+        &:hover{
+            color: #3367d6;
+        }     
     `
 
-export const SubmitButton = styled.button`
-        -webkit-appearance:none;
-        padding: 0 0.6rem;
-        outline: none;
-        cursor: pointer;
-        position: absolute;
-        right: 2rem;
-        color: white;
-        height: calc(100% - 2rem);
-        width: ${props => props.isFocus ? '2.4rem' : '4.6rem'};
-        background: ${props => props.isFocus ? '#0084FF' : 'gray'};
-        border: 1px solid ${props => props.isFocus ? '#0084FF' : 'gray'};
-        border-radius: 0.4rem;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        transition: all 0.4s ease;
-         &:hover{
-            background: hsl(209, 100%, 45%);
-            border: 1px solid #0084FF;
-         }
-    `
 
-export const SearchTitle = styled.div`
-        cursor: pointer;
-        color: grey;
-        font-size: 1.2rem;
-        position: absolute;
-        height: calc(100% - 2rem);
-        right: 0rem;
-        top: 1rem;
-        width: calc(16% + 2rem);
-        
+export const ArticleAuthor = styled.div`
+        width: 15%;
         display: flex;
         justify-content: center;
         align-items: center;
-        opacity: ${props => props.isFocus ? '0' : '1'};
-        transition: all 0.4s ease;
-        &:hover{
-            color: black;
-        }
+        padding: 1rem;
+        padding-left: 0;
+        line-height: 1.4;
     `
+
+export const ArticleLabel = styled(ArticleAuthor)`
+        width: 10%;
+        
+    `
+
+export const ArticleReleaseTime = styled(ArticleAuthor)`
+        width: 20%;
+    `
+
+
+export const ArticleItemWrapper = styled.div`
+        width: 100%;
+        display: flex;
+        margin-top: 1rem;
+        color: grey;
+        margin-top: 0;
+        margin-bottom: 0;
+        background: ${props => props.isBeingHover ? 'linear-gradient(to right, rgba(255,255,255,1), rgba(0,0,0,0.05), rgba(255,255,255,1))' : 'white'};
+        border-bottom: solid 1px #EEEEEE;
+    `
+
 

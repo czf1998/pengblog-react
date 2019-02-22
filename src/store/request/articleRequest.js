@@ -27,3 +27,11 @@ export const RequestDraftData = () => {
 export const SaveArticle = (value) => {
     return axios.post(Api.API_SAVE_ARTICLE,value)
 }
+
+export const RequestArticleFilingData = () => {
+    return axios.get(Api.API_GET_ARTICLE_FILING)
+}
+
+export const RequestArticleLabelData = () => {
+    return axios.get(Api.API_GET_ARTICLE_LABEL)
+}

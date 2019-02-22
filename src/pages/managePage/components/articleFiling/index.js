@@ -15,7 +15,25 @@ class ArticleFiling extends PureComponent {
 
     render() {
 
-        const {year,month} = this.props
+        const {year,month,articleFilingObj} = this.props
+
+        let years = []
+
+        let months = []
+
+        if(articleFilingObj){
+
+            let toJSArticleFilingObj = articleFilingObj.toJS()
+
+            Object.keys(toJSArticleFilingObj).forEach((key) => {
+                years.push(key)
+            })
+
+            if(year){
+                months = toJSArticleFilingObj[year]
+            }
+
+        }
 
         return (
          <ArticleFilingWrapper>
@@ -25,11 +43,11 @@ class ArticleFiling extends PureComponent {
                  <DateSelector>
                      <Select value={year}
                              selectId="year"
-                             optionList={['2001','2002','2003']}
+                             optionList={years}
                              width="4.2rem"/>&nbsp;年&nbsp;
                      <Select value={month}
                              selectId="month"
-                             optionList={['1','2','3']}
+                             optionList={months}
                              width="3.2rem"/>&nbsp;月&nbsp;
 
                  </DateSelector>

@@ -45,3 +45,7 @@ export const DELIVER_TITLE_IMAGE_URL = 'deliverTitleImageUrl'
 export const RECORD_CURRENT_BROWSER_EDITION = 'recordCurrentBrowserEdition'
 
 export const DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE = 'deliverArticleListDataToManagePage'
+
+export const DELIVER_ARTICLE_FILING_DATA_TO_MANAGE_PAGE = 'deliverArticleFilingDataToManagePage'
+
+export const DELIVER_ARTICLE_LABEL_DATA_TO_MANAGE_PAGE = 'deliverArticleLabelDataToManagePage'

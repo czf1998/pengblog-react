@@ -12,6 +12,7 @@ import { GapLine, GapLineVertical } from './gapLine'
 import Notice from './notice'
 import Modal from './modal'
 import Select from './select'
+import Pagination from './pagination'
 
 export {Button,
         Input,
@@ -27,4 +28,5 @@ export {Button,
         Textarea,
         Notice,
         Modal,
-        Select }
+        Select,
+        Pagination }

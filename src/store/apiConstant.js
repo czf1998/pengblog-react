@@ -23,3 +23,7 @@ export const API_SAVE_ARTICLE = server + 'article/upload_article.do'
 
 export const API_POST_IMAGE = server + 'image/image_upload.do'
 
+export const API_GET_ARTICLE_FILING = server + 'article/article_filing.do'
+
+export const API_GET_ARTICLE_LABEL = server + 'article/article_label.do'
+

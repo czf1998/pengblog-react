@@ -14,7 +14,9 @@ import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
         DELIVER_DRAFT_DATA,
         DELIVER_TITLE_IMAGE_URL,
         RECORD_CURRENT_BROWSER_EDITION,
-        DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE} from './actionTypesWithSaga'
+        DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE,
+        DELIVER_ARTICLE_FILING_DATA_TO_MANAGE_PAGE,
+        DELIVER_ARTICLE_LABEL_DATA_TO_MANAGE_PAGE} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -100,7 +102,17 @@ export const createRecordCurrentBrowserEdition = () => ({
     type: RECORD_CURRENT_BROWSER_EDITION
 })
 
-export const createDeliverArticleDataToManagePageAction = (value) => ({
+export const createDeliverArticleListDataToManagePageAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE,
+    value
+})
+
+export const createDeliverArticleFilingDataToManagePageAction = (value) => ({
+    type: DELIVER_ARTICLE_FILING_DATA_TO_MANAGE_PAGE,
+    value
+})
+
+export const createDeliverArticleLabelDataToManagePageAction = (value) => ({
+    type: DELIVER_ARTICLE_LABEL_DATA_TO_MANAGE_PAGE,
     value
 })

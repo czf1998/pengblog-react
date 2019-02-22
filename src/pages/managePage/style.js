@@ -30,12 +30,18 @@ export const ArticleListWrapper = styled.div`
     `
 
 export const ArticleListFixer = styled.div`
+        min-height: ${props => props.heightOfBrowser - 70}px;
         width: 700px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         
          @media(max-width:${milePostWidth}px){
             width: 100%;
         }
     `
+
+export const ArticleList = styled.div``
 
 export const Title = styled.div`
         padding: 1rem 2rem;
@@ -69,29 +75,6 @@ export const HeaderArticleTitle = styled.div`
         line-height: 1.4;
     `
 
-export const ArticleTitle = styled(HeaderArticleTitle)`
-        position: relative;
-        justify-content: flex-start;
-        color: black;
-        cursor: pointer;
-        padding-right:3rem;
-        &:hover{
-            color: #3367d6;
-        }
-    `
-
-export const DeleteButton = styled.div`
-        position: absolute;
-        height: 100%;
-        top: 0;
-        right: 1rem;
-        display: flex;
-        padding: 0.5rem;
-        align-items: center;
-        color: black;       
-    `
-
-
 export const ArticleAuthor = styled.div`
         width: 15%;
         display: flex;
@@ -109,11 +92,11 @@ export const ArticleReleaseTime = styled(ArticleAuthor)`
         width: 20%;
     `
 
-
-export const ArticleItemWrapper = styled(Header)`
-        padding-top: 1rem;
-        margin-top: 0;
-        margin-bottom: 0;
-        background: ${props => props.isBeingHover ? '#F7F7F7' : 'white'};
-        border-bottom: solid 1px #EEEEEE;
+export const PaginationFixer = styled.div`
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        
     `

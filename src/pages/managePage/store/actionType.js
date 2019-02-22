@@ -1,2 +1,7 @@
 export const GET_MANAGE_PAGE_ARTICLE_LIST_DATA = 'getManagePageArticleListData'
+
 export const TRIGGER_ISLOADING_MANAGE_PAGE_ARTICLE_LIST_DATA = 'triggerIsloadingManagePageArticleListData'
+
+export const GET_MANAGE_PAGE_ARTICLE_FILING_DATA = 'getManagePageArticleFilingData'
+
+export const GET_MANAGE_PAGE_ARTICLE_LABEL_DATA = 'getManagePageArticleLabelData'

@@ -18,29 +18,23 @@ class Select extends Component{
         this.state = {
             show: false
         }
-        this.clickHander = this.clickHander.bind(this)
+        this.openOptions = this.openOptions.bind(this)
+        this.closeOptions = this.closeOptions.bind(this)
     }
 
     render() {
 
 
-        const {selectId,value,onChange,optionList,onFocus,onBlur,appointSelectContent,width} = this.props
+        const {selectId,value,optionList,onFocus,onBlur,appointSelectContent,width} = this.props
 
         return (
             <SelectWrapper>
                 <SelectHead>
 
-                    <ShadowInput ref="shadowInput"
-                                 onFocus={() => {focusHandler(this)}}
-                                 onBlur={() => {blurHandler(this)}}/>
-
-
                     <SelectContent ref="selectContent"
                                    id="selectContent"
                                    width={width}
-                                   disabled={true}
-                                   value={value}
-                                   onChange={onChange}/>
+                                   disabled={true}>{value}</SelectContent>
 
 
                     <SelectButton>
@@ -50,25 +44,42 @@ class Select extends Component{
                     </SelectButton>
                 </SelectHead>
 
-                <Options show={this.state.show} length={optionList.length}>
-                    {
-                        optionList.map((item,index) => {
-                            return <OptionItem key={index} onClick={() => appointSelectContent(selectId,item)}>{item}</OptionItem>
-                        })
-                    }
-                </Options>
+                {
+                    optionList &&
+                    <Options show={this.state.show} length={optionList.length}>
+                        {
+                            optionList.map((item,index) => {
+                                return <OptionItem key={index} onClick={() => appointSelectContent(selectId,item)}>{item}</OptionItem>
+                            })
+                        }
+                    </Options>
+                }
 
             </SelectWrapper>
         )
     }
 
     componentDidMount(){
-      this.refs.selectButtonIcon.addEventListener('click', this.clickHander)
+      this.refs.selectButtonIcon.addEventListener('click', this.openOptions)
     }
 
-    clickHander(){
-        this.refs.shadowInput.focus()
-        this.refs.selectButtonIcon.removeEventListener('click', this.clickHander)
+    openOptions(){
+        this.setState({
+            show: true
+        })
+        this.refs.selectButtonIcon.removeEventListener('click', this.openOptions)
+
+        setTimeout(() => {
+            window.addEventListener('click', this.closeOptions)
+        },100)
+    }
+
+    closeOptions(){
+        this.setState({
+            show: false
+        })
+        window.removeEventListener('click', this.closeOptions)
+        this.refs.selectButtonIcon.addEventListener('click', this.openOptions)
     }
 }
 

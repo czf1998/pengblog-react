@@ -1,8 +1,13 @@
 import reducer from './reducer'
 import {createTriggerIsLoadingManagePageArticleListDataAction,
-        createGetManagePageArticleListDataAction} from './actionCreators'
+        createGetManagePageArticleListDataAction,
+        createGetManagePageArticleFilingDataAction,
+        createGetManagePageArticleLabelDataAction} from './actionCreators'
 
 export { reducer}
 
 export {createTriggerIsLoadingManagePageArticleListDataAction,
-        createGetManagePageArticleListDataAction}
+        createGetManagePageArticleListDataAction,
+        createGetManagePageArticleFilingDataAction,
+        createGetManagePageArticleLabelDataAction}
+

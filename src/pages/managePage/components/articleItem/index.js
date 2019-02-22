@@ -8,8 +8,9 @@ import {
     ArticleLabel,
     ArticleReleaseTime,
     ArticleTitle,
-    DeleteButton
-} from "../../style";
+    DeleteButton,
+    ArticleTitleInner
+} from "./style";
 import {DateFormat} from "../../../../exJs";
 
 
@@ -28,15 +29,19 @@ class ArticleItem extends PureComponent {
 
         const {article} = this.props
 
+        const {isBeingHover} = this.state
+
         return (
-            <ArticleItemWrapper isBeingHover={this.state.isBeingHover}
+            <ArticleItemWrapper isBeingHover={isBeingHover}
                                 onMouseEnter={() => {this.mouseBehaviourHandler(true)}}
                                 onMouseLeave={() => {this.mouseBehaviourHandler(false)}}>
 
-                <ArticleTitle>
-                    {article.get('article_title')}
+                <ArticleTitle isBeingHover={isBeingHover}>
+                    <ArticleTitleInner>
+                        {article.get('article_title')}
+                    </ArticleTitleInner>
                     {
-                        this.state.isBeingHover &&
+                        isBeingHover &&
                         <DeleteButton><span className="iconfont">&#xe60c;</span></DeleteButton>
                     }
                 </ArticleTitle>

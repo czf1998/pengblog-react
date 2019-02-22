@@ -14,11 +14,12 @@ export const SelectHead = styled.div`
          position: relative;
     `
 
-export const SelectContent = styled.input`
+export const SelectContent = styled.div`
         -webkit-appearance:none;
         outline: none;
         font-size: 1rem;
         width: ${props => props.width ? props.width : '8rem'};
+        height: 34px;
         border: solid 1px gray;
         border-radius: 0.4rem;
         padding: 0.5rem;
