@@ -14,7 +14,7 @@ class Pagination extends PureComponent{
 
         const {currentPage, maxPage, paginationId, clickHandler} = this.props
 
-        const itemList = [currentPage - 3,
+        const itemList = [  currentPage - 3,
                             currentPage - 2,
                             currentPage - 1,
                             currentPage,

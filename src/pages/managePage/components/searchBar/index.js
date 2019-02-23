@@ -1,7 +1,8 @@
 import React, {Fragment, PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {SearchBarWrapper,Input,SubmitButton,SearchTitle} from './style'
-import {createTriggerSearchInputIsFocusAction} from './store'
+import {createTriggerSearchInputIsFocusAction,
+        createAppointKeyWordOfSearchBarAction} from './store'
 
 
 
@@ -9,12 +10,23 @@ class SearchBar extends PureComponent {
 
     render() {
 
-        const {metaColor,triggerIsFocus,isFocus} = this.props
+        const {searchBarObj,
+                searchButtonClickHandler,
+                triggerIsFocus,
+                isFocus,
+                appointKeyWordOfSearchBar,
+                searchBarId} = this.props
+
+        const searchBarValue = searchBarObj.get(searchBarId).get('searchBarValue')
 
         return (
           <SearchBarWrapper >
-              <Input placeholder="标题、作者、标签" onFocus={() => {triggerIsFocus(true)}} onBlur={() => {triggerIsFocus(false)}}/>
-              <SubmitButton isFocus={isFocus}>
+              <Input placeholder="标题、作者、标签"
+                     value={searchBarValue}
+                     onChange={(e) => {appointKeyWordOfSearchBar(e, searchBarId)}}
+                     onFocus={() => {triggerIsFocus(searchBarId,true)}}
+                     onBlur={() => {triggerIsFocus(searchBarId,false)}}/>
+              <SubmitButton isFocus={isFocus} onClick={() => {searchButtonClickHandler(searchBarValue)}}>
                 {
                     isFocus ? <i className='fa fa-search'/> : ' Search'
                 }
@@ -32,15 +44,28 @@ class SearchBar extends PureComponent {
 
 const mapState = (state) => {
     return  {
+        searchBarObj: state.get('searchBar'),
         metaColor: state.get('rootState').get('basicUIFeatures').get('metaColor'),
         isFocus: state.get('searchBar').get('isFocus')
     }
 }
 
 const mapActions = (dispatch) => ({
-    triggerIsFocus(flag){
-        const triggerIsFocusAction = createTriggerSearchInputIsFocusAction(flag)
+    triggerIsFocus(searchBarId,flag){
+        const value = {
+            searchBarId: searchBarId,
+            isFocus: flag
+        }
+        const triggerIsFocusAction = createTriggerSearchInputIsFocusAction(value)
         dispatch(triggerIsFocusAction)
+    },
+    appointKeyWordOfSearchBar(event, searchBarId){
+        const value = {
+            searchBarId: searchBarId,
+            searchBarValue: event.target.value
+        }
+        const appointKeyWordOfSearchBarAction = createAppointKeyWordOfSearchBarAction(value)
+        dispatch(appointKeyWordOfSearchBarAction)
     }
 })
 

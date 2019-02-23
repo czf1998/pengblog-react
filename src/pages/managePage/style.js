@@ -30,6 +30,7 @@ export const ArticleListWrapper = styled.div`
     `
 
 export const ArticleListFixer = styled.div`
+        position: relative;
         min-height: ${props => props.heightOfBrowser - 70}px;
         width: 700px;
         display: flex;
@@ -41,7 +42,8 @@ export const ArticleListFixer = styled.div`
         }
     `
 
-export const ArticleList = styled.div``
+export const ArticleList = styled.div`
+    `
 
 export const Title = styled.div`
         padding: 1rem 2rem;
@@ -50,11 +52,6 @@ export const Title = styled.div`
         font-weight: 100;
     `
 
-export const LoadingWrapper = styled.div`
-        position: fixed;
-        width: 100%;
-        height: 100%;
-    `
 
 export const Header = styled.div`
         width: 100%;
@@ -98,5 +95,16 @@ export const PaginationFixer = styled.div`
         justify-content: center;
         margin-top: 2rem;
         margin-bottom: 2rem;
-        
+    `
+
+export const LoadingWrapper = styled.div`
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     `

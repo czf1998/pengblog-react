@@ -1,7 +1,9 @@
 import reducer from './reducer'
-import {createTriggerSearchInputIsFocusAction} from "./actionCreators";
+import {createTriggerSearchInputIsFocusAction,
+        createAppointKeyWordOfSearchBarAction} from "./actionCreators";
 
 export {reducer}
 
-export {createTriggerSearchInputIsFocusAction}
+export {createTriggerSearchInputIsFocusAction,
+        createAppointKeyWordOfSearchBarAction}
 

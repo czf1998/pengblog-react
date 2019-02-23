@@ -5,3 +5,5 @@ export const TRIGGER_ISLOADING_MANAGE_PAGE_ARTICLE_LIST_DATA = 'triggerIsloading
 export const GET_MANAGE_PAGE_ARTICLE_FILING_DATA = 'getManagePageArticleFilingData'
 
 export const GET_MANAGE_PAGE_ARTICLE_LABEL_DATA = 'getManagePageArticleLabelData'
+
+export const GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD = 'getManagePageArticleListDataByKeyWord'

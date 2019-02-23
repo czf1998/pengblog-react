@@ -1,15 +1,25 @@
 import { fromJS } from 'immutable'
-import {TRIGGER_SEARCH_INPUT_IS_FOCUS} from "./actionTypes";
+import {APPOINT_KEYWORD_OF_SEARCH_BAR, TRIGGER_SEARCH_INPUT_IS_FOCUS} from "./actionTypes";
 
 const defaultState = fromJS({
-    isFocus:false
+    managePage: fromJS({
+        isFocus: false,
+        searchBarValue: ''
+    })
 })
 
 export default (state = defaultState, action) => {
     if(action.type === TRIGGER_SEARCH_INPUT_IS_FOCUS){
-        return state.merge({
-            isFocus: action.value
-        })
+        let searchBarId = action.value.searchBarId
+        return state.set(searchBarId,state.get(searchBarId).merge({
+            isFocus: action.value.isFocus
+        }))
+    }
+    if(action.type === APPOINT_KEYWORD_OF_SEARCH_BAR){
+        let searchBarId = action.value.searchBarId
+        return state.set(searchBarId,state.get(searchBarId).merge({
+            searchBarValue: action.value.searchBarValue
+        }))
     }
     return state
 }

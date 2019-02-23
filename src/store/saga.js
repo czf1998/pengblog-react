@@ -43,7 +43,7 @@ import {UPLOAD_TITLE_IMAGE} from "../pages/articleEditPage/components/titleImage
 import {
     GET_MANAGE_PAGE_ARTICLE_FILING_DATA,
     GET_MANAGE_PAGE_ARTICLE_LABEL_DATA,
-    GET_MANAGE_PAGE_ARTICLE_LIST_DATA
+    GET_MANAGE_PAGE_ARTICLE_LIST_DATA, GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD
 } from "../pages/managePage/store/actionType";
 
 
@@ -62,6 +62,18 @@ function* mySaga() {
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA, ajaxManagePageArticleListData)
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_FILING_DATA, ajaxManagePageArticleFilingData)
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LABEL_DATA, ajaxManagePageArticleLabelData)
+    yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD, ajaxManagePageArticleListDataByKeyWord)
+}
+
+function* ajaxManagePageArticleListDataByKeyWord(action) {
+    try{
+        const res = yield ArticleRequest.RequestArticleListDataByKeyWord(action.value)
+        console.log(res.data)
+        //let appointDataAction = createDeliverArticleLabelDataToManagePageAction(res.data)
+        //yield put(appointDataAction)
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+    }
 }
 
 function* ajaxManagePageArticleLabelData() {

@@ -8,7 +8,7 @@ const defaultState = fromJS({
         currentPage: 1,
         maxPage: 1,
         startIndex: 3,
-        pageScale: 3,
+        pageScale: 8,
     })
 })
 

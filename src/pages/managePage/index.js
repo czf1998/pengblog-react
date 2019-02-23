@@ -11,7 +11,8 @@ import {CentralController,
         ArticleAuthor,
         ArticleLabel,
         ArticleReleaseTime,
-        PaginationFixer} from './style'
+        PaginationFixer,
+        LoadingWrapper} from './style'
 import {SearchBar,
         ArticleFiling,
         ArticleClassification,
@@ -20,19 +21,29 @@ import {createPushPrograssToEndAction} from "../articlePage/store";
 import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataAction,
         createGetManagePageArticleFilingDataAction,
-        createGetManagePageArticleLabelDataAction} from "./store";
+        createGetManagePageArticleLabelDataAction,
+        createGetManagePageArticleListDataByKeyWordAction} from "./store";
 import {Pagination} from '../../common'
+import Loading from "../../common/loading";
+import store from '../../store'
 
 class ManagePage extends PureComponent {
 
     render() {
 
-        const {articleList,paginationObj,articleFilingObj,articleLabelObjList,heightOfBrowser} = this.props
+        const {isLoading,
+                articleList,
+                paginationObj,
+                articleFilingObj,
+                articleLabelObjList,
+                heightOfBrowser,
+                getArticleByKeyWord} = this.props
 
         return (
             <Fragment>
                 <CentralController>
-                    <SearchBar/>
+                    <SearchBar searchBarId="managePage"
+                               searchButtonClickHandler={getArticleByKeyWord}/>
                     <ArticleFiling articleFilingObj={articleFilingObj}/>
                     <ArticleClassification articleLabelObjList={articleLabelObjList}/>
                 </CentralController>
@@ -50,7 +61,12 @@ class ManagePage extends PureComponent {
                             </Header>
 
                             {
-                                articleList && articleList.map((item, index) => {
+                                isLoading ?
+                                    <LoadingWrapper>
+                                        <Loading/>
+                                    </LoadingWrapper>
+                                    :
+                                    articleList && articleList.map((item, index) => {
                                     return (
                                         <ArticleItem key={item.get('article_id')} article={item}/>
                                     )
@@ -67,6 +83,7 @@ class ManagePage extends PureComponent {
                     </ArticleListFixer>
                 </ArticleListWrapper>
             </Fragment>
+
     )
 }
 
@@ -81,6 +98,7 @@ class ManagePage extends PureComponent {
 
     componentDidUpdate(preProps){
         if(preProps.paginationObj.get('currentPage') !== this.props.paginationObj.get('currentPage')){
+
             this.props.getArticleListData((this.props.paginationObj.get('currentPage') - 1) * this.props.paginationObj.get('pageScale'),
                                             this.props.paginationObj.get('pageScale'))
         }
@@ -89,6 +107,7 @@ class ManagePage extends PureComponent {
 }
 
 const mapState = (state) => ({
+        isLoading: state.get('managePage').get('isLoading'),
         articleList: state.get('managePage').get('articleList'),
         paginationObj: state.get('pagination').get('managePage'),
         articleFilingObj: state.get('managePage').get('articleFilingObj'),
@@ -102,6 +121,7 @@ const mapActions = (dispatch) => {
             const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'managePage'})
             dispatch(pushPrograssBarToEndAction)
         },
+
         getArticleListData(startIndex, pageScale) {
             const triggerIsLoadingManagePageArticleListDataAction = createTriggerIsLoadingManagePageArticleListDataAction(true)
             dispatch(triggerIsLoadingManagePageArticleListDataAction)
@@ -114,15 +134,33 @@ const mapActions = (dispatch) => {
             const getManagePageArticleListDataAction = createGetManagePageArticleListDataAction(value)
             dispatch(getManagePageArticleListDataAction)
         },
+
         getArticleFilingData(){
             const getArticleFilingDataAction = createGetManagePageArticleFilingDataAction()
             dispatch(getArticleFilingDataAction)
         },
+
         getArticleLabelData(){
             const getArticleLabelDataAction = createGetManagePageArticleLabelDataAction()
             dispatch(getArticleLabelDataAction)
+        },
+
+        getArticleByKeyWord(keyWord){
+
+            const pageScale = store.getState().get('pagination').get('managePage').get('pageScale')
+
+            const value = {
+                keyWord: keyWord,
+                startIndex: 0,
+                pageScale: pageScale
+            }
+
+            const getArticleByKeyWordAction = createGetManagePageArticleListDataByKeyWordAction(value)
+            dispatch(getArticleByKeyWordAction)
         }
     }
 }
 
 export default connect(mapState, mapActions)(withRouter(ManagePage))
+
+
