@@ -23,10 +23,11 @@ import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleFilingDataAction,
         createGetManagePageArticleLabelDataAction,
         createGetManagePageArticleListDataByKeyWordAction,
-        createRefreshManagePagePaginationAction} from "./store";
+        createGetManagePageArticleListDataByFilingAction} from "./store";
 import {Pagination} from '../../common'
 import Loading from "../../common/loading";
 import store from '../../store'
+import {COMMON_CONTEXT, FILING_CONTENT, SEARCH_CONTEXT} from "./store/reducer";
 
 class ManagePage extends PureComponent {
 
@@ -38,14 +39,16 @@ class ManagePage extends PureComponent {
                 articleFilingObj,
                 articleLabelObjList,
                 heightOfBrowser,
-                getArticleByKeyWord} = this.props
+                getArticleByKeyWord,
+                getArticleByFiling} = this.props
 
         return (
             <Fragment>
                 <CentralController>
                     <SearchBar searchBarId="managePage"
                                dataGetter={getArticleByKeyWord}/>
-                    <ArticleFiling articleFilingObj={articleFilingObj}/>
+                    <ArticleFiling articleFilingObj={articleFilingObj}
+                                   dataGetter={getArticleByFiling}/>
                     <ArticleClassification articleLabelObjList={articleLabelObjList}/>
                 </CentralController>
 
@@ -103,12 +106,16 @@ class ManagePage extends PureComponent {
 
         if(preProps.paginationObj.get('currentPage') !== this.props.paginationObj.get('currentPage') && preProps.currentContext === this.props.currentContext){
 
-            if(currentContext === 'common'){
+            if(currentContext === COMMON_CONTEXT){
                 this.props.getArticleListData()
             }
 
-            if(currentContext === 'search'){
+            if(currentContext === SEARCH_CONTEXT){
                 this.props.getArticleByKeyWord()
+            }
+
+            if(currentContext === FILING_CONTENT){
+                this.props.getArticleByFiling()
             }
         }
     }
@@ -172,9 +179,30 @@ const mapActions = (dispatch) => {
                 pageScale: pageScale
             }
 
-            console.log(value)
             const getArticleByKeyWordAction = createGetManagePageArticleListDataByKeyWordAction(value)
             dispatch(getArticleByKeyWordAction)
+        },
+
+        getArticleByFiling(){
+
+            const selectedYear = store.getState().get('select').get('year')
+            const selectedMonth = store.getState().get('select').get('month')
+            const startIndex = store.getState().get('pagination').get('managePage').get('startIndex')
+            const pageScale = store.getState().get('pagination').get('managePage').get('pageScale')
+
+            if(selectedYear === undefined){
+                return
+            }
+
+            const value = {
+                selectedYear: selectedYear,
+                selectedMonth: selectedMonth,
+                startIndex: startIndex,
+                pageScale: pageScale
+            }
+
+            const getArticleByFilingAction = createGetManagePageArticleListDataByFilingAction(value)
+            dispatch(getArticleByFilingAction)
         }
     }
 }

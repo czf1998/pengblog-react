@@ -34,16 +34,18 @@ export const SubmitButton = styled.button`
         -webkit-appearance:none;
         padding: 0 0.6rem;
         outline: none;
-        cursor: pointer;
+        cursor: ${props => props.year ? 'pointer' : 'default'};
         color: white;
         background: gray;
         border: solid 1px gray;
         border-radius: 0.4rem;
         transition: all 0.4s ease;
+        ${props => props.year ? ` 
         &:hover{
             background: hsl(209, 100%, 45%);
             border: 1px solid #0084FF;
-        }
+        }` : ''};
+       
     `
 
 export const Option = styled.option`

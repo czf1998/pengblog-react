@@ -48,3 +48,17 @@ export const RequestArticleListDataByKeyWord = (value) => {
 
     return axios.get(Api.API_GET_ARTICLE_LIST_BY_SEARCH, config)
 }
+
+export const RequestArticleListDataByFiling = (value) => {
+
+    let config = {
+        params: {
+            startIndex: value.startIndex,
+            pageScale: value.pageScale,
+            selectedYear: value.selectedYear,
+            selectedMonth: value.selectedMonth
+        }
+    }
+
+    return axios.get(Api.API_GET_ARTICLE_LIST_BY_FILING, config)
+}

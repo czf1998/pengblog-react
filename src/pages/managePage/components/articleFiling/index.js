@@ -8,6 +8,8 @@ import {ArticleFilingWrapper,
         Option} from './style'
 import {} from './store'
 import {Select} from '../../../../common'
+import {createRefreshManagePagePaginationAction} from "../../store";
+import {createAppointSelectContentAction} from "../../../../common/select/store";
 
 
 
@@ -15,7 +17,7 @@ class ArticleFiling extends PureComponent {
 
     render() {
 
-        const {year,month,articleFilingObj} = this.props
+        const {year,month,articleFilingObj,dataGetter,submitButtonClickHandler} = this.props
 
         let years = []
 
@@ -51,13 +53,22 @@ class ArticleFiling extends PureComponent {
                              width="3.2rem"/>&nbsp;月&nbsp;
 
                  </DateSelector>
-                 <SubmitButton>Go!</SubmitButton>
+                 <SubmitButton year={year}
+                               onClick={() => {submitButtonClickHandler(dataGetter)}}>Go!</SubmitButton>
              </ArticleFilinger>
          </ArticleFilingWrapper>
         );
     }
 
     componentDidMount(){
+
+    }
+
+    componentDidUpdate(preProps){
+        if(preProps.year !== this.props.year){
+            this.props.resetMonthValue()
+        }
+
     }
 }
 
@@ -71,7 +82,19 @@ const mapState = (state) => {
 }
 
 const mapActions = (dispatch) => ({
-
+    submitButtonClickHandler(dataGetter){
+        const refreshManagePagePaginationAction = createRefreshManagePagePaginationAction()
+        dispatch(refreshManagePagePaginationAction)
+        dataGetter()
+    },
+    resetMonthValue(){
+        const value = {
+            selectValue: undefined,
+            selectId: 'month'
+        }
+        const appointSelectContentAction = createAppointSelectContentAction(value)
+        dispatch(appointSelectContentAction)
+    }
 })
 
 export default connect(mapState, mapActions)(ArticleFiling)

@@ -5,12 +5,14 @@ import {
     DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE
 } from "../../../store/actionTypesWithSaga";
 import {
+    GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING,
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD,
     TRIGGER_ISLOADING_MANAGE_PAGE_ARTICLE_LIST_DATA
 } from "./actionType";
 
-const COMMON_CONTEXT = 'common'
-const SEARCH_CONTEXT = 'search'
+export const COMMON_CONTEXT = 'common'
+export const SEARCH_CONTEXT = 'search'
+export const FILING_CONTENT = 'filing'
 
 const defaultState = fromJS({
     articleList: undefined,
@@ -50,6 +52,12 @@ export default (state = defaultState, action) => {
     if(action.type === GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD){
         return state.merge({
             currentContext: SEARCH_CONTEXT
+        })
+    }
+
+    if(action.type === GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING){
+        return state.merge({
+            currentContext: FILING_CONTENT
         })
     }
     return state

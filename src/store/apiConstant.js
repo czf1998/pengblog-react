@@ -29,3 +29,4 @@ export const API_GET_ARTICLE_LABEL = server + 'article/article_label.do'
 
 export const API_GET_ARTICLE_LIST_BY_SEARCH = server + 'article/article_bysearch.do'
 
+export const API_GET_ARTICLE_LIST_BY_FILING = server + 'article/article_byfiling.do'

@@ -3,7 +3,8 @@ import {GET_MANAGE_PAGE_ARTICLE_LIST_DATA,
         GET_MANAGE_PAGE_ARTICLE_FILING_DATA,
         GET_MANAGE_PAGE_ARTICLE_LABEL_DATA,
         GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD,
-        REFRESH_MANAGE_PAGE_PAGINATION} from './actionType'
+        REFRESH_MANAGE_PAGE_PAGINATION,
+        GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING} from './actionType'
 
 export const createGetManagePageArticleListDataAction = (value) => ({
     type: GET_MANAGE_PAGE_ARTICLE_LIST_DATA,
@@ -30,4 +31,9 @@ export const createGetManagePageArticleListDataByKeyWordAction = (value) => ({
 
 export const createRefreshManagePagePaginationAction = (value) => ({
     type: REFRESH_MANAGE_PAGE_PAGINATION
+})
+
+export const createGetManagePageArticleListDataByFilingAction = (value) => ({
+    type: GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING,
+    value
 })
