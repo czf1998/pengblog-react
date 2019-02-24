@@ -3,7 +3,8 @@ import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataAction,
         createGetManagePageArticleFilingDataAction,
         createGetManagePageArticleLabelDataAction,
-        createGetManagePageArticleListDataByKeyWordAction} from './actionCreators'
+        createGetManagePageArticleListDataByKeyWordAction,
+        createRefreshManagePagePaginationAction} from './actionCreators'
 
 export { reducer}
 
@@ -11,5 +12,6 @@ export {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataAction,
         createGetManagePageArticleFilingDataAction,
         createGetManagePageArticleLabelDataAction,
-        createGetManagePageArticleListDataByKeyWordAction}
+        createGetManagePageArticleListDataByKeyWordAction,
+        createRefreshManagePagePaginationAction}
 

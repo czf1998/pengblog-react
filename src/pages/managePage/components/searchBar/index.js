@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {SearchBarWrapper,Input,SubmitButton} from './style'
 import {createTriggerSearchInputIsFocusAction,
         createAppointKeyWordOfSearchBarAction} from './store'
+import {createRefreshManagePagePaginationAction} from "../../store";
 
 
 
@@ -16,6 +17,7 @@ class SearchBar extends PureComponent {
     render() {
 
         const {searchBarObj,
+                dataGetter,
                 searchButtonClickHandler,
                 triggerIsFocus,
                 appointKeyWordOfSearchBar,
@@ -32,7 +34,7 @@ class SearchBar extends PureComponent {
                      onFocus={() => {triggerIsFocus(searchBarId,true)}}
                      onBlur={() => {triggerIsFocus(searchBarId,false)}}/>
 
-              <SubmitButton isFocus={isFocus}  onClick={() => {searchButtonClickHandler(searchBarValue)}}>
+              <SubmitButton isFocus={isFocus}  onClick={() => {searchButtonClickHandler(dataGetter)}}>
                 {
                     isFocus ?
                         <i className='fa fa-search' style={{pointerEvents:'none'}}/>
@@ -50,9 +52,7 @@ class SearchBar extends PureComponent {
 
     checkKeyNumber(e){
         if(e.keyCode === 108 || e.keyCode === 13 ) {
-            const searchBarId = this.props.searchBarId
-            const searchBarValue = this.props.searchBarObj.get(searchBarId).get('searchBarValue')
-            this.props.searchButtonClickHandler(searchBarValue)
+            this.props.searchButtonClickHandler(this.props.dataGetter)
         }
     }
 }
@@ -82,6 +82,12 @@ const mapActions = (dispatch) => ({
         }
         const appointKeyWordOfSearchBarAction = createAppointKeyWordOfSearchBarAction(value)
         dispatch(appointKeyWordOfSearchBarAction)
+    },
+    searchButtonClickHandler(dataGetter){
+        const refreshManagePagePaginationAction = createRefreshManagePagePaginationAction()
+        dispatch(refreshManagePagePaginationAction)
+
+        dataGetter()
     }
 })
 

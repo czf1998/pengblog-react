@@ -10,8 +10,6 @@ import { Header } from '../common'
 
 class RouterComponent extends PureComponent {
 
-
-
     render() {
 
         const {isMobile} = this.props
@@ -31,8 +29,6 @@ class RouterComponent extends PureComponent {
             </Router>
         );
     }
-
-
 }
 
 const mapState = (state) => ({

@@ -22,7 +22,8 @@ import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataAction,
         createGetManagePageArticleFilingDataAction,
         createGetManagePageArticleLabelDataAction,
-        createGetManagePageArticleListDataByKeyWordAction} from "./store";
+        createGetManagePageArticleListDataByKeyWordAction,
+        createRefreshManagePagePaginationAction} from "./store";
 import {Pagination} from '../../common'
 import Loading from "../../common/loading";
 import store from '../../store'
@@ -43,7 +44,7 @@ class ManagePage extends PureComponent {
             <Fragment>
                 <CentralController>
                     <SearchBar searchBarId="managePage"
-                               searchButtonClickHandler={getArticleByKeyWord}/>
+                               dataGetter={getArticleByKeyWord}/>
                     <ArticleFiling articleFilingObj={articleFilingObj}/>
                     <ArticleClassification articleLabelObjList={articleLabelObjList}/>
                 </CentralController>
@@ -97,10 +98,18 @@ class ManagePage extends PureComponent {
     }
 
     componentDidUpdate(preProps){
-        if(preProps.paginationObj.get('currentPage') !== this.props.paginationObj.get('currentPage')){
 
-            this.props.getArticleListData((this.props.paginationObj.get('currentPage') - 1) * this.props.paginationObj.get('pageScale'),
-                                            this.props.paginationObj.get('pageScale'))
+        const currentContext = this.props.currentContext
+
+        if(preProps.paginationObj.get('currentPage') !== this.props.paginationObj.get('currentPage') && preProps.currentContext === this.props.currentContext){
+
+            if(currentContext === 'common'){
+                this.props.getArticleListData()
+            }
+
+            if(currentContext === 'search'){
+                this.props.getArticleByKeyWord()
+            }
         }
     }
 
@@ -112,7 +121,8 @@ const mapState = (state) => ({
         paginationObj: state.get('pagination').get('managePage'),
         articleFilingObj: state.get('managePage').get('articleFilingObj'),
         articleLabelObjList: state.get('managePage').get('articleLabelObjList'),
-        heightOfBrowser: state.get('rootState').get('heightOfBrowser')
+        heightOfBrowser: state.get('rootState').get('heightOfBrowser'),
+        currentContext: state.get('managePage').get('currentContext')
     })
 
 const mapActions = (dispatch) => {
@@ -122,9 +132,14 @@ const mapActions = (dispatch) => {
             dispatch(pushPrograssBarToEndAction)
         },
 
-        getArticleListData(startIndex, pageScale) {
+        getArticleListData() {
+
             const triggerIsLoadingManagePageArticleListDataAction = createTriggerIsLoadingManagePageArticleListDataAction(true)
             dispatch(triggerIsLoadingManagePageArticleListDataAction)
+
+            const startIndex = store.getState().get('pagination').get('managePage').get('startIndex')
+            const pageScale = store.getState().get('pagination').get('managePage').get('pageScale')
+
 
             let value = {
                 startIndex: startIndex,
@@ -145,16 +160,19 @@ const mapActions = (dispatch) => {
             dispatch(getArticleLabelDataAction)
         },
 
-        getArticleByKeyWord(keyWord){
+        getArticleByKeyWord(){
 
+            const keyWord = store.getState().get('searchBar').get('managePage').get('searchBarValue')
+            const startIndex = store.getState().get('pagination').get('managePage').get('startIndex')
             const pageScale = store.getState().get('pagination').get('managePage').get('pageScale')
 
             const value = {
                 keyWord: keyWord,
-                startIndex: 0,
+                startIndex: startIndex,
                 pageScale: pageScale
             }
 
+            console.log(value)
             const getArticleByKeyWordAction = createGetManagePageArticleListDataByKeyWordAction(value)
             dispatch(getArticleByKeyWordAction)
         }
