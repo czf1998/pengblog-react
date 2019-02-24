@@ -95,12 +95,14 @@ class ManagePage extends PureComponent {
         setTimeout(() => {
             this.props.pushPrograssBarToEnd()
         },500)
-        this.props.getArticleListData(0,this.props.paginationObj.get('pageScale'))
+
         this.props.getArticleFilingData()
         this.props.getArticleLabelData()
     }
 
     componentDidUpdate(preProps){
+
+        console.log('update')
 
         const currentContext = this.props.currentContext
 

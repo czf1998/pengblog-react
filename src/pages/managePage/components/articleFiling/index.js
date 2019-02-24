@@ -8,7 +8,7 @@ import {ArticleFilingWrapper,
         Option} from './style'
 import {} from './store'
 import {Select} from '../../../../common'
-import {createRefreshManagePagePaginationAction} from "../../store";
+import {createAppointManagePagePaginationAction} from "../../store";
 import {createAppointSelectContentAction} from "../../../../common/select/store";
 
 
@@ -83,9 +83,18 @@ const mapState = (state) => {
 
 const mapActions = (dispatch) => ({
     submitButtonClickHandler(dataGetter){
-        const refreshManagePagePaginationAction = createRefreshManagePagePaginationAction()
-        dispatch(refreshManagePagePaginationAction)
+
+        const value = {
+            startIndex: 0,
+            currentPage: 1
+        }
+
+        const appointManagePagePaginationAction = createAppointManagePagePaginationAction(value)
+        dispatch(appointManagePagePaginationAction)
+
         dataGetter()
+        
+
     },
     resetMonthValue(){
         const value = {

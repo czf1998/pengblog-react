@@ -12,7 +12,9 @@ class Pagination extends PureComponent{
 
     render(){
 
-        const {currentPage, maxPage, paginationId} = this.props
+        const {currentPage, maxPage, paginationId, jumpToThePage} = this.props
+
+
 
         const itemList = [  currentPage - 3,
                             currentPage - 2,
@@ -74,8 +76,10 @@ class Pagination extends PureComponent{
         )
     }
 
-    componentDidUpdate() {
-
+    componentDidMount() {
+        if(this.props.currentPage < 1){
+            this.props.jumpToThePage(this.props.paginationId,1)
+        }
     }
 }
 

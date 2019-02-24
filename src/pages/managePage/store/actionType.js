@@ -8,6 +8,6 @@ export const GET_MANAGE_PAGE_ARTICLE_LABEL_DATA = 'getManagePageArticleLabelData
 
 export const GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD = 'getManagePageArticleListDataByKeyWord'
 
-export const REFRESH_MANAGE_PAGE_PAGINATION = 'refreshManagePagePagination'
+export const APPOINT_MANAGE_PAGE_PAGINATION = 'appointManagePagePagination'
 
 export const GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING = 'getManagePageArticleListDataByFiling'

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {SearchBarWrapper,Input,SubmitButton} from './style'
 import {createTriggerSearchInputIsFocusAction,
         createAppointKeyWordOfSearchBarAction} from './store'
-import {createRefreshManagePagePaginationAction} from "../../store";
+import {createAppointManagePagePaginationAction} from "../../store";
 
 
 
@@ -84,10 +84,25 @@ const mapActions = (dispatch) => ({
         dispatch(appointKeyWordOfSearchBarAction)
     },
     searchButtonClickHandler(dataGetter){
-        const refreshManagePagePaginationAction = createRefreshManagePagePaginationAction()
-        dispatch(refreshManagePagePaginationAction)
+
+        const value = {
+            startIndex: 0,
+            currentPage: 1
+        }
+
+        const appointManagePagePaginationAction = createAppointManagePagePaginationAction(value)
+        dispatch(appointManagePagePaginationAction)
 
         dataGetter()
+
+        const afterValue = {
+            startIndex: 2,
+            currentPage: 1
+        }
+
+        const afterAppointManagePagePaginationAction = createAppointManagePagePaginationAction(afterValue)
+        dispatch(afterAppointManagePagePaginationAction)
+
     }
 })
 
