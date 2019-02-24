@@ -3,7 +3,6 @@ import {HeaderWrapper,
         HeaderMainArea,
         NavItem,
         NavItemWrapper,
-        LogoWrapper,
         SubmitButton,
         Info} from './style'
 import { connect } from 'react-redux'
@@ -22,7 +21,6 @@ class ArticleEditPageHeader extends PureComponent {
 
         const { height,
                 backgroundColor,
-                basicUIFeatures,
                 isSaving,
                 showSaveTag,
                 submitable,

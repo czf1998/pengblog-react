@@ -5,11 +5,8 @@ import history from './history'
 import ArticlePageLoadable from '../pages/articlePage/loadable'
 import ArticleEditPageLoadable from '../pages/articleEditPage/loadable'
 import HomeEXLoadable from '../pages/homeEx/loadable'
-import HomeEX from '../pages/homeEx'
 import ManagePageLoadable from '../pages/managePage/loadable'
-import ManagePage from '../pages/managePage'
 import { Header } from '../common'
-import Test from '../pages/test'
 
 class RouterComponent extends PureComponent {
 

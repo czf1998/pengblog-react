@@ -1,8 +1,5 @@
 import styled from 'styled-components'
 
-const widthOfMainArea = 750
-const maxMobileWidth = 750
-
 const backgroundColor = '#F7F7F7'
 
 export const SearchBarWrapper = styled.div`

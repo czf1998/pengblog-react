@@ -21,7 +21,6 @@ import {createAppointArticleEditInfoAction,
 import { TITLE,LABEL,AUTHOR} from './constant'
 import store from '../../store'
 import {createPushPrograssToEndAction} from "../articlePage/store";
-import {createAppointArticleEditorAction} from "./components/articleEditor/store";
 
 
 class ArticleEditPage extends PureComponent{
@@ -33,7 +32,7 @@ class ArticleEditPage extends PureComponent{
                 maxTitleLength,
                 label,
                 author,
-                isMobile,articleEditor} = this.props
+                isMobile} = this.props
 
         let remnantTitleLength = maxTitleLength - (title ? title.length : 0)
 

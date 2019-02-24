@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { ArticleSummaryWrapper, Title, ArticleInfoColumn, ArticleMultipleContent, ArticleContent, PreviewImage } from './style'
 import { connect } from 'react-redux'
-import { Link,withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import {CommonClassNameConstants} from '../../../../commonStyle'
 import { DateFormat } from "../../../../exJs"
 

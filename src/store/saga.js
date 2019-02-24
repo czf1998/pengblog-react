@@ -1,4 +1,4 @@
-import { put, takeEvery, takeLatest, select } from 'redux-saga/effects'
+import { put, takeEvery, takeLatest } from 'redux-saga/effects'
 
 import {
     GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA,
@@ -68,9 +68,8 @@ function* mySaga() {
 function* ajaxManagePageArticleListDataByKeyWord(action) {
     try{
         const res = yield ArticleRequest.RequestArticleListDataByKeyWord(action.value)
-        console.log(res.data)
-        //let appointDataAction = createDeliverArticleLabelDataToManagePageAction(res.data)
-        //yield put(appointDataAction)
+        let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
+        yield put(appointDataAction)
     }catch (err) {
         console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
     }
@@ -249,12 +248,12 @@ function* ajaxHomeArticleListData(action) {
         const res = yield ArticleRequest.RequestArticleListData(action.value)
         let appointDataAction = createDeliverArticleDataToHomeAction(res.data)
         yield put(appointDataAction)
-        const state = yield select();
-        const isMobile = state.get('rootState').get('isMobile')
-       /* if(isMobile) {
+     /*   const state = yield select();
+      /!*  const isMobile = state.get('rootState').get('isMobile')
+       /!* if(isMobile) {
             let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home-mobile'})
             yield put(pushPrograssBarToEndAction)
-        }*/
+        }*!/!*!/*/
     }catch (err) {
         console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_DATA  ERR: ' + err)
     }

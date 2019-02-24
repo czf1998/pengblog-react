@@ -2,11 +2,8 @@ import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
 import {Route, withRouter} from 'react-router-dom'
 import {ArticleListWrapper, ArticleDetailWrapper,ArticleDetailFixer} from './style'
-import { CommonClassNameConstants } from "../../commonStyle";
-import { Loading, ForMore  } from '../../common'
 import ArticleList from '../home'
 import ArticleDetail from '../articlePage'
-import ArticlePageLoadable from "../articlePage/loadable";
 
 class HomeEX extends PureComponent {
 

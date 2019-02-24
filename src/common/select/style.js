@@ -1,8 +1,5 @@
 import styled from 'styled-components'
 
-const backgroundColor = '#f7f7f7'
-const widthOfMainArea = 750
-
 export const SelectWrapper = styled.div`
        position: relative;
       

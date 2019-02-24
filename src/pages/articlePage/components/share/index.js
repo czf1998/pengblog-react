@@ -79,7 +79,7 @@ export default connect(mapState, mapActions)(Share)
 
 const shareToWeibo = (title, picUrl) => {
     let shareToXinLangWeiboUrl = 'http://v.t.sina.com.cn/share/share.php?'
-    shareToXinLangWeiboUrl = shareToXinLangWeiboUrl + 'title=' + '我正在阅读文章“' + title + '”，出自“彭凯帆的博客www.pengblog.xyz”。  -- '
+    shareToXinLangWeiboUrl = shareToXinLangWeiboUrl + 'title=我正在阅读文章:' + title + '，出自彭凯帆的博客www.pengblog.xyz。  -- '
     shareToXinLangWeiboUrl = shareToXinLangWeiboUrl + '&url=' + window.location.href
     shareToXinLangWeiboUrl = shareToXinLangWeiboUrl + '&content=utf-8&sourceUrl=' + window.location.href
     if(picUrl !== undefined)

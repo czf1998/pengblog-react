@@ -12,7 +12,7 @@ class Pagination extends PureComponent{
 
     render(){
 
-        const {currentPage, maxPage, paginationId, clickHandler} = this.props
+        const {currentPage, maxPage, paginationId} = this.props
 
         const itemList = [  currentPage - 3,
                             currentPage - 2,
@@ -42,7 +42,7 @@ class Pagination extends PureComponent{
 
 
                 {
-                    itemList.map((item,index) => {
+                    itemList.map((item) => {
                         if(item > 0 && item < (maxPage + 1)){
                             return  <Item key={item}
                                           isCurrentPage={currentPage === item}
@@ -50,6 +50,7 @@ class Pagination extends PureComponent{
                                         {item}
                                      </Item>
                         }
+                        return null
                     })
                 }
 

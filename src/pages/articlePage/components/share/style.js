@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-const widthOfMainArea = 750
 const maxMobileWidth = 750
 
 export const ShareWrapper = styled.div`

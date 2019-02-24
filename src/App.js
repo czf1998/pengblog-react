@@ -5,9 +5,7 @@ import store from './store'
 import './commonStyle'
 import './exJs'
 import { createObserveScrollTopOfElementElAction,createRecordCurrentBrowserEdition } from "./store/actionCreators";
-import { CommonClassNameConstants } from './commonStyle'
-import {Footer,
-        PrograssBar,
+import {PrograssBar,
         Notice,
         Modal } from './common'
 import history from './router/history'

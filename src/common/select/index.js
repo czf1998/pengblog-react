@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {fromJS} from 'immutable'
 import {SelectWrapper,
         SelectHead,
         SelectContent,
         SelectButton,
         SelectButtonFixer,
         Options,
-        OptionItem,
-        ShadowInput} from "./style";
+        OptionItem} from "./style";
 import {createAppointSelectContentAction} from './store'
 
 class Select extends Component{
@@ -25,7 +23,7 @@ class Select extends Component{
     render() {
 
 
-        const {selectId,value,optionList,onFocus,onBlur,appointSelectContent,width} = this.props
+        const {selectId,value,optionList,appointSelectContent,width} = this.props
 
         return (
             <SelectWrapper>
@@ -100,19 +98,3 @@ const mapActions = (dispatch) => ({
 
 export default connect(mapState,mapActions)(Select)
 
-
-const focusHandler = (_this) => {
-    _this.setState({
-        show: true
-    })
-}
-
-const blurHandler = (_this) => {
-    setTimeout(() => {
-        _this.setState({
-            show: false
-        })
-        _this.refs.selectButtonIcon.addEventListener('click', _this.clickHander)
-    },200)
-
-}

@@ -14,7 +14,7 @@ class Home extends PureComponent {
 
     render() {
 
-        const {basicUIFeatures,
+        const {
                 articleList,
                 isMobile,
                 isLoading,
@@ -22,12 +22,9 @@ class Home extends PureComponent {
                 pageScale,
                 maxPage,
                 currentPage,
-                jumbotronArticleId,
-                jumbotronArticleIdDefault,
                 hasBeenMountOnce,
                 articleListDataIsReady} = this.props
 
-        const jumbotronTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.ZOOM_IN
         const articleSummaryListTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.SLIDE_UP
 
         return (
@@ -113,8 +110,6 @@ const mapState = (state) => ({
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
         articleList: state.get('home').get('articleList'),
         isMobile: state.get('rootState').get('isMobile'),
-        jumbotronArticleId: state.get('home').get('jumbotronArticleId'),
-        jumbotronArticleIdDefault: state.get('home').get('jumbotronArticleIdDefault'),
         isLoading: state.get('home').get('isLoading'),
         articleListDataIsReady: state.get('home').get('articleListDataIsReady'),
         hasBeenMountOnce: state.get('home').get('hasBeenMountOnce'),

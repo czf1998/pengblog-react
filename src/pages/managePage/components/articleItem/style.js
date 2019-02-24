@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import {Header, HeaderArticleTitle} from "../../style";
 
 
 export const ArticleTitle = styled.div`
