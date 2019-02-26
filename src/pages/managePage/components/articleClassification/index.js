@@ -1,7 +1,7 @@
 import React, {Fragment, PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {ArticleClassificationWrapper,Title,Tags,TagItem} from './style'
-import {} from './store'
+import {createAppointCurrentLabelAction} from './store'
 
 
 
@@ -9,7 +9,7 @@ class ArticleClassification extends PureComponent {
 
     render() {
 
-        const {articleLabelObjList} = this.props
+        const {articleLabelObjList,appointCurrentLabel,currentLabel,dataGetter} = this.props
 
         return (
             <ArticleClassificationWrapper>
@@ -17,8 +17,10 @@ class ArticleClassification extends PureComponent {
                 <Tags>
 
                     {
-                        articleLabelObjList && articleLabelObjList.map((item,index) => {
-                            return <TagItem key={item.get('article_label')}>
+                        articleLabelObjList && articleLabelObjList.map((item) => {
+                            return <TagItem key={item.get('article_label')}
+                                            isCurrent={currentLabel === item.get('article_label')}
+                                            onClick={() => {appointCurrentLabel(item.get('article_label'),dataGetter)}}>
                                         {item.get('article_label') + '(' + item .get('number') + ')'}
                                     </TagItem>
                         })
@@ -36,13 +38,16 @@ class ArticleClassification extends PureComponent {
 
 const mapState = (state) => {
     return  {
-        year: state.get('select').get('year'),
-        month: state.get('select').get('month')
+        currentLabel: state.get('managePage').get('currentLabel')
     }
 }
 
 const mapActions = (dispatch) => ({
-
+    appointCurrentLabel(label,dataGetter){
+        const action = createAppointCurrentLabelAction(label)
+        dispatch(action)
+        dataGetter()
+    }
 })
 
 export default connect(mapState, mapActions)(ArticleClassification)

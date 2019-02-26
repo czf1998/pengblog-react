@@ -1,10 +1,20 @@
 import styled from 'styled-components'
 
-const widthOfMainArea = '750'
+const widthOfMainArea = 700
+
+const maxMobileWidth = 750
 
 export const ArticlePageWrapper = styled.div`
         width: 100%;
-        background: #f7f7f7;
+        //background: #f7f7f7;
+    `
+
+export const ArticlePageFixer = styled.div`
+        width: 100%;
+        max-width: ${widthOfMainArea}px;
+        @media(max-width:${maxMobileWidth}px){
+            width: 100%;
+        }
     `
 
 export const ArticleMainArea = styled.div`

@@ -1,5 +1,7 @@
 import { fromJS } from 'immutable'
 import {APPOINT_KEYWORD_OF_SEARCH_BAR, TRIGGER_SEARCH_INPUT_IS_FOCUS} from "./actionTypes";
+import {RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE} from "../../../store/actionType";
+import {LABEL_CONTEXT, SEARCH_CONTEXT} from "../../../store/reducer";
 
 const defaultState = fromJS({
     managePage: fromJS({
@@ -20,6 +22,14 @@ export default (state = defaultState, action) => {
         return state.set(searchBarId,state.get(searchBarId).merge({
             searchBarValue: action.value.searchBarValue
         }))
+    }
+
+    if(action.type === RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE){
+        if(action.value !== SEARCH_CONTEXT){
+            return state.merge({
+                managePage: state.get('managePage').set('searchBarValue','')
+            })
+        }
     }
     return state
 }

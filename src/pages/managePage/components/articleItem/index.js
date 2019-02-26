@@ -27,17 +27,17 @@ class ArticleItem extends PureComponent {
 
     render() {
 
-        const {article} = this.props
+        const {article,goTo,browser} = this.props
 
         const {isBeingHover} = this.state
 
         return (
-            <ArticleItemWrapper isBeingHover={isBeingHover}
+            <ArticleItemWrapper browser={browser}
                                 onMouseEnter={() => {this.mouseBehaviourHandler(true)}}
                                 onMouseLeave={() => {this.mouseBehaviourHandler(false)}}>
 
                 <ArticleTitle isBeingHover={isBeingHover}>
-                    <ArticleTitleInner>
+                    <ArticleTitleInner  onClick={() => {goTo('/article/' + article.get('article_id'))}}>
                         {article.get('article_title')}
                     </ArticleTitleInner>
                     {
@@ -77,7 +77,8 @@ class ArticleItem extends PureComponent {
 
 const mapState = (state) => {
     return  {
-
+        goTo: state.get('router').get('goTo'),
+        browser: state.get('rootState').get('browser')
     }
 }
 

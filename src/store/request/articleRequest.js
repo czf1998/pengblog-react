@@ -62,3 +62,15 @@ export const RequestArticleListDataByFiling = (value) => {
 
     return axios.get(Api.API_GET_ARTICLE_LIST_BY_FILING, config)
 }
+
+export const RequestArticleListDataByLabel = (value) => {
+    let config = {
+        params: {
+            startIndex: value.startIndex,
+            pageScale: value.pageScale,
+            article_label: value.article_label
+        }
+    }
+
+    return axios.get(Api.API_GET_ARTICLE_LIST_BY_LABEL, config)
+}

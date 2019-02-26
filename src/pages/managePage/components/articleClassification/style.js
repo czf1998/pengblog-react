@@ -31,6 +31,7 @@ export const TagItem = styled.div`
         border: solid 1px grey;
         border-radius: 0.4rem;
         cursor: pointer;
+        background: ${props => props.isCurrent ? '#F7F7F7' : 'white'};
         &:hover{
             background: #F7F7F7;
         }

@@ -89,7 +89,8 @@ export const InputWrapper = styled.div`
 export const SubmitButtonWrapper = styled.div`
         position: absolute;
         right: 2rem;
-        bottom: 1rem;
+        width: 15%;
+        bottom: 0;
         @media(max-width:${widthOfMainArea}px){
             padding: 0 1rem 1rem 1rem;
             width: 100%;
@@ -99,6 +100,7 @@ export const SubmitButtonWrapper = styled.div`
 
 export const SubmitButton = styled(Button)`
         height: 2.2rem;
+        width: 100%;
         @media(max-width:${widthOfMainArea}px){
              height: 3em;
              width: 100%;

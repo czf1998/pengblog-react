@@ -22,6 +22,7 @@ export const ArticleListWrapper = styled.div`
         width: calc(100% - 400px);
         display: flex;
         padding-left: 1rem;
+        padding-right: 2rem;
         
         @media(max-width:${milePostWidth}px){
             margin-left: 300px;
@@ -107,4 +108,16 @@ export const LoadingWrapper = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+    `
+
+export const ArticleDetail = styled.div`
+        z-index: 2;
+        position: fixed;
+        right: ${props => props.showArticleDetail ? '0' : '-700px'};
+        width: 700px;
+        top: 0;
+        height: 100%;
+        background: gray;
+        overflow-y:scroll;
+        transition: all 0.4s ease; 
     `

@@ -63,8 +63,13 @@ export const ArticleItemWrapper = styled.div`
         color: grey;
         margin-top: 0;
         margin-bottom: 0;
-        background: ${props => props.isBeingHover ? 'linear-gradient(to right, rgba(255,255,255,1), rgba(0,0,0,0.05), rgba(255,255,255,1))' : 'white'};
+        background: white;
         border-bottom: solid 1px #EEEEEE;
+        ${props => props.browser === 'Safari' ? '' : `
+            &:hover{
+                background:linear-gradient(to right, rgba(255,255,255,1), rgba(0,0,0,0.05), rgba(255,255,255,1));
+            }
+        `}
     `
 
 

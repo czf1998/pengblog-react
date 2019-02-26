@@ -11,7 +11,8 @@ class Input extends Component{
 
     render() {
 
-        const {id,
+        const { width,
+                id,
                 maxLenght,
                 type,
                 placeholder,
@@ -31,7 +32,7 @@ class Input extends Component{
                 fontColor } = this.props
 
         return (
-            <InputWrapper style={style}>
+            <InputWrapper style={style} width={width}>
 
                 <Inputer id={id}
                         type={type}

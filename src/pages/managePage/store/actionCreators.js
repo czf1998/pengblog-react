@@ -4,7 +4,9 @@ import {GET_MANAGE_PAGE_ARTICLE_LIST_DATA,
         GET_MANAGE_PAGE_ARTICLE_LABEL_DATA,
         GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD,
         APPOINT_MANAGE_PAGE_PAGINATION,
-        GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING} from './actionType'
+        GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING,
+        GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL,
+        RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE} from './actionType'
 
 export const createGetManagePageArticleListDataAction = (value) => ({
     type: GET_MANAGE_PAGE_ARTICLE_LIST_DATA,
@@ -36,5 +38,15 @@ export const createAppointManagePagePaginationAction = (value) => ({
 
 export const createGetManagePageArticleListDataByFilingAction = (value) => ({
     type: GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING,
+    value
+})
+
+export const createGetManagePageArticleListDataByLabelAction = (value) => ({
+    type: GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL,
+    value
+})
+
+export const createResetCentralControllerOfManagePage = (value) => ({
+    type: RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE,
     value
 })

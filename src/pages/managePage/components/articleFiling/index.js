@@ -93,7 +93,7 @@ const mapActions = (dispatch) => ({
         dispatch(appointManagePagePaginationAction)
 
         dataGetter()
-        
+
 
     },
     resetMonthValue(){

@@ -1,0 +1,1 @@
+export const APPOINT_CURRENT_LABEL = 'appointCurrentLabel'

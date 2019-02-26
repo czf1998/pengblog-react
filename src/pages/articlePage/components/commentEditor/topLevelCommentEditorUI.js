@@ -87,7 +87,8 @@ class TopLevelCommentEditorUI extends PureComponent{
 
                 <VisitorInfo className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
 
-                    <Input  placeholder="您的邮箱"
+                    <Input  width="35%"
+                            placeholder="您的邮箱"
                             type="text"
                             value={visitorEmailManager.get('value')}
                             onChange={(event) => {appointInputValue(event,VISITOR_EMAIL,TOP_LEVEL_COMMENT_EDITOR)}}
@@ -99,7 +100,8 @@ class TopLevelCommentEditorUI extends PureComponent{
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <Input  placeholder="你的个人网站？如果有"
+                    <Input  width="35%"
+                            placeholder="你的个人网站？如果有"
                             type="text"
                             value={visitorSiteAddressManager.get('value')}
                             onChange={(event) => {appointInputValue(event,VISITOR_SITE_ADDRESS,TOP_LEVEL_COMMENT_EDITOR)}}
@@ -124,12 +126,12 @@ class TopLevelCommentEditorUI extends PureComponent{
                             {
                                 isLoading ?
                                     <span>
-                                    <i className={'fa fa-spinner fa-pulse'} style={{color:'black'}}/>&nbsp;Submitting&nbsp;
-                                </span>
+                                        <i className={'fa fa-spinner fa-pulse'} style={{color:'black'}}/>
+                                    </span>
                                     :
                                     <span>
-                                    <i className="fa fa-paper-plane"/>&nbsp;Submit&nbsp;
-                                </span>
+                                    Submit
+                                    </span>
                             }
                         </SubmitButton>
                     </div>

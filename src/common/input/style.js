@@ -5,6 +5,7 @@ const widthOfMainArea = 750
 
 export const InputWrapper = styled.div`
         position: relative;
+        width: ${props => props.width};
     `
 
 export const Inputer = styled.input`

@@ -4,6 +4,7 @@ import {SearchBarWrapper,Input,SubmitButton} from './style'
 import {createTriggerSearchInputIsFocusAction,
         createAppointKeyWordOfSearchBarAction} from './store'
 import {createAppointManagePagePaginationAction} from "../../store";
+import {SEARCH_CONTEXT} from "../../store/reducer";
 
 
 
@@ -85,23 +86,7 @@ const mapActions = (dispatch) => ({
     },
     searchButtonClickHandler(dataGetter){
 
-        const value = {
-            startIndex: 0,
-            currentPage: 1
-        }
-
-        const appointManagePagePaginationAction = createAppointManagePagePaginationAction(value)
-        dispatch(appointManagePagePaginationAction)
-
         dataGetter()
-
-        const afterValue = {
-            startIndex: 2,
-            currentPage: 1
-        }
-
-        const afterAppointManagePagePaginationAction = createAppointManagePagePaginationAction(afterValue)
-        dispatch(afterAppointManagePagePaginationAction)
 
     }
 })

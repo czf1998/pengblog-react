@@ -1,7 +1,9 @@
 import reducer from './reducer'
-import {createTriggerSearchInputIsFocusAction} from "./actionCreators";
+import {createAppointCurrentArticleDetailOfManagePage,
+        createTriggerShowArticleDetailOfManagePageAction} from "./actionCreators";
 
 export {reducer}
 
-export {createTriggerSearchInputIsFocusAction}
+export {createAppointCurrentArticleDetailOfManagePage,
+        createTriggerShowArticleDetailOfManagePageAction}
 

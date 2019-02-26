@@ -5,7 +5,9 @@ import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleLabelDataAction,
         createGetManagePageArticleListDataByKeyWordAction,
         createAppointManagePagePaginationAction,
-        createGetManagePageArticleListDataByFilingAction} from './actionCreators'
+        createGetManagePageArticleListDataByFilingAction,
+        createGetManagePageArticleListDataByLabelAction,
+        createResetCentralControllerOfManagePage} from './actionCreators'
 
 export { reducer}
 
@@ -15,5 +17,7 @@ export {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleLabelDataAction,
         createGetManagePageArticleListDataByKeyWordAction,
         createAppointManagePagePaginationAction,
-        createGetManagePageArticleListDataByFilingAction}
+        createGetManagePageArticleListDataByFilingAction,
+        createGetManagePageArticleListDataByLabelAction,
+        createResetCentralControllerOfManagePage}
 

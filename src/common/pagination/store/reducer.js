@@ -8,14 +8,13 @@ const defaultState = fromJS({
     managePage: fromJS({
         currentPage: 0,
         maxPage: 1,
-        startIndex: -2,
-        pageScale: 2,
+        startIndex: -8,
+        pageScale: 8,
     })
 })
 
 export default (state = defaultState, action) => {
     if(action.type === APPOINT_CURRENTPAGE_OF_PAGINATION){
-        console.log("appoint")
 
         let paginationId = action.value.paginationId
         let currentPage = action.value.currentPage

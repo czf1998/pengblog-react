@@ -11,3 +11,7 @@ export const GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD = 'getManagePageArtic
 export const APPOINT_MANAGE_PAGE_PAGINATION = 'appointManagePagePagination'
 
 export const GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING = 'getManagePageArticleListDataByFiling'
+
+export const GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL = 'getManagePageArticleListDataByLabel'
+
+export const RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE = 'resetCentralControllerOfManagePage'

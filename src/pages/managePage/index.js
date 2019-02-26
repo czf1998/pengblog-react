@@ -12,7 +12,8 @@ import {CentralController,
         ArticleLabel,
         ArticleReleaseTime,
         PaginationFixer,
-        LoadingWrapper} from './style'
+        LoadingWrapper,
+        ArticleDetail} from './style'
 import {SearchBar,
         ArticleFiling,
         ArticleClassification,
@@ -23,33 +24,42 @@ import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleFilingDataAction,
         createGetManagePageArticleLabelDataAction,
         createGetManagePageArticleListDataByKeyWordAction,
-        createGetManagePageArticleListDataByFilingAction} from "./store";
+        createGetManagePageArticleListDataByFilingAction,
+        createGetManagePageArticleListDataByLabelAction,
+        createResetCentralControllerOfManagePage} from "./store";
 import {Pagination} from '../../common'
 import Loading from "../../common/loading";
 import store from '../../store'
-import {COMMON_CONTEXT, FILING_CONTENT, SEARCH_CONTEXT} from "./store/reducer";
+import {COMMON_CONTEXT, FILING_CONTENT, LABEL_CONTEXT, SEARCH_CONTEXT} from "./store/reducer";
 
 class ManagePage extends PureComponent {
 
     render() {
 
-        const {isLoading,
+        const { isLoading,
                 articleList,
                 paginationObj,
                 articleFilingObj,
                 articleLabelObjList,
                 heightOfBrowser,
                 getArticleByKeyWord,
-                getArticleByFiling} = this.props
+                getArticleByFiling,
+                getArticleByLabel,
+                showArticleDetail} = this.props
 
         return (
             <Fragment>
                 <CentralController>
+
                     <SearchBar searchBarId="managePage"
                                dataGetter={getArticleByKeyWord}/>
+
                     <ArticleFiling articleFilingObj={articleFilingObj}
                                    dataGetter={getArticleByFiling}/>
-                    <ArticleClassification articleLabelObjList={articleLabelObjList}/>
+
+                    <ArticleClassification articleLabelObjList={articleLabelObjList}
+                                           dataGetter={getArticleByLabel}/>
+
                 </CentralController>
 
                 <ArticleListWrapper>
@@ -70,7 +80,7 @@ class ManagePage extends PureComponent {
                                         <Loading/>
                                     </LoadingWrapper>
                                     :
-                                    articleList && articleList.map((item, index) => {
+                                    articleList && articleList.map((item) => {
                                     return (
                                         <ArticleItem key={item.get('article_id')} article={item}/>
                                     )
@@ -85,6 +95,10 @@ class ManagePage extends PureComponent {
                                         maxPage={paginationObj.get('maxPage')}/>
                         </PaginationFixer>
                     </ArticleListFixer>
+
+                    <ArticleDetail showArticleDetail={showArticleDetail}>
+
+                    </ArticleDetail>
                 </ArticleListWrapper>
             </Fragment>
 
@@ -92,21 +106,17 @@ class ManagePage extends PureComponent {
 }
 
     componentDidMount() {
-        setTimeout(() => {
-            this.props.pushPrograssBarToEnd()
-        },500)
-
         this.props.getArticleFilingData()
         this.props.getArticleLabelData()
     }
 
     componentDidUpdate(preProps){
 
-        console.log('update')
-
         const currentContext = this.props.currentContext
 
         if(preProps.paginationObj.get('currentPage') !== this.props.paginationObj.get('currentPage') && preProps.currentContext === this.props.currentContext){
+
+            this.props.triggerIsLoadingManagePageArticleListData()
 
             if(currentContext === COMMON_CONTEXT){
                 this.props.getArticleListData()
@@ -119,6 +129,18 @@ class ManagePage extends PureComponent {
             if(currentContext === FILING_CONTENT){
                 this.props.getArticleByFiling()
             }
+
+            if(currentContext === LABEL_CONTEXT){
+                this.props.getArticleByLabel()
+            }
+        }
+
+        if(preProps.dataIsReady === false && this.props.dataIsReady === true){
+            this.props.pushPrograssBarToEnd()
+        }
+
+        if(this.props.showArticleDetail === true){
+            document.documentElement.style.overflowY = 'hidden'
         }
     }
 
@@ -131,7 +153,9 @@ const mapState = (state) => ({
         articleFilingObj: state.get('managePage').get('articleFilingObj'),
         articleLabelObjList: state.get('managePage').get('articleLabelObjList'),
         heightOfBrowser: state.get('rootState').get('heightOfBrowser'),
-        currentContext: state.get('managePage').get('currentContext')
+        currentContext: state.get('managePage').get('currentContext'),
+        dataIsReady: state.get('managePage').get('dataIsReady'),
+        showArticleDetail: state.get('managePage').get('showArticleDetail')
     })
 
 const mapActions = (dispatch) => {
@@ -141,10 +165,12 @@ const mapActions = (dispatch) => {
             dispatch(pushPrograssBarToEndAction)
         },
 
-        getArticleListData() {
+        triggerIsLoadingManagePageArticleListData(){
+            const action = createTriggerIsLoadingManagePageArticleListDataAction(true)
+            dispatch(action)
+        },
 
-            const triggerIsLoadingManagePageArticleListDataAction = createTriggerIsLoadingManagePageArticleListDataAction(true)
-            dispatch(triggerIsLoadingManagePageArticleListDataAction)
+        getArticleListData() {
 
             const startIndex = store.getState().get('pagination').get('managePage').get('startIndex')
             const pageScale = store.getState().get('pagination').get('managePage').get('pageScale')
@@ -171,6 +197,9 @@ const mapActions = (dispatch) => {
 
         getArticleByKeyWord(){
 
+            const resetCentralControllerAction = createResetCentralControllerOfManagePage(SEARCH_CONTEXT)
+            dispatch(resetCentralControllerAction)
+
             const keyWord = store.getState().get('searchBar').get('managePage').get('searchBarValue')
             const startIndex = store.getState().get('pagination').get('managePage').get('startIndex')
             const pageScale = store.getState().get('pagination').get('managePage').get('pageScale')
@@ -186,6 +215,9 @@ const mapActions = (dispatch) => {
         },
 
         getArticleByFiling(){
+
+            const resetCentralControllerAction = createResetCentralControllerOfManagePage(FILING_CONTENT)
+            dispatch(resetCentralControllerAction)
 
             const selectedYear = store.getState().get('select').get('year')
             const selectedMonth = store.getState().get('select').get('month')
@@ -205,6 +237,25 @@ const mapActions = (dispatch) => {
 
             const getArticleByFilingAction = createGetManagePageArticleListDataByFilingAction(value)
             dispatch(getArticleByFilingAction)
+        },
+
+        getArticleByLabel(){
+            const resetCentralControllerAction = createResetCentralControllerOfManagePage(LABEL_CONTEXT)
+            dispatch(resetCentralControllerAction)
+
+            const currentLabel = store.getState().get('managePage').get('currentLabel')
+            const startIndex = store.getState().get('pagination').get('managePage').get('startIndex')
+            const pageScale = store.getState().get('pagination').get('managePage').get('pageScale')
+
+
+            const value = {
+                startIndex: startIndex,
+                pageScale: pageScale,
+                article_label: currentLabel
+            }
+
+            const getArticleByLableAction = createGetManagePageArticleListDataByLabelAction(value)
+            dispatch(getArticleByLableAction)
         }
     }
 }
