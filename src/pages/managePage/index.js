@@ -13,11 +13,13 @@ import {CentralController,
         ArticleReleaseTime,
         PaginationFixer,
         LoadingWrapper,
-        ArticleDetail} from './style'
+        ArticleDetail,
+        SearchBarMobile} from './style'
 import {SearchBar,
         ArticleFiling,
         ArticleClassification,
-        ArticleItem} from './components'
+        ArticleItem,
+        ArticleItemMobile} from './components'
 import {createPushPrograssToEndAction} from "../articlePage/store";
 import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataAction,
@@ -45,7 +47,8 @@ class ManagePage extends PureComponent {
                 getArticleByKeyWord,
                 getArticleByFiling,
                 getArticleByLabel,
-                showArticleDetail} = this.props
+                showArticleDetail,
+                widthOfBrowser} = this.props
 
         return (
             <Fragment>
@@ -66,13 +69,26 @@ class ManagePage extends PureComponent {
                     <ArticleListFixer heightOfBrowser={heightOfBrowser}>
 
                         <ArticleList>
+
+                            <SearchBarMobile>
+                                <SearchBar searchBarId="managePage"
+                                           dataGetter={getArticleByKeyWord}/>
+                            </SearchBarMobile>
+
+
+
                             <Title>所有文章</Title>
-                            <Header>
-                                <HeaderArticleTitle>文章标题</HeaderArticleTitle>
-                                <ArticleAuthor>作者</ArticleAuthor>
-                                <ArticleLabel>标签</ArticleLabel>
-                                <ArticleReleaseTime>发表时间</ArticleReleaseTime>
-                            </Header>
+
+                            {
+                                widthOfBrowser > 800 &&
+                                <Header>
+                                    <HeaderArticleTitle>文章标题</HeaderArticleTitle>
+                                    <ArticleAuthor>作者</ArticleAuthor>
+                                    <ArticleLabel>标签</ArticleLabel>
+                                    <ArticleReleaseTime>发表时间</ArticleReleaseTime>
+                                </Header>
+                            }
+
 
                             {
                                 isLoading ?
@@ -82,7 +98,10 @@ class ManagePage extends PureComponent {
                                     :
                                     articleList && articleList.map((item) => {
                                     return (
-                                        <ArticleItem key={item.get('article_id')} article={item}/>
+                                        widthOfBrowser < 800 ?
+                                            <ArticleItemMobile key={item.get('article_id')} article={item}/>
+                                            :
+                                            <ArticleItem key={item.get('article_id')} article={item}/>
                                     )
                                 })
                             }
@@ -155,7 +174,8 @@ const mapState = (state) => ({
         heightOfBrowser: state.get('rootState').get('heightOfBrowser'),
         currentContext: state.get('managePage').get('currentContext'),
         dataIsReady: state.get('managePage').get('dataIsReady'),
-        showArticleDetail: state.get('managePage').get('showArticleDetail')
+        showArticleDetail: state.get('managePage').get('showArticleDetail'),
+        widthOfBrowser: state.get('rootState').get('widthOfBrowser')
     })
 
 const mapActions = (dispatch) => {

@@ -1,45 +1,51 @@
 import styled from 'styled-components'
 
 const headerHeight = 70
-const milePostWidth = 1000
+
+const milePostWidth2 = 800
+
+const milePostWidth = 1440
 
 export const CentralController = styled.div`
         position: fixed;
         top: ${headerHeight}px;
         bottom: 0;
         left: 0;
-        width: 320px;
+        width: 300px;
         padding-top: 2rem;
         border-right: solid 1px #EEEEEE;
         
-        @media(max-width:${milePostWidth}px){
-            width: 300px;
+        @media(max-width:${milePostWidth2}px){
+            display:none
         }
     `
 
 export const ArticleListWrapper = styled.div`
-        margin-left: 400px;
-        width: calc(100% - 400px);
         display: flex;
+        justify-content: center;
         padding-left: 1rem;
-        padding-right: 2rem;
+        padding-right: 1rem;
         
-        @media(max-width:${milePostWidth}px){
-            margin-left: 300px;
-            width: calc(100% - 300px);
+        margin-left: 300px;
+        width: calc(100% - 300px);
+        
+        @media(max-width:${milePostWidth2}px){
+            padding: 0;
+            margin-left: 0;
+            width: 100%;
         }
     `
 
 export const ArticleListFixer = styled.div`
         position: relative;
         min-height: ${props => props.heightOfBrowser - 70}px;
-        width: 700px;
+        width: 1000px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         
          @media(max-width:${milePostWidth}px){
-            width: 100%;
+            width: 800px;
         }
     `
 
@@ -48,9 +54,11 @@ export const ArticleList = styled.div`
 
 export const Title = styled.div`
         padding: 1rem 2rem;
-        padding-left: 0;
         font-size: 2rem;
         font-weight: 100;
+        @media(max-width:${milePostWidth2}px){
+            padding: 0 1rem;
+        }
     `
 
 
@@ -120,4 +128,12 @@ export const ArticleDetail = styled.div`
         background: gray;
         overflow-y:scroll;
         transition: all 0.4s ease; 
+    `
+
+export const SearchBarMobile = styled.div`
+        width: 100%;
+        display: none;
+        @media(max-width:${milePostWidth2}px){
+           display: block;
+        }
     `

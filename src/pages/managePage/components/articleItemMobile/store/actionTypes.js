@@ -1,0 +1,3 @@
+export const TRIGGER_SHOW_ARTICLE_DETAIL_OF_MANAGE_PAGE = 'triggerShowArticleDetailOfManagePage'
+
+export const APPOINT_CURRENT_ARTICLE_DETAIL_OF_MANAGE_PAGE = 'appointCurrentArticleDetailOfManagePage'

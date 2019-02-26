@@ -2,10 +2,15 @@ import styled from 'styled-components'
 
 const backgroundColor = '#F7F7F7'
 
+const maxMobileWidth = 750
+
 export const SearchBarWrapper = styled.div`
         width: 100%;
         position: relative;
         padding: 1rem 2rem;
+        @media(max-width: ${maxMobileWidth}px){
+            padding: 1rem 1rem;
+        }
     `
 
 export const Input = styled.input`
@@ -41,7 +46,7 @@ export const SubmitButton = styled.button`
         right: 2rem;
         color: white;
         height: calc(100% - 2rem);
-        width: ${props => props.isFocus ? '2.4rem' : '4.6rem'};
+        width: ${props => props.isFocus ? '2.4rem' : '3.8rem'};
         background: ${props => props.isFocus ? '#0084FF' : 'gray'};
         border: 1px solid ${props => props.isFocus ? '#0084FF' : 'gray'};
         border-radius: 0.4rem;
@@ -52,6 +57,9 @@ export const SubmitButton = styled.button`
             background: hsl(209, 100%, 45%);
             border: 1px solid #0084FF;
          }
+          @media(max-width: ${maxMobileWidth}px){
+            right: 1rem;
+        }
     `
 
 export const SearchTitle = styled.div`
