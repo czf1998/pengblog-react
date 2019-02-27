@@ -1,12 +1,6 @@
-import {TRIGGER_SHOW_ARTICLE_DETAIL_OF_MANAGE_PAGE,
-        APPOINT_CURRENT_ARTICLE_DETAIL_OF_MANAGE_PAGE} from './actionTypes'
+import {APPOINT_ARTICLE_BEING_SELECTED_IN_MANAGE_PAGE} from './actionTypes'
 
-export const createTriggerShowArticleDetailOfManagePageAction = (value) => ({
-    type: TRIGGER_SHOW_ARTICLE_DETAIL_OF_MANAGE_PAGE,
-    value
-})
-
-export const createAppointCurrentArticleDetailOfManagePage = (value) => ({
-    type: APPOINT_CURRENT_ARTICLE_DETAIL_OF_MANAGE_PAGE,
+export const createAppointArticleBeingSelectedInManagePage = (value) => ({
+    type: APPOINT_ARTICLE_BEING_SELECTED_IN_MANAGE_PAGE,
     value
 })

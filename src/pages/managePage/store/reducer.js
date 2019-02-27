@@ -8,13 +8,12 @@ import {
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING,
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD,
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL,
-    RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE,
+    RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE, TRIGGER_IS_MULTIPLE_SELECTING_IN_MANAGE_PAGE,
     TRIGGER_ISLOADING_MANAGE_PAGE_ARTICLE_LIST_DATA
 } from "./actionType";
 import {APPOINT_CURRENT_LABEL} from "../components/articleClassification/store/actionTypes";
 import {
-    APPOINT_CURRENT_ARTICLE_DETAIL_OF_MANAGE_PAGE,
-    TRIGGER_SHOW_ARTICLE_DETAIL_OF_MANAGE_PAGE
+    APPOINT_ARTICLE_BEING_SELECTED_IN_MANAGE_PAGE
 } from "../components/articleItem/store/actionTypes";
 
 export const COMMON_CONTEXT = 'common'
@@ -30,8 +29,8 @@ const defaultState = fromJS({
     currentLabel: undefined,
     currentContext: COMMON_CONTEXT,
     dataIsReady: false,
-    showArticleDetail: false,
-    currentArticleDetail: undefined
+    isMultipleSelecting: false,
+    articleListBeingSelected: []
 })
 
 export default (state = defaultState, action) => {
@@ -94,16 +93,41 @@ export default (state = defaultState, action) => {
         }
     }
 
-    if(action.type === TRIGGER_SHOW_ARTICLE_DETAIL_OF_MANAGE_PAGE){
+
+    if(action.type === TRIGGER_IS_MULTIPLE_SELECTING_IN_MANAGE_PAGE){
         return state.merge({
-            showArticleDetail: action.value
+            isMultipleSelecting: action.value
         })
     }
 
-    if(action.type === APPOINT_CURRENT_ARTICLE_DETAIL_OF_MANAGE_PAGE){
-        return state.merge({
-            currentArticleDetail: action.value
+    if(action.type === APPOINT_ARTICLE_BEING_SELECTED_IN_MANAGE_PAGE){
+
+
+        let articleListBeingSelected = state.get('articleListBeingSelected').toJS()
+        const articleHasBeingSelectedAlready = articleListBeingSelected.some((item) => {
+            return item === action.value.article_id
         })
+
+        if(!articleHasBeingSelectedAlready && action.value.isSelected){
+            return state.merge({
+                articleListBeingSelected:fromJS(articleListBeingSelected).push(action.value.article_id)
+            })
+        }
+
+        if(!action.value.isSelected){
+            articleListBeingSelected.map((item,index) => {
+                if(item === action.value.article_id){
+                    articleListBeingSelected.splice(index,1)
+
+                }
+            })
+            return state.merge({
+                articleListBeingSelected:fromJS(articleListBeingSelected)
+            })
+        }
+
+
+
     }
     return state
 }

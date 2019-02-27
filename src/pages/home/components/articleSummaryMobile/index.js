@@ -45,8 +45,7 @@ class ArticleSummary extends PureComponent {
                     </ArticleMultipleContent>
 
 
-                    <ArticleInfoColumn className={CommonClassNameConstants.FONT_DARK +
-                                                  CommonClassNameConstants.FONT_SMALL}>
+                    <ArticleInfoColumn className={CommonClassNameConstants.FONT_DARK}>
                         <span>
                                     <i className="fa fa-tag"></i> {article.get('article_label')}
                         </span>

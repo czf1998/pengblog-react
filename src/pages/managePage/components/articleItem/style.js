@@ -12,10 +12,11 @@ export const ArticleTitle = styled.div`
         position: relative;
         justify-content: flex-start;
         color: black;
-        cursor: pointer;
+        
     `
 
 export const ArticleTitleInner = styled.span`
+        cursor: pointer;
         &:hover{
             color: #3367d6;
         }
@@ -57,6 +58,8 @@ export const ArticleReleaseTime = styled(ArticleAuthor)`
 
 
 export const ArticleItemWrapper = styled.div`
+        position: relative;
+        padding-left: ${props => props.isMultipleSelecting ? '1rem' : '0'};
         width: 100%;
         display: flex;
         margin-top: 1rem;
@@ -65,6 +68,7 @@ export const ArticleItemWrapper = styled.div`
         margin-bottom: 0;
         background: white;
         border-bottom: solid 1px #EEEEEE;
+        transition: all 0.4s ease;
         ${props => props.browser === 'Safari' ? '' : `
             &:hover{
                 background:linear-gradient(to right, rgba(255,255,255,1), rgba(0,0,0,0.05), rgba(255,255,255,1));
@@ -72,4 +76,13 @@ export const ArticleItemWrapper = styled.div`
         `}
     `
 
+export const CheckBoxWrapper = styled.div`
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 1rem;
+        display: flex;
+        align-items: center;
+    `
 

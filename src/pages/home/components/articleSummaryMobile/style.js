@@ -26,6 +26,7 @@ export const ArticleInfoColumn = styled.div`
         display: flex;
         flex-wrap: wrap;
         line-height: 2;
+        font-size: 0.8rem;
     `
 
 export const ArticleMultipleContent = styled.div`

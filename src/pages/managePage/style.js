@@ -57,12 +57,15 @@ export const Title = styled.div`
         font-size: 2rem;
         font-weight: 100;
         @media(max-width:${milePostWidth2}px){
-            padding: 0 1rem;
+            padding: 1rem;
+            padding-bottom: 0;
+            
         }
     `
 
 
 export const Header = styled.div`
+        position: relative;
         width: 100%;
         display: flex;
         padding-bottom: 1rem;
@@ -71,6 +74,7 @@ export const Header = styled.div`
         color: grey;
     `
 
+
 export const HeaderArticleTitle = styled.div`
         width: 55%;
         display: flex;
@@ -78,7 +82,6 @@ export const HeaderArticleTitle = styled.div`
         align-items: center;
         padding-left: 2rem;
         padding-right: 1rem;
-        line-height: 1.4;
     `
 
 export const ArticleAuthor = styled.div`
@@ -90,9 +93,28 @@ export const ArticleAuthor = styled.div`
         line-height: 1.4;
     `
 
+
+export const MultipleSelectTitle = styled.div`
+        position:absolute;
+        width: 5%;
+        top: 0;
+        bottom: 0;
+        left: 1rem;
+        cursor: pointer;
+        color:#175199;
+        &:hover{
+            color: black;
+        }
+    `
+
+export const ShutDownMultipleSelect = styled(MultipleSelectTitle)`
+        left: calc(5% + 2rem);
+    `
+
 export const ArticleLabel = styled(ArticleAuthor)`
         width: 10%;
     `
+
 
 export const ArticleReleaseTime = styled(ArticleAuthor)`
         width: 20%;
@@ -133,6 +155,7 @@ export const ArticleDetail = styled.div`
 export const SearchBarMobile = styled.div`
         width: 100%;
         display: none;
+        border-bottom: solid 1px #f0f0f0; 
         @media(max-width:${milePostWidth2}px){
            display: block;
         }

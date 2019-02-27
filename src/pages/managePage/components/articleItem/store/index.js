@@ -1,9 +1,7 @@
 import reducer from './reducer'
-import {createAppointCurrentArticleDetailOfManagePage,
-        createTriggerShowArticleDetailOfManagePageAction} from "./actionCreators";
+import {createAppointArticleBeingSelectedInManagePage} from "./actionCreators";
 
 export {reducer}
 
-export {createAppointCurrentArticleDetailOfManagePage,
-        createTriggerShowArticleDetailOfManagePageAction}
+export {createAppointArticleBeingSelectedInManagePage}
 

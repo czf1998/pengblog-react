@@ -6,7 +6,8 @@ import {GET_MANAGE_PAGE_ARTICLE_LIST_DATA,
         APPOINT_MANAGE_PAGE_PAGINATION,
         GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING,
         GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL,
-        RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE} from './actionType'
+        RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE,
+        TRIGGER_IS_MULTIPLE_SELECTING_IN_MANAGE_PAGE} from './actionType'
 
 export const createGetManagePageArticleListDataAction = (value) => ({
     type: GET_MANAGE_PAGE_ARTICLE_LIST_DATA,
@@ -48,5 +49,10 @@ export const createGetManagePageArticleListDataByLabelAction = (value) => ({
 
 export const createResetCentralControllerOfManagePage = (value) => ({
     type: RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE,
+    value
+})
+
+export const createTiggerIsMultipleSelectingInManagePageAction = (value) => ({
+    type: TRIGGER_IS_MULTIPLE_SELECTING_IN_MANAGE_PAGE,
     value
 })

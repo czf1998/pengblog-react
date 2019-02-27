@@ -14,7 +14,9 @@ import {CentralController,
         PaginationFixer,
         LoadingWrapper,
         ArticleDetail,
-        SearchBarMobile} from './style'
+        SearchBarMobile,
+        MultipleSelectTitle,
+        ShutDownMultipleSelect} from './style'
 import {SearchBar,
         ArticleFiling,
         ArticleClassification,
@@ -28,7 +30,8 @@ import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataByKeyWordAction,
         createGetManagePageArticleListDataByFilingAction,
         createGetManagePageArticleListDataByLabelAction,
-        createResetCentralControllerOfManagePage} from "./store";
+        createResetCentralControllerOfManagePage,
+        createTiggerIsMultipleSelectingInManagePageAction} from "./store";
 import {Pagination} from '../../common'
 import Loading from "../../common/loading";
 import store from '../../store'
@@ -48,7 +51,10 @@ class ManagePage extends PureComponent {
                 getArticleByFiling,
                 getArticleByLabel,
                 showArticleDetail,
-                widthOfBrowser} = this.props
+                widthOfBrowser,
+                currentContext,
+                triggerIsMultipleSelecting,
+                isMultipleSelecting} = this.props
 
         return (
             <Fragment>
@@ -77,11 +83,20 @@ class ManagePage extends PureComponent {
 
 
 
-                            <Title>所有文章</Title>
+                            <Title>
+                                {
+                                    currentContext !== 'common' ? '检索结果' : '所有文章'
+                                }
+                            </Title>
 
                             {
                                 widthOfBrowser > 800 &&
                                 <Header>
+                                    <MultipleSelectTitle onClick={() => {triggerIsMultipleSelecting(true)}}>多选</MultipleSelectTitle>
+                                    {
+                                        isMultipleSelecting &&
+                                        <ShutDownMultipleSelect onClick={() => {triggerIsMultipleSelecting(false)}}>完成</ShutDownMultipleSelect>
+                                    }
                                     <HeaderArticleTitle>文章标题</HeaderArticleTitle>
                                     <ArticleAuthor>作者</ArticleAuthor>
                                     <ArticleLabel>标签</ArticleLabel>
@@ -99,9 +114,11 @@ class ManagePage extends PureComponent {
                                     articleList && articleList.map((item) => {
                                     return (
                                         widthOfBrowser < 800 ?
-                                            <ArticleItemMobile key={item.get('article_id')} article={item}/>
+                                            <ArticleItemMobile isMultipleSelecting={isMultipleSelecting}
+                                                               key={item.get('article_id')} article={item}/>
                                             :
-                                            <ArticleItem key={item.get('article_id')} article={item}/>
+                                            <ArticleItem isMultipleSelecting={isMultipleSelecting}
+                                                         key={item.get('article_id')} article={item}/>
                                     )
                                 })
                             }
@@ -175,7 +192,8 @@ const mapState = (state) => ({
         currentContext: state.get('managePage').get('currentContext'),
         dataIsReady: state.get('managePage').get('dataIsReady'),
         showArticleDetail: state.get('managePage').get('showArticleDetail'),
-        widthOfBrowser: state.get('rootState').get('widthOfBrowser')
+        widthOfBrowser: state.get('rootState').get('widthOfBrowser'),
+        isMultipleSelecting: state.get('managePage').get('isMultipleSelecting')
     })
 
 const mapActions = (dispatch) => {
@@ -276,6 +294,11 @@ const mapActions = (dispatch) => {
 
             const getArticleByLableAction = createGetManagePageArticleListDataByLabelAction(value)
             dispatch(getArticleByLableAction)
+        },
+
+        triggerIsMultipleSelecting(flag){
+            const triggerIsMultipleSelectingAction = createTiggerIsMultipleSelectingInManagePageAction(flag)
+            dispatch(triggerIsMultipleSelectingAction)
         }
     }
 }

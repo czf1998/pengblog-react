@@ -13,6 +13,7 @@ import Notice from './notice'
 import Modal from './modal'
 import Select from './select'
 import Pagination from './pagination'
+import CheckBox from './checkBox'
 
 export {Button,
         Input,
@@ -29,4 +30,5 @@ export {Button,
         Notice,
         Modal,
         Select,
-        Pagination }
+        Pagination,
+        CheckBox }
