@@ -94,14 +94,20 @@ export const ArticleAuthor = styled.div`
     `
 
 
-export const MultipleSelectTitle = styled.div`
+export const MultipleSelectTitle = styled.span`
         position:absolute;
         width: 5%;
         top: 0;
         bottom: 0;
         left: 1rem;
+        padding-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
         color:#175199;
+        overflow: visible;
+        white-space: nowrap;
         &:hover{
             color: black;
         }

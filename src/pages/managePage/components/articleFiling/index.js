@@ -39,7 +39,7 @@ class ArticleFiling extends PureComponent {
 
         return (
          <ArticleFilingWrapper>
-             <ArticleFilingTitle>文章归档</ArticleFilingTitle>
+             <ArticleFilingTitle>归档</ArticleFilingTitle>
 
              <ArticleFilinger>
                  <DateSelector>

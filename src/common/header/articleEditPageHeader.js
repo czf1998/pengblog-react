@@ -36,7 +36,7 @@ class ArticleEditPageHeader extends PureComponent {
                            zIndex={3}
                            isMobile={isMobile}>
 
-                <HeaderMainArea>
+                <HeaderMainArea isMobile={isMobile}>
                     <NavItemWrapper>
 
                             <Logo/>

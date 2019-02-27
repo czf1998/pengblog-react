@@ -31,7 +31,7 @@ class ArticleItemMobile extends PureComponent {
 
 
         return (
-            <ArticleItemMobileWrapper>
+            <ArticleItemMobileWrapper onClick={() => {goTo('/article/' + article.get('article_id'))}}>
 
                 <ArticleLabelAndTitle>
 
@@ -39,7 +39,7 @@ class ArticleItemMobile extends PureComponent {
                         [{article.get('article_label')}]
                     </Label>&nbsp;
 
-                    <Title  onClick={() => {goTo('/article/' + article.get('article_id'))}}>
+                    <Title>
                         {article.get('article_title')}
                     </Title>
 

@@ -18,8 +18,13 @@ export const HeaderMainArea = styled.div`
         justify-content: space-between;
         height: inherit;
         width: 100%;
-        padding-left: 1rem;
-        padding-right: 2rem;
+        padding-left: ${props => props.isMobile ? '0' : '1rem'};
+        padding-right: ${props => props.isMobile ? '0' : '2rem'};
+    `
+
+export const MobileHeaderMainArea = styled(HeaderMainArea)`
+        position: relative;
+        padding: 0;
     `
 
 export const NavItemWrapper = styled.div`
@@ -44,8 +49,6 @@ export const NavItem = styled.div`
         }
     `
 
-
-
 export const SubmitButton = styled.div`
         display:flex;
         align-items: center;
@@ -59,4 +62,43 @@ export const SubmitButton = styled.div`
 export const Info = styled.div`
         height: auto;
         font-size: 1.2rem;
+    `
+
+export const MenuButtonWrapper = styled.div`
+        padding-right: ${props => props.showMenuList ? '0':'1rem'};;
+        color: ${props => props.showMenuList ? 'black':'grey'};
+        transition: all 0.4s ease;
+    `
+
+export const Button = styled.span``
+
+export const MenuList = styled.div`
+        height: ${props => props.showMenuList ? '12rem' : '0'};
+        background: white;
+        position: absolute;
+        width: 100%;
+        top: 100%;
+        left: 0;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        border-bottom: solid 1px rgba(60, 64, 67, 0.3);
+        box-shadow:rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    `
+
+export const MenuItem = styled.div`
+        color: grey;
+        font-size: 1.2rem;
+        height: 4rem;
+        margin: 0 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: solid 1px #F0F0F0;
+    `
+
+export const Cover = styled.div`
+        z-index: -1;
+        position: fixed;
+        height: 100%;
+        width: 100%;
     `

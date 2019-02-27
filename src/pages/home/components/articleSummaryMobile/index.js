@@ -34,7 +34,8 @@ class ArticleSummary extends PureComponent {
                     <ArticleMultipleContent>
                         <ArticleContent className={CommonClassNameConstants.CURSORP +
                                                     CommonClassNameConstants.OVER_3ROWS_HANDLE}
-                                        withPreviewImage={withPreviewImage}>
+                                        withPreviewImage={withPreviewImage}
+                                        isMobile={isMobile}>
                             {article.get('article_summary')}
                         </ArticleContent>
 
@@ -45,7 +46,8 @@ class ArticleSummary extends PureComponent {
                     </ArticleMultipleContent>
 
 
-                    <ArticleInfoColumn className={CommonClassNameConstants.FONT_DARK}>
+                    <ArticleInfoColumn isMobile={isMobile}
+                                       className={CommonClassNameConstants.FONT_DARK}>
                         <span>
                                     <i className="fa fa-tag"></i> {article.get('article_label')}
                         </span>

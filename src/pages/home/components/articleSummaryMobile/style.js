@@ -26,7 +26,7 @@ export const ArticleInfoColumn = styled.div`
         display: flex;
         flex-wrap: wrap;
         line-height: 2;
-        font-size: 0.8rem;
+        font-size: ${props => props.isMobile ? '1rem' : '0.8rem'};
     `
 
 export const ArticleMultipleContent = styled.div`
@@ -35,7 +35,7 @@ export const ArticleMultipleContent = styled.div`
     `
 
 export const ArticleContent = styled.div`
-        font-size: 0.8rem;
+        font-size: ${props => props.isMobile ? '1rem' : '0.8rem'};
         width: ${props => props.withPreviewImage ? '62%' : '100%'};
         color: black;
         line-height:1.5;

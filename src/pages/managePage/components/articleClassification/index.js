@@ -13,7 +13,7 @@ class ArticleClassification extends PureComponent {
 
         return (
             <ArticleClassificationWrapper>
-                <Title>文章TAG</Title>
+                <Title>TAG</Title>
                 <Tags>
 
                     {

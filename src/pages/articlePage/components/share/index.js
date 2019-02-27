@@ -50,7 +50,8 @@ const mapActions = (dispatch) => ({
 
         const appointModalMsgValue = {
             modalTitle: '打开微信扫描以下二维码',
-            modalContent: SHARE_TO_WECHAT
+            modalContent: SHARE_TO_WECHAT,
+            onlyQrcode: true
         }
 
         const appointModalMsgAction = createAppointModalMsgAction(appointModalMsgValue)

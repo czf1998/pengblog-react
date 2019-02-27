@@ -31,6 +31,16 @@ class CommonHeader extends PureComponent {
                     <Logo/>
 
                     <NavItemWrapper>
+
+                        <NavItem cursorp={true}>
+                            <span className="iconfont"
+                                  onClick={() => {goTo('/manage')}}
+                                  style={{fontSize:'1.6rem'}}>&#xe76a;</span>
+                            <Info onClick={() => {goTo('/manage')}}>
+                                索引
+                            </Info>
+                        </NavItem>
+
                         <NavItem cursorp={true}>
                             <span className="iconfont"
                                   onClick={() => {goTo('/edit')}}

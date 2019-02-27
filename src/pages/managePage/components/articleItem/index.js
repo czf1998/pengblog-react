@@ -14,6 +14,8 @@ import {
 } from "./style";
 import {DateFormat} from "../../../../exJs";
 import {CheckBox} from '../../../../common'
+import {createAppointModalMsgAction, createTriggerShowModalAction} from "../../../../common/modal/store";
+import {SHARE_TO_WECHAT} from "../../../articlePage/components/share";
 
 
 
@@ -29,7 +31,13 @@ class ArticleItem extends PureComponent {
 
     render() {
 
-        const {article,goTo,browser,isMultipleSelecting,articleListBeingSelected,checkBoxSelecter} = this.props
+        const {article,
+                goTo,
+                browser,
+                isMultipleSelecting,
+                articleListBeingSelected,
+                checkBoxSelecter,
+                tryToDeleteThisArticle} = this.props
 
         const isSelected = articleListBeingSelected.some((item) => {
             return item === article.get('article_id')
@@ -38,40 +46,55 @@ class ArticleItem extends PureComponent {
         const {isBeingHover} = this.state
 
         const article_id = article.get('article_id')
+        const article_title = article.get('article_title')
+        const article_author = article.get('article_author')
+        const article_label = article.get('article_label')
+        const article_releaseTime = article.get('article_releaseTime')
 
         return (
             <ArticleItemWrapper isMultipleSelecting={isMultipleSelecting}
                                 browser={browser}
-                                onMouseEnter={() => {this.mouseBehaviourHandler(true)}}
-                                onMouseLeave={() => {this.mouseBehaviourHandler(false)}}>
+                                onMouseEnter={() => {this.mouseBehaviourHandler(true,browser)}}
+                                onMouseLeave={() => {this.mouseBehaviourHandler(false,browser)}}>
+
                 {
                     isMultipleSelecting &&
                     <CheckBoxWrapper>
-                        <CheckBox isSelected={isSelected} selecter={(flag) => {checkBoxSelecter(article_id, flag)}}/>
+                        <CheckBox isSelected={isSelected}
+                                  selecter={(flag) => {checkBoxSelecter(article_id, flag)}}/>
                     </CheckBoxWrapper>
                 }
 
-
                 <ArticleTitle isBeingHover={isBeingHover}>
-                    <ArticleTitleInner  onClick={() => {goTo('/article/' + article.get('article_id'))}}>
-                        {article.get('article_title')}
+
+                    <ArticleTitleInner browser={browser}
+                                       onClick={() => {goTo('/article/' + article_id)}}>
+                        {article_title}
                     </ArticleTitleInner>
+
+
+
                     {
-                        isBeingHover &&
-                        <DeleteButton><span className="iconfont">&#xe60c;</span></DeleteButton>
+                        (isBeingHover || browser === 'Safari') &&
+                        <DeleteButton browser={browser}>
+                            <span className="iconfont"
+                                  style={{cursor: 'pointer'}}
+                                  onClick={() => {tryToDeleteThisArticle(article_id,article_title)}}>&#xe60c;</span>
+                        </DeleteButton>
                     }
+
                 </ArticleTitle>
 
                 <ArticleAuthor>
-                    {article.get('article_author')}
+                    {article_author}
                 </ArticleAuthor>
 
                 <ArticleLabel>
-                    {article.get('article_label')}
+                    {article_label}
                 </ArticleLabel>
 
                 <ArticleReleaseTime>
-                    {DateFormat('yyyy-MM-dd',new Date(article.get('article_releaseTime')))}
+                    {DateFormat('yyyy-MM-dd',new Date(article_releaseTime))}
                 </ArticleReleaseTime>
 
             </ArticleItemWrapper>
@@ -82,7 +105,10 @@ class ArticleItem extends PureComponent {
 
     }
 
-    mouseBehaviourHandler(flag){
+    mouseBehaviourHandler(flag,browser){
+        if(browser === 'Safari'){
+            return
+        }
        this.setState({
            isBeingHover: flag
        })
@@ -107,6 +133,19 @@ const mapActions = (dispatch) => ({
         }
         const action = createAppointArticleBeingSelectedInManagePage(value)
         dispatch(action)
+    },
+    tryToDeleteThisArticle(article_id,article_title){
+        const appointModalMsgValue = {
+            modalTitle: '提示',
+            modalContent: '你正在试图删除标题为“' + article_title + '”的文章，这个操作将不可恢复。',
+            onlyQrcode: false
+        }
+
+        const appointModalMsgAction = createAppointModalMsgAction(appointModalMsgValue)
+        dispatch(appointModalMsgAction)
+
+        const triggerShowModalAction = createTriggerShowModalAction(true)
+        dispatch(triggerShowModalAction)
     }
 })
 

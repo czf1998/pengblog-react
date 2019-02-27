@@ -17,9 +17,11 @@ export const ArticleTitle = styled.div`
 
 export const ArticleTitleInner = styled.span`
         cursor: pointer;
-        &:hover{
+        ${props => props.browser === 'Safari' ? '' : `
+          &:hover{
             color: #3367d6;
-        }
+            }
+        `}
     `
 
 export const DeleteButton = styled.div`
@@ -31,9 +33,11 @@ export const DeleteButton = styled.div`
         padding: 0.5rem;
         align-items: center;
         color: black;  
-        &:hover{
-            color: #3367d6;
-        }     
+         ${props => props.browser === 'Safari' ? '' : `
+             &:hover{
+                color: #3367d6;
+            }     
+         `}
     `
 
 

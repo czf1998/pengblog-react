@@ -1,5 +1,7 @@
 import reducer from './reducer'
-import {createTriggerIsSavingArticleAction} from './actionCreators'
+import {createTriggerIsSavingArticleAction,
+        createTriggerShowMenuListOfMobileHeader} from './actionCreators'
 
 export { reducer }
-export {createTriggerIsSavingArticleAction}
+export {createTriggerIsSavingArticleAction,
+        createTriggerShowMenuListOfMobileHeader}

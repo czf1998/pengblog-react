@@ -92,10 +92,14 @@ class ManagePage extends PureComponent {
                             {
                                 widthOfBrowser > 800 &&
                                 <Header>
-                                    <MultipleSelectTitle onClick={() => {triggerIsMultipleSelecting(true)}}>多选</MultipleSelectTitle>
+                                    <MultipleSelectTitle onClick={() => {triggerIsMultipleSelecting(true)}}>
+                                        {
+                                            isMultipleSelecting ? '批量删除' : '多选'
+                                        }
+                                    </MultipleSelectTitle>
                                     {
                                         isMultipleSelecting &&
-                                        <ShutDownMultipleSelect onClick={() => {triggerIsMultipleSelecting(false)}}>完成</ShutDownMultipleSelect>
+                                        <ShutDownMultipleSelect onClick={() => {triggerIsMultipleSelecting(false)}}>取消</ShutDownMultipleSelect>
                                     }
                                     <HeaderArticleTitle>文章标题</HeaderArticleTitle>
                                     <ArticleAuthor>作者</ArticleAuthor>
@@ -144,6 +148,9 @@ class ManagePage extends PureComponent {
     componentDidMount() {
         this.props.getArticleFilingData()
         this.props.getArticleLabelData()
+        if(this.props.dataIsReady){
+            this.props.pushPrograssBarToEnd()
+        }
     }
 
     componentDidUpdate(preProps){

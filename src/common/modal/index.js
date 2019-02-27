@@ -1,7 +1,16 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
-import {ModalWrapper,ModalCover,ModalBodyWrapper,ModalTitle,ModalContent,CloseButton,QrcodeContainer} from "./style";
+import {ModalWrapper,
+        ModalCover,
+        ModalBodyWrapper,
+        ModalTitle,
+        ModalContent,
+        CloseButton,
+        QrcodeContainer,
+        OperationColumn,
+        ConfirmButton,
+        CancelButton} from "./style";
 import {CommonClassNameConstants} from "../../commonStyle";
 import {createTriggerShowModalAction} from "./store";
 import {SHARE_TO_WECHAT} from "../../pages/articlePage/components/share";
@@ -11,10 +20,17 @@ class Modal extends PureComponent{
 
     render(){
 
-        const {showModal,closeThisModal,modalTitle,modalContent} = this.props
+        const {showModal,
+                closeThisModal,
+                modalTitle,
+                modalContent,
+                onlyQrcode,
+                browser,
+                postProcessor} = this.props
 
         return (
             <ModalWrapper>
+
                 <CSSTransition in={showModal}
                                timeout={400}
                                classNames={CommonClassNameConstants.FADE_IN_CSSTRANSITION}
@@ -26,22 +42,37 @@ class Modal extends PureComponent{
                 <CSSTransition in={showModal}
                                timeout={400}
                                classNames={CommonClassNameConstants.SLIDE_DOWN}
-                                appear={true}
+                               appear={true}
                                unmountOnExit>
                     <ModalBodyWrapper >
+
                         <ModalTitle>
                             {modalTitle}
                         </ModalTitle>
-                        {
-                            !modalContent === SHARE_TO_WECHAT &&
-                            <ModalContent>{modalContent}</ModalContent>
-                        }
-                        <QrcodeContainer id="qrcode">
 
-                        </QrcodeContainer>
-                        <CloseButton className="iconfont" onClick={closeThisModal}>&#xe70b;</CloseButton>
+                        {
+                            onlyQrcode ?
+                                <QrcodeContainer id="qrcode"/>
+                                :
+                                <ModalContent>{modalContent}</ModalContent>
+                        }
+
+                        {
+                            !onlyQrcode &&
+                            <OperationColumn>
+                                <ConfirmButton browser={browser} onClick={() => {closeThisModal();postProcessor()}}>确认</ConfirmButton>
+                                <CancelButton onClick={closeThisModal}>取消</CancelButton>
+                            </OperationColumn>
+                        }
+
+
+
+                        <CloseButton className="iconfont"
+                                     onClick={closeThisModal}>&#xe70b;</CloseButton>
+
                     </ModalBodyWrapper>
                 </CSSTransition>
+
             </ModalWrapper>
         )
     }
@@ -56,7 +87,10 @@ class Modal extends PureComponent{
 const mapState = (state) => ({
     showModal: state.get('modal').get('showModal'),
     modalTitle: state.get('modal').get('modalTitle'),
-    modalContent: state.get('modal').get('modalContent')
+    modalContent: state.get('modal').get('modalContent'),
+    onlyQrcode: state.get('modal').get('onlyQrcode'),
+    browser: state.get('rootState').get('browser'),
+    postProcessor: state.get('modal').get('postProcessor')
 })
 
 const mapActions = (dispatch) => ({

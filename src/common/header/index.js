@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import CommonHeader from './commonHeader'
+import MobileHeader from './mobileHeader'
 import ArticleEditPageHeader from './articleEditPageHeader'
 
 class Header extends PureComponent {
@@ -19,7 +20,7 @@ class Header extends PureComponent {
                         :
                         (
                             isMobile ?
-                                <CommonHeader/>
+                                <MobileHeader/>
                                 :
                                 <CommonHeader/>
                         )
