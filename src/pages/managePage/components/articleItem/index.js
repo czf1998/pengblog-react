@@ -14,8 +14,9 @@ import {
 } from "./style";
 import {DateFormat} from "../../../../exJs";
 import {CheckBox} from '../../../../common'
-import {createAppointModalMsgAction, createTriggerShowModalAction} from "../../../../common/modal/store";
-import {SHARE_TO_WECHAT} from "../../../articlePage/components/share";
+import {createAppointModalMsgAction,
+        createTriggerShowModalAction,
+        createTriggerModalIsLoadingAction} from "../../../../common/modal/store";
 
 
 
@@ -37,7 +38,8 @@ class ArticleItem extends PureComponent {
                 isMultipleSelecting,
                 articleListBeingSelected,
                 checkBoxSelecter,
-                tryToDeleteThisArticle} = this.props
+                tryToDeleteThisArticle,
+                confirmDeletePostProcessor} = this.props
 
         const isSelected = articleListBeingSelected.some((item) => {
             return item === article.get('article_id')
@@ -79,7 +81,7 @@ class ArticleItem extends PureComponent {
                         <DeleteButton browser={browser}>
                             <span className="iconfont"
                                   style={{cursor: 'pointer'}}
-                                  onClick={() => {tryToDeleteThisArticle(article_id,article_title)}}>&#xe60c;</span>
+                                  onClick={() => {tryToDeleteThisArticle(article_id,article_title,confirmDeletePostProcessor)}}>&#xe60c;</span>
                         </DeleteButton>
                     }
 
@@ -134,11 +136,12 @@ const mapActions = (dispatch) => ({
         const action = createAppointArticleBeingSelectedInManagePage(value)
         dispatch(action)
     },
-    tryToDeleteThisArticle(article_id,article_title){
+    tryToDeleteThisArticle(article_id,article_title,confirmDeletePostProcessor){
         const appointModalMsgValue = {
             modalTitle: '提示',
             modalContent: '你正在试图删除标题为“' + article_title + '”的文章，这个操作将不可恢复。',
-            onlyQrcode: false
+            onlyQrcode: false,
+            postProcessor: () => {confirmDeletePostProcessor(article_id)}
         }
 
         const appointModalMsgAction = createAppointModalMsgAction(appointModalMsgValue)
@@ -146,7 +149,13 @@ const mapActions = (dispatch) => ({
 
         const triggerShowModalAction = createTriggerShowModalAction(true)
         dispatch(triggerShowModalAction)
+    },
+    confirmDeletePostProcessor(article_id){
+
+        const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(true)
+        dispatch(triggerModalIsLoadingAction)
+
     }
-})
+ })
 
 export default connect(mapState, mapActions)(ArticleItem)

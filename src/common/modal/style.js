@@ -100,3 +100,12 @@ export const CancelButton = styled(ConfirmButton)`
         color: #AA0000;
     `
 
+export const LoadingWraper = styled(ModalContent)`
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    `
+
+export const LoadingIcon = styled.img`
+        transform: scale(0.8);
+    `

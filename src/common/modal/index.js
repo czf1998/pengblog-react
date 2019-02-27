@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent,Fragment } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import {ModalWrapper,
@@ -10,11 +10,14 @@ import {ModalWrapper,
         QrcodeContainer,
         OperationColumn,
         ConfirmButton,
-        CancelButton} from "./style";
+        CancelButton,
+        LoadingWraper,
+        LoadingIcon} from "./style";
 import {CommonClassNameConstants} from "../../commonStyle";
 import {createTriggerShowModalAction} from "./store";
 import {SHARE_TO_WECHAT} from "../../pages/articlePage/components/share";
 import QRCode from 'qrcodejs2'
+import loadingSpin from "../loading/svg/loading-spin.svg";
 
 class Modal extends PureComponent{
 
@@ -26,7 +29,8 @@ class Modal extends PureComponent{
                 modalContent,
                 onlyQrcode,
                 browser,
-                postProcessor} = this.props
+                postProcessor,
+                isLoading} = this.props
 
         return (
             <ModalWrapper>
@@ -54,13 +58,23 @@ class Modal extends PureComponent{
                             onlyQrcode ?
                                 <QrcodeContainer id="qrcode"/>
                                 :
-                                <ModalContent>{modalContent}</ModalContent>
+                                (
+                                    isLoading ?
+                                        <LoadingWraper>
+                                            <LoadingIcon src={loadingSpin} alt="Loading icon"/>&nbsp;IS LOADING...
+                                        </LoadingWraper>
+                                        :
+                                        <ModalContent>
+                                            {modalContent}
+                                        </ModalContent>
+                                )
+
                         }
 
                         {
                             !onlyQrcode &&
                             <OperationColumn>
-                                <ConfirmButton browser={browser} onClick={() => {closeThisModal();postProcessor()}}>确认</ConfirmButton>
+                                <ConfirmButton browser={browser} onClick={postProcessor}>确认</ConfirmButton>
                                 <CancelButton onClick={closeThisModal}>取消</CancelButton>
                             </OperationColumn>
                         }
@@ -90,7 +104,8 @@ const mapState = (state) => ({
     modalContent: state.get('modal').get('modalContent'),
     onlyQrcode: state.get('modal').get('onlyQrcode'),
     browser: state.get('rootState').get('browser'),
-    postProcessor: state.get('modal').get('postProcessor')
+    postProcessor: state.get('modal').get('postProcessor'),
+    isLoading: state.get('modal').get('isLoading')
 })
 
 const mapActions = (dispatch) => ({
