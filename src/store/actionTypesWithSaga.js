@@ -49,3 +49,5 @@ export const DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE = 'deliverArticleListDataT
 export const DELIVER_ARTICLE_FILING_DATA_TO_MANAGE_PAGE = 'deliverArticleFilingDataToManagePage'
 
 export const DELIVER_ARTICLE_LABEL_DATA_TO_MANAGE_PAGE = 'deliverArticleLabelDataToManagePage'
+
+export const RECORD_ARTICLE_HAS_BEEN_DELETE = 'recordArticleHasBeenDelete'

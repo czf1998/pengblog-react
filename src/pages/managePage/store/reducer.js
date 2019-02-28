@@ -2,7 +2,7 @@ import { fromJS } from 'immutable'
 import {
     DELIVER_ARTICLE_FILING_DATA_TO_MANAGE_PAGE,
     DELIVER_ARTICLE_LABEL_DATA_TO_MANAGE_PAGE,
-    DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE
+    DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE, RECORD_ARTICLE_HAS_BEEN_DELETE
 } from "../../../store/actionTypesWithSaga";
 import {
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING,
@@ -30,7 +30,8 @@ const defaultState = fromJS({
     currentContext: COMMON_CONTEXT,
     dataIsReady: false,
     isMultipleSelecting: false,
-    articleListBeingSelected: []
+    articleListBeingSelected: [],
+    articleHasBeenDeleteList: []
 })
 
 export default (state = defaultState, action) => {
@@ -102,7 +103,6 @@ export default (state = defaultState, action) => {
 
     if(action.type === APPOINT_ARTICLE_BEING_SELECTED_IN_MANAGE_PAGE){
 
-
         let articleListBeingSelected = state.get('articleListBeingSelected').toJS()
         const articleHasBeingSelectedAlready = articleListBeingSelected.some((item) => {
             return item === action.value.article_id
@@ -125,9 +125,14 @@ export default (state = defaultState, action) => {
                 articleListBeingSelected:fromJS(articleListBeingSelected)
             })
         }
+    }
 
-
-
+    if(action.type === RECORD_ARTICLE_HAS_BEEN_DELETE){
+        let articleHasBeenDeleteList = state.get('articleHasBeenDeleteList')
+        console.log(action.value)
+        return state.merge({
+            articleHasBeenDeleteList: articleHasBeenDeleteList.push(action.value)
+        })
     }
     return state
 }

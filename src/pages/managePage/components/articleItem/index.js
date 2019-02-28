@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {} from './style'
-import {createAppointArticleBeingSelectedInManagePage} from './store'
+import {createAppointArticleBeingSelectedInManagePage,
+        createDeleteArticleAction} from './store'
 import {
     ArticleAuthor,
     ArticleItemWrapper,
@@ -39,9 +40,14 @@ class ArticleItem extends PureComponent {
                 articleListBeingSelected,
                 checkBoxSelecter,
                 tryToDeleteThisArticle,
-                confirmDeletePostProcessor} = this.props
+                confirmDeletePostProcessor,
+                articleHasBeenDeleteList} = this.props
 
         const isSelected = articleListBeingSelected.some((item) => {
+            return item === article.get('article_id')
+        })
+
+        const isDeleted = articleHasBeenDeleteList.some((item) => {
             return item === article.get('article_id')
         })
 
@@ -54,7 +60,8 @@ class ArticleItem extends PureComponent {
         const article_releaseTime = article.get('article_releaseTime')
 
         return (
-            <ArticleItemWrapper isMultipleSelecting={isMultipleSelecting}
+            <ArticleItemWrapper isDeleted={isDeleted}
+                                isMultipleSelecting={isMultipleSelecting}
                                 browser={browser}
                                 onMouseEnter={() => {this.mouseBehaviourHandler(true,browser)}}
                                 onMouseLeave={() => {this.mouseBehaviourHandler(false,browser)}}>
@@ -123,7 +130,8 @@ const mapState = (state) => {
     return  {
         goTo: state.get('router').get('goTo'),
         browser: state.get('rootState').get('browser'),
-        articleListBeingSelected: state.get('managePage').get('articleListBeingSelected')
+        articleListBeingSelected: state.get('managePage').get('articleListBeingSelected'),
+        articleHasBeenDeleteList: state.get('managePage').get('articleHasBeenDeleteList')
     }
 }
 
@@ -154,6 +162,9 @@ const mapActions = (dispatch) => ({
 
         const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(true)
         dispatch(triggerModalIsLoadingAction)
+
+        const deleteArticleAction = createDeleteArticleAction(article_id)
+        dispatch(deleteArticleAction)
 
     }
  })

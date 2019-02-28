@@ -74,3 +74,14 @@ export const RequestArticleListDataByLabel = (value) => {
 
     return axios.get(Api.API_GET_ARTICLE_LIST_BY_LABEL, config)
 }
+
+export const RequestDeleteArticle = (value) => {
+
+    let config = {
+        params: {
+            article_id: value
+        }
+    }
+
+    return axios.get(Api.API_DELETE_ARTICLE, config)
+}

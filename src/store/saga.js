@@ -26,7 +26,8 @@ import {createDeliverArticleDataToHomeAction,
         createDeliverTitleImageUrlAction,
         createDeliverArticleListDataToManagePageAction,
         createDeliverArticleFilingDataToManagePageAction,
-        createDeliverArticleLabelDataToManagePageAction} from './actionCreators'
+        createDeliverArticleLabelDataToManagePageAction,
+        createRecordArticleHasBeenDeletedAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest} from './request'
@@ -47,6 +48,8 @@ import {
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING,
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD, GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL
 } from "../pages/managePage/store/actionType";
+import {DELETE_ARTICLE} from "../pages/managePage/components/articleItem/store/actionTypes";
+import {createTriggerShowModalAction} from "../common/modal/store";
 
 
 function* mySaga() {
@@ -67,6 +70,25 @@ function* mySaga() {
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD, ajaxManagePageArticleListDataByKeyWord)
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING, ajaxManagePageArticleListDataByFiling)
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL, ajaxManagePageArticleListDataByLabel)
+    yield takeEvery(DELETE_ARTICLE, ajaxDeleteArticle)
+}
+
+function* ajaxDeleteArticle(action) {
+    try{
+
+        yield ArticleRequest.RequestDeleteArticle(action.value)
+
+        //标记已删除的文章条目
+        const recordArticleHasBeenDeletedAction = createRecordArticleHasBeenDeletedAction(action.value)
+        yield put(recordArticleHasBeenDeletedAction)
+
+        //关闭modal
+        const triggerShowModalAction = createTriggerShowModalAction(false)
+        yield put(triggerShowModalAction)
+
+    }catch (err) {
+        console.log('ERR IN ACTION: DELETE_ARTICLE  ERR: ' + err)
+    }
 }
 
 function* ajaxManagePageArticleListDataByLabel(action) {
@@ -301,7 +323,6 @@ function* recordScrollTopOfElementEl(action) {
     let nextAction = createRecordScrollTopOfElementElAction(action.value)
     yield put(nextAction)
 }
-
 
 function* ajaxArticleDataForArticlePageData(action) {
     try{

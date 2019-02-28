@@ -9,6 +9,7 @@ export const ArticleItemMobileWrapper = styled.div`
         padding-top: 0.8rem;
         padding-right: 2rem;
         border-top: solid 1px #f0f0f0; 
+        ${props => props.isDeleted ? 'text-decoration:line-through' : ''};
     `
 
 export const ArticleLabelAndTitle = styled.div`

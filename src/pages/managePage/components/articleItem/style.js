@@ -73,6 +73,7 @@ export const ArticleItemWrapper = styled.div`
         background: white;
         border-bottom: solid 1px #EEEEEE;
         transition: all 0.4s ease;
+        ${props => props.isDeleted ? 'text-decoration:line-through' : ''};
         ${props => props.browser === 'Safari' ? '' : `
             &:hover{
                 background:linear-gradient(to right, rgba(255,255,255,1), rgba(0,0,0,0.05), rgba(255,255,255,1));
