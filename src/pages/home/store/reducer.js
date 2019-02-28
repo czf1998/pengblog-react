@@ -11,7 +11,7 @@ import {TRIGGER_HAS_BEEN_MOUNT_ONCE, TRIGGER_ISLOADING_HOME_ARTICLE_LIST} from "
 
 const defaultState = fromJS({
     startIndex: 0,
-    pageScale: 7,
+    pageScale: 8,
     maxPage: 1,
     currentPage: 0,
     articleList: [],

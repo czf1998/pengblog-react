@@ -9,6 +9,8 @@ import npmLogo from './npm.svg'
 import centosLogo from './centos.svg'
 import webstormLogo from './webstorm.svg'
 import eclipseLogo from './eclipse.svg'
+import tomcatLogo from './tomcat.svg'
+import nginxLogo from './nginx.svg'
 
 export {reactLogo,
         immutableLogo,
@@ -20,4 +22,6 @@ export {reactLogo,
         npmLogo,
         centosLogo,
         webstormLogo,
-        eclipseLogo}
+        eclipseLogo,
+        tomcatLogo,
+        nginxLogo}

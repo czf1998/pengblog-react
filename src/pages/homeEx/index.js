@@ -1,7 +1,12 @@
 import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
 import {Route, withRouter} from 'react-router-dom'
-import {HomeEXWrapper,ArticleListWrapper, ArticleDetailWrapper,ArticleDetailFixer,ThemeJumbotronWrapper} from './style'
+import {ScrollToThePositionOnMount} from '../../common'
+import {HomeEXWrapper,
+        ArticleListWrapper,
+        ArticleDetailWrapper,
+        ArticleDetailFixer,
+        ThemeJumbotronWrapper} from './style'
 import ArticleList from '../home'
 import ArticleDetail from '../articlePage'
 import {ThemeJumbotron} from './components'
@@ -30,6 +35,8 @@ class HomeEX extends PureComponent {
                         <Route path="/home" exact component={ThemeJumbotron}/>
                     </ThemeJumbotronWrapper>
                 }
+                
+                <ScrollToThePositionOnMount/>
 
             </HomeEXWrapper>
         )

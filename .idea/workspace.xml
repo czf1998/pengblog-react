@@ -2,54 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="435386c2-4738-4296-9e2d-0eb0c4eda9b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/homeEx/components/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/components/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/components/logo/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/components/logo/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/store/actionCreators.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/store/actionTypes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/store/reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/image/logo/maven.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/image/logo/mybatis.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/image/logo/tencentcloud.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/centos.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/eclipse.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/immutable.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/mysql.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/npm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/react.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/redux-saga.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/redux.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/spring.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/webpack.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/webstorm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/svg/theme.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/nginx.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/svg/logo/tomcat.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/footer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/footer/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/footer/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/footer/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/header/components/logo/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/components/logo/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/header/components/logo/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/components/logo/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/pagination/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/pagination/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/pagination/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/pagination/store/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/store/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/homeEx/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/homeEx/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/homeEx/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/homeEx/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/managePage/components/articleItemMobile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/components/articleItemMobile/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/managePage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/managePage/store/actionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/store/actionCreators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/managePage/store/actionType.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/store/actionType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/managePage/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/managePage/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/store/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/managePage/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actionCreators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actionTypesWithSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actionTypesWithSaga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/apiConstant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/apiConstant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/request/articleRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/request/articleRequest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/saga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/svg/logo/immutable.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/svg/logo/immutable.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/svg/logo/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/svg/logo/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/svg/logo/npm.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/svg/logo/npm.svg" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -66,9 +28,9 @@
         <counts>
           <entry key="css" value="2208" />
           <entry key="html" value="23" />
-          <entry key="js" value="160908" />
+          <entry key="js" value="161134" />
           <entry key="json" value="7" />
-          <entry key="svg" value="34" />
+          <entry key="svg" value="45" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -76,8 +38,8 @@
           <entry key="CSS" value="2208" />
           <entry key="HTML" value="24" />
           <entry key="JSON" value="7" />
-          <entry key="JavaScript" value="160907" />
-          <entry key="SVG" value="34" />
+          <entry key="JavaScript" value="161133" />
+          <entry key="SVG" value="45" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -86,13 +48,13 @@
           <entry key="eslintignore" value="2" />
           <entry key="html" value="5" />
           <entry key="jpg" value="2" />
-          <entry key="js" value="1811" />
+          <entry key="js" value="1817" />
           <entry key="json" value="15" />
           <entry key="md" value="4" />
           <entry key="npmignore" value="1" />
-          <entry key="png" value="4" />
+          <entry key="png" value="5" />
           <entry key="rnc" value="2" />
-          <entry key="svg" value="25" />
+          <entry key="svg" value="29" />
           <entry key="ts" value="5" />
         </counts>
       </usages-collector>
@@ -100,12 +62,12 @@
         <counts>
           <entry key="CSS" value="105" />
           <entry key="HTML" value="5" />
-          <entry key="Image" value="6" />
+          <entry key="Image" value="7" />
           <entry key="JSON" value="15" />
-          <entry key="JavaScript" value="1811" />
+          <entry key="JavaScript" value="1817" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="RNG Compact" value="2" />
-          <entry key="SVG" value="25" />
+          <entry key="SVG" value="29" />
           <entry key="TypeScript" value="5" />
         </counts>
       </usages-collector>
@@ -138,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+            <state relative-caret-position="985">
+              <caret line="47" column="93" selection-start-line="47" selection-start-column="93" selection-end-line="47" selection-end-column="93" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -147,21 +109,45 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/components/index.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/components/logo/style.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/homeEx/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+            <state relative-caret-position="336">
+              <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#52#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/common/scrollBehaviour/index.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/common/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="7" column="35" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/home/store/reducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/style.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
@@ -174,10 +160,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/homeEx/index.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/managePage/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+            <state relative-caret-position="1075">
+              <caret line="346" column="22" selection-start-line="346" selection-start-column="22" selection-end-line="346" selection-end-column="22" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -186,45 +172,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#44#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/static/svg/logo/nginx.svg">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/static/svg/logo/npm.svg">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/homeEx/style.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/components/logo/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#44#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/static/svg/logo/immutable.svg">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -275,10 +234,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/common/header/store/index.js" />
-        <option value="$PROJECT_DIR$/src/common/header/store/actionCreators.js" />
-        <option value="$PROJECT_DIR$/src/common/header/store/actionTypes.js" />
-        <option value="$PROJECT_DIR$/src/common/header/store/reducer.js" />
         <option value="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/index.js" />
         <option value="$PROJECT_DIR$/src/common/header/articleEditPageHeader.js" />
         <option value="$PROJECT_DIR$/src/common/header/mobileHeader.js" />
@@ -310,22 +265,26 @@
         <option value="$PROJECT_DIR$/src/common/pagination/store/reducer.js" />
         <option value="$PROJECT_DIR$/src/common/pagination/index.js" />
         <option value="$PROJECT_DIR$/src/store/request/articleRequest.js" />
-        <option value="$PROJECT_DIR$/src/pages/managePage/index.js" />
         <option value="$PROJECT_DIR$/src/store/saga.js" />
         <option value="$PROJECT_DIR$/src/pages/homeEx/themeJumbotron/index.js" />
         <option value="$PROJECT_DIR$/src/pages/homeEx/components/index.js" />
         <option value="$PROJECT_DIR$/src/common/header/components/logo/style.js" />
         <option value="$PROJECT_DIR$/src/common/header/components/logo/index.js" />
-        <option value="$PROJECT_DIR$/src/static/svg/logo/index.js" />
         <option value="$PROJECT_DIR$/src/common/footer/index.js" />
         <option value="$PROJECT_DIR$/src/common/footer/style.js" />
         <option value="$PROJECT_DIR$/src/pages/homeEx/style.js" />
         <option value="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/components/logo/index.js" />
-        <option value="$PROJECT_DIR$/src/pages/homeEx/index.js" />
         <option value="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js" />
         <option value="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/components/logo/style.js" />
-        <option value="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/index.js" />
         <option value="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/style.js" />
+        <option value="$PROJECT_DIR$/src/static/svg/logo/index.js" />
+        <option value="$PROJECT_DIR$/src/static/svg/logo/nginx.svg" />
+        <option value="$PROJECT_DIR$/src/static/svg/logo/npm.svg" />
+        <option value="$PROJECT_DIR$/src/static/svg/logo/immutable.svg" />
+        <option value="$PROJECT_DIR$/src/pages/home/store/reducer.js" />
+        <option value="$PROJECT_DIR$/src/pages/managePage/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/homeEx/index.js" />
       </list>
     </option>
   </component>
@@ -376,7 +335,8 @@
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="commonStyle" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="scrollBehaviour" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
@@ -388,14 +348,23 @@
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="homeEx" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="svg" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="managePage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="managePage" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
@@ -428,8 +397,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\code\pengblog-react\src\static\svg" />
       <recent name="D:\code\pengblog-react\src\static\svg\logo" />
+      <recent name="D:\code\pengblog-react\src\static\svg" />
       <recent name="D:\code\pengblog-react\src\static\image\logo" />
       <recent name="D:\code\pengblog-react\src\pages\homeEx\components\themeJumbotron" />
       <recent name="D:\code\pengblog-react\src\pages\homeEx\themeJumbotron" />
@@ -491,14 +460,7 @@
       <workItem from="1550877570309" duration="32000" />
       <workItem from="1550914277454" duration="3130000" />
       <workItem from="1550928365029" duration="108300000" />
-      <workItem from="1551357818922" duration="9078000" />
-    </task>
-    <task id="LOCAL-00026" summary="normal commit">
-      <created>1547201180651</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1547201180651</updated>
+      <workItem from="1551357818922" duration="10566000" />
     </task>
     <task id="LOCAL-00027" summary="normal commit">
       <created>1547225950627</created>
@@ -836,11 +798,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551325541824</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="normal commit">
+      <created>1551367632132</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1551367632132</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1090011000" />
+    <option name="totallyTimeSpent" value="1091499000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -870,7 +839,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.22553192" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.24397163" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -913,50 +882,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="normal commit" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/store/actionType.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="53" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/store/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="11" column="54" lean-forward="true" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/articleEditPage/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5355">
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/apiConstant.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/actionTypesWithSaga.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="54" column="72" lean-forward="true" selection-start-line="54" selection-start-column="72" selection-end-line="54" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/store/reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="40" column="70" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/common/pagination/store/reducer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -968,6 +893,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="86" column="63" selection-start-line="86" selection-start-column="63" selection-end-line="86" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -975,6 +903,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
           <caret line="127" column="13" selection-start-line="127" selection-start-column="13" selection-end-line="127" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#871#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -989,6 +920,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="90" selection-start-line="90" selection-end-line="90" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1029,20 +963,13 @@
     <entry file="file://$PROJECT_DIR$/src/static/image/background/timg.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1504">
-          <caret line="143" column="45" lean-forward="true" selection-start-line="143" selection-start-column="45" selection-end-line="143" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/store/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1083,9 +1010,6 @@
     <entry file="file://$PROJECT_DIR$/src/common/loading/index.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/static/svg/logo/immutable.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/static/svg/logo/react.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1104,24 +1028,11 @@
     <entry file="file://$PROJECT_DIR$/src/static/svg/logo/webpack.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/static/svg/logo/npm.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/static/svg/logo/webstorm.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/static/svg/logo/eclipse.svg">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/static/svg/logo/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/static/svg/logo/centos.svg">
       <provider selected="true" editor-type-id="images" />
@@ -1180,16 +1091,6 @@
     <entry file="file://$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/components/index.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/homeEx/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -1217,12 +1118,37 @@
     <entry file="file://$PROJECT_DIR$/src/static/svg/theme.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/index.js">
+    <entry file="file://$PROJECT_DIR$/src/static/svg/logo/tomcat.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/svg/logo/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+        <state relative-caret-position="125">
+          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="26" selection-end-column="18" />
           <folding>
-            <element signature="e#0#42#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/image/logo/maven.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/svg/logo/nginx.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/svg/logo/npm.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/svg/logo/immutable.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/store/reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1233,6 +1159,46 @@
           <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/managePage/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1075">
+          <caret line="346" column="22" selection-start-line="346" selection-start-column="22" selection-end-line="346" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/homeEx/components/themeJumbotron/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="985">
+          <caret line="47" column="93" selection-start-line="47" selection-start-column="93" selection-end-line="47" selection-end-column="93" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/common/scrollBehaviour/index.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/common/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/homeEx/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
           </folding>
         </state>
       </provider>

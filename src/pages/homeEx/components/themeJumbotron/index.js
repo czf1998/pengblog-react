@@ -26,12 +26,15 @@ import {reactLogo,
         npmLogo,
         centosLogo,
         webstormLogo,
-        eclipseLogo} from '../../../../static/svg/logo'
+        eclipseLogo,
+        tomcatLogo,
+        nginxLogo} from '../../../../static/svg/logo'
 
 import mybatisLogo from '../../../../static/image/logo/mybatis.png'
 import mavenLogo from '../../../../static/image/logo/maven.png'
 import tencentcloud from '../../../../static/image/logo/tencentcloud.png'
 import themeImage from '../../../../static/svg/theme.svg'
+import {SLIDE_UP_FAST} from "../../../../commonStyle/commonClassNameConstant";
 
 
 
@@ -42,7 +45,7 @@ class ThemeJumbotron extends PureComponent {
         const {heightOfBrowser} = this.props
 
         return (
-            <ThemeJumbotronWrapper heightOfBrowser={heightOfBrowser}>
+            <ThemeJumbotronWrapper heightOfBrowser={heightOfBrowser} className={SLIDE_UP_FAST}>
                 <LogoAndSimpleDescription>
 
                     <ThemeImage src={themeImage}/>
@@ -77,7 +80,9 @@ class ThemeJumbotron extends PureComponent {
                         <SponsorItem src={centosLogo} title="centOS"/>
                         <SponsorItem src={webstormLogo} title="webstorm"/>
                         <SponsorItem src={eclipseLogo} title="eclipse"/>
-                        <SponsorItem src={mavenLogo} title="maven"/>
+                        <SponsorItem src={tomcatLogo} title="tomcat"/>
+                        <SponsorItem src={nginxLogo} title="nginx"/>
+                        <SponsorItem src={mavenLogo} title="maven" style={{width: '120px',height:'100%',padding:'10px'}}/>
                         <SponsorItem src={immutableLogo} title="immutable"/>
                     </SponsorContain>
                 </SponsorDisplayCabinet>

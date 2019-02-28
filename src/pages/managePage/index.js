@@ -343,6 +343,10 @@ const mapActions = (dispatch) => {
 
             const numberOfArticleListToDelete = articleListBeingSelected.size
 
+            if(numberOfArticleListToDelete === 0){
+                return
+            }
+
             const appointModalMsgValue = {
                 modalTitle: '提示',
                 modalContent: '你正在试图删除选中的' + numberOfArticleListToDelete + '篇文章，这个操作将不可恢复。',
