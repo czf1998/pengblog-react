@@ -114,7 +114,7 @@ export const MultipleSelectTitle = styled.span`
     `
 
 export const ShutDownMultipleSelect = styled(MultipleSelectTitle)`
-        left: calc(5% + 2rem);
+        left: calc(5% + 3rem);
     `
 
 export const ArticleLabel = styled(ArticleAuthor)`

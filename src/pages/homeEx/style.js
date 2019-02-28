@@ -12,22 +12,27 @@ const milePostWidth = 1600
 
 const maxMobileWidth = 750
 
+export const HomeEXWrapper = styled.div`
+       
+    `
+
 export const ArticleListWrapper = styled.div`
         position: fixed;
         top: ${headerHeight}px;
         bottom: 0;
         left: 0;
         width: 450px;
-        overflow-y:scroll;
+        overflow-y: overlay;
+        border-right: solid 1px #F0F0F0;
         ${props => props.browser !== 'Safari' ? `&::-webkit-scrollbar{
-            width:10px;
+            width:2px;
             height:1px;
         }
         &::-webkit-scrollbar-thumb{
             background: #DDDDDD;
         }
         &::-webkit-scrollbar-track{
-            background: white;
+        
         }` : ''}
          @media(max-width:${milePostWidth}px){
             width: 300px;
@@ -74,3 +79,11 @@ export const LoadingWrapper = styled.div`
         height: 100%;
     `
 
+export const ThemeJumbotronWrapper = styled.div`
+        width: calc(100% - 450px);
+        margin-left: 450px;
+        @media(max-width:${milePostWidth}px){
+            margin-left: 300px;
+            width: calc(100% - 300px);
+        }
+    `

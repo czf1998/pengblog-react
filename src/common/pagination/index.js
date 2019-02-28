@@ -81,6 +81,12 @@ class Pagination extends PureComponent{
             this.props.jumpToThePage(this.props.paginationId,1)
         }
     }
+
+    componentDidUpdate() {
+        if(this.props.currentPage < 1){
+            this.props.jumpToThePage(this.props.paginationId,1)
+        }
+    }
 }
 
 const mapState = (state) => ({

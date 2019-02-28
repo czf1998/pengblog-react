@@ -85,3 +85,13 @@ export const RequestDeleteArticle = (value) => {
 
     return axios.get(Api.API_DELETE_ARTICLE, config)
 }
+
+export const RequestDeleteArticleList = (value) => {
+
+    let deleteArticleListData = {
+        articleIdListString: JSON.stringify(value)
+    }
+
+    return axios.post(Api.API_DELETE_ARTICLE_LIST, deleteArticleListData)
+
+}

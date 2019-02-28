@@ -1,7 +1,10 @@
 import {fromJS} from 'immutable'
 import {} from "./actionTypes";
 import {APPOINT_CURRENTPAGE_OF_PAGINATION} from "./actionTypes";
-import {DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE} from "../../../store/actionTypesWithSaga";
+import {
+    DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE,
+    RESET_MANAGE_PAGE_ARTICLE_LIST
+} from "../../../store/actionTypesWithSaga";
 import {APPOINT_MANAGE_PAGE_PAGINATION} from "../../../pages/managePage/store/actionType";
 
 const defaultState = fromJS({
@@ -19,6 +22,7 @@ export default (state = defaultState, action) => {
         let paginationId = action.value.paginationId
         let currentPage = action.value.currentPage
         let startIndex = state.get(paginationId).get('startIndex') + (currentPage - state.get(paginationId).get('currentPage')) * state.get(paginationId).get('pageScale')
+        startIndex = startIndex < 0 ? 0 : startIndex
 
         if(currentPage === state.get(paginationId).get('currentPage')){
             return state
@@ -46,6 +50,10 @@ export default (state = defaultState, action) => {
                 startIndex: action.value.startIndex
             })
         })
+    }
+
+    if(action.type === RESET_MANAGE_PAGE_ARTICLE_LIST){
+        return defaultState
     }
     return state
 }

@@ -17,7 +17,7 @@ export const ArticleSummaryWrapper = styled.div`
 export const Title = styled.div`
         color: black;
         font-size: 1.2rem;
-        line-height: 1.6; 
+        line-height: 1.4; 
         font-weight: bold;
     `
 

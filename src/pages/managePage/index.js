@@ -31,11 +31,19 @@ import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataByFilingAction,
         createGetManagePageArticleListDataByLabelAction,
         createResetCentralControllerOfManagePage,
-        createTiggerIsMultipleSelectingInManagePageAction} from "./store";
+        createTiggerIsMultipleSelectingInManagePageAction,
+        createDeleteArticleListAction} from "./store";
 import {Pagination} from '../../common'
 import Loading from "../../common/loading";
 import store from '../../store'
 import {COMMON_CONTEXT, FILING_CONTENT, LABEL_CONTEXT, SEARCH_CONTEXT} from "./store/reducer";
+import {
+    createAppointModalMsgAction,
+    createTriggerModalIsLoadingAction,
+    createTriggerShowModalAction
+} from "../../common/modal/store";
+import {createDeleteArticleAction} from "./components/articleItem/store";
+import {SLIDE_UP, SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
 
 class ManagePage extends PureComponent {
 
@@ -54,7 +62,10 @@ class ManagePage extends PureComponent {
                 widthOfBrowser,
                 currentContext,
                 triggerIsMultipleSelecting,
-                isMultipleSelecting} = this.props
+                isMultipleSelecting,
+                tryToDeleteArticleList,
+                articleListBeingSelected,
+                confirmDeletePostProcessor} = this.props
 
         return (
             <Fragment>
@@ -94,7 +105,14 @@ class ManagePage extends PureComponent {
                                 <Header>
                                     <MultipleSelectTitle onClick={() => {triggerIsMultipleSelecting(true)}}>
                                         {
-                                            isMultipleSelecting ? '批量删除' : '多选'
+                                            isMultipleSelecting ?
+                                                <span onClick={(e) => {tryToDeleteArticleList(articleListBeingSelected,
+                                                                                                confirmDeletePostProcessor,
+                                                                                                e)}}>
+                                                    批量删除
+                                                </span>
+                                                :
+                                                '多选'
                                         }
                                     </MultipleSelectTitle>
                                     {
@@ -118,11 +136,18 @@ class ManagePage extends PureComponent {
                                     articleList && articleList.map((item) => {
                                     return (
                                         widthOfBrowser < 800 ?
-                                            <ArticleItemMobile isMultipleSelecting={isMultipleSelecting}
-                                                               key={item.get('article_id')} article={item}/>
+                                            <div className={SLIDE_UP_FAST}>
+                                                <ArticleItemMobile isMultipleSelecting={isMultipleSelecting}
+                                                                   key={item.get('article_id')}
+                                                                   article={item}/>
+                                            </div>
                                             :
-                                            <ArticleItem isMultipleSelecting={isMultipleSelecting}
-                                                         key={item.get('article_id')} article={item}/>
+                                            <div className={SLIDE_UP_FAST}>
+                                                <ArticleItem isMultipleSelecting={isMultipleSelecting}
+                                                             key={item.get('article_id')}
+                                                             article={item}/>
+                                            </div>
+
                                     )
                                 })
                             }
@@ -162,6 +187,9 @@ class ManagePage extends PureComponent {
             this.props.triggerIsLoadingManagePageArticleListData()
 
             if(currentContext === COMMON_CONTEXT){
+                if(this.props.paginationObj.get('currentPage') === 0){
+                    return
+                }
                 this.props.getArticleListData()
             }
 
@@ -200,7 +228,8 @@ const mapState = (state) => ({
         dataIsReady: state.get('managePage').get('dataIsReady'),
         showArticleDetail: state.get('managePage').get('showArticleDetail'),
         widthOfBrowser: state.get('rootState').get('widthOfBrowser'),
-        isMultipleSelecting: state.get('managePage').get('isMultipleSelecting')
+        isMultipleSelecting: state.get('managePage').get('isMultipleSelecting'),
+        articleListBeingSelected: state.get('managePage').get('articleListBeingSelected')
     })
 
 const mapActions = (dispatch) => {
@@ -306,6 +335,35 @@ const mapActions = (dispatch) => {
         triggerIsMultipleSelecting(flag){
             const triggerIsMultipleSelectingAction = createTiggerIsMultipleSelectingInManagePageAction(flag)
             dispatch(triggerIsMultipleSelectingAction)
+        },
+
+        tryToDeleteArticleList(articleListBeingSelected,confirmDeletePostProcessor,e){
+
+            e.stopPropagation()
+
+            const numberOfArticleListToDelete = articleListBeingSelected.size
+
+            const appointModalMsgValue = {
+                modalTitle: '提示',
+                modalContent: '你正在试图删除选中的' + numberOfArticleListToDelete + '篇文章，这个操作将不可恢复。',
+                onlyQrcode: false,
+                postProcessor: () => {confirmDeletePostProcessor(articleListBeingSelected)}
+            }
+
+            const appointModalMsgAction = createAppointModalMsgAction(appointModalMsgValue)
+            dispatch(appointModalMsgAction)
+
+            const triggerShowModalAction = createTriggerShowModalAction(true)
+            dispatch(triggerShowModalAction)
+        },
+        confirmDeletePostProcessor(articleListBeingSelected){
+
+            const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(true)
+            dispatch(triggerModalIsLoadingAction)
+
+            const deleteArticleListAction = createDeleteArticleListAction(articleListBeingSelected)
+            dispatch(deleteArticleListAction)
+
         }
     }
 }

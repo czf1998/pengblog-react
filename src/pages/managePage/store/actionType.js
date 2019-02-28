@@ -17,3 +17,5 @@ export const GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL = 'getManagePageArticleL
 export const RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE = 'resetCentralControllerOfManagePage'
 
 export const TRIGGER_IS_MULTIPLE_SELECTING_IN_MANAGE_PAGE = 'triggerIsMultipleSelectingInManagePage'
+
+export const DELETE_ARTICLE_LIST = 'deleteArticleList'

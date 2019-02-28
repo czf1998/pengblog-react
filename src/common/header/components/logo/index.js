@@ -10,14 +10,14 @@ class Logo extends PureComponent {
 
     render() {
 
-        const { metaColor,goTo } = this.props
+        const { metaColor,goTo} = this.props
 
         return (
                 <LogoWrapper className={CommonClassNameConstants.FONT_LARGE +
                                 CommonClassNameConstants.FONT_SONG +
                                 CommonClassNameConstants.CURSORP +
                                 CommonClassNameConstants.FLEX_COLUMN_CENTER}
-                      metaColor={metaColor}>
+                                metaColor={metaColor}>
                     <div onClick={() => {goTo('/')}}>
                         <span style={{color:metaColor, fontWeight:'bold', fontSize:'1.8rem'}}>遠</span>方有鱼
                     </div>

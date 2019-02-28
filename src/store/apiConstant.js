@@ -34,3 +34,5 @@ export const API_GET_ARTICLE_LIST_BY_FILING = server + 'article/article_byfiling
 export const API_GET_ARTICLE_LIST_BY_LABEL = server + 'article/article_bylabel.do'
 
 export const API_DELETE_ARTICLE = server + 'article/delete_article.do'
+
+export const API_DELETE_ARTICLE_LIST = server + 'article/delete_article_list.do'

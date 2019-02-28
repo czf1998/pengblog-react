@@ -27,7 +27,9 @@ import {createDeliverArticleDataToHomeAction,
         createDeliverArticleListDataToManagePageAction,
         createDeliverArticleFilingDataToManagePageAction,
         createDeliverArticleLabelDataToManagePageAction,
-        createRecordArticleHasBeenDeletedAction} from './actionCreators'
+        createRecordArticleHasBeenDeletedAction,
+        createRecordArticleListHasBeenDeletedAction,
+        createResetManagePageArticleListAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest} from './request'
@@ -42,6 +44,7 @@ import {createTriggerIsSavingDraftAction} from "../pages/articleEditPage/store";
 import {createTriggerIsSavingArticleAction} from "../common/header/store";
 import {UPLOAD_TITLE_IMAGE} from "../pages/articleEditPage/components/titleImage/store/actionTypes";
 import {
+    DELETE_ARTICLE_LIST,
     GET_MANAGE_PAGE_ARTICLE_FILING_DATA,
     GET_MANAGE_PAGE_ARTICLE_LABEL_DATA,
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA,
@@ -50,6 +53,10 @@ import {
 } from "../pages/managePage/store/actionType";
 import {DELETE_ARTICLE} from "../pages/managePage/components/articleItem/store/actionTypes";
 import {createTriggerShowModalAction} from "../common/modal/store";
+import {
+    createTiggerIsMultipleSelectingInManagePageAction,
+    createTriggerIsLoadingManagePageArticleListDataAction
+} from "../pages/managePage/store";
 
 
 function* mySaga() {
@@ -71,11 +78,45 @@ function* mySaga() {
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING, ajaxManagePageArticleListDataByFiling)
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL, ajaxManagePageArticleListDataByLabel)
     yield takeEvery(DELETE_ARTICLE, ajaxDeleteArticle)
+    yield takeEvery(DELETE_ARTICLE_LIST, ajaxDeleteArticleList)
+}
+
+function* ajaxDeleteArticleList(action) {
+    try{
+        yield ArticleRequest.RequestDeleteArticleList(action.value)
+
+        //标记已删除的文章条目
+        const recordArticleListHasBeenDeletedAction = createRecordArticleListHasBeenDeletedAction(action.value)
+        yield put(recordArticleListHasBeenDeletedAction)
+
+        //关闭modal
+        const triggerShowModalAction = createTriggerShowModalAction(false)
+        yield put(triggerShowModalAction)
+
+        //关闭多选状态
+        const triggerIsMultipleSelectingAction = createTiggerIsMultipleSelectingInManagePageAction(false)
+        yield put(triggerIsMultipleSelectingAction)
+
+        const delay = (ms) => new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        })
+        yield delay(500);
+
+        //刷新managePage数据前先trigger页面为loading状态
+        const triggerIsLoadingManagePageArticleListDataAction = createTriggerIsLoadingManagePageArticleListDataAction(true)
+        yield put(triggerIsLoadingManagePageArticleListDataAction)
+
+        //清空managePage页面数据articleList
+        const resetManagePageArticleListAction = createResetManagePageArticleListAction()
+        yield put(resetManagePageArticleListAction)
+
+    }catch (err) {
+        console.log('ERR IN ACTION: DELETE_ARTICLE_LIST  ERR: ' + err)
+    }
 }
 
 function* ajaxDeleteArticle(action) {
     try{
-
         yield ArticleRequest.RequestDeleteArticle(action.value)
 
         //标记已删除的文章条目
@@ -85,6 +126,23 @@ function* ajaxDeleteArticle(action) {
         //关闭modal
         const triggerShowModalAction = createTriggerShowModalAction(false)
         yield put(triggerShowModalAction)
+
+        //关闭多选状态
+        const triggerIsMultipleSelectingAction = createTiggerIsMultipleSelectingInManagePageAction(false)
+        yield put(triggerIsMultipleSelectingAction)
+
+        const delay = (ms) => new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        })
+        yield delay(500);
+
+        //刷新managePage数据前先trigger页面为loading状态
+        const triggerIsLoadingManagePageArticleListDataAction = createTriggerIsLoadingManagePageArticleListDataAction(true)
+        yield put(triggerIsLoadingManagePageArticleListDataAction)
+
+        //清空managePage页面数据articleList
+        const resetManagePageArticleListAction = createResetManagePageArticleListAction()
+        yield put(resetManagePageArticleListAction)
 
     }catch (err) {
         console.log('ERR IN ACTION: DELETE_ARTICLE  ERR: ' + err)

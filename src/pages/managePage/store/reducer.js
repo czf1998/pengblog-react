@@ -2,7 +2,10 @@ import { fromJS } from 'immutable'
 import {
     DELIVER_ARTICLE_FILING_DATA_TO_MANAGE_PAGE,
     DELIVER_ARTICLE_LABEL_DATA_TO_MANAGE_PAGE,
-    DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE, RECORD_ARTICLE_HAS_BEEN_DELETE
+    DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE,
+    RECORD_ARTICLE_HAS_BEEN_DELETE,
+    RECORD_ARTICLE_LIST_HAS_BEEN_DELETE,
+    RESET_MANAGE_PAGE_ARTICLE_LIST
 } from "../../../store/actionTypesWithSaga";
 import {
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING,
@@ -96,6 +99,14 @@ export default (state = defaultState, action) => {
 
 
     if(action.type === TRIGGER_IS_MULTIPLE_SELECTING_IN_MANAGE_PAGE){
+
+        if(!action.value){
+            return state.merge({
+                isMultipleSelecting: action.value,
+                articleListBeingSelected:fromJS([])
+            })
+        }
+
         return state.merge({
             isMultipleSelecting: action.value
         })
@@ -129,9 +140,21 @@ export default (state = defaultState, action) => {
 
     if(action.type === RECORD_ARTICLE_HAS_BEEN_DELETE){
         let articleHasBeenDeleteList = state.get('articleHasBeenDeleteList')
-        console.log(action.value)
         return state.merge({
-            articleHasBeenDeleteList: articleHasBeenDeleteList.push(action.value)
+            articleHasBeenDeleteList: fromJS(articleHasBeenDeleteList.push(action.value))
+        })
+    }
+
+    if(action.type === RECORD_ARTICLE_LIST_HAS_BEEN_DELETE){
+        let articleHasBeenDeleteList = state.get('articleHasBeenDeleteList')
+        return state.merge({
+            articleHasBeenDeleteList: fromJS(articleHasBeenDeleteList.concat(action.value))
+        })
+    }
+
+    if(action.type === RESET_MANAGE_PAGE_ARTICLE_LIST){
+        return state.merge({
+            articleList: fromJS([])
         })
     }
     return state

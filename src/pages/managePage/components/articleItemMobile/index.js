@@ -111,7 +111,7 @@ const mapState = (state) => {
 
 const mapActions = (dispatch) => ({
     tryToDeleteThisArticle(article_id,article_title,confirmDeletePostProcessor,e){
-        
+
         e.stopPropagation()
 
         const appointModalMsgValue = {
