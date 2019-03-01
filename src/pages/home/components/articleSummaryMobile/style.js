@@ -12,6 +12,9 @@ export const ArticleSummaryWrapper = styled.div`
         @media(max-width:${maxMobileWidth}px){
             padding: 0.5rem 1rem;
         }
+        &:hover{
+             background: ${props => props.isFocus ? '#EEEEEE' : '#F7F7F7'};
+        }
     `
 
 export const Title = styled.div`

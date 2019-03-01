@@ -1,6 +1,7 @@
 import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
 import {Route, withRouter} from 'react-router-dom'
+import {CSSTransition} from 'react-transition-group'
 import {ScrollToThePositionOnMount} from '../../common'
 import {HomeEXWrapper,
         ArticleListWrapper,
@@ -10,12 +11,17 @@ import {HomeEXWrapper,
 import ArticleList from '../home'
 import ArticleDetail from '../articlePage'
 import {ThemeJumbotron} from './components'
+import {FADE_IN} from "../../commonStyle/commonClassNameConstant";
 
 class HomeEX extends PureComponent {
 
+
+
     render() {
 
-        const {browser,isMobile} = this.props
+        const {browser,isMobile,hasBeenMountOnce} = this.props
+
+        const themeJumbotronClassName = hasBeenMountOnce ? '' : FADE_IN
 
         return (
             <HomeEXWrapper>
@@ -31,8 +37,8 @@ class HomeEX extends PureComponent {
 
                 {
                     !isMobile &&
-                    <ThemeJumbotronWrapper>
-                        <Route path="/home" exact component={ThemeJumbotron}/>
+                    <ThemeJumbotronWrapper  className={themeJumbotronClassName}>
+                            <Route path="/home" exact component={ThemeJumbotron}/>
                     </ThemeJumbotronWrapper>
                 }
 
@@ -43,7 +49,6 @@ class HomeEX extends PureComponent {
     }
 
     componentDidMount() {
-
     }
 
     componentWillUnmount() {
@@ -53,7 +58,8 @@ class HomeEX extends PureComponent {
 
 const mapState = (state) => ({
         browser: state.get('rootState').get('browser'),
-        isMobile: state.get('rootState').get('isMobile')
+        isMobile: state.get('rootState').get('isMobile'),
+        hasBeenMountOnce: state.get('home').get('hasBeenMountOnce')
     })
 
 const mapActions = (dispatch) => {

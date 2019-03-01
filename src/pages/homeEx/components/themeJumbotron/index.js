@@ -35,6 +35,7 @@ import mavenLogo from '../../../../static/image/logo/maven.png'
 import tencentcloud from '../../../../static/image/logo/tencentcloud.png'
 import themeImage from '../../../../static/image/theme/theme.png'
 import {SLIDE_UP_FAST} from "../../../../commonStyle/commonClassNameConstant";
+import {FADE_IN} from "../../../../commonStyle/commonClassNameConstant";
 
 
 
@@ -45,7 +46,7 @@ class ThemeJumbotron extends PureComponent {
         const {heightOfBrowser} = this.props
 
         return (
-            <ThemeJumbotronWrapper className={SLIDE_UP_FAST}>
+            <ThemeJumbotronWrapper>
                 <LogoAndSimpleDescription heightOfBrowser={heightOfBrowser}>
 
                     <ThemeImage src={themeImage}/>

@@ -94,6 +94,9 @@ export const MenuItem = styled.div`
         justify-content: center;
         align-items: center;
         border-bottom: solid 1px #F0F0F0;
+        &:hover{
+            background: #F7F7F7;
+        }
     `
 
 export const Cover = styled.div`

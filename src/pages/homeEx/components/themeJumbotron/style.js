@@ -19,6 +19,7 @@ export const LogoAndSimpleDescription = styled.div`
         width: 100%;
         padding-top: 3rem;
         padding-bottom: 2rem;
+        background: white;
         height: ${props => props.heightOfBrowser - heightOfHeader}px;
     `
 
