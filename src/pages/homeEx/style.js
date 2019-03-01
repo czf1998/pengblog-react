@@ -49,14 +49,14 @@ export const ArticleListWrapper = styled.div`
 
 
 export const ArticleDetailWrapper = styled.div`
-        width: 100%;
         display: flex;
         justify-content: center;
         padding: 0 1rem;
+        margin-left: 200px;
+        width: calc(100% - 200px);
         @media(max-width:${milePostWidth3}px){
             margin-left: 300px;
-            width: calc(100% - 300px)
-                      
+            width: calc(100% - 300px);
         }
          @media(max-width:${maxMobileWidth}px){
             display: none;
@@ -66,10 +66,14 @@ export const ArticleDetailWrapper = styled.div`
 export const ArticleDetailFixer = styled.div`
         width: 700px;
         @media(max-width:${milePostWidth2}px){
-           width: 600px;
+           width: 650px;
         }
         @media(max-width:${milePostWidth4}px){
            width: 100%;
+        }
+        
+        @media(min-width:${milePostWidth}px){
+            width: 800px;
         }
     `
 

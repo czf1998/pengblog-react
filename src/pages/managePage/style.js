@@ -2,7 +2,9 @@ import styled from 'styled-components'
 
 const headerHeight = 70
 
-const milePostWidth2 = 800
+const milePostWidth3 = 800
+
+const milePostWidth2 = 1200
 
 const milePostWidth = 1440
 
@@ -15,7 +17,7 @@ export const CentralController = styled.div`
         padding-top: 2rem;
         border-right: solid 1px #EEEEEE;
         
-        @media(max-width:${milePostWidth2}px){
+        @media(max-width:${milePostWidth3}px){
             display:none
         }
     `
@@ -26,10 +28,15 @@ export const ArticleListWrapper = styled.div`
         padding-left: 1rem;
         padding-right: 1rem;
         
-        margin-left: 300px;
-        width: calc(100% - 300px);
+        margin-left: 250px;
+        width: calc(100% - 250px);
         
-        @media(max-width:${milePostWidth2}px){
+         @media(max-width:${milePostWidth2}px){
+            margin-left: 300px;
+            width: calc(100% - 300px);
+        }
+        
+        @media(max-width:${milePostWidth3}px){
             padding: 0;
             margin-left: 0;
             width: 100%;
@@ -56,7 +63,7 @@ export const Title = styled.div`
         padding: 1rem 2rem;
         font-size: 2rem;
         font-weight: 100;
-        @media(max-width:${milePostWidth2}px){
+        @media(max-width:${milePostWidth3}px){
             padding: 1rem;
             padding-bottom: 0;
             
@@ -162,7 +169,7 @@ export const SearchBarMobile = styled.div`
         width: 100%;
         display: none;
         border-bottom: solid 1px #f0f0f0; 
-        @media(max-width:${milePostWidth2}px){
+        @media(max-width:${milePostWidth3}px){
            display: block;
         }
     `

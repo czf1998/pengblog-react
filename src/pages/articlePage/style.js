@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const widthOfMainArea = 700
+const widthOfMainArea = 800
 
 const maxMobileWidth = 750
 
