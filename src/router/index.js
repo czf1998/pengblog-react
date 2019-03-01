@@ -29,11 +29,40 @@ class RouterComponent extends PureComponent {
             </Router>
         );
     }
+
+    componentDidUpdate(){
+        console.log(history.location.pathname)
+        appointDocumentTitle(history.location.pathname,this.props.currentArticle)
+    }
 }
 
 const mapState = (state) => ({
     isMobile: state.get('rootState').get('isMobile'),
-    prograssBarManager: state.get('prograssBar').get('prograssBarManager')
+    prograssBarManager: state.get('prograssBar').get('prograssBarManager'),
+    currentArticle: state.get('articlePage').get('article')
 })
 
 export default connect(mapState,null)(RouterComponent);
+
+const appointDocumentTitle = (path,currentArticle) => {
+    if(path === '/home'){
+        document.title = '彭凯帆的个人网站'
+        return
+    }
+    if(path === '/manage'){
+        document.title = '彭凯帆的个人网站-索引'
+        return
+    }
+    if(path.match(/^\/home\/article/) !== null){
+        document.title = currentArticle.get('article_title')
+        return
+    }
+    if(path.match(/^\/article/) !== null){
+        document.title = currentArticle.get('article_title')
+        return
+    }
+    if(path === '/edit'){
+        document.title = '写文章'
+        return
+    }
+}

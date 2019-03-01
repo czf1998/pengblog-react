@@ -1,13 +1,14 @@
 import styled from 'styled-components'
-import backgroundImage from '../../../../static/image/background/timg.jpg'
 
+const heightOfHeader = 70
+
+const milePostWidth = 1000
 
 export const ThemeJumbotronWrapper = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         width: 100%;
-        min-height: ${props => props.heightOfBrowser - 70}px;
     `
 
 export const LogoAndSimpleDescription = styled.div`
@@ -18,11 +19,15 @@ export const LogoAndSimpleDescription = styled.div`
         width: 100%;
         padding-top: 3rem;
         padding-bottom: 2rem;
+        height: ${props => props.heightOfBrowser - heightOfHeader}px;
     `
 
 export const ThemeImage = styled.img`
-        width: 200px;
+        width: 60%;
         margin-bottom: 3rem;
+        @media(max-width:${milePostWidth}px){
+            width: 80%;
+        }
     `
 
 export const LogoAndSimpleDescriptionFixer = styled.div`

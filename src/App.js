@@ -12,6 +12,7 @@ import history from './router/history'
 import {createAppointCurrentPathAction} from "./router/store";
 
 class App extends Component {
+
     constructor(props){
         super(props)
         this.state = {

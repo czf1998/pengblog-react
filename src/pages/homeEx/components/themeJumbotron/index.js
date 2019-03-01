@@ -33,7 +33,7 @@ import {reactLogo,
 import mybatisLogo from '../../../../static/image/logo/mybatis.png'
 import mavenLogo from '../../../../static/image/logo/maven.png'
 import tencentcloud from '../../../../static/image/logo/tencentcloud.png'
-import themeImage from '../../../../static/svg/theme.svg'
+import themeImage from '../../../../static/image/theme/theme.png'
 import {SLIDE_UP_FAST} from "../../../../commonStyle/commonClassNameConstant";
 
 
@@ -45,8 +45,8 @@ class ThemeJumbotron extends PureComponent {
         const {heightOfBrowser} = this.props
 
         return (
-            <ThemeJumbotronWrapper heightOfBrowser={heightOfBrowser} className={SLIDE_UP_FAST}>
-                <LogoAndSimpleDescription>
+            <ThemeJumbotronWrapper className={SLIDE_UP_FAST}>
+                <LogoAndSimpleDescription heightOfBrowser={heightOfBrowser}>
 
                     <ThemeImage src={themeImage}/>
 

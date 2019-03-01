@@ -35,7 +35,7 @@ class HomeEX extends PureComponent {
                         <Route path="/home" exact component={ThemeJumbotron}/>
                     </ThemeJumbotronWrapper>
                 }
-                
+
                 <ScrollToThePositionOnMount/>
 
             </HomeEXWrapper>
