@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom'
 import CommonHeader from './commonHeader'
 import MobileHeader from './mobileHeader'
 import ArticleEditPageHeader from './articleEditPageHeader'
+import LoginPageHeader from './loginPageHeader'
 
 class Header extends PureComponent {
 
@@ -22,7 +23,12 @@ class Header extends PureComponent {
                             isMobile ?
                                 <MobileHeader/>
                                 :
-                                <CommonHeader/>
+                                (
+                                    currentPath === '/login' ?
+                                        <LoginPageHeader/>
+                                        :
+                                        <CommonHeader/>
+                                )
                         )
                 }
             </Fragment>

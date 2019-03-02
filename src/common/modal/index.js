@@ -18,6 +18,7 @@ import {createTriggerShowModalAction} from "./store";
 import {SHARE_TO_WECHAT} from "../../pages/articlePage/components/share";
 import QRCode from 'qrcodejs2'
 import loadingSpin from "../loading/svg/loading-spin.svg";
+import {FADE_IN} from "../../commonStyle/commonClassNameConstant";
 
 class Modal extends PureComponent{
 

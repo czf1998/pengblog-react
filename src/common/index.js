@@ -7,6 +7,7 @@ import PrograssBar from './prograssBar'
 import ForMore from './forMore'
 import { ScrollToThePositionOnMount } from './scrollBehaviour'
 import Input from './input'
+import InputEX from './inputEX'
 import Textarea from './textarea'
 import { GapLine, GapLineVertical } from './gapLine'
 import Notice from './notice'
@@ -17,6 +18,7 @@ import CheckBox from './checkBox'
 
 export {Button,
         Input,
+        InputEX,
         GapLine,
         GapLineVertical,
         Footer,

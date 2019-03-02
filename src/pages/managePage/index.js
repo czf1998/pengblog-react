@@ -42,8 +42,8 @@ import {
     createTriggerModalIsLoadingAction,
     createTriggerShowModalAction
 } from "../../common/modal/store";
-import {createDeleteArticleAction} from "./components/articleItem/store";
-import {SLIDE_UP, SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
+import {SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
+import ScrollToThePositionOnMount from "../../common/scrollBehaviour/scrollToThePositionOnMount";
 
 class ManagePage extends PureComponent {
 
@@ -165,6 +165,8 @@ class ManagePage extends PureComponent {
 
                     </ArticleDetail>
                 </ArticleListWrapper>
+
+                <ScrollToThePositionOnMount/>
             </Fragment>
 
     )

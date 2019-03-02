@@ -25,7 +25,7 @@ class Home extends PureComponent {
                 hasBeenMountOnce,
                 articleListDataIsReady} = this.props
 
-        const articleSummaryListTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.SLIDE_UP
+        const articleSummaryListTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.SLIDE_UP_FAST
 
         return (
             articleListDataIsReady ?

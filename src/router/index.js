@@ -6,6 +6,7 @@ import ArticlePageLoadable from '../pages/articlePage/loadable'
 import ArticleEditPageLoadable from '../pages/articleEditPage/loadable'
 import HomeEXLoadable from '../pages/homeEx/loadable'
 import ManagePageLoadable from '../pages/managePage/loadable'
+import LoginPageLoadable from '../pages/loginPage/loadable'
 import { Header } from '../common'
 
 class RouterComponent extends PureComponent {
@@ -25,6 +26,7 @@ class RouterComponent extends PureComponent {
                     <Route exact={isMobile} path='/home' component={HomeEXLoadable}/>
                     <Route exact path='/article/:article_id' component={ArticlePageLoadable}/>
                     <Route exact path='/manage' component={ManagePageLoadable}/>
+                    <Route exact path='/login' component={LoginPageLoadable}/>
                 </Fragment>
             </Router>
         );
