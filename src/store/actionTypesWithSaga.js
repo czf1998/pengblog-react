@@ -55,3 +55,5 @@ export const RECORD_ARTICLE_HAS_BEEN_DELETE = 'recordArticleHasBeenDelete'
 export const RECORD_ARTICLE_LIST_HAS_BEEN_DELETE = 'recordArticleListHasBeenDelete'
 
 export const RESET_MANAGE_PAGE_ARTICLE_LIST = 'resetManagePageArticleList'
+
+export const TRIGGER_ALREADY_LOGGED_IN = 'triggerAlreadyLoggedIn'

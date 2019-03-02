@@ -10,6 +10,7 @@ import {GapLineVertical} from '../../common'
 import { CommonClassNameConstants } from '../../commonStyle'
 import { withRouter } from 'react-router-dom'
 import {Logo} from './components'
+//直接引入articleEditPage组件中的方法将使该组件的懒加载失效
 import {saveArticle} from "../../pages/articleEditPage";
 import {createTriggerIsSavingArticleAction} from "./store";
 import loadingSpin from "../loading/svg/loading-spin.svg";

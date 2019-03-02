@@ -19,7 +19,8 @@ import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
         DELIVER_ARTICLE_LABEL_DATA_TO_MANAGE_PAGE,
         RECORD_ARTICLE_HAS_BEEN_DELETE,
         RECORD_ARTICLE_LIST_HAS_BEEN_DELETE,
-        RESET_MANAGE_PAGE_ARTICLE_LIST} from './actionTypesWithSaga'
+        RESET_MANAGE_PAGE_ARTICLE_LIST,
+        TRIGGER_ALREADY_LOGGED_IN} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -132,5 +133,10 @@ export const createRecordArticleListHasBeenDeletedAction = (value) => ({
 
 export const createResetManagePageArticleListAction = () => ({
     type: RESET_MANAGE_PAGE_ARTICLE_LIST
+})
+
+export const createTriggerAlreadyLoggedInAction = (value) => ({
+    type: TRIGGER_ALREADY_LOGGED_IN,
+    value
 })
 

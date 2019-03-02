@@ -36,7 +36,8 @@ class LoginPage extends PureComponent {
                 username,
                 password,
                 tryToLogin,
-                isLoggingIn} = this.props
+                isLoggingIn,
+                alreadyLoggedIn} = this.props
 
 
         return (
@@ -78,7 +79,7 @@ class LoginPage extends PureComponent {
                            isLoggingIn ?
                                <Loading src={loadingSpin}/>
                                :
-                               <Button onClick={() => {tryToLogin(username,password)}}
+                               <Button onClick={() => {!isLoggingIn && tryToLogin(username,password)}}
                                        disabled={isLoggingIn}>
                                    &nbsp;&nbsp;登录&nbsp;&nbsp;
                                </Button>
@@ -105,7 +106,8 @@ const mapState = (state) => ({
         heightOfBrowser: state.get('rootState').get('heightOfBrowser'),
         username: state.get('loginPage').get('username'),
         password: state.get('loginPage').get('password'),
-        isLoggingIn: state.get('loginPage').get('isLoggingIn')
+        isLoggingIn: state.get('loginPage').get('isLoggingIn'),
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     })
 
 const mapActions = (dispatch) => {

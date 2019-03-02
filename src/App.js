@@ -39,10 +39,6 @@ class App extends Component {
 
             <RouterComponent/>
 
-            {/*<div className={CommonClassNameConstants.FADE_IN}>
-                <Footer/>
-            </div>*/}
-
         </Provider>
     );
   }

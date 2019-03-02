@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 import {ArticleEditor,TitleImage} from './components'
 import {ArticleEditorPageWrapper,ArticleEditorPageMainArea,
         ArticleEditorWrapper,
@@ -187,7 +188,7 @@ const mapActions = (dispatch) => ({
     }
 })
 
-export default connect(mapState,mapActions)(ArticleEditPage)
+export default connect(mapState,mapActions)(withRouter(ArticleEditPage))
 
 const keydownHandler = (event) => {
     if(event.keyCode === 13){

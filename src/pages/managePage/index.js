@@ -136,15 +136,13 @@ class ManagePage extends PureComponent {
                                     articleList && articleList.map((item) => {
                                     return (
                                         widthOfBrowser < 800 ?
-                                            <div className={SLIDE_UP_FAST}>
+                                            <div className={SLIDE_UP_FAST} key={item.get('article_id')}>
                                                 <ArticleItemMobile isMultipleSelecting={isMultipleSelecting}
-                                                                   key={item.get('article_id')}
                                                                    article={item}/>
                                             </div>
                                             :
-                                            <div className={SLIDE_UP_FAST}>
+                                            <div className={SLIDE_UP_FAST} key={item.get('article_id')}>
                                                 <ArticleItem isMultipleSelecting={isMultipleSelecting}
-                                                             key={item.get('article_id')}
                                                              article={item}/>
                                             </div>
 

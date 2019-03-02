@@ -2,11 +2,13 @@ import {fromJS} from 'immutable'
 import {} from "./actionTypes";
 import {APPOINT_LOGIN_PAGE_INPUT_VALUE} from "./actionTypes";
 import {TRIGGER_IS_LOGGING_IN} from "./actionTypes";
+import {TRIGGER_ALREADY_LOGGED_IN} from "../../../store/actionTypesWithSaga";
 
 const defaultState = fromJS({
     username: '',
     password: '',
-    isLoggingIn: false
+    isLoggingIn: false,
+    alreadyLoggedIn: false
 })
 
 export default (state = defaultState, action) => {
@@ -18,6 +20,12 @@ export default (state = defaultState, action) => {
     if(action.type === TRIGGER_IS_LOGGING_IN){
         return state.merge({
             isLoggingIn: action.value
+        })
+    }
+
+    if(action.type === TRIGGER_ALREADY_LOGGED_IN){
+        return state.merge({
+            alreadyLoggedIn: action.value
         })
     }
     return state

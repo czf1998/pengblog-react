@@ -1,7 +1,6 @@
 import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
 import {Route, withRouter} from 'react-router-dom'
-import {CSSTransition} from 'react-transition-group'
 import {ScrollToThePositionOnMount} from '../../common'
 import {HomeEXWrapper,
         ArticleListWrapper,
@@ -9,9 +8,9 @@ import {HomeEXWrapper,
         ArticleDetailFixer,
         ThemeJumbotronWrapper} from './style'
 import ArticleList from '../home'
-import ArticleDetail from '../articlePage'
+import ArticleDetail from '../articlePage/loadable'
 import {ThemeJumbotron} from './components'
-import {FADE_IN} from "../../commonStyle/commonClassNameConstant";
+import {FADE_IN} from "../../commonStyle/commonClassNameConstant"
 
 class HomeEX extends PureComponent {
 
@@ -19,7 +18,7 @@ class HomeEX extends PureComponent {
 
     render() {
 
-        const {browser,isMobile,hasBeenMountOnce} = this.props
+        const {browser,isMobile,hasBeenMountOnce,heightOfBrowser} = this.props
 
         const themeJumbotronClassName = hasBeenMountOnce ? '' : FADE_IN
 
@@ -59,7 +58,8 @@ class HomeEX extends PureComponent {
 const mapState = (state) => ({
         browser: state.get('rootState').get('browser'),
         isMobile: state.get('rootState').get('isMobile'),
-        hasBeenMountOnce: state.get('home').get('hasBeenMountOnce')
+        hasBeenMountOnce: state.get('home').get('hasBeenMountOnce'),
+        heightOfBrowser: state.get('rootState').get('heightOfBrowser')
     })
 
 const mapActions = (dispatch) => {

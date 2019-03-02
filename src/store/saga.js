@@ -1,4 +1,4 @@
-import { put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { put, takeEvery, takeLatest,select } from 'redux-saga/effects'
 
 import {
     GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA,
@@ -29,10 +29,12 @@ import {createDeliverArticleDataToHomeAction,
         createDeliverArticleLabelDataToManagePageAction,
         createRecordArticleHasBeenDeletedAction,
         createRecordArticleListHasBeenDeletedAction,
-        createResetManagePageArticleListAction} from './actionCreators'
+        createResetManagePageArticleListAction,
+        createTriggerAlreadyLoggedInAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
-        ImageRequest} from './request'
+        ImageRequest,
+        LoginRequest} from './request'
 import {SUBMIT_COMMENT} from "../pages/articlePage/components/commentEditor/store/actionType";
 import {
     createAppointInputValueAction,
@@ -57,6 +59,8 @@ import {
     createTiggerIsMultipleSelectingInManagePageAction,
     createTriggerIsLoadingManagePageArticleListDataAction
 } from "../pages/managePage/store";
+import {LOGIN} from "../pages/loginPage/store/actionTypes";
+import {createTriggerIsLoggingInAction} from "../pages/loginPage/store";
 
 
 function* mySaga() {
@@ -79,9 +83,56 @@ function* mySaga() {
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL, ajaxManagePageArticleListDataByLabel)
     yield takeEvery(DELETE_ARTICLE, ajaxDeleteArticle)
     yield takeEvery(DELETE_ARTICLE_LIST, ajaxDeleteArticleList)
+    yield takeEvery(LOGIN, ajaxLogin)
+}
+
+function* ajaxLogin(action) {
+    try{
+        const res = yield LoginRequest.RequestLogin(action.value)
+        console.log(res.data)
+
+        //登录成功
+        if(res.data.loginStatus === 1){
+            //本地存储token以及过期时间
+            let validTime = res.data.validTimeMillis
+            let expTime = new Date().getTime() + validTime
+            localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime}))
+
+            //更新reducer为已登录
+            const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
+            yield put(triggerAlreadyLoggedInAction)
+
+            /*通知窗口提示登录成功*/
+            const appointNoticeContent = createAppointNoticeContent('登录成功')
+            yield put(appointNoticeContent)
+
+            return
+        }
+
+        //登陆失败
+        if(res.data.loginStatus === 0){
+            /*通知窗口提示登录失败*/
+            const appointNoticeContent = createAppointNoticeContent('登录失败: ' + res.data.loginMsg)
+            yield put(appointNoticeContent)
+
+            //更新loginPage.reducer的isLoggingIn
+            const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
+            yield put(triggerIsLoggingInAction)
+        }
+
+
+    }catch (err) {
+        console.log('ERR IN ACTION: LOGIN  ERR: ' + err)
+        /*通知窗口提示登录失败*/
+        const appointNoticeContent = createAppointNoticeContent('登录失败: ' + err)
+        yield put(appointNoticeContent)
+    }
 }
 
 function* ajaxDeleteArticleList(action) {
+
+    yield checkToken()
+
     try{
         yield ArticleRequest.RequestDeleteArticleList(action.value)
 
@@ -116,6 +167,9 @@ function* ajaxDeleteArticleList(action) {
 }
 
 function* ajaxDeleteArticle(action) {
+
+    yield checkToken()
+
     try{
         yield ArticleRequest.RequestDeleteArticle(action.value)
 
@@ -210,6 +264,9 @@ function* ajaxManagePageArticleListData(action) {
 }
 
 function* ajaxUploadImage(action) {
+
+    yield checkToken()
+
     try{
         const res = yield ImageRequest.UploadImage(action.value)
         let appointTitleImageUrlAction = createDeliverTitleImageUrlAction(res.data.imgUrl)
@@ -220,6 +277,9 @@ function* ajaxUploadImage(action) {
 }
 
 function* ajaxSaveArticle(action) {
+
+    yield checkToken()
+
     try{
         yield ArticleRequest.SaveArticle(action.value)
         const triggerIsSavingDraftAction = createTriggerIsSavingDraftAction(false)
@@ -244,6 +304,9 @@ function* ajaxSaveArticle(action) {
 }
 
 function* ajaxDraft() {
+
+    yield checkToken()
+
     try{
         const res = yield ArticleRequest.RequestDraftData()
         let appointDataAction = createDeliverDraftDataAction(res.data)
@@ -395,3 +458,23 @@ function* ajaxArticleDataForArticlePageData(action) {
 }
 
 export default mySaga;
+
+function* checkToken(){
+    const state = yield select();
+
+    const goTo = state.get('router').get('goTo')
+
+    if(localStorage.getItem('token') === undefined || localStorage.getItem('token') === null){
+        goTo('/login')
+        return
+    }
+
+    if(localStorage.getItem('token') !== undefined && localStorage.getItem('token') !== null){
+        let tokenObj = JSON.parse(localStorage.getItem('token'))
+        let expTime = tokenObj.expTime
+
+        if(expTime < new Date().getTime()){
+            goTo('/login')
+        }
+    }
+}
