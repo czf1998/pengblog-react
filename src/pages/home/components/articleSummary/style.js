@@ -24,7 +24,7 @@ export const ArticleInfoColumn = styled.div`
 
 export const ArticleContent = styled.div`
         display: -webkit-box;
-        /* autoprefixer: next */
+       /*  autoprefixer: next */
         -webkit-box-orient: vertical;
         overflow: hidden;
         color: black;

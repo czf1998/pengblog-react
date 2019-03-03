@@ -8,7 +8,7 @@ class ForMore extends PureComponent{
 
     render() {
 
-        const { widthOfMainArea, isLoading, noMore, height, forMoreText, noMoreText, fontSize } = this.props
+        const { widthOfMainArea, isLoading, noMore, height, forMoreText, noMoreText, fontSize,clickHandler } = this.props
 
         return (
             <ForMoreWrapper widthOfMainArea={widthOfMainArea}
@@ -28,7 +28,7 @@ class ForMore extends PureComponent{
                             :
                                 <span className={CommonClassNameConstants.HOVER_UNDERLINE +
                                                  CommonClassNameConstants.CURSORP}
-                                      onClick={this._clickHandler.bind(this)}>
+                                      onClick={clickHandler}>
                                     {
                                         forMoreText ? forMoreText : 'CLICK FOR MORE づ￣ 3￣)づ'
                                     }
@@ -42,11 +42,6 @@ class ForMore extends PureComponent{
         )
     }
 
-    _clickHandler(){
-        if(this.props.isLoading || this.props.noMore)
-            return
-        this.props.clickHandler(...this.props.meta)
-    }
 
 }
 

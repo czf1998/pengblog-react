@@ -3,22 +3,38 @@ import styled from 'styled-components'
 
 
 export const FreshCommentItemWrapper = styled.div`
-        border: solid 1px #F0F0F0;
+        position: relative;
+        border: solid 1px #CCCCCC;
         border-radius: 0.4rem;
         padding: 0.5rem;
         padding-top: 0;
         cursor: pointer;
         color:grey;
         font-size:0.9rem;
-        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+        background: ${props => props.isLoading ? '#F7F7F7' : 'white'};
+    `
+
+export const DeleteButton = styled.i`
+        position: absolute;
+        top: -0.5rem;
+        right: -0.5rem;
         &:hover{
             color: black;
         }
     `
 
 export const CommentSubject = styled.div`
-        padding: 0.5rem;
+        padding: 0.3rem;
         line-height: 1.5;
+        display: -webkit-box;
+        /*autoprefixer: next*/
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+          &:hover{
+            color: black;
+        }
     `
 
 export const Visitor = styled.span`
@@ -34,8 +50,10 @@ export const HostArticle = styled.div`
         border: none;
         border-radius: 0.4rem;
         background: #F0F0F0;
-        padding: 0.5rem;
-        line-height: 1.5;
+          &:hover{
+            color: black;
+        }
+       
         &:after{
             content: '';
             width: 0;
@@ -48,6 +66,24 @@ export const HostArticle = styled.div`
         }
     `
 
+export const HostArticleInner = styled.div`
+        padding: 0.2rem;
+        line-height: 1.5;
+        display: -webkit-box;
+        /*autoprefixer: next*/
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+    `
+
 export const Label = styled.span``
 
 export const Title = styled.span``
+
+export const LoadingIcon = styled.img`
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        top: calc(50% - 0.75rem);
+        left: calc(50% - 0.75rem);
+    `

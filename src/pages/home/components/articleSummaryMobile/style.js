@@ -42,7 +42,6 @@ export const ArticleContent = styled.div`
         width: ${props => props.withPreviewImage ? '62%' : '100%'};
         color: black;
         line-height:1.5;
-        -webkit-line-clamp: 3;
     `
 
 

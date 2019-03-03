@@ -9,6 +9,10 @@ import {createTriggerHasBeenMountOnce,
         createTriggerIsLoadingHomeArticleListAction } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
 import { Loading, ForMore  } from '../../common'
+import {
+    createGetFreshCommentsDataAction,
+    createTriggerIsLoadingFreshCommentsAction
+} from "../managePage/components/freshComments/store";
 
 class Home extends PureComponent {
 
@@ -23,7 +27,9 @@ class Home extends PureComponent {
                 maxPage,
                 currentPage,
                 hasBeenMountOnce,
-                articleListDataIsReady} = this.props
+                articleListDataIsReady,
+                getData,
+                state} = this.props
 
         const articleSummaryListTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.SLIDE_UP_FAST
 
@@ -48,10 +54,10 @@ class Home extends PureComponent {
                 }*/}
 
                 {
-                    articleList.map((item, index) => {
+                    articleList.map((item) => {
 
                         return (
-                            <Fragment key={item.get('article_title')}>
+                            <Fragment key={item.get('article_id')}>
                                 {
                                     isMobile ?
                                         <div className={articleSummaryListTransitionClassName} style={{width:'100%'}}>
@@ -69,9 +75,7 @@ class Home extends PureComponent {
 
                 <ForMore isLoading={isLoading}
                          noMore={currentPage === maxPage}
-                         clickHandler={this.props.getMoreArticleListData.bind(this)}
-                         meta={[startIndex,
-                             pageScale]}/>
+                         clickHandler={() => {getData(state)}}/>
 
 
             </HomeWrapper>
@@ -87,7 +91,7 @@ class Home extends PureComponent {
             this.props.pushPrograssBarToEnd()
             return
         }
-        this.props.getData(this.props.startIndex, this.props.pageScale)
+        this.props.getData(this.props.state)
     }
 
     componentDidUpdate(preProps){
@@ -103,6 +107,7 @@ class Home extends PureComponent {
 }
 
 const mapState = (state) => ({
+        state: state,
         startIndex: state.get('home').get('startIndex'),
         pageScale: state.get('home').get('pageScale'),
         maxPage: state.get('home').get('maxPage'),
@@ -117,15 +122,22 @@ const mapState = (state) => ({
 
 const mapActions = (dispatch) => {
     return {
-        getData(startIndex, pageScale) {
+        getData(state) {
+
+            const startIndex = state.get('home').get('startIndex')
+            const pageScale = state.get('home').get('pageScale')
+
+            //trigger当前组件为loading状态
             const triggerIsLoadingHomeArticleListAction = createTriggerIsLoadingHomeArticleListAction(true)
             dispatch(triggerIsLoadingHomeArticleListAction)
 
-            let value = {
+            //请求数据
+            const getHomeDataActionValue = {
                 startIndex: startIndex,
                 pageScale: pageScale
             }
-            const action = createGetHomeDataAction(value)
+
+            const action = createGetHomeDataAction(getHomeDataActionValue)
             dispatch(action)
         },
         getMoreArticleListData(startIndex, pageScale){

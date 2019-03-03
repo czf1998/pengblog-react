@@ -92,7 +92,6 @@ function* mySaga() {
 function* ajaxGetFreshCommentsData(action) {
     try{
         const res = yield CommentRequest.RequestFreshCommentListData(action.value)
-        console.log(res.data)
 
         const appointFreshCommentsDataAction = createAppointFreshCommentsDataAction(res.data)
         yield put(appointFreshCommentsDataAction)

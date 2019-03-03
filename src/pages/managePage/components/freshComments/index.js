@@ -11,7 +11,7 @@ class FreshComments extends PureComponent {
     render() {
 
 
-        const {browser,isLoading,currentPage,maxPage,commentList} = this.props
+        const {browser,isLoading,currentPage,maxPage,commentList,getData,state} = this.props
 
         return (
             <FreshCommentsWrapper browser={browser}>
@@ -23,12 +23,16 @@ class FreshComments extends PureComponent {
                 }
                 <ForMore fontSize="0.9rem;"
                          isLoading={isLoading}
-                         noMore={currentPage === maxPage}/>
+                         height={60}
+                         noMore={currentPage === maxPage} clickHandler={() => {getData(state)}}/>
             </FreshCommentsWrapper>
         );
     }
 
     componentDidMount(){
+        if(this.props.commentList.size !== 0){
+            return
+        }
         this.props.getData(this.props.state)
     }
 
@@ -53,8 +57,6 @@ const mapActions = (dispatch) => ({
 
         const startIndex = state.get('freshComments').get('startIndex')
         const pageScale = state.get('freshComments').get('pageScale')
-        const currentPage = state.get('freshComments').get('currentPage')
-        const maxPage = state.get('freshComments').get('maxPage')
 
         //trigger当前组件为loading状态
         const triggerIsLoadingFreshCommentsAction = createTriggerIsLoadingFreshCommentsAction(true)

@@ -1,34 +1,66 @@
 import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {FreshCommentItemWrapper,
+        DeleteButton,
         CommentSubject,
         Visitor,
         Content,
         HostArticle,
+        HostArticleInner,
         Label,
-        Title} from './style'
-import {} from './store'
+        Title,
+        LoadingIcon} from './style'
+import {createDeleteCommentAction} from './store'
+import loadingSpin from "../../../../../../common/loading/svg/loading-spin.svg";
 
-
+const DELETE_BUTTON_ICON_CLASSNAME = 'fa fa-minus-circle'
 
 class FreshCommentItem extends PureComponent {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: false
+        }
+    }
+
+
     render() {
 
-        const {comment} = this.props
+        const {comment,goTo,tryToDeleteThisComment} = this.props
+
+        const {isLoading} = this.state
 
         return (
-            <FreshCommentItemWrapper>
+            <FreshCommentItemWrapper isLoading={isLoading}
+                                     onClick={() => {goTo('/article/' + comment.get('comment_hostArticle').get('article_id'))}}>
+
+
 
                 <CommentSubject>
-                    <Visitor>{comment.get('comment_author').get('visitor_name')}</Visitor>&nbsp;
+                    <Visitor>{comment.get('comment_author').get('visitor_name')}</Visitor>:&nbsp;
                     <Content>{comment.get('comment_content')}</Content>
                 </CommentSubject>
 
                 <HostArticle>
-                    <Label>[{comment.get('comment_hostArticle').get('article_label')}]</Label>&nbsp;
-                    <Title>{comment.get('comment_hostArticle').get('article_title')}</Title>
+                    <HostArticleInner>
+                        <Label>[{comment.get('comment_hostArticle').get('article_label')}]</Label>&nbsp;
+                        <Title>{comment.get('comment_hostArticle').get('article_title')}</Title>
+                    </HostArticleInner>
+
                 </HostArticle>
+
+
+                {
+                    !isLoading &&
+                    <DeleteButton className={DELETE_BUTTON_ICON_CLASSNAME}
+                                  onClick={(e) => {tryToDeleteThisComment(e,comment.get('comment_id'),this)}}/>
+                }
+
+                {
+                    isLoading &&
+                    <LoadingIcon src={loadingSpin} alt="Loading icon"/>
+                }
 
             </FreshCommentItemWrapper>
         );
@@ -47,12 +79,22 @@ class FreshCommentItem extends PureComponent {
 
 const mapState = (state) => {
     return  {
-
+        goTo: state.get('router').get('goTo')
     }
 }
 
 const mapActions = (dispatch) => ({
+    tryToDeleteThisComment(e, comment_id, _this){
+        e.stopPropagation()
 
+        _this.setState({
+            isLoading: true
+        })
+
+        const deleteCommentAction = createDeleteCommentAction(comment_id)
+        dispatch(deleteCommentAction)
+
+    }
 })
 
 export default connect(mapState, mapActions)(FreshCommentItem)

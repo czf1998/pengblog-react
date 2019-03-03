@@ -15,11 +15,7 @@ const defaultState = fromJS({
     maxPage: 1,
     currentPage: 0,
     articleList: [],
-    jumbotronArticleIdDefault: 0,
-    jumbotronArticleId: 0,
     isLoading: false,
-    loadedAndShowJumbotron: false,
-    jumbotronDataIsReady: false,
     articleListDataIsReady: false,
     hasBeenMountOnce: false
 })
@@ -30,8 +26,7 @@ export default (state = defaultState, action) => {
             articleList: state.get('articleList').concat(fromJS(action.value.articleList)),
             maxPage: action.value.maxPage,
             currentPage: state.get('currentPage') + 1,
-            startIndex: (state.get('currentPage') + 1) * state.get('pageScale'),
-            jumbotronArticleId: state.get('articleList').get(0) ? state.get('articleList').get(0).get('article_id') : action.value.articleList[0].article_id,
+            startIndex: state.get('startIndex') + state.get('pageScale'),
             isLoading: false,
             articleListDataIsReady: true
         })

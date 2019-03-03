@@ -1,7 +1,7 @@
 import reducer from './reducer'
-import {} from "./actionCreators";
+import {createDeleteCommentAction} from "./actionCreators";
 
 export {reducer}
 
-export {}
+export {createDeleteCommentAction}
 
