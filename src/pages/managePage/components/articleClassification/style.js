@@ -21,6 +21,21 @@ export const Title = styled.div`
 export const Tags = styled.div`
         display: flex;
         flex-wrap: wrap;
+        max-height: 6.4rem;
+        overflow-Y: scroll;
+         ${props => props.browser !== 'Safari' ? `
+
+        &::-webkit-scrollbar{
+            width:2px;
+            height:1px;
+        }
+        &::-webkit-scrollbar-thumb{
+            background: #DDDDDD;
+        }
+        &::-webkit-scrollbar-track{
+        
+        }` 
+        : ''}
     `
 
 export const TagItem = styled.div`

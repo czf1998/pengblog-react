@@ -22,6 +22,8 @@ import themeImage from "../../static/image/fangao.jpg";
 import {SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
 import {PASSWORD, USERNAME} from "./constant";
 import loadingSpin from "../../common/loading/svg/loading-spin.svg";
+import {createAppointNoticeContent, createTriggerAlreadyLoggedInAction} from "../../store/actionCreators";
+import {put} from "redux-saga/effects";
 
 class LoginPage extends PureComponent {
 
@@ -36,8 +38,9 @@ class LoginPage extends PureComponent {
                 username,
                 password,
                 tryToLogin,
-                isLoggingIn,
-                alreadyLoggedIn} = this.props
+                isLogging,
+                alreadyLoggedIn,
+                tryToLogout} = this.props
 
 
         return (
@@ -62,7 +65,7 @@ class LoginPage extends PureComponent {
                    <InputWrapper>
                        <InputEX value={username}
                                 placeholder="用户名"
-                                disabled={isLoggingIn}
+                                disabled={isLogging || alreadyLoggedIn}
                                 onChange={(e) => {appointLoginPageInputValue(USERNAME,e)}}/>
                    </InputWrapper>
 
@@ -70,19 +73,27 @@ class LoginPage extends PureComponent {
                        <InputEX value={password}
                                 placeholder="密码"
                                 type="password"
-                                disabled={isLoggingIn}
+                                disabled={isLogging || alreadyLoggedIn}
                                 onChange={(e) => {appointLoginPageInputValue(PASSWORD,e)}}/>
                    </InputWrapper>
 
                    <ButtonWrapper>
                        {
-                           isLoggingIn ?
-                               <Loading src={loadingSpin}/>
-                               :
-                               <Button onClick={() => {!isLoggingIn && tryToLogin(username,password)}}
-                                       disabled={isLoggingIn}>
-                                   &nbsp;&nbsp;登录&nbsp;&nbsp;
+                           alreadyLoggedIn ?
+                               <Button onClick={() => {!isLogging && tryToLogout()}}
+                                       disabled={isLogging}>
+                                   &nbsp;&nbsp;登出&nbsp;&nbsp;
                                </Button>
+                               :
+                               (
+                                   isLogging ?
+                                       <Loading src={loadingSpin}/>
+                                       :
+                                       <Button onClick={() => {!isLogging && tryToLogin(username,password)}}
+                                               disabled={isLogging}>
+                                           &nbsp;&nbsp;登录&nbsp;&nbsp;
+                                       </Button>
+                               )
                        }
                    </ButtonWrapper>
                </Loginer>
@@ -106,7 +117,7 @@ const mapState = (state) => ({
         heightOfBrowser: state.get('rootState').get('heightOfBrowser'),
         username: state.get('loginPage').get('username'),
         password: state.get('loginPage').get('password'),
-        isLoggingIn: state.get('loginPage').get('isLoggingIn'),
+        isLogging: state.get('loginPage').get('isLogging'),
         alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     })
 
@@ -135,6 +146,21 @@ const mapActions = (dispatch) => {
 
             const loginAction = createLoginAction(loginValue)
             dispatch(loginAction)
+        },
+        tryToLogout(){
+            const triggerIsLoggingInAction = createTriggerIsLoggingInAction(true)
+            dispatch(triggerIsLoggingInAction)
+
+            localStorage.removeItem('token')
+
+            const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(false)
+            dispatch(triggerAlreadyLoggedInAction)
+
+            const triggerIsLoggingInAction2 = createTriggerIsLoggingInAction(false)
+            dispatch(triggerIsLoggingInAction2)
+
+            const appointNoticeContent = createAppointNoticeContent('登出成功')
+            dispatch(appointNoticeContent)
         }
     }
 }

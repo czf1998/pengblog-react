@@ -10,7 +10,7 @@ class Logo extends PureComponent {
 
     render() {
 
-        const { metaColor,goTo} = this.props
+        const { metaColor,goTo, alreadyLoggedIn} = this.props
 
         return (
                 <LogoWrapper className={CommonClassNameConstants.FONT_LARGE +
@@ -19,9 +19,9 @@ class Logo extends PureComponent {
                                 CommonClassNameConstants.FLEX_COLUMN_CENTER}
                                 metaColor={metaColor}>
                     <div onClick={() => {goTo('/')}}>
-                        <span style={{color:metaColor, fontWeight:'bold', fontSize:'1.8rem'}}>遠</span>方有鱼
+                        <span style={{color:alreadyLoggedIn ? '#CCCCCC' : metaColor, fontWeight:'bold', fontSize:'1.8rem'}}>遠</span>方有鱼
                     </div>
-                    <div style={{borderTop: "solid 1px " + metaColor}}
+                    <div style={{borderTop: "solid 1px " + (alreadyLoggedIn ? '#CCCCCC' : metaColor)}}
                          className={CommonClassNameConstants.FONT_TINY}
                          onClick={() => {goTo('/')}}>
                         It's a Wonderful Life
@@ -35,7 +35,8 @@ const mapState = (state) => {
     return  {
         metaColor: state.get('header').get('metaColor'),
         history: state.get('router').get('history'),
-        goTo: state.get('router').get('goTo')
+        goTo: state.get('router').get('goTo'),
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }
 }
 

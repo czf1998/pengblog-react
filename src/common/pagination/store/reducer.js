@@ -7,12 +7,17 @@ import {
 } from "../../../store/actionTypesWithSaga";
 import {APPOINT_MANAGE_PAGE_PAGINATION} from "../../../pages/managePage/store/actionType";
 
+//根据浏览器显示高度初始化managePage的pageScale
+let pageScaleDefault = window.innerWidth < 800 ? 8 : parseInt((window.innerHeight - 300)/54)
+pageScaleDefault = pageScaleDefault < 8 ? 8 : pageScaleDefault
+const startIndexDefault = -pageScaleDefault
+
 const defaultState = fromJS({
     managePage: fromJS({
         currentPage: 0,
         maxPage: 1,
-        startIndex: -8,
-        pageScale: 8,
+        startIndex: startIndexDefault,
+        pageScale: pageScaleDefault,
     })
 })
 

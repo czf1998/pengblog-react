@@ -35,7 +35,6 @@ export function RequestCountOfComment(value) {
     return axios.get(Api.API_GET_COUNT_OF_COMMENT, config)
 }
 
-
 export function RequestTopLevelCommentListData(value) {
     let config = {
         params: {
@@ -46,3 +45,16 @@ export function RequestTopLevelCommentListData(value) {
     }
     return axios.get(Api.API_GET_TOP_LEVEL_COMMENT_LIST_BY_LIMITINDEX, config)
 }
+
+export function RequestFreshCommentListData(value){
+    let config = {
+        params: {
+            startIndex: value.startIndex,
+            pageScale: value.pageScale
+        }
+    }
+
+    return axios.get(Api.API_GET_FRESH_COMMENT_LIST, config)
+
+}
+

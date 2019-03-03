@@ -9,12 +9,15 @@ import ManagePageLoadable from '../pages/managePage/loadable'
 import LoginPageLoadable from '../pages/loginPage/loadable'
 import { Header } from '../common'
 import {createTriggerAlreadyLoggedInAction} from "../store/actionCreators";
+import {createAppointLoginPageInputValueAction} from "../pages/loginPage/store";
 
 class RouterComponent extends PureComponent {
 
     render() {
 
-        const {isMobile,alreadyLoggedIn} = this.props
+        const {isMobile} = this.props
+
+        let alreadyLoggedIn = getLoginStatus()
 
         return (
             <Router history={history}>
@@ -27,7 +30,9 @@ class RouterComponent extends PureComponent {
                     <Route exact path='/article/:article_id' component={ArticlePageLoadable}/>
                     <Route exact path='/manage' component={ManagePageLoadable}/>
                     <Route exact path='/edit' component={ArticleEditPageLoadable}/>
-                    <Route exact path='/login' render={() => (alreadyLoggedIn ? <Redirect to='/home'/> : <LoginPageLoadable/>)}/>
+                    <Route exact path='/edit' render={() => (alreadyLoggedIn ? (<ArticleEditPageLoadable/>) : (<Redirect to='/login'/>))}/>
+                    <Route exact path='/login' render={() => (alreadyLoggedIn ? (<Redirect to='/home'/>) : (<LoginPageLoadable/>))}/>
+                    <Route exact path='/logout' render={() => (alreadyLoggedIn ? (<LoginPageLoadable/>) : (<Redirect to='/home'/>))}/>
                 </Fragment>
             </Router>
         );
@@ -37,8 +42,8 @@ class RouterComponent extends PureComponent {
         appointDocumentTitle(history.location.pathname,this.props.currentArticle)
     }
 
-    componentDidMount(){
-        initLoginStatus(this.props.goTo,this.props.getDispatch())
+    componentWillMount(){
+       initLoginStatus(this.props.getDispatch())
     }
 }
 
@@ -47,7 +52,6 @@ const mapState = (state) => ({
     prograssBarManager: state.get('prograssBar').get('prograssBarManager'),
     currentArticle: state.get('articlePage').get('article'),
     alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn'),
-    goTo: state.get('router').get('goTo')
 })
 
 const mapActions = (dispatch) => ({
@@ -77,12 +81,28 @@ const appointDocumentTitle = (path,currentArticle) => {
     }
     if(path === '/edit'){
         document.title = '写文章'
-        return
     }
 }
 
+const getLoginStatus = () => {
 
-const initLoginStatus = (goTo,dispatch) => {
+    if(localStorage.getItem('token') === undefined || localStorage.getItem('token') === null){
+        return false
+    }
+
+    if(localStorage.getItem('token') !== undefined && localStorage.getItem('token') !== null){
+        let tokenObj = JSON.parse(localStorage.getItem('token'))
+        let expTime = tokenObj.expTime
+
+        if(expTime < new Date().getTime()){
+            return false
+        }
+
+        return true
+    }
+}
+
+const initLoginStatus = (dispatch) => {
 
     if(localStorage.getItem('token') === undefined || localStorage.getItem('token') === null){
         return
@@ -98,5 +118,14 @@ const initLoginStatus = (goTo,dispatch) => {
 
         const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
         dispatch(triggerAlreadyLoggedInAction)
+
+
+        //更新loginPage.reducer的username
+        const appointLoginPageInputValueActionValue = {
+            inputId: 'username',
+            inputValue: tokenObj.username
+        }
+        const appointLoginPageInputValueAction = createAppointLoginPageInputValueAction(appointLoginPageInputValueActionValue)
+        dispatch(appointLoginPageInputValueAction)
     }
 }

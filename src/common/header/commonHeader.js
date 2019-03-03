@@ -16,11 +16,11 @@ class CommonHeader extends PureComponent {
 
     render() {
 
-        const {
-                height,
+        const { height,
                 backgroundColor,
                 basicUIFeatures,
-                goTo} = this.props
+                goTo,
+                alreadyLoggedIn} = this.props
 
         return (
             <HeaderWrapper id="_header" className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
@@ -41,14 +41,18 @@ class CommonHeader extends PureComponent {
                             </Info>
                         </NavItem>
 
-                        <NavItem cursorp={true}>
+                        {
+                            alreadyLoggedIn &&
+                            <NavItem cursorp={true}>
                             <span className="iconfont"
                                   onClick={() => {goTo('/edit')}}
                                   style={{fontSize:'1.6rem'}}>&#xe67f;</span>
-                            <Info onClick={() => {goTo('/edit')}}>
-                                写作
-                            </Info>
-                        </NavItem>
+                                <Info onClick={() => {goTo('/edit')}}>
+                                    写作
+                                </Info>
+                            </NavItem>
+                        }
+
                     </NavItemWrapper>
                 </HeaderMainArea>
             </HeaderWrapper>
@@ -70,7 +74,8 @@ const mapState = (state) => {
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
         goTo: state.get('router').get('goTo'),
         currentPath: state.get('router').get('currentPath'),
-        submitable: state.get('router').get('submitable')
+        submitable: state.get('router').get('submitable'),
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }
 }
 

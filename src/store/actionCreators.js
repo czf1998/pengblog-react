@@ -20,7 +20,8 @@ import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
         RECORD_ARTICLE_HAS_BEEN_DELETE,
         RECORD_ARTICLE_LIST_HAS_BEEN_DELETE,
         RESET_MANAGE_PAGE_ARTICLE_LIST,
-        TRIGGER_ALREADY_LOGGED_IN} from './actionTypesWithSaga'
+        TRIGGER_ALREADY_LOGGED_IN,
+        APPOINT_FRESH_COMMENTS_DATA} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -140,3 +141,7 @@ export const createTriggerAlreadyLoggedInAction = (value) => ({
     value
 })
 
+export const createAppointFreshCommentsDataAction = (value) => ({
+    type: APPOINT_FRESH_COMMENTS_DATA,
+    value
+})

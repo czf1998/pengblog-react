@@ -7,7 +7,7 @@ import {TRIGGER_ALREADY_LOGGED_IN} from "../../../store/actionTypesWithSaga";
 const defaultState = fromJS({
     username: '',
     password: '',
-    isLoggingIn: false,
+    isLogging: false,
     alreadyLoggedIn: false
 })
 
@@ -19,7 +19,7 @@ export default (state = defaultState, action) => {
 
     if(action.type === TRIGGER_IS_LOGGING_IN){
         return state.merge({
-            isLoggingIn: action.value
+            isLogging: action.value
         })
     }
 

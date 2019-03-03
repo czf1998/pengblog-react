@@ -25,6 +25,13 @@ export const Inputer = styled.input`
         &:disabled{
             color: #CCCCCC;
         }
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+        -webkit-transition-delay: 99999s;
+        -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+    }
 `
 
 export const Line = styled.div`

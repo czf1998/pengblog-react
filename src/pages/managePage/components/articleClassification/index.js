@@ -9,12 +9,12 @@ class ArticleClassification extends PureComponent {
 
     render() {
 
-        const {articleLabelObjList,appointCurrentLabel,currentLabel,dataGetter} = this.props
+        const {articleLabelObjList,appointCurrentLabel,currentLabel,dataGetter,browser} = this.props
 
         return (
             <ArticleClassificationWrapper>
                 <Title>TAG</Title>
-                <Tags>
+                <Tags browser={browser}>
 
                     {
                         articleLabelObjList && articleLabelObjList.map((item) => {
@@ -38,7 +38,8 @@ class ArticleClassification extends PureComponent {
 
 const mapState = (state) => {
     return  {
-        currentLabel: state.get('managePage').get('currentLabel')
+        currentLabel: state.get('managePage').get('currentLabel'),
+        browser: state.get('rootState').get('browser')
     }
 }
 

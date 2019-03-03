@@ -16,10 +16,11 @@ import {CentralController,
         ArticleDetail,
         SearchBarMobile,
         MultipleSelectTitle,
-        ShutDownMultipleSelect} from './style'
+        ShutDownMultipleSelect,ArticleItemWrapper,FreshCommentsTitle} from './style'
 import {SearchBar,
         ArticleFiling,
         ArticleClassification,
+        FreshComments,
         ArticleItem,
         ArticleItemMobile} from './components'
 import {createPushPrograssToEndAction} from "../articlePage/store";
@@ -65,7 +66,8 @@ class ManagePage extends PureComponent {
                 isMultipleSelecting,
                 tryToDeleteArticleList,
                 articleListBeingSelected,
-                confirmDeletePostProcessor} = this.props
+                confirmDeletePostProcessor,
+                alreadyLoggedIn} = this.props
 
         return (
             <Fragment>
@@ -79,6 +81,9 @@ class ManagePage extends PureComponent {
 
                     <ArticleClassification articleLabelObjList={articleLabelObjList}
                                            dataGetter={getArticleByLabel}/>
+
+                    <FreshCommentsTitle>最近评论</FreshCommentsTitle>
+                    <FreshComments/>
 
                 </CentralController>
 
@@ -103,18 +108,22 @@ class ManagePage extends PureComponent {
                             {
                                 widthOfBrowser > 800 &&
                                 <Header>
-                                    <MultipleSelectTitle onClick={() => {triggerIsMultipleSelecting(true)}}>
-                                        {
-                                            isMultipleSelecting ?
-                                                <span onClick={(e) => {tryToDeleteArticleList(articleListBeingSelected,
-                                                                                                confirmDeletePostProcessor,
-                                                                                                e)}}>
+                                    {
+                                        alreadyLoggedIn &&
+                                        <MultipleSelectTitle onClick={() => {triggerIsMultipleSelecting(true)}}>
+                                            {
+                                                isMultipleSelecting ?
+                                                    <span onClick={(e) => {tryToDeleteArticleList(articleListBeingSelected,
+                                                        confirmDeletePostProcessor,
+                                                        e)}}>
                                                     批量删除
                                                 </span>
-                                                :
-                                                '多选'
-                                        }
-                                    </MultipleSelectTitle>
+                                                    :
+                                                    '多选'
+                                            }
+                                        </MultipleSelectTitle>
+                                    }
+
                                     {
                                         isMultipleSelecting &&
                                         <ShutDownMultipleSelect onClick={() => {triggerIsMultipleSelecting(false)}}>取消</ShutDownMultipleSelect>
@@ -136,15 +145,19 @@ class ManagePage extends PureComponent {
                                     articleList && articleList.map((item) => {
                                     return (
                                         widthOfBrowser < 800 ?
-                                            <div className={SLIDE_UP_FAST} key={item.get('article_id')}>
+                                            <ArticleItemWrapper currentPage={paginationObj.get('currentPage')}
+                                                                className={SLIDE_UP_FAST}
+                                                                key={item.get('article_id')}>
                                                 <ArticleItemMobile isMultipleSelecting={isMultipleSelecting}
                                                                    article={item}/>
-                                            </div>
+                                            </ArticleItemWrapper>
                                             :
-                                            <div className={SLIDE_UP_FAST} key={item.get('article_id')}>
+                                            <ArticleItemWrapper currentPage={paginationObj.get('currentPage')}
+                                                                className={SLIDE_UP_FAST}
+                                                                key={item.get('article_id')}>
                                                 <ArticleItem isMultipleSelecting={isMultipleSelecting}
                                                              article={item}/>
-                                            </div>
+                                            </ArticleItemWrapper>
 
                                     )
                                 })
@@ -229,7 +242,8 @@ const mapState = (state) => ({
         showArticleDetail: state.get('managePage').get('showArticleDetail'),
         widthOfBrowser: state.get('rootState').get('widthOfBrowser'),
         isMultipleSelecting: state.get('managePage').get('isMultipleSelecting'),
-        articleListBeingSelected: state.get('managePage').get('articleListBeingSelected')
+        articleListBeingSelected: state.get('managePage').get('articleListBeingSelected'),
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     })
 
 const mapActions = (dispatch) => {

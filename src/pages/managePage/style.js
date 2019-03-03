@@ -14,8 +14,10 @@ export const CentralController = styled.div`
         bottom: 0;
         left: 0;
         width: 300px;
-        padding-top: 2rem;
         border-right: solid 1px #EEEEEE;
+        
+        display: flex;
+        flex-direction: column;
         
         @media(max-width:${milePostWidth3}px){
             display:none
@@ -57,12 +59,17 @@ export const ArticleListFixer = styled.div`
     `
 
 export const ArticleList = styled.div`
+        flex-grow: 1;
+        display:flex;
+        flex-direction: column;
     `
 
 export const Title = styled.div`
         padding: 1rem 2rem;
+        padding-bottom: 0;
         font-size: 2rem;
         font-weight: 100;
+        margin-bottom: 1rem;
         @media(max-width:${milePostWidth3}px){
             padding: 1rem;
             padding-bottom: 0;
@@ -172,4 +179,19 @@ export const SearchBarMobile = styled.div`
         @media(max-width:${milePostWidth3}px){
            display: block;
         }
+    `
+
+export const ArticleItemWrapper = styled.div`
+        display: flex;
+        align-items: center;
+        border-top: solid 1px #f0f0f0; 
+    `
+
+export const FreshCommentsTitle = styled.div`
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding-bottom: 0.8rem;
+        margin: 1rem 2rem;
+        margin-bottom: 0.5rem;
+        border-bottom: solid 1px #f0f0f0;
     `

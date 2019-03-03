@@ -57,3 +57,5 @@ export const RECORD_ARTICLE_LIST_HAS_BEEN_DELETE = 'recordArticleListHasBeenDele
 export const RESET_MANAGE_PAGE_ARTICLE_LIST = 'resetManagePageArticleList'
 
 export const TRIGGER_ALREADY_LOGGED_IN = 'triggerAlreadyLoggedIn'
+
+export const APPOINT_FRESH_COMMENTS_DATA = 'appointFreshCommentsData'

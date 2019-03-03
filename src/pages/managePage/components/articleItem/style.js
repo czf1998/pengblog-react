@@ -71,7 +71,6 @@ export const ArticleItemWrapper = styled.div`
         margin-top: 0;
         margin-bottom: 0;
         background: white;
-        border-bottom: solid 1px #EEEEEE;
         transition: all 0.4s ease;
         ${props => props.isDeleted ? 'text-decoration:line-through' : ''};
         ${props => props.browser === 'Safari' ? '' : `

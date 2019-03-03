@@ -41,7 +41,8 @@ class ArticleItem extends PureComponent {
                 checkBoxSelecter,
                 tryToDeleteThisArticle,
                 confirmDeletePostProcessor,
-                articleHasBeenDeleteList} = this.props
+                articleHasBeenDeleteList,
+                alreadyLoggedIn} = this.props
 
         const isSelected = articleListBeingSelected.some((item) => {
             return item === article.get('article_id')
@@ -84,7 +85,7 @@ class ArticleItem extends PureComponent {
 
 
                     {
-                        (isBeingHover || browser === 'Safari') &&
+                        (isBeingHover || browser === 'Safari') && alreadyLoggedIn &&
                         <DeleteButton browser={browser}>
                             <span className="iconfont"
                                   style={{cursor: 'pointer'}}
@@ -131,7 +132,8 @@ const mapState = (state) => {
         goTo: state.get('router').get('goTo'),
         browser: state.get('rootState').get('browser'),
         articleListBeingSelected: state.get('managePage').get('articleListBeingSelected'),
-        articleHasBeenDeleteList: state.get('managePage').get('articleHasBeenDeleteList')
+        articleHasBeenDeleteList: state.get('managePage').get('articleHasBeenDeleteList'),
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }
 }
 

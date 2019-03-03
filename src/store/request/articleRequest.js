@@ -25,7 +25,16 @@ export const RequestDraftData = () => {
 }
 
 export const SaveArticle = (value) => {
-    return axios.post(Api.API_SAVE_ARTICLE,value)
+
+    let token = getToken()
+
+    let config = {
+        headers:{
+            Authorization: token
+        }
+    }
+
+    return axios.post(Api.API_SAVE_ARTICLE,value,config)
 }
 
 export const RequestArticleFilingData = () => {
@@ -77,9 +86,14 @@ export const RequestArticleListDataByLabel = (value) => {
 
 export const RequestDeleteArticle = (value) => {
 
+    let token = getToken()
+
     let config = {
         params: {
             article_id: value
+        },
+        header: {
+            Authorization: token
         }
     }
 
@@ -88,10 +102,24 @@ export const RequestDeleteArticle = (value) => {
 
 export const RequestDeleteArticleList = (value) => {
 
+    let token = getToken()
+
     let deleteArticleListData = {
         articleIdListString: JSON.stringify(value)
     }
 
-    return axios.post(Api.API_DELETE_ARTICLE_LIST, deleteArticleListData)
+    let config = {
+        header: {
+            Authorization: token
+        }
+    }
 
+    return axios.post(Api.API_DELETE_ARTICLE_LIST, deleteArticleListData, config)
+
+}
+
+export const getToken = () => {
+    let tokenObj = JSON.parse(localStorage.getItem('token'))
+    let token = tokenObj ? tokenObj.token : null
+    return token
 }

@@ -30,7 +30,8 @@ import {createDeliverArticleDataToHomeAction,
         createRecordArticleHasBeenDeletedAction,
         createRecordArticleListHasBeenDeletedAction,
         createResetManagePageArticleListAction,
-        createTriggerAlreadyLoggedInAction} from './actionCreators'
+        createTriggerAlreadyLoggedInAction,
+        createAppointFreshCommentsDataAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest,
@@ -61,6 +62,7 @@ import {
 } from "../pages/managePage/store";
 import {LOGIN} from "../pages/loginPage/store/actionTypes";
 import {createTriggerIsLoggingInAction} from "../pages/loginPage/store";
+import {GET_FRESH_COMMENTS_DATA} from "../pages/managePage/components/freshComments/store/actionTypes";
 
 
 function* mySaga() {
@@ -84,19 +86,32 @@ function* mySaga() {
     yield takeEvery(DELETE_ARTICLE, ajaxDeleteArticle)
     yield takeEvery(DELETE_ARTICLE_LIST, ajaxDeleteArticleList)
     yield takeEvery(LOGIN, ajaxLogin)
+    yield takeEvery(GET_FRESH_COMMENTS_DATA, ajaxGetFreshCommentsData)
+}
+
+function* ajaxGetFreshCommentsData(action) {
+    try{
+        const res = yield CommentRequest.RequestFreshCommentListData(action.value)
+        console.log(res.data)
+
+        const appointFreshCommentsDataAction = createAppointFreshCommentsDataAction(res.data)
+        yield put(appointFreshCommentsDataAction)
+    }catch (err) {
+
+    }
 }
 
 function* ajaxLogin(action) {
     try{
         const res = yield LoginRequest.RequestLogin(action.value)
-        console.log(res.data)
+        //console.log(res.data)
 
         //登录成功
         if(res.data.loginStatus === 1){
             //本地存储token以及过期时间
             let validTime = res.data.validTimeMillis
             let expTime = new Date().getTime() + validTime
-            localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime}))
+            localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, username:action.value.username}))
 
             //更新reducer为已登录
             const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
@@ -123,6 +138,7 @@ function* ajaxLogin(action) {
 
     }catch (err) {
         console.log('ERR IN ACTION: LOGIN  ERR: ' + err)
+
         /*通知窗口提示登录失败*/
         const appointNoticeContent = createAppointNoticeContent('登录失败: ' + err)
         yield put(appointNoticeContent)
@@ -163,6 +179,14 @@ function* ajaxDeleteArticleList(action) {
 
     }catch (err) {
         console.log('ERR IN ACTION: DELETE_ARTICLE_LIST  ERR: ' + err)
+
+        //关闭modal
+        const triggerShowModalAction = createTriggerShowModalAction(false)
+        yield put(triggerShowModalAction)
+
+        /*通知窗口提示异常*/
+        const appointNoticeContent = createAppointNoticeContent('ERR IN ACTION: DELETE_ARTICLE_LIST  ERR: ' + err)
+        yield put(appointNoticeContent)
     }
 }
 
@@ -200,6 +224,14 @@ function* ajaxDeleteArticle(action) {
 
     }catch (err) {
         console.log('ERR IN ACTION: DELETE_ARTICLE  ERR: ' + err)
+
+        //关闭modal
+        const triggerShowModalAction = createTriggerShowModalAction(false)
+        yield put(triggerShowModalAction)
+
+        /*通知窗口提示异常*/
+        const appointNoticeContent = createAppointNoticeContent('ERR IN ACTION: DELETE_ARTICLE_LIST  ERR: ' + err)
+        yield put(appointNoticeContent)
     }
 }
 
@@ -209,7 +241,7 @@ function* ajaxManagePageArticleListDataByLabel(action) {
         let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_LIST  ERR: ' + err)
     }
 }
 
@@ -219,7 +251,7 @@ function* ajaxManagePageArticleListDataByFiling(action) {
         let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING  ERR: ' + err)
     }
 }
 
@@ -229,7 +261,7 @@ function* ajaxManagePageArticleListDataByKeyWord(action) {
         let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEYWORD  ERR: ' + err)
     }
 }
 
@@ -239,7 +271,7 @@ function* ajaxManagePageArticleLabelData() {
         let appointDataAction = createDeliverArticleLabelDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_LABEL_DATA  ERR: ' + err)
     }
 }
 
@@ -249,7 +281,7 @@ function* ajaxManagePageArticleFilingData() {
         let appointDataAction = createDeliverArticleFilingDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_FILING_DATA  ERR: ' + err)
     }
 }
 
@@ -259,7 +291,7 @@ function* ajaxManagePageArticleListData(action) {
         let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_LIST_DATA  ERR: ' + err)
     }
 }
 
@@ -272,7 +304,11 @@ function* ajaxUploadImage(action) {
         let appointTitleImageUrlAction = createDeliverTitleImageUrlAction(res.data.imgUrl)
         yield put(appointTitleImageUrlAction)
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        console.log('ERR IN ACTION: UPLOAD_IMAGE  ERR: ' + err)
+
+        /*通知窗口提示异常*/
+        const appointNoticeContent = createAppointNoticeContent('ERR IN ACTION: UPLOAD_IMAGE  ERR: ' + err)
+        yield put(appointNoticeContent)
     }
 }
 
@@ -297,9 +333,11 @@ function* ajaxSaveArticle(action) {
         }
     }catch (err) {
         console.log('ERR IN ACTION: SAVE_ARTICLE  ERR: ' + err)
-        /*通知窗口提示提交成功*/
+
+        /*通知窗口提示异常*/
         const appointNoticeContent = createAppointNoticeContent('文章发布失败: ' + err)
         yield put(appointNoticeContent)
+
     }
 }
 
@@ -313,7 +351,8 @@ function* ajaxDraft() {
         yield put(appointDataAction)
 
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        console.log('ERR IN ACTION: GET_DRAFT_DATA  ERR: ' + err)
+
     }
 }
 
@@ -385,7 +424,7 @@ function* ajaxSubCommentListData(action) {
         let appointDataAction = createDeliverSubCommentListDataAction(value)
         yield put(appointDataAction)
     }catch (err) {
-        console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
+        console.log('ERR IN ACTION: SUBMIT_COMMENT  ERR: ' + err)
     }
 }
 
@@ -406,7 +445,7 @@ function* ajaxCommentListData(action) {
         let appointDataAction = createDeliverCommentListDataToArticlePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
-        console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_DATA  ERR: ' + err)
+        console.log('ERR IN ACTION: GET_COMMENT_LIST_DATA  ERR: ' + err)
     }
 }
 

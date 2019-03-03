@@ -3,12 +3,9 @@ import styled from 'styled-components'
 
 export const ArticleItemMobileWrapper = styled.div`
         position: relative;
-        margin-left: 1rem;
-        margin-right: 1rem;
-        margin-top: 0.8rem;
-        padding-top: 0.8rem;
-        padding-right: 2rem;
-        border-top: solid 1px #f0f0f0; 
+        width: 100%;
+        padding-left: 1rem;
+        margin: 0.5rem 0;
         ${props => props.isDeleted ? 'text-decoration:line-through' : ''};
     `
 
@@ -41,7 +38,7 @@ export const DeleteButtonWraper = styled.div`
         position: absolute;
         top: 0.8rem;
         bottom: 0;
-        right: 0;
+        right: 1rem;
         width: 1rem;
         
         display: flex;
