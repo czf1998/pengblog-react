@@ -10,7 +10,7 @@ import {FreshCommentItemWrapper,
         Label,
         Title,
         LoadingIcon} from './style'
-import {createDeleteCommentAction} from './store'
+import {createDeleteCommentFromFreshCommentsAction} from './store'
 import loadingSpin from "../../../../../../common/loading/svg/loading-spin.svg";
 
 const DELETE_BUTTON_ICON_CLASSNAME = 'fa fa-minus-circle'
@@ -92,7 +92,7 @@ const mapActions = (dispatch) => ({
             isLoading: true
         })
 
-        const deleteCommentAction = createDeleteCommentAction(comment_id)
+        const deleteCommentAction = createDeleteCommentFromFreshCommentsAction(comment_id)
         dispatch(deleteCommentAction)
 
     }

@@ -17,8 +17,12 @@ import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
 import SubComment from '../subComment'
 import {SubCommentEditor} from '../commentEditor'
-import { createGetSubCommentListDataAction,createAppointShowSubCommentEditorManagerAction } from './store'
+import {createGetSubCommentListDataAction,
+        createAppointShowSubCommentEditorManagerAction,
+        createDeleteCommentFromArticlePageAction } from './store'
 import {ForMore} from "../../../../common";
+import {LoadingIcon} from "../../../managePage/components/freshComments/components/freshCommentItem/style";
+import loadingSpin from "../../../../common/loading/svg/loading-spin.svg";
 
 const REPLY_CLASSNAME = 'fa fa-reply'
 const RETRACT_CLASSNAME = 'fa fa-chevron-up'
@@ -32,7 +36,8 @@ class Comment extends PureComponent {
         this.redirectToVisitorSite = this.redirectToVisitorSite.bind(this)
         this.state = {
             startIndex: 0,
-            currentPage: 1
+            currentPage: 1,
+            isBeenDeleting: false
         }
     }
 
@@ -50,10 +55,10 @@ class Comment extends PureComponent {
                 getMoreSubCommentListData,
                 pageScale,
                 isLoadingMoreSubComment,
-                alreadyLoggedIn} = this.props
+                alreadyLoggedIn,tryToDeleteThisComment} = this.props
 
         const comment_id = comment.get('comment_id')
-        const currentPage = this.state.currentPage
+        const {currentPage,isBeenDeleting} = this.state
 
         let maxPage = subCommentMaxPageMananger.get(comment.get('comment_id').toString())
 
@@ -78,7 +83,7 @@ class Comment extends PureComponent {
 
 
         return (
-            <CommentWrapper className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}
+            <CommentWrapper isBeenDeleting={isBeenDeleting}
                             widthOfMainArea={widthOfMainArea}>
 
 
@@ -114,7 +119,7 @@ class Comment extends PureComponent {
                             alreadyLoggedIn &&
                             <Fragment>
                                 &nbsp;|&nbsp;
-                                <DeleteButton className="fa fa-trash-o"/>
+                                <DeleteButton onClick={() => {tryToDeleteThisComment(comment_id,comment.get('comment_hostArticle').get('article_id'),this)}} className="fa fa-trash-o"/>
                             </Fragment>
                         }
                     </OperationBar>
@@ -171,6 +176,11 @@ class Comment extends PureComponent {
 
                 </MultiContent>
 
+                {
+                    isBeenDeleting &&
+                    <LoadingIcon src={loadingSpin} alt="Loading icon"/>
+
+                }
 
             </CommentWrapper>
         );
@@ -237,6 +247,20 @@ const mapActions = (dispatch) => ({
         }
         const appointShowSubCommentEditorManagerAction = createAppointShowSubCommentEditorManagerAction(value)
         dispatch(appointShowSubCommentEditorManagerAction)
+    },
+    tryToDeleteThisComment(comment_id, article_id, _this){
+
+        _this.setState({
+            isBeenDeleting: true
+        })
+
+        const value = {
+            comment_id: comment_id,
+            article_id: article_id
+        }
+        const deleteCommentAction = createDeleteCommentFromArticlePageAction(value)
+        dispatch(deleteCommentAction)
+
     }
 })
 

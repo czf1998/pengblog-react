@@ -6,7 +6,10 @@ export const CommentWrapper = styled.div`
         position: relative;
         display: flex;
         align-items: stretch;
-        width: 100%;
+        filter: brightness(${props => props.isBeenDeleting ? '95%' : '100%'});
+        background: white;
+        margin: 0 2rem;
+        transition: all 0.4s ease;
         @media(max-width: ${props => props.widthOfMainArea}px) {
             width: 100%;
         }

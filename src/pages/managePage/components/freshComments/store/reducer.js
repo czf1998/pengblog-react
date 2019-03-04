@@ -55,7 +55,7 @@ export default (state = defaultState, action) => {
 
         return state.merge({
             commentList: fromJS(newCommentList),
-            startIndex: startIndex - newCommentList.length,
+            startIndex: startIndex - (commentList.length - newCommentList.length),
             maxPage: action.value.maxPage
         })
     }

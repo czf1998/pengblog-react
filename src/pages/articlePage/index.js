@@ -1,6 +1,7 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent,Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import { ArticlePageWrapper,
             ArticlePageFixer,
          ArticleTitleImage,
@@ -22,6 +23,7 @@ import { Loading, ForMore, ScrollToThePositionOnMount, GapLine } from '../../com
 import { DateFormat } from "../../exJs"
 import { Comment, TopLevelCommentEditor,Share } from './components'
 import {createAppointSizeOfTitleImageFrameAction} from "../articleEditPage/components/titleImage/store";
+import {SLIDE_FROM_LEFT_CSSTRANSITION} from "../../commonStyle/commonClassNameConstant";
 
 class ArticlePage extends PureComponent {
 
@@ -83,17 +85,24 @@ class ArticlePage extends PureComponent {
                                 <CommentTitle className={CommonClassNameConstants.COMMON_PADDING}>
                                     <span className="iconfont" style={{fontSize:'1.6rem'}}>&#xe625;</span>&nbsp;{countOfAllComment}条留言
                                 </CommentTitle>
-                                {
-                                    commentList.map((item) => {
-                                        return (
-                                            <div key={item.get('comment_id')}
-                                                 className={CommonClassNameConstants.SLIDE_UP_FAST}>
-                                                <GapLine/>
-                                                <Comment comment={item} clickReferHandler={() => {referComment(item)}}/>
-                                            </div>
-                                        )
-                                    })
-                                }
+
+                                <TransitionGroup>
+                                    {
+                                        commentList.map((item) => {
+                                            return (
+                                                <CSSTransition key={item.get('comment_id')}
+                                                               timeout={400}
+                                                               classNames={SLIDE_FROM_LEFT_CSSTRANSITION}>
+                                                    <div>
+                                                        <GapLine/>
+                                                        <Comment comment={item} clickReferHandler={() => {referComment(item)}}/>
+                                                    </div>
+                                                </CSSTransition>
+                                            )
+                                        })
+                                    }
+                                </TransitionGroup>
+
                                 <GapLine/>
                                 <ForMore isLoading={isLoadingMoreComment}
                                          noMore={currentPage === maxPage}

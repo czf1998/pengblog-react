@@ -1,1 +1,1 @@
-export const DELETE_COMMENT = 'deleteComment'
+export const DELETE_COMMENT_FROM_FRESH_COMMENTS = 'deleteCommentFromFreshComments'

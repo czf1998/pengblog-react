@@ -4,16 +4,20 @@
     <list default="true" id="435386c2-4738-4296-9e2d-0eb0c4eda9b8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/comment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/comment/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/comment/store/actionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/comment/store/actionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/comment/store/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/comment/store/actionTypes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/comment/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/comment/store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/comment/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/comment/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/subCommentEditorUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/subCommentEditorUI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/subComment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/subComment/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/components/subComment/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/components/subComment/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/managePage/components/articleItem/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/components/articleItem/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/managePage/components/articleItem/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/components/articleItem/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/articlePage/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articlePage/store/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/request/articleRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/request/articleRequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/saga.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,7 +34,7 @@
         <counts>
           <entry key="css" value="2220" />
           <entry key="html" value="23" />
-          <entry key="js" value="176670" />
+          <entry key="js" value="177649" />
           <entry key="json" value="7" />
           <entry key="svg" value="45" />
         </counts>
@@ -40,7 +44,7 @@
           <entry key="CSS" value="2220" />
           <entry key="HTML" value="25" />
           <entry key="JSON" value="7" />
-          <entry key="JavaScript" value="176668" />
+          <entry key="JavaScript" value="177647" />
           <entry key="SVG" value="45" />
         </counts>
       </usages-collector>
@@ -51,7 +55,7 @@
           <entry key="html" value="5" />
           <entry key="ico" value="1" />
           <entry key="jpg" value="2" />
-          <entry key="js" value="2011" />
+          <entry key="js" value="2033" />
           <entry key="json" value="15" />
           <entry key="md" value="4" />
           <entry key="npmignore" value="1" />
@@ -67,7 +71,7 @@
           <entry key="HTML" value="5" />
           <entry key="Image" value="8" />
           <entry key="JSON" value="15" />
-          <entry key="JavaScript" value="2011" />
+          <entry key="JavaScript" value="2033" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="RNG Compact" value="2" />
           <entry key="SVG" value="29" />
@@ -101,43 +105,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/aritclePageEX/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#52#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="118" column="25" lean-forward="true" selection-start-line="112" selection-start-column="24" selection-end-line="118" selection-end-column="25" />
+            <state relative-caret-position="3129">
+              <caret line="260" column="82" selection-start-line="260" selection-start-column="82" selection-end-line="260" selection-end-column="82" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/style.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="87" column="26" lean-forward="true" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/subComment/index.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="54" column="21" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+            <state relative-caret-position="308">
+              <caret line="72" column="28" selection-start-line="72" selection-start-column="28" selection-end-line="72" selection-end-column="28" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -146,52 +129,92 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/subCommentEditorUI.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/home/store/reducer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="110" column="32" lean-forward="true" selection-start-line="110" selection-start-column="32" selection-end-line="110" selection-end-column="32" />
+            <state relative-caret-position="105">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
               <folding>
-                <element signature="e#0#42#0" expanded="true" />
+                <element signature="e#0#34#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/style.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/home/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="103" column="17" selection-start-line="103" selection-start-column="17" selection-end-line="103" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/subComment/style.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="27" column="24" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/articleItem/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="88" column="30" lean-forward="true" selection-start-line="88" selection-start-column="30" selection-end-line="88" selection-end-column="30" />
+            <state relative-caret-position="-315">
+              <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
               <folding>
-                <element signature="e#0#42#0" expanded="true" />
+                <element signature="e#0#52#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/articleItem/style.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+            <state relative-caret-position="168">
+              <caret line="53" column="38" selection-start-line="53" selection-start-column="38" selection-end-line="53" selection-end-column="84" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/store/reducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2058">
+              <caret line="105" selection-start-line="105" selection-end-line="105" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/store/reducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-693">
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/subComment/store/reducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/reducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="945">
+              <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -231,6 +254,7 @@
       <find>padding-bo</find>
       <find>isMultipleSelecting</find>
       <find>ArticleEditPageLoadable</find>
+      <find>console</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -245,13 +269,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/pages/articleEditPage/loadable.js" />
-        <option value="$PROJECT_DIR$/src/pages/articleEditPage/index.js" />
-        <option value="$PROJECT_DIR$/src/common/header/articleEditPageHeader.js" />
-        <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/store/request/index.js" />
-        <option value="$PROJECT_DIR$/src/store/request/imageRequest.js" />
-        <option value="$PROJECT_DIR$/src/common/header/commonHeader.js" />
         <option value="$PROJECT_DIR$/src/common/inputEX/style.js" />
         <option value="$PROJECT_DIR$/src/common/header/components/logo/index.js" />
         <option value="$PROJECT_DIR$/src/pages/loginPage/store/reducer.js" />
@@ -272,30 +289,37 @@
         <option value="$PROJECT_DIR$/src/pages/home/store/reducer.js" />
         <option value="$PROJECT_DIR$/src/pages/home/index.js" />
         <option value="$PROJECT_DIR$/src/pages/home/components/articleSummary/style.js" />
-        <option value="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js" />
         <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/style.js" />
         <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/style.js" />
-        <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/index.js" />
-        <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionCreators.js" />
-        <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes.js" />
         <option value="$PROJECT_DIR$/src/store/actionTypesWithSaga.js" />
         <option value="$PROJECT_DIR$/src/store/actionCreators.js" />
-        <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/index.js" />
         <option value="$PROJECT_DIR$/src/store/request/commentRequest.js" />
-        <option value="$PROJECT_DIR$/src/store/saga.js" />
         <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/index.js" />
-        <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/reducer.js" />
         <option value="$PROJECT_DIR$/src/store/apiConstant.js" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/store/request/articleRequest.js" />
         <option value="$PROJECT_DIR$/src/pages/managePage/components/articleItem/index.js" />
         <option value="$PROJECT_DIR$/src/pages/managePage/components/articleItem/style.js" />
-        <option value="$PROJECT_DIR$/src/pages/articlePage/components/comment/style.js" />
         <option value="$PROJECT_DIR$/src/pages/articlePage/components/subComment/style.js" />
         <option value="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/subCommentEditorUI.js" />
         <option value="$PROJECT_DIR$/src/pages/articlePage/components/commentEditor/style.js" />
-        <option value="$PROJECT_DIR$/src/pages/articlePage/components/comment/index.js" />
         <option value="$PROJECT_DIR$/src/pages/articlePage/components/subComment/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/components/comment/style.js" />
+        <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes.js" />
+        <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionCreators.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/components/comment/store/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/components/comment/store/actionCreators.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/components/comment/store/actionTypes.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/components/comment/index.js" />
+        <option value="$PROJECT_DIR$/src/store/saga.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/reducer.js" />
+        <option value="$PROJECT_DIR$/src/pages/articlePage/store/reducer.js" />
+        <option value="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js" />
+        <option value="$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/index.js" />
       </list>
     </option>
   </component>
@@ -347,14 +371,14 @@
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="articlePage" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="articlePage" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -362,33 +386,32 @@
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="articlePage" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="commentEditor" type="462c0819:PsiDirectoryNode" />
+              <item name="articleSummary" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="articlePage" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="subComment" type="462c0819:PsiDirectoryNode" />
+              <item name="articleSummaryMobile" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="managePage" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pengblog-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="pengblog-react" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="managePage" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -479,14 +502,7 @@
       <workItem from="1550877570309" duration="32000" />
       <workItem from="1550914277454" duration="3130000" />
       <workItem from="1550928365029" duration="108300000" />
-      <workItem from="1551357818922" duration="98618000" />
-    </task>
-    <task id="LOCAL-00036" summary="normal commit">
-      <created>1547462695877</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1547462695877</updated>
+      <workItem from="1551357818922" duration="107402000" />
     </task>
     <task id="LOCAL-00037" summary="normal commit">
       <created>1547472504014</created>
@@ -824,11 +840,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551680103795</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="normal commit">
+      <created>1551690390194</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1551690390194</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1179551000" />
+    <option name="totallyTimeSpent" value="1188335000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -901,88 +924,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="normal commit" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/articleFiling/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/articleFiling/style.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="17" column="41" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="17" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/articleItemMobile/style.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/articleClassification/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="40" column="66" selection-start-line="40" selection-start-column="66" selection-end-line="40" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/homeEx/style.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="35" column="16" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="35" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/common/pagination/store/reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/articleClassification/style.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-259">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="63" column="40" selection-start-line="63" selection-start-column="40" selection-end-line="63" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/style.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="193" column="20" selection-start-line="193" selection-start-column="20" selection-end-line="193" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="102" selection-start-line="1" selection-start-column="102" selection-end-line="1" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/actionCreators.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1016,37 +957,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/store/reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummary/style.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="28" column="25" lean-forward="true" selection-start-line="25" selection-start-column="6" selection-end-line="28" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
         </state>
       </provider>
     </entry>
@@ -1098,27 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="53" selection-start-line="1" selection-start-column="53" selection-end-line="1" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="44" selection-start-column="44" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionCreators.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="39" selection-start-column="39" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/store/actionTypesWithSaga.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -1136,58 +1029,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/request/commentRequest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="65" column="18" lean-forward="true" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/saga.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="193" column="38" lean-forward="true" selection-start-line="193" selection-start-column="38" selection-end-line="193" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="24" column="50" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/commonStyle/transition/slideFromLeft-CSSTransiton.css">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="54" column="52" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/store/apiConstant.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1226,16 +1069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/aritclePageEX/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1287,27 +1120,220 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/style.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/subComment/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="87" column="26" lean-forward="true" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
+        <state relative-caret-position="1134">
+          <caret line="54" column="21" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/index.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/style.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="118" column="25" lean-forward="true" selection-start-line="112" selection-start-column="24" selection-end-line="118" selection-end-column="25" />
+        <state relative-caret-position="168">
+          <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/aritclePageEX/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/subComment/index.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="54" column="21" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+        <state>
+          <caret column="81" selection-start-column="81" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="63" lean-forward="true" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="72" selection-start-line="1" selection-start-column="72" selection-end-line="1" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/store/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="68" lean-forward="true" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/store/actionCreators.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="59" selection-start-line="2" selection-start-column="59" selection-end-line="2" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/store/actionTypes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="78" lean-forward="true" selection-start-line="2" selection-start-column="78" selection-end-line="2" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/request/commentRequest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/saga.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="116" column="27" lean-forward="true" selection-start-line="116" selection-start-column="27" selection-end-line="116" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="24" column="93" lean-forward="true" selection-start-line="22" selection-start-column="35" selection-end-line="24" selection-end-column="93" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/components/freshCommentItem/store/actionCreators.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="45" lean-forward="true" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="93" column="69" lean-forward="true" selection-start-line="93" selection-start-column="69" selection-end-line="93" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/store/reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2058">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/subComment/store/reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/store/reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-693">
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-315">
+          <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/store/reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/articlePage/components/comment/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3129">
+          <caret line="260" column="82" selection-start-line="260" selection-start-column="82" selection-end-line="260" selection-end-column="82" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/style.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummary/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="53" column="38" selection-start-line="53" selection-start-column="38" selection-end-line="53" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/components/articleSummaryMobile/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="72" column="28" selection-start-line="72" selection-start-column="28" selection-end-line="72" selection-end-column="28" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>

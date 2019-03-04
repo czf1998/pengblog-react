@@ -24,11 +24,16 @@ export const Title = styled.div`
         font-weight: bold;
     `
 
+export const Label = styled.span`
+        color: #0066AA;
+    `
+
 
 export const ArticleInfoColumn = styled.div`
         display: flex;
         flex-wrap: wrap;
         line-height: 2;
+        align-items: center;
         font-size: ${props => props.isMobile ? '1rem' : '0.8rem'};
     `
 

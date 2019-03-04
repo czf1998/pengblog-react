@@ -1,9 +1,16 @@
 import React, { PureComponent } from 'react'
-import { ArticleSummaryWrapper, Title, ArticleInfoColumn, ArticleMultipleContent, ArticleContent, PreviewImage } from './style'
+import {ArticleSummaryWrapper,
+        Title,
+        Label,
+        ArticleInfoColumn,
+        ArticleMultipleContent,
+        ArticleContent,
+        PreviewImage } from './style'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {CommonClassNameConstants} from '../../../../commonStyle'
 import { DateFormat } from "../../../../exJs"
+import {GET_COUNT_OF_COMMENT} from "../../../../store/actionTypesWithSaga";
 
 class ArticleSummary extends PureComponent {
 
@@ -25,6 +32,9 @@ class ArticleSummary extends PureComponent {
                                        isFocus={isFocus}>
 
                     <Title className={CommonClassNameConstants.CURSORP}>
+                          <Label>
+                              [{article.get('article_label')}]
+                          </Label>
                             {article.get('article_title')}
                     </Title>
 
@@ -49,20 +59,28 @@ class ArticleSummary extends PureComponent {
                     <ArticleInfoColumn isMobile={isMobile}
                                        className={CommonClassNameConstants.FONT_DARK}>
                         <span>
-                                    <i className="fa fa-tag"></i> {article.get('article_label')}
-                        </span>
-                        &nbsp;&nbsp;
-                        <span>
-                                    <i className="fa fa-pencil"></i> {article.get('article_author')}
+                                    <i className="fa fa-pencil"/> {article.get('article_author')}
                         </span>
                         &nbsp;&nbsp;
                         <span>
                                      { DateFormat('yyyy-MM-dd', new Date(article.get('article_releaseTime'))) }
                         </span>
+                        &nbsp;|&nbsp;
+                        <span>
+                            <span className="iconfont">&#xe634;</span>&nbsp;
+                            <span>
+                                {article.get('countOfAllComment')}
+                            </span>
+                        </span>
                     </ArticleInfoColumn>
 
                 </ArticleSummaryWrapper>
         );
+    }
+    componentDidMount() {
+        if(this.props.article.get('countOfAllComment') !==undefined && this.props.hasBeenMountOnce)
+            return
+        this.props.getCountOfAllComment(this.props.article.get('article_id'), this)
     }
 }
 
@@ -71,9 +89,20 @@ const mapState = (state) => {
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
         currentArticleId: state.get('articlePage').get('article').get('article_id'),
         isMobile: state.get('rootState').get('isMobile'),
-        goTo: state.get('router').get('goTo')
+        goTo: state.get('router').get('goTo'),
+        hasBeenMountOnce: state.get('home').get('hasBeenMountOnce')
     }
 }
 
+const mapActions = (dispatch) => ({
+    getCountOfAllComment: (article_id, _this) => {
+        const action = {
+            type: GET_COUNT_OF_COMMENT,
+            value: article_id,
+            host: _this
+        }
+        dispatch(action)
+    }
+})
 
-export default connect(mapState)(withRouter(ArticleSummary))
+export default connect(mapState,mapActions)(withRouter(ArticleSummary))

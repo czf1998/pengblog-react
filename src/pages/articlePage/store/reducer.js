@@ -2,7 +2,7 @@ import { fromJS } from 'immutable'
 import {
     APPEND_COMMENT_JUST_SUBMIT,
     DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
-    DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE, GET_COMMENT_LIST_DATA,
+    DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE, GET_COMMENT_LIST_DATA, RECORD_COMMENT_HAS_BEEN_DELETED,
     RESET_ARTICLE_PAGE_STORE
 } from '../../../store/actionTypesWithSaga'
 import {LOAD_ARTICLE_CACHE, RECORD_SCROLL_TOP_OF_ARTICLE_PAGE} from "./actionType";
@@ -34,9 +34,6 @@ const resetState = fromJS({
     commentList: [],
     dataReady: false
 })
-
-
-
 
 
 export default (state = defaultState, action) => {
@@ -80,8 +77,9 @@ export default (state = defaultState, action) => {
             commentList: uniqueCommentList(state.get('commentList').concat(fromJS(action.value.commentList))),
             countOfAllComment: action.value.countOfComment,
             maxPage: action.value.maxPage,
+
             currentPage: state.get('currentPage') + 1,
-            startIndex: (state.get('currentPage') + 1) * state.get('pageScale'),
+            startIndex: state.get('startIndex') + state.get('pageScale'),
             isLoadingMoreComment: false
         })
     }
@@ -104,7 +102,9 @@ export default (state = defaultState, action) => {
             action.value.referCommentId !== undefined
             &&
             action.value.referCommentId !== null ){
-            return state
+            return state.merge({
+                countOfAllComment: state.get('countOfAllComment') + 1
+            })
         }
         return state.merge({
             commentList: state.get('commentList').push(constructComment(action.value)),
@@ -117,6 +117,26 @@ export default (state = defaultState, action) => {
                 width: action.value.width,
                 height: action.value.height
             })
+        })
+    }
+    if(action.type === RECORD_COMMENT_HAS_BEEN_DELETED){
+        let commentList = state.get('commentList').toJS()
+        let startIndex = state.get('startIndex')
+        let newCommentList = []
+
+        commentList.map((item) => {
+
+            if(item.comment_id === action.value.comment_id){
+                return
+            }
+            newCommentList.push(item)
+        })
+
+        return state.merge({
+            commentList: fromJS(newCommentList),
+            startIndex: startIndex - (commentList.length - newCommentList.length),
+            maxPage: action.value.maxPage,
+            countOfAllComment: state.get('countOfAllComment') - (commentList.length - newCommentList.length)
         })
     }
     return state
