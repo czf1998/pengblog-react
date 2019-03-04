@@ -2,20 +2,22 @@ import {fromJS} from 'immutable'
 import {TRIGGER_MODAL_IS_LOADING, TRIGGER_SHOW_MODAL} from "./actionTypes";
 import {APPOINT_MODAL_MSG} from "../store";
 
+export const COMMON_MODAL = 'common'
+export const SHARE_TO_WECHAT_MODAL = 'shareToWechat'
+export const CONTACT_ME_MODAL = 'contactMe'
+
 const defaultState = fromJS({
     showModal: false,
     modalTitle: '提示',
     modalContent: '这是一个通知',
-    onlyQrcode: false,
     postProcessor: () => {},
-    isLoading: false
+    isLoading: false,
+    context: COMMON_MODAL
 })
 
 export default (state = defaultState, action) => {
     if(action.type === TRIGGER_SHOW_MODAL){
-        if(action.value === false){
-            return defaultState
-        }
+
         return state.merge({
             showModal: action.value
         })
@@ -24,8 +26,8 @@ export default (state = defaultState, action) => {
         return state.merge({
             modalTitle: action.value.modalTitle,
             modalContent: action.value.modalContent,
-            onlyQrcode: action.value.onlyQrcode,
-            postProcessor: action.value.postProcessor ? action.value.postProcessor : () => {}
+            postProcessor: action.value.postProcessor ? action.value.postProcessor : () => {},
+            context: action.value.context
         })
     }
     if(action.type === TRIGGER_MODAL_IS_LOADING){

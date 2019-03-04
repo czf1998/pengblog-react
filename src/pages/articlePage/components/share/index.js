@@ -5,6 +5,7 @@ import {createAppointModalMsgAction} from "../../../../common/modal/store";
 import {createTriggerShowModalAction} from "../../../../common/modal/store";
 import {createAppointNoticeContent} from "../../../../store/actionCreators";
 import Clipboard from 'clipboard'
+import {SHARE_TO_WECHAT_MODAL} from "../../../../common/modal/store/reducer";
 
 
 export const SHARE_TO_WECHAT = 'share to Wechat'
@@ -51,7 +52,7 @@ const mapActions = (dispatch) => ({
         const appointModalMsgValue = {
             modalTitle: '打开微信扫描以下二维码',
             modalContent: SHARE_TO_WECHAT,
-            onlyQrcode: true
+            context: SHARE_TO_WECHAT_MODAL
         }
 
         const appointModalMsgAction = createAppointModalMsgAction(appointModalMsgValue)

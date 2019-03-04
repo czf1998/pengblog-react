@@ -11,7 +11,7 @@ export const CommentWrapper = styled.div`
         margin: 0 2rem;
         transition: all 0.4s ease;
         @media(max-width: ${props => props.widthOfMainArea}px) {
-            width: 100%;
+            margin: 0 1rem;
         }
     `
 

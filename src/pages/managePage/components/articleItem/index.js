@@ -18,6 +18,7 @@ import {CheckBox} from '../../../../common'
 import {createAppointModalMsgAction,
         createTriggerShowModalAction,
         createTriggerModalIsLoadingAction} from "../../../../common/modal/store";
+import {COMMON_MODAL} from "../../../../common/modal/store/reducer";
 
 
 
@@ -150,8 +151,8 @@ const mapActions = (dispatch) => ({
         const appointModalMsgValue = {
             modalTitle: '提示',
             modalContent: '你正在试图删除标题为“' + article_title + '”的文章，这个操作将不可恢复。',
-            onlyQrcode: false,
-            postProcessor: () => {confirmDeletePostProcessor(article_id)}
+            postProcessor: () => {confirmDeletePostProcessor(article_id)},
+            context: COMMON_MODAL
         }
 
         const appointModalMsgAction = createAppointModalMsgAction(appointModalMsgValue)

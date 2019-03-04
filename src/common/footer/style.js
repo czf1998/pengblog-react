@@ -10,3 +10,10 @@ export const Row = styled.div`
         color: grey;
         margin: 0.2rem 0;
     `
+
+export const ContactMe = styled.span`
+        cursor: pointer;
+        &:hover{
+            color: black;
+        }
+    `

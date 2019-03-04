@@ -7,7 +7,7 @@ import './exJs'
 import { createObserveScrollTopOfElementElAction,createRecordCurrentBrowserEdition } from "./store/actionCreators";
 import {PrograssBar,
         Notice,
-        Modal } from './common'
+        Modal,Footer } from './common'
 import history from './router/history'
 import {createAppointCurrentPathAction} from "./router/store";
 
@@ -38,6 +38,10 @@ class App extends Component {
             <PrograssBar/>
 
             <RouterComponent/>
+            {
+                window.innerWidth <= 750 &&
+                    <Footer/>
+            }
 
         </Provider>
     );

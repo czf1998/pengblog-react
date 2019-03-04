@@ -34,7 +34,7 @@ class ArticleSummary extends PureComponent {
                     <Title className={CommonClassNameConstants.CURSORP}>
                           <Label>
                               [{article.get('article_label')}]
-                          </Label>
+                          </Label>&nbsp;
                             {article.get('article_title')}
                     </Title>
 
