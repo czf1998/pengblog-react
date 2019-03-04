@@ -27,7 +27,7 @@ class FreshCommentItem extends PureComponent {
 
     render() {
 
-        const {comment,goTo,tryToDeleteThisComment} = this.props
+        const {comment,goTo,tryToDeleteThisComment,alreadyLoggedIn} = this.props
 
         const {isLoading} = this.state
 
@@ -52,7 +52,7 @@ class FreshCommentItem extends PureComponent {
 
 
                 {
-                    !isLoading &&
+                    !isLoading && alreadyLoggedIn &&
                     <DeleteButton className={DELETE_BUTTON_ICON_CLASSNAME}
                                   onClick={(e) => {tryToDeleteThisComment(e,comment.get('comment_id'),this)}}/>
                 }
@@ -79,7 +79,8 @@ class FreshCommentItem extends PureComponent {
 
 const mapState = (state) => {
     return  {
-        goTo: state.get('router').get('goTo')
+        goTo: state.get('router').get('goTo'),
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }
 }
 

@@ -40,3 +40,5 @@ export const API_DELETE_ARTICLE_LIST = server + 'article/delete_article_list.do'
 export const API_LOGIN = server + 'login/login.do'
 
 export const API_GET_FRESH_COMMENT_LIST = server + 'comment/comment_last.do'
+
+export const API_DELETE_COMMENT = server + 'comment/comment_delete.do'

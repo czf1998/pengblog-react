@@ -59,3 +59,7 @@ export const RESET_MANAGE_PAGE_ARTICLE_LIST = 'resetManagePageArticleList'
 export const TRIGGER_ALREADY_LOGGED_IN = 'triggerAlreadyLoggedIn'
 
 export const APPOINT_FRESH_COMMENTS_DATA = 'appointFreshCommentsData'
+
+export const RECORD_COMMENT_HAS_BEEN_DELETED = 'recordCommentHasBeenDeleted'
+
+export const REFRESH_FRESH_COMMENTS_MAX_PAGE = 'refreshFreshCommentsMaxPage'

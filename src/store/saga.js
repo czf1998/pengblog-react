@@ -31,7 +31,8 @@ import {createDeliverArticleDataToHomeAction,
         createRecordArticleListHasBeenDeletedAction,
         createResetManagePageArticleListAction,
         createTriggerAlreadyLoggedInAction,
-        createAppointFreshCommentsDataAction} from './actionCreators'
+        createAppointFreshCommentsDataAction,
+        createRecordCommentHasBeenDeletedAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest,
@@ -63,7 +64,10 @@ import {
 import {LOGIN} from "../pages/loginPage/store/actionTypes";
 import {createTriggerIsLoggingInAction} from "../pages/loginPage/store";
 import {GET_FRESH_COMMENTS_DATA} from "../pages/managePage/components/freshComments/store/actionTypes";
+import {DELETE_COMMENT} from "../pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes";
 
+
+const NO_MORE_ITEM_AVAILABLE = 'noMoreItemAvailable'
 
 function* mySaga() {
     yield takeEvery(GET_HOME_ARTICLE_LIST_DATA, ajaxHomeArticleListData)
@@ -87,10 +91,48 @@ function* mySaga() {
     yield takeEvery(DELETE_ARTICLE_LIST, ajaxDeleteArticleList)
     yield takeEvery(LOGIN, ajaxLogin)
     yield takeEvery(GET_FRESH_COMMENTS_DATA, ajaxGetFreshCommentsData)
+    yield takeEvery(DELETE_COMMENT, ajaxDeleteComment)
+}
+
+function* ajaxDeleteComment(action) {
+
+    yield checkToken()
+
+    try{
+        yield CommentRequest.RequestDeleteComment(action.value)
+
+        //刷新页面指数
+        const state = yield select()
+        const pageScale = state.get('freshComments').get('pageScale')
+        const res = yield CommentRequest.RequestFreshCommentListData({startIndex: 0, pageScale:pageScale})
+
+        const delay = (ms) => new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        })
+        yield delay(500);
+
+        //标记已删除的文章条目并刷新页面指数
+        const value = {
+            comment_id: action.value,
+            maxPage: res.data.maxPage
+        }
+
+        const recordCommentHasBeenDeletedAction = createRecordCommentHasBeenDeletedAction(value)
+        yield put(recordCommentHasBeenDeletedAction)
+
+
+    }catch (err) {
+        console.log('ERR IN ACTION: DELETE_COMMENT  ERR: ' + err)
+
+        /*通知窗口提示异常*/
+        const appointNoticeContent = createAppointNoticeContent('ERR IN ACTION: DELETE_COMMENT  ERR: ' + err)
+        yield put(appointNoticeContent)
+    }
 }
 
 function* ajaxGetFreshCommentsData(action) {
     try{
+
         const res = yield CommentRequest.RequestFreshCommentListData(action.value)
 
         const appointFreshCommentsDataAction = createAppointFreshCommentsDataAction(res.data)

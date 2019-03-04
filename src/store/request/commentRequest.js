@@ -1,5 +1,6 @@
 import * as Api from '../apiConstant'
 import axios from 'axios'
+import {getToken} from "./articleRequest";
 
 export function SubmitCommentListData(value) {
     let commentData = {
@@ -56,5 +57,21 @@ export function RequestFreshCommentListData(value){
 
     return axios.get(Api.API_GET_FRESH_COMMENT_LIST, config)
 
+}
+
+export function RequestDeleteComment(value) {
+
+    let token = getToken()
+
+    let config = {
+        params: {
+            comment_id: value
+        },
+        headers: {
+            Authorization: token
+        }
+    }
+
+    return axios.get(Api.API_DELETE_COMMENT, config)
 }
 

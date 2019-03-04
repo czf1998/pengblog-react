@@ -92,7 +92,7 @@ export const RequestDeleteArticle = (value) => {
         params: {
             article_id: value
         },
-        header: {
+        headers: {
             Authorization: token
         }
     }
@@ -109,7 +109,7 @@ export const RequestDeleteArticleList = (value) => {
     }
 
     let config = {
-        header: {
+        headers: {
             Authorization: token
         }
     }
