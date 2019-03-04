@@ -24,3 +24,19 @@ export const Meta = styled.div`
         line-height: 1.5;
         text-align: right;
     `
+
+export const ReplyButton = styled.span`
+        color: grey;
+        cursor: pointer;
+        &:hover{
+            color: black;
+        }
+    `
+
+export const DeleteButton = styled.i`
+        color: grey;
+        cursor: pointer;
+        &:hover{
+            color: black;
+        }
+    `

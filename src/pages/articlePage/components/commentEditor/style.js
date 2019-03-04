@@ -98,6 +98,18 @@ export const SubmitButtonWrapper = styled.div`
         }
     `
 
+export const SubSubmitButtonWrapper = styled.div`
+        position: absolute;
+        right: 2rem;
+        width: 20%;
+        bottom: 1rem;
+        @media(max-width:${widthOfMainArea}px){
+            padding: 0 1rem 1rem 1rem;
+            width: 100%;
+            position: static;
+        }
+    `
+
 export const SubmitButton = styled(Button)`
         height: 2.2rem;
         width: 100%;

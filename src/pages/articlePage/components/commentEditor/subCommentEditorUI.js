@@ -6,6 +6,7 @@ import {
     SubEmojiPickerWrapper,
     SubmitButton,
     SubmitButtonWrapper,
+    SubSubmitButtonWrapper,
     SubVisitorInfo,
     InputWrapper
 } from "./style";
@@ -107,7 +108,7 @@ class SubCommentEditorUI extends PureComponent{
 
                 </SubVisitorInfo>
 
-                <SubmitButtonWrapper>
+                <SubSubmitButtonWrapper>
                         <SubmitButton onClick={() => {!isLoading && window.throttleByGap(() => {submitComment( article_id,
                                                                                                         comment_referComment.get('comment_id'),
                                                                                                         visitorNameManager.get('value'),
@@ -126,7 +127,7 @@ class SubCommentEditorUI extends PureComponent{
                                 </span>
                             }
                         </SubmitButton>
-                </SubmitButtonWrapper>
+                </SubSubmitButtonWrapper>
             </SubCommentEditorWrapper>
         )
     }

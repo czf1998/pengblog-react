@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const widthOfMainArea = 750
 
 export const CommentWrapper = styled.div`
+        position: relative;
         display: flex;
         align-items: stretch;
         width: 100%;
@@ -88,13 +89,18 @@ export const OperationBar = styled.div`
         text-align: right;
     `
 
-
-
-export const Visitor = styled.div`
-        font-weight: bold;
-        margin-bottom: 15px;
+export const ReplyButton = styled.span`
+        color: grey;
+        cursor: pointer;
+        &:hover{
+            color: black;
+        }
     `
 
-export const Meta = styled.div`
-        text-align: right;
+export const DeleteButton = styled.i`
+        color: grey;
+        cursor: pointer;
+        &:hover{
+            color: black;
+        }
     `

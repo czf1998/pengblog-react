@@ -21,7 +21,14 @@ export const RequestArticleListData = (value) => {
 }
 
 export const RequestDraftData = () => {
-    return axios.get(Api.API_GET_DRAFT)
+    let token = getToken()
+
+    let config = {
+        headers:{
+            Authorization: token
+        }
+    }
+    return axios.get(Api.API_GET_DRAFT,config)
 }
 
 export const SaveArticle = (value) => {

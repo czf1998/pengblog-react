@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react'
+import React, {Fragment, PureComponent} from 'react'
 import { connect } from 'react-redux'
-import { SubCommentWrapper, SubCommentAuthor, Content, Meta } from './style'
+import { SubCommentWrapper,SubCommentAuthor,Content,Meta,ReplyButton,DeleteButton } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
 import {createAppointShowSubCommentEditorManagerAction} from "../comment/store";
@@ -16,7 +16,7 @@ class SubComment extends PureComponent {
 
     render() {
 
-        const { comment,isMobile,clickReplyHandler,showSubCommentEditorManager } = this.props
+        const { comment,isMobile,clickReplyHandler,showSubCommentEditorManager,alreadyLoggedIn } = this.props
 
         const replyButtonIconClassName = showSubCommentEditorManager.get('hostTopLevelCommentId') === comment.get('comment_referComment').get('comment_id')
                                          &&
@@ -41,15 +41,18 @@ class SubComment extends PureComponent {
                 </Content>
 
                 <Meta className={CommonClassNameConstants.FONT_DARK}>
-                    {GetDateDiff(comment.get('comment_releaseTime'))} | <span className={CommonClassNameConstants.CLICKABLE}>
-                    <span className={CommonClassNameConstants.CLICKABLE}
-                          onClick={() => {clickReplyHandler(comment.get('comment_referComment').get('comment_id'),comment.get('comment_id'),comment.get('comment_author').get('visitor_name'))}}>
-                        <i className={replyButtonIconClassName}/>&nbsp;
-                        {
-                            isMobile && replyButtonMsg
-                        }
-                    </span>
-                </span>
+                    {GetDateDiff(comment.get('comment_releaseTime'))}
+                    &nbsp;|&nbsp;
+                    <ReplyButton className={replyButtonIconClassName}
+                                onClick={() => {clickReplyHandler(comment.get('comment_referComment').get('comment_id'),comment.get('comment_id'),comment.get('comment_author').get('visitor_name'))}}>
+                    </ReplyButton>
+                    {
+                        alreadyLoggedIn &&
+                        <Fragment>
+                            &nbsp;|&nbsp;
+                            <DeleteButton className="fa fa-trash-o"/>
+                        </Fragment>
+                    }
                 </Meta>
             </SubCommentWrapper>
         );
@@ -59,7 +62,8 @@ class SubComment extends PureComponent {
 const mapState = (state) => {
     return  {
         isMobile: state.get('rootState').get('isMobile'),
-        showSubCommentEditorManager: state.get('commentEditor').get('showSubCommentEditorManager')
+        showSubCommentEditorManager: state.get('commentEditor').get('showSubCommentEditorManager'),
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }
 }
 

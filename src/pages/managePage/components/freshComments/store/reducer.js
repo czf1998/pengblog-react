@@ -33,26 +33,29 @@ export default (state = defaultState, action) => {
     if(action.type === RECORD_COMMENT_HAS_BEEN_DELETED){
         let commentList = state.get('commentList').toJS()
         let startIndex = state.get('startIndex')
+        let newCommentList = []
+        console.log(commentList)
 
-        commentList.map((item, index) => {
+        commentList.map((item) => {
+
             if(item.comment_id === action.value.comment_id){
-                commentList.splice(index,1)
-                startIndex = startIndex - 1
                 return
             }
+
             if(item.comment_referComment !== null
                 &&
                 item.comment_referComment !== undefined
                 &&
                 item.comment_referComment.comment_id === action.value.comment_id){
-                commentList.splice(index,1)
-                startIndex = startIndex - 1
+                return
             }
+
+            newCommentList.push(item)
         })
 
         return state.merge({
-            commentList: fromJS(commentList),
-            startIndex: startIndex,
+            commentList: fromJS(newCommentList),
+            startIndex: startIndex - newCommentList.length,
             maxPage: action.value.maxPage
         })
     }

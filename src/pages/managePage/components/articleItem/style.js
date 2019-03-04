@@ -33,6 +33,7 @@ export const DeleteButton = styled.div`
         padding: 0.5rem;
         align-items: center;
         color: black;  
+        font-size: 1.2rem;
          ${props => props.browser === 'Safari' ? '' : `
              &:hover{
                 color: #3367d6;

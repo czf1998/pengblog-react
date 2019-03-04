@@ -10,7 +10,9 @@ import {CommentWrapper,
         MultiContent,
         OperationBar,
         Avatar,
-        GapH } from './style'
+        GapH,
+        ReplyButton,
+        DeleteButton } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
 import SubComment from '../subComment'
@@ -47,7 +49,8 @@ class Comment extends PureComponent {
                 showSubCommentEditorManager,
                 getMoreSubCommentListData,
                 pageScale,
-                isLoadingMoreSubComment} = this.props
+                isLoadingMoreSubComment,
+                alreadyLoggedIn} = this.props
 
         const comment_id = comment.get('comment_id')
         const currentPage = this.state.currentPage
@@ -80,37 +83,40 @@ class Comment extends PureComponent {
 
 
                 <VisitorInfo>
-
                     <AvatarWraper>
                         <Avatar className={CommonClassNameConstants.FLEX_ROW_CENTER} metaColor={metaColor}>
                             {featureString}
                         </Avatar>
                     </AvatarWraper>
-
                     <Name>
                         {comment.get('comment_author').get('visitor_name')}
                     </Name>
-
                 </VisitorInfo>
+
 
                 <Gap/>
 
-                <MultiContent>
 
+                <MultiContent>
                     <Content>
                         {comment.get('comment_content')}
                     </Content>
-
                     <OperationBar  className={CommonClassNameConstants.FONT_DARK }>
                         {GetDateDiff(comment.get('comment_releaseTime'))}
                         &nbsp;|&nbsp;
-                        <span className={CommonClassNameConstants.CLICKABLE}
-                              onClick={() => {clickReplyHandler(comment_id)}}>
+                        <ReplyButton onClick={() => {clickReplyHandler(comment_id)}}>
                             <i className={replyButtonIconClassName}/>&nbsp;
                             {
                                 isMobile && replyButtonMsg
                             }
-                        </span>
+                        </ReplyButton>
+                        {
+                            alreadyLoggedIn &&
+                            <Fragment>
+                                &nbsp;|&nbsp;
+                                <DeleteButton className="fa fa-trash-o"/>
+                            </Fragment>
+                        }
                     </OperationBar>
 
                     {
@@ -165,6 +171,7 @@ class Comment extends PureComponent {
 
                 </MultiContent>
 
+
             </CommentWrapper>
         );
     }
@@ -198,7 +205,8 @@ const mapState = (state) => {
         subCommentList: state.get('subComment').get('subCommentList'),
         pageScale: state.get('subComment').get('pageScale'),
         showSubCommentEditorManager: state.get('commentEditor').get('showSubCommentEditorManager'),
-        isLoadingMoreSubComment: state.get('subComment').get('isLoadingMoreSubComment')
+        isLoadingMoreSubComment: state.get('subComment').get('isLoadingMoreSubComment'),
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }
 }
 

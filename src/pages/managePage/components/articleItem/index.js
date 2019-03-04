@@ -87,9 +87,9 @@ class ArticleItem extends PureComponent {
                     {
                         (isBeingHover || browser === 'Safari') && alreadyLoggedIn &&
                         <DeleteButton browser={browser}>
-                            <span className="iconfont"
+                            <i className="fa fa-trash-o"
                                   style={{cursor: 'pointer'}}
-                                  onClick={() => {tryToDeleteThisArticle(article_id,article_title,confirmDeletePostProcessor)}}>&#xe60c;</span>
+                                  onClick={() => {tryToDeleteThisArticle(article_id,article_title,confirmDeletePostProcessor)}}/>
                         </DeleteButton>
                     }
 
