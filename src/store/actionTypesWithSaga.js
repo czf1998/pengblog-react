@@ -62,4 +62,5 @@ export const APPOINT_FRESH_COMMENTS_DATA = 'appointFreshCommentsData'
 
 export const RECORD_COMMENT_HAS_BEEN_DELETED = 'recordCommentHasBeenDeleted'
 
-export const REFRESH_FRESH_COMMENTS_MAX_PAGE = 'refreshFreshCommentsMaxPage'
+export const RECORD_SUB_COMMENT_HAS_BEEN_DELETED = 'recordSubCommentHasBeenDeleted'
+

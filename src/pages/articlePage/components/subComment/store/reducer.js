@@ -1,5 +1,9 @@
 import { fromJS,Map } from 'immutable'
-import {APPEND_COMMENT_JUST_SUBMIT, DELIVER_SUB_COMMENT_LIST_DATA} from "../../../../../store/actionTypesWithSaga";
+import {
+    APPEND_COMMENT_JUST_SUBMIT,
+    DELIVER_SUB_COMMENT_LIST_DATA,
+    RECORD_SUB_COMMENT_HAS_BEEN_DELETED
+} from "../../../../../store/actionTypesWithSaga";
 import {constructComment, uniqueCommentList} from "../../../store/reducer";
 import {GET_SUB_COMMENT_LIST_DATA} from "../../comment/store";
 
@@ -35,6 +39,19 @@ export default (state = defaultState, action) => {
                 subCommentList: subCommentList.push(commentJustSubmit),
             })
         }
+    }
+
+    if(action.type === RECORD_SUB_COMMENT_HAS_BEEN_DELETED){
+        let subCommentListToJS = subCommentList.toJS()
+
+        subCommentListToJS.map((item,index) => {
+            item.comment_id === action.value.comment_id && subCommentListToJS.splice(index,1)
+        })
+
+        return state.merge({
+            subCommentList: fromJS(subCommentListToJS),
+            subCommentMaxPageMananger: subCommentMaxPageMananger.set(action.value.refer_comment_id,action.value.maxPage)
+        })
     }
     return state
 }

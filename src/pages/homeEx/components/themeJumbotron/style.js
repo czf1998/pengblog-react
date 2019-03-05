@@ -24,7 +24,7 @@ export const LogoAndSimpleDescription = styled.div`
     `
 
 export const ThemeImage = styled.img`
-        width: 60%;
+        width: 50%;
         margin-bottom: 3rem;
         @media(max-width:${milePostWidth}px){
             width: 80%;

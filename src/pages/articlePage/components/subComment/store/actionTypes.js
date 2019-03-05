@@ -1,0 +1,1 @@
+export const DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE = 'deleteSubCommentFromArticlePage'

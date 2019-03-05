@@ -1,6 +1,6 @@
 import React, {Fragment, PureComponent} from 'react'
 import { connect } from 'react-redux'
-import { CSSTransition } from 'react-transition-group'
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
 import {CommentWrapper,
         Content,
         VisitorInfo,
@@ -23,6 +23,7 @@ import {createGetSubCommentListDataAction,
 import {ForMore} from "../../../../common";
 import {LoadingIcon} from "../../../managePage/components/freshComments/components/freshCommentItem/style";
 import loadingSpin from "../../../../common/loading/svg/loading-spin.svg";
+import {SLIDE_FROM_LEFT_CSSTRANSITION} from "../../../../commonStyle/commonClassNameConstant";
 
 const REPLY_CLASSNAME = 'fa fa-reply'
 const RETRACT_CLASSNAME = 'fa fa-chevron-up'
@@ -55,15 +56,13 @@ class Comment extends PureComponent {
                 getMoreSubCommentListData,
                 pageScale,
                 isLoadingMoreSubComment,
-                alreadyLoggedIn,tryToDeleteThisComment} = this.props
+                alreadyLoggedIn,
+                tryToDeleteThisComment} = this.props
 
         const comment_id = comment.get('comment_id')
         const {currentPage,isBeenDeleting} = this.state
 
         let maxPage = subCommentMaxPageMananger.get(comment.get('comment_id').toString())
-
-
-
 
         const replyButtonIconClassName = showSubCommentEditorManager.get('hostTopLevelCommentId') === comment_id
                                          &&
@@ -84,7 +83,8 @@ class Comment extends PureComponent {
 
         return (
             <CommentWrapper isBeenDeleting={isBeenDeleting}
-                            widthOfMainArea={widthOfMainArea}>
+                            widthOfMainArea={widthOfMainArea}
+                            ref="topLevelComment">
 
 
                 <VisitorInfo>
@@ -119,40 +119,45 @@ class Comment extends PureComponent {
                             alreadyLoggedIn &&
                             <Fragment>
                                 &nbsp;|&nbsp;
-                                <DeleteButton onClick={() => {tryToDeleteThisComment(comment_id,comment.get('comment_hostArticle').get('article_id'),this)}} className="fa fa-trash-o"/>
+                                <DeleteButton onClick={() => {tryToDeleteThisComment(comment_id,comment.get('comment_hostArticle').get('article_id'),this)}}
+                                              className="fa fa-trash-o"/>
                             </Fragment>
                         }
                     </OperationBar>
 
+                    <TransitionGroup>
                     {
                         subCommentList.map((item) => {
                             if(item.get('comment_referComment').get('comment_id').toString() === comment_id.toString())
                                 return (
-                                    <div key={item.get('comment_id')}
-                                         className={CommonClassNameConstants.SLIDE_UP_FAST}>
-                                        <GapH/>
-                                        <SubComment comment={item}/>
-                                    </div>
+                                    <CSSTransition key={item.get('comment_id')}
+                                                   timeout={400}
+                                                   classNames={SLIDE_FROM_LEFT_CSSTRANSITION}>
+                                        <div>
+                                            <GapH/>
+                                            <SubComment comment={item}/>
+                                        </div>
+                                    </CSSTransition>
 
                                 )
                             return null
                         })
                     }
+                    </TransitionGroup>
 
                     {
                         comment.get('comment_haveSubComment') && currentPage !== maxPage &&
                         <Fragment>
                             <GapH/>
                             <ForMore isLoading={isLoadingMoreSubComment}
-                                     noMore={currentPage === maxPage}
-                                     clickHandler={getMoreSubCommentListData}
-                                     height={60}
-                                     forMoreText='加载更多'
-                                     fontSize='0.9rem'
-                                     meta={[comment_id,
+                                     noMore={currentPage >= maxPage}
+                                     clickHandler={() => {getMoreSubCommentListData(comment_id,
                                          pageScale,
                                          maxPage,
-                                         this]}/>
+                                         this)}}
+                                     height={60}
+                                     forMoreText='加载更多'
+                                     fontSize='0.9rem'/>
                         </Fragment>
 
                     }
@@ -193,6 +198,7 @@ class Comment extends PureComponent {
     componentDidMount(){
         const comment_id = this.props.comment.get('comment_id').toString()
 
+        //获取subComment数据
         this.props.comment.get('comment_haveSubComment') === true
         &&
         !this.props.subCommentList.some((item) => {
@@ -200,6 +206,13 @@ class Comment extends PureComponent {
         })
         &&
         this.props.getSubCommentListData(comment_id, 0, this.props.pageScale)
+
+        //当有subComment被删除时，更新此条目的startIndex
+        this.refs.topLevelComment.addEventListener('deleteSubComment', () => {
+            this.setState({
+                startIndex: this.state.startIndex - 1
+            })
+        })
     }
 }
 

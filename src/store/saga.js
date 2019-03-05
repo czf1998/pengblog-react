@@ -32,7 +32,8 @@ import {createDeliverArticleDataToHomeAction,
         createResetManagePageArticleListAction,
         createTriggerAlreadyLoggedInAction,
         createAppointFreshCommentsDataAction,
-        createRecordCommentHasBeenDeletedAction} from './actionCreators'
+        createRecordCommentHasBeenDeletedAction,
+        createRecordSubCommentHasBeenDeletedAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest,
@@ -66,6 +67,7 @@ import {createTriggerIsLoggingInAction} from "../pages/loginPage/store";
 import {GET_FRESH_COMMENTS_DATA} from "../pages/managePage/components/freshComments/store/actionTypes";
 import {DELETE_COMMENT_FROM_FRESH_COMMENTS} from "../pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes";
 import {DELETE_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/components/comment/store/actionTypes";
+import {DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/components/subComment/store/actionTypes";
 
 
 const NO_MORE_ITEM_AVAILABLE = 'noMoreItemAvailable'
@@ -94,6 +96,46 @@ function* mySaga() {
     yield takeEvery(GET_FRESH_COMMENTS_DATA, ajaxGetFreshCommentsData)
     yield takeEvery(DELETE_COMMENT_FROM_FRESH_COMMENTS, ajaxDeleteCommentFromFreshComments)
     yield takeEvery(DELETE_COMMENT_FROM_ARTICLE_PAGE, ajaxDeleteCommentFromArticlePage)
+    yield takeEvery(DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE, ajaxDeleteSubCommentFromArticlePage)
+}
+
+function* ajaxDeleteSubCommentFromArticlePage(action) {
+    yield checkToken()
+
+    try{
+        yield CommentRequest.RequestDeleteComment(action.value.comment_id)
+
+
+        const delay = (ms) => new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        })
+        yield delay(500);
+
+
+        const state = yield select()
+
+        const res = yield CommentRequest.RequestSubCommentListData({
+            comment_id: action.value.refer_comment_id,
+            startIndex: 0,
+            pageScale: state.get('subComment').get('pageScale')
+        })
+
+        const value = {
+            comment_id: action.value.comment_id,
+            refer_comment_id: action.value.refer_comment_id,
+            maxPage: res.data.maxPage
+        }
+
+        const recordSubCommentHasBeenDeletedAction = createRecordSubCommentHasBeenDeletedAction(value)
+        yield put(recordSubCommentHasBeenDeletedAction)
+
+    }catch (err) {
+        console.log('ERR IN ACTION: DELETE_COMMENT  ERR: ' + err)
+
+        /*通知窗口提示异常*/
+        const appointNoticeContent = createAppointNoticeContent('ERR IN ACTION: DELETE_COMMENT  ERR: ' + err)
+        yield put(appointNoticeContent)
+    }
 }
 
 function* ajaxDeleteCommentFromArticlePage(action) {
@@ -114,7 +156,7 @@ function* ajaxDeleteCommentFromArticlePage(action) {
         })
         yield delay(500);
 
-        //标记已删除的文章条目并刷新页面指数
+        //标记已删除的评论条目并刷新页面指数
         const value = {
             comment_id: action.value.comment_id,
             maxPage: res.data.maxPage
