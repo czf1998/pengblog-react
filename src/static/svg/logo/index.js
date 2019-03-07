@@ -11,6 +11,7 @@ import webstormLogo from './webstorm.svg'
 import eclipseLogo from './eclipse.svg'
 import tomcatLogo from './tomcat.svg'
 import nginxLogo from './nginx.svg'
+import reactRouterLogo from './react-router.svg'
 
 export {reactLogo,
         immutableLogo,
@@ -24,4 +25,4 @@ export {reactLogo,
         webstormLogo,
         eclipseLogo,
         tomcatLogo,
-        nginxLogo}
+        nginxLogo,reactRouterLogo}

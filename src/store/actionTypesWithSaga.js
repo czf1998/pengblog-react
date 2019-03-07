@@ -64,3 +64,5 @@ export const RECORD_COMMENT_HAS_BEEN_DELETED = 'recordCommentHasBeenDeleted'
 
 export const RECORD_SUB_COMMENT_HAS_BEEN_DELETED = 'recordSubCommentHasBeenDeleted'
 
+export const DELIVER_CAPTCHA_IMAGE_BASE64 = 'deliverCaptchaImageBase64'
+

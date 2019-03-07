@@ -1,5 +1,5 @@
-const server = 'http://pengblog.xyz/pengblog-SSM/'
-//const server = 'http://localhost:8088/pengkaifanblog/'
+//const server = 'http://pengblog.xyz/pengblog-SSM/'
+const server = 'http://localhost:8088/pengkaifanblog/'
 
 export const API_GET_ARTICLE_LIST_BY_LIMITINDEX = server + 'article/article_summary.do'
 
@@ -42,3 +42,5 @@ export const API_LOGIN = server + 'login/login.do'
 export const API_GET_FRESH_COMMENT_LIST = server + 'comment/comment_last.do'
 
 export const API_DELETE_COMMENT = server + 'comment/comment_delete.do'
+
+export const API_GET_CAPTCHA = server + 'captcha/get_captcha.do'

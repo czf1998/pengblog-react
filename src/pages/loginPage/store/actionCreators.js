@@ -1,6 +1,7 @@
 import {APPOINT_LOGIN_PAGE_INPUT_VALUE,
         TRIGGER_IS_LOGGING_IN,
-        LOGIN} from './actionTypes'
+        LOGIN,
+        GET_CAPTCHA_IMAGE} from './actionTypes'
 
 export const createAppointLoginPageInputValueAction = (value) => ({
     type: APPOINT_LOGIN_PAGE_INPUT_VALUE,
@@ -14,5 +15,10 @@ export const createTriggerIsLoggingInAction = (value) => ({
 
 export const createLoginAction = (value) => ({
     type: LOGIN,
+    value
+})
+
+export const createGetCaptchaImageAction = (value) => ({
+    type: GET_CAPTCHA_IMAGE,
     value
 })

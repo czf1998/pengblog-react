@@ -6,6 +6,8 @@ import {LoginPageWrapper,
         ThemeJumbotron,
         Loginer,
         InputWrapper,
+        CaptchaWrapper,
+        CaptchaImage,
         ThemeImage,
         Gap,
         LogoWrapper,
@@ -14,16 +16,17 @@ import {LoginPageWrapper,
 
 import {createAppointLoginPageInputValueAction,
         createTriggerIsLoggingInAction,
-        createLoginAction} from './store'
+        createLoginAction,
+        createGetCaptchaImageAction} from './store'
 
 import Logo from "../homeEx/components/themeJumbotron/components/logo";
 import {createPushPrograssToEndAction} from "../home/store";
 import themeImage from "../../static/image/fangao.jpg";
 import {SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
-import {PASSWORD, USERNAME} from "./constant";
+import {PASSWORD, USERNAME, CAPTCHA} from "./constant";
 import loadingSpin from "../../common/loading/svg/loading-spin.svg";
 import {createAppointNoticeContent, createTriggerAlreadyLoggedInAction} from "../../store/actionCreators";
-import {put} from "redux-saga/effects";
+const uuidv4 = require('uuid/v4');
 
 class LoginPage extends PureComponent {
 
@@ -40,7 +43,9 @@ class LoginPage extends PureComponent {
                 tryToLogin,
                 isLogging,
                 alreadyLoggedIn,
-                tryToLogout} = this.props
+                tryToLogout,
+                captcha,
+                captchaImage} = this.props
 
 
         return (
@@ -77,6 +82,15 @@ class LoginPage extends PureComponent {
                                 onChange={(e) => {appointLoginPageInputValue(PASSWORD,e)}}/>
                    </InputWrapper>
 
+                   <CaptchaWrapper>
+                       <CaptchaImage captchaImage={captchaImage}/>
+                       <InputEX value={captcha}
+                                placeholder="验证码"
+                                type="text"
+                                disabled={isLogging || alreadyLoggedIn}
+                                onChange={(e) => {appointLoginPageInputValue(CAPTCHA,e)}}/>
+                   </CaptchaWrapper>
+
                    <ButtonWrapper>
                        {
                            alreadyLoggedIn ?
@@ -104,6 +118,7 @@ class LoginPage extends PureComponent {
 
     componentDidMount() {
         this.props.pushPrograssBarToEnd()
+        this.props.getCaptchaImage()
     }
 
     componentWillUnmount() {
@@ -118,7 +133,9 @@ const mapState = (state) => ({
         username: state.get('loginPage').get('username'),
         password: state.get('loginPage').get('password'),
         isLogging: state.get('loginPage').get('isLogging'),
-        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn'),
+        captcha: state.get('loginPage').get('captcha'),
+        captchaImage: state.get('loginPage').get('captchaImage')
     })
 
 const mapActions = (dispatch) => {
@@ -129,6 +146,10 @@ const mapActions = (dispatch) => {
                 inputValue: e.target.value
             }
             const action = createAppointLoginPageInputValueAction(value)
+            dispatch(action)
+        },
+        getCaptchaImage(){
+            const action = createGetCaptchaImageAction(uuidv4())
             dispatch(action)
         },
         pushPrograssBarToEnd() {

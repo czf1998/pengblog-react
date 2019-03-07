@@ -33,11 +33,13 @@ import {createDeliverArticleDataToHomeAction,
         createTriggerAlreadyLoggedInAction,
         createAppointFreshCommentsDataAction,
         createRecordCommentHasBeenDeletedAction,
-        createRecordSubCommentHasBeenDeletedAction} from './actionCreators'
+        createRecordSubCommentHasBeenDeletedAction,
+        createDeliverCaptchaImageBase64Action} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest,
-        LoginRequest} from './request'
+        LoginRequest,
+        CaptchaRequest} from './request'
 import {SUBMIT_COMMENT} from "../pages/articlePage/components/commentEditor/store/actionType";
 import {
     createAppointInputValueAction,
@@ -62,7 +64,7 @@ import {
     createTiggerIsMultipleSelectingInManagePageAction,
     createTriggerIsLoadingManagePageArticleListDataAction
 } from "../pages/managePage/store";
-import {LOGIN} from "../pages/loginPage/store/actionTypes";
+import {GET_CAPTCHA_IMAGE, LOGIN} from "../pages/loginPage/store/actionTypes";
 import {createTriggerIsLoggingInAction} from "../pages/loginPage/store";
 import {GET_FRESH_COMMENTS_DATA} from "../pages/managePage/components/freshComments/store/actionTypes";
 import {DELETE_COMMENT_FROM_FRESH_COMMENTS} from "../pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes";
@@ -97,6 +99,67 @@ function* mySaga() {
     yield takeEvery(DELETE_COMMENT_FROM_FRESH_COMMENTS, ajaxDeleteCommentFromFreshComments)
     yield takeEvery(DELETE_COMMENT_FROM_ARTICLE_PAGE, ajaxDeleteCommentFromArticlePage)
     yield takeEvery(DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE, ajaxDeleteSubCommentFromArticlePage)
+    yield takeEvery(GET_CAPTCHA_IMAGE, ajaxGetCaptchaImage)
+}
+
+function* ajaxGetCaptchaImage(action) {
+
+
+    try{
+
+        const res = yield CaptchaRequest.RequestCaptchaImage(action.value)
+
+        const deliverImageAction = createDeliverCaptchaImageBase64Action(res.data)
+
+        yield put(deliverImageAction)
+
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_CAPTCHA_IMAGE  ERR: ' + err)
+    }
+}
+
+function* ajaxLogin(action) {
+
+    try{
+        const res = yield LoginRequest.RequestLogin(action.value)
+
+        //登录成功
+        if(res.data.loginStatus === 1){
+            //本地存储token以及过期时间
+            let validTime = res.data.validTimeMillis
+            let expTime = new Date().getTime() + validTime
+            localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, username:action.value.username}))
+
+            //更新reducer为已登录
+            const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
+            yield put(triggerAlreadyLoggedInAction)
+
+            /*通知窗口提示登录成功*/
+            const appointNoticeContent = createAppointNoticeContent('登录成功')
+            yield put(appointNoticeContent)
+
+            return
+        }
+
+        //登陆失败
+        if(res.data.loginStatus === 0){
+            /*通知窗口提示登录失败*/
+            const appointNoticeContent = createAppointNoticeContent('登录失败: ' + res.data.loginMsg)
+            yield put(appointNoticeContent)
+
+            //更新loginPage.reducer的isLoggingIn
+            const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
+            yield put(triggerIsLoggingInAction)
+        }
+
+
+    }catch (err) {
+        console.log('ERR IN ACTION: LOGIN  ERR: ' + err)
+
+        /*通知窗口提示登录失败*/
+        const appointNoticeContent = createAppointNoticeContent('登录失败: ' + err)
+        yield put(appointNoticeContent)
+    }
 }
 
 function* ajaxDeleteSubCommentFromArticlePage(action) {
@@ -223,49 +286,7 @@ function* ajaxGetFreshCommentsData(action) {
     }
 }
 
-function* ajaxLogin(action) {
-    try{
-        const res = yield LoginRequest.RequestLogin(action.value)
-        //console.log(res.data)
 
-        //登录成功
-        if(res.data.loginStatus === 1){
-            //本地存储token以及过期时间
-            let validTime = res.data.validTimeMillis
-            let expTime = new Date().getTime() + validTime
-            localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, username:action.value.username}))
-
-            //更新reducer为已登录
-            const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
-            yield put(triggerAlreadyLoggedInAction)
-
-            /*通知窗口提示登录成功*/
-            const appointNoticeContent = createAppointNoticeContent('登录成功')
-            yield put(appointNoticeContent)
-
-            return
-        }
-
-        //登陆失败
-        if(res.data.loginStatus === 0){
-            /*通知窗口提示登录失败*/
-            const appointNoticeContent = createAppointNoticeContent('登录失败: ' + res.data.loginMsg)
-            yield put(appointNoticeContent)
-
-            //更新loginPage.reducer的isLoggingIn
-            const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
-            yield put(triggerIsLoggingInAction)
-        }
-
-
-    }catch (err) {
-        console.log('ERR IN ACTION: LOGIN  ERR: ' + err)
-
-        /*通知窗口提示登录失败*/
-        const appointNoticeContent = createAppointNoticeContent('登录失败: ' + err)
-        yield put(appointNoticeContent)
-    }
-}
 
 function* ajaxDeleteArticleList(action) {
 

@@ -50,6 +50,16 @@ export const InputWrapper = styled.div`
         margin-bottom: 2rem;
     `
 
+export const CaptchaWrapper = styled.div`
+        margin-bottom: 2rem;
+        display: flex;
+    `
+export const CaptchaImage = styled.div`
+        margin-right: 1rem;
+        width: 10rem;
+        background: url(data:image/jpeg;base64,${props => props.captchaImage}) no-repeat;
+        background-size: 100% 100%;
+    `
 
 export const ThemeImage = styled.img`
         width: 400px;
@@ -76,6 +86,9 @@ export const ButtonWrapper = styled.div`
         justify-content: flex-end;
         align-items: center;
         margin-bottom: 6rem;
+        @media(max-height:600px){
+         margin-bottom: 0;
+        }
     `
 
 export const LoadingWrapper = styled.div`

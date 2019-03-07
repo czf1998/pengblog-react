@@ -87,7 +87,7 @@ class TopLevelCommentEditorUI extends PureComponent{
 
                 <VisitorInfo className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
 
-                    <Input  width="35%"
+                    <Input  width={isMobile ? '100%' : '35%'}
                             placeholder="您的邮箱"
                             type="text"
                             value={visitorEmailManager.get('value')}
@@ -100,7 +100,7 @@ class TopLevelCommentEditorUI extends PureComponent{
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <Input  width="35%"
+                    <Input  width={isMobile ? '100%' : '35%'}
                             placeholder="你的个人网站？如果有"
                             type="text"
                             value={visitorSiteAddressManager.get('value')}

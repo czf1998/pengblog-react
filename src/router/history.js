@@ -1,10 +1,12 @@
 import { createBrowserHistory } from 'history'
 import store from '../store'
 import {createAppointCurrentPathAction} from './store'
+import {createTriggerShowModalAction} from "../common/modal/store";
 
 const history = createBrowserHistory()
 
 history.listen((location, action) => {
+    handlerModal()
     registerCurrentPath(location)
     if(action === 'PUSH'){
         rebootPrograssBar()
@@ -20,4 +22,12 @@ const rebootPrograssBar = () => {
 export const registerCurrentPath = (location) => {
     const appointCurrentPathAction = createAppointCurrentPathAction(location.pathname)
     store.dispatch(appointCurrentPathAction)
+}
+
+const handlerModal = () => {
+    const isShowingModal = store.getState().get('modal').get('showModal')
+    if(isShowingModal){
+        const triggerShowModalAction = createTriggerShowModalAction(false)
+        store.dispatch(triggerShowModalAction)
+    }
 }
