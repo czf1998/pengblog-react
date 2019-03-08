@@ -1,24 +1,30 @@
 import {fromJS} from 'immutable'
-import {} from "./actionTypes";
-import {APPOINT_LOGIN_PAGE_INPUT_VALUE} from "./actionTypes";
+import {APPOINT_LOGIN_PAGE_INPUT_VALUE, TRIGGER_SHOW_WARN_OF_INPUT_OF_LOGIN_PAGE} from "./actionTypes";
 import {TRIGGER_IS_LOGGING_IN} from "./actionTypes";
-import {DELIVER_CAPTCHA_IMAGE_BASE64, TRIGGER_ALREADY_LOGGED_IN} from "../../../store/actionTypesWithSaga";
-import {GET_CAPTCHA_IMAGE} from "./actionTypes";
+import {TRIGGER_ALREADY_LOGGED_IN} from "../../../store/actionTypesWithSaga";
 
 const defaultState = fromJS({
-    username: '',
-    password: '',
+    username: fromJS({
+        value: '',
+        warnMsg: '尚未填写',
+        showWarn: false
+    }),
+    password: fromJS({
+        value: '',
+        warnMsg: '尚未填写',
+        showWarn: false
+    }),
     isLogging: false,
-    alreadyLoggedIn: false,
-    captcha: '',
-    captchaImage: '',
-    captchaId: undefined
+    alreadyLoggedIn: false
 })
 
 export default (state = defaultState, action) => {
 
     if(action.type === APPOINT_LOGIN_PAGE_INPUT_VALUE){
-        return state.set(action.value.inputId, action.value.inputValue)
+        const target = state.get(action.value.inputId)
+        return state.set(action.value.inputId, target.merge({
+            value: action.value.inputValue
+        }))
     }
 
     if(action.type === TRIGGER_IS_LOGGING_IN){
@@ -33,16 +39,12 @@ export default (state = defaultState, action) => {
         })
     }
 
-    if(action.type === GET_CAPTCHA_IMAGE){
-        return state.merge({
-            captchaId: action.value
-        })
-    }
+    if(action.type === TRIGGER_SHOW_WARN_OF_INPUT_OF_LOGIN_PAGE){
+        const target = state.get(action.value.inputId)
 
-    if(action.type === DELIVER_CAPTCHA_IMAGE_BASE64){
-        return state.merge({
-            captchaImage: action.value
-        })
+        return state.set(action.value.inputId, target.merge({
+            showWarn: action.value.showWarn
+        }))
     }
     return state
 }

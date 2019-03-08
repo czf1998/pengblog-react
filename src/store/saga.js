@@ -34,7 +34,8 @@ import {createDeliverArticleDataToHomeAction,
         createAppointFreshCommentsDataAction,
         createRecordCommentHasBeenDeletedAction,
         createRecordSubCommentHasBeenDeletedAction,
-        createDeliverCaptchaImageBase64Action} from './actionCreators'
+        createDeliverCaptchaImageBase64Action,
+        createTriggerShowCaptchaInputWarnAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest,
@@ -64,12 +65,13 @@ import {
     createTiggerIsMultipleSelectingInManagePageAction,
     createTriggerIsLoadingManagePageArticleListDataAction
 } from "../pages/managePage/store";
-import {GET_CAPTCHA_IMAGE, LOGIN} from "../pages/loginPage/store/actionTypes";
+import {LOGIN} from "../pages/loginPage/store/actionTypes";
 import {createTriggerIsLoggingInAction} from "../pages/loginPage/store";
 import {GET_FRESH_COMMENTS_DATA} from "../pages/managePage/components/freshComments/store/actionTypes";
 import {DELETE_COMMENT_FROM_FRESH_COMMENTS} from "../pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes";
 import {DELETE_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/components/comment/store/actionTypes";
 import {DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/components/subComment/store/actionTypes";
+import {GET_CAPTCHA_IMAGE} from "../common/captcha/store/actionTypes";
 
 
 const NO_MORE_ITEM_AVAILABLE = 'noMoreItemAvailable'
@@ -104,12 +106,15 @@ function* mySaga() {
 
 function* ajaxGetCaptchaImage(action) {
 
-
     try{
+        const res = yield CaptchaRequest.RequestCaptchaImage(action.value.captchaId)
 
-        const res = yield CaptchaRequest.RequestCaptchaImage(action.value)
+        const deliverImageActionValue = {
+            captchaImage: res.data,
+            captchaHost: action.value.captchaHost
+        }
 
-        const deliverImageAction = createDeliverCaptchaImageBase64Action(res.data)
+        const deliverImageAction = createDeliverCaptchaImageBase64Action(deliverImageActionValue)
 
         yield put(deliverImageAction)
 
@@ -120,6 +125,15 @@ function* ajaxGetCaptchaImage(action) {
 
 function* ajaxLogin(action) {
 
+    const captchaPass = yield checkCaptchaCode('loginPage')
+
+    if(!captchaPass){
+
+        const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
+        yield put(triggerIsLoggingInAction)
+
+        return
+    }
     try{
         const res = yield LoginRequest.RequestLogin(action.value)
 
@@ -658,5 +672,53 @@ function* checkToken(){
         if(expTime < new Date().getTime()){
             goTo('/login')
         }
+    }
+}
+
+function* checkCaptchaCode(captchaHost) {
+    try{
+
+        const state = yield select()
+
+        const captchaId = state.get('captcha').get(captchaHost).get('captchaId')
+        const uncheckCaptchaCode = state.get('captcha').get(captchaHost).get('captchaCode')
+
+        if(uncheckCaptchaCode === '' || uncheckCaptchaCode == null){
+
+            //验证码input显示警告
+            const value = {
+                captchaHost: captchaHost,
+                showWarn: true
+            }
+
+            const action = createTriggerShowCaptchaInputWarnAction(value)
+            yield put(action)
+
+            return false
+        }
+
+        const value = {
+            captchaId: captchaId,
+            uncheckCaptchaCode: uncheckCaptchaCode
+        }
+
+        const res = yield CaptchaRequest.RequestCheck(value)
+
+        /*通知窗口提示提交验证码验证失败*/
+        if(res.data.pass !== true){
+            if(res.data.status === 'wrong'){
+                const appointNoticeContent = createAppointNoticeContent('验证码填写错误')
+                yield put(appointNoticeContent)
+            }else if(res.data.status === 'overdue'){
+                const appointNoticeContent = createAppointNoticeContent('验证码已过期')
+                yield put(appointNoticeContent)
+            }
+
+            return false
+        }
+
+        return true
+    }catch (err) {
+        console.log('ERR IN ACTION: CHECK_CAPTCHA_CODE  ERR: ' + err)
     }
 }

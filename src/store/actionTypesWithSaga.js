@@ -66,3 +66,5 @@ export const RECORD_SUB_COMMENT_HAS_BEEN_DELETED = 'recordSubCommentHasBeenDelet
 
 export const DELIVER_CAPTCHA_IMAGE_BASE64 = 'deliverCaptchaImageBase64'
 
+export const TRIGGER_SHOW_CAPTCHA_INPUT_WARN = 'triggerShowCaptchaInputWarn'
+

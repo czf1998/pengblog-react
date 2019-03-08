@@ -2,10 +2,10 @@ import reducer from './reducer'
 import {createAppointLoginPageInputValueAction,
         createTriggerIsLoggingInAction,
         createLoginAction,
-        createGetCaptchaImageAction} from './actionCreators'
+        createTriggerShowWarnOfInputOfLoginPageAction} from './actionCreators'
 
 export {reducer}
 export {createAppointLoginPageInputValueAction,
         createTriggerIsLoggingInAction,
         createLoginAction,
-        createGetCaptchaImageAction}
+        createTriggerShowWarnOfInputOfLoginPageAction}

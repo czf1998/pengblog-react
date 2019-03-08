@@ -4,4 +4,4 @@ export const TRIGGER_IS_LOGGING_IN = 'triggerIsLoggingIn'
 
 export const LOGIN = 'login'
 
-export const GET_CAPTCHA_IMAGE = 'getCaptchaImage'
+export const TRIGGER_SHOW_WARN_OF_INPUT_OF_LOGIN_PAGE = 'triggerShowWarnOfInputOfLoginPage'

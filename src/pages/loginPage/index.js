@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {InputEX,Button} from '../../common'
+import {InputEX,Button,Captcha} from '../../common'
 import {LoginPageWrapper,
         ThemeJumbotron,
         Loginer,
@@ -17,7 +17,7 @@ import {LoginPageWrapper,
 import {createAppointLoginPageInputValueAction,
         createTriggerIsLoggingInAction,
         createLoginAction,
-        createGetCaptchaImageAction} from './store'
+        createTriggerShowWarnOfInputOfLoginPageAction} from './store'
 
 import Logo from "../homeEx/components/themeJumbotron/components/logo";
 import {createPushPrograssToEndAction} from "../home/store";
@@ -26,7 +26,6 @@ import {SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
 import {PASSWORD, USERNAME, CAPTCHA} from "./constant";
 import loadingSpin from "../../common/loading/svg/loading-spin.svg";
 import {createAppointNoticeContent, createTriggerAlreadyLoggedInAction} from "../../store/actionCreators";
-const uuidv4 = require('uuid/v4');
 
 class LoginPage extends PureComponent {
 
@@ -34,18 +33,14 @@ class LoginPage extends PureComponent {
 
     render() {
 
-        const { browser,
-                isMobile,
-                heightOfBrowser,
+        const { heightOfBrowser,
                 appointLoginPageInputValue,
                 username,
                 password,
                 tryToLogin,
                 isLogging,
                 alreadyLoggedIn,
-                tryToLogout,
-                captcha,
-                captchaImage} = this.props
+                tryToLogout,shutdownShowWarn} = this.props
 
 
         return (
@@ -68,28 +63,27 @@ class LoginPage extends PureComponent {
                <Loginer>
 
                    <InputWrapper>
-                       <InputEX value={username}
+                       <InputEX value={username.get('value')}
+                                showWarn={username.get('showWarn')}
+                                warnMsg={username.get('warnMsg')}
                                 placeholder="用户名"
                                 disabled={isLogging || alreadyLoggedIn}
+                                onFocus={() => {shutdownShowWarn(USERNAME)}}
                                 onChange={(e) => {appointLoginPageInputValue(USERNAME,e)}}/>
                    </InputWrapper>
 
                    <InputWrapper>
-                       <InputEX value={password}
+                       <InputEX value={password.get('value')}
+                                showWarn={password.get('showWarn')}
+                                warnMsg={password.get('warnMsg')}
                                 placeholder="密码"
                                 type="password"
                                 disabled={isLogging || alreadyLoggedIn}
+                                onFocus={() => {shutdownShowWarn(PASSWORD)}}
                                 onChange={(e) => {appointLoginPageInputValue(PASSWORD,e)}}/>
                    </InputWrapper>
 
-                   <CaptchaWrapper>
-                       <CaptchaImage captchaImage={captchaImage}/>
-                       <InputEX value={captcha}
-                                placeholder="验证码"
-                                type="text"
-                                disabled={isLogging || alreadyLoggedIn}
-                                onChange={(e) => {appointLoginPageInputValue(CAPTCHA,e)}}/>
-                   </CaptchaWrapper>
+                   <Captcha captchaHost="loginPage"/>
 
                    <ButtonWrapper>
                        {
@@ -101,9 +95,14 @@ class LoginPage extends PureComponent {
                                :
                                (
                                    isLogging ?
-                                       <Loading src={loadingSpin}/>
+
+                                       <Button disabled={true}
+                                               style={{width:'5rem'}}>
+                                           &nbsp;&nbsp;请稍等&nbsp;&nbsp;
+                                        </Button>
                                        :
-                                       <Button onClick={() => {!isLogging && tryToLogin(username,password)}}
+                                       <Button style={{width:'5rem'}}
+                                               onClick={() => {!isLogging && tryToLogin(username.get('value'),password.get('value'))}}
                                                disabled={isLogging}>
                                            &nbsp;&nbsp;登录&nbsp;&nbsp;
                                        </Button>
@@ -118,7 +117,6 @@ class LoginPage extends PureComponent {
 
     componentDidMount() {
         this.props.pushPrograssBarToEnd()
-        this.props.getCaptchaImage()
     }
 
     componentWillUnmount() {
@@ -134,8 +132,6 @@ const mapState = (state) => ({
         password: state.get('loginPage').get('password'),
         isLogging: state.get('loginPage').get('isLogging'),
         alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn'),
-        captcha: state.get('loginPage').get('captcha'),
-        captchaImage: state.get('loginPage').get('captchaImage')
     })
 
 const mapActions = (dispatch) => {
@@ -148,15 +144,31 @@ const mapActions = (dispatch) => {
             const action = createAppointLoginPageInputValueAction(value)
             dispatch(action)
         },
-        getCaptchaImage(){
-            const action = createGetCaptchaImageAction(uuidv4())
-            dispatch(action)
-        },
         pushPrograssBarToEnd() {
             const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home'})
             dispatch(pushPrograssBarToEndAction)
         },
         tryToLogin(username,password){
+            if(username === ''){
+                const value = {
+                    inputId: USERNAME,
+                    showWarn: true
+                }
+                const triggerShowWarnOfInputOfLoginPageAction = createTriggerShowWarnOfInputOfLoginPageAction(value)
+                dispatch(triggerShowWarnOfInputOfLoginPageAction)
+            }
+            if(password === ''){
+                const value = {
+                    inputId: PASSWORD,
+                    showWarn: true
+                }
+                const triggerShowWarnOfInputOfLoginPageAction = createTriggerShowWarnOfInputOfLoginPageAction(value)
+                dispatch(triggerShowWarnOfInputOfLoginPageAction)
+            }
+            if(username === '' || password === ''){
+                return
+            }
+
             const triggerIsLoggingInAction = createTriggerIsLoggingInAction(true)
             dispatch(triggerIsLoggingInAction)
 
@@ -182,6 +194,14 @@ const mapActions = (dispatch) => {
 
             const appointNoticeContent = createAppointNoticeContent('登出成功')
             dispatch(appointNoticeContent)
+        },
+        shutdownShowWarn(inputId){
+            const value = {
+                inputId: inputId,
+                showWarn: false
+            }
+            const triggerShowWarnOfInputOfLoginPageAction = createTriggerShowWarnOfInputOfLoginPageAction(value)
+            dispatch(triggerShowWarnOfInputOfLoginPageAction)
         }
     }
 }

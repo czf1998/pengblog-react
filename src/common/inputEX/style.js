@@ -44,7 +44,7 @@ export const Color = styled.div`
         position: absolute;
         width: ${props => props.isFocus ? '100%' : '0'};
         height: 1px;
-        border-bottom: solid 1px rgb(51, 103, 214);
+        border-bottom: solid 1px ${props => props.lineColor ? props.lineColor : 'rgb(51, 103, 214)'};
         transition: all 0.5s ease;
     `
 

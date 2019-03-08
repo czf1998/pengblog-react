@@ -15,6 +15,7 @@ import Modal from './modal'
 import Select from './select'
 import Pagination from './pagination'
 import CheckBox from './checkBox'
+import Captcha from './captcha'
 
 export {Button,
         Input,
@@ -33,4 +34,5 @@ export {Button,
         Modal,
         Select,
         Pagination,
-        CheckBox }
+        CheckBox,
+        Captcha }

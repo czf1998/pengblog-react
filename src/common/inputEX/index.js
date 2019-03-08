@@ -37,7 +37,8 @@ class InputEX extends Component{
                 disabled,
                 backgroundColor,
                 disableFocusStyle,
-                fontColor } = this.props
+                fontColor,
+                lineColor } = this.props
 
         const {isFocus} = this.state
 
@@ -62,7 +63,7 @@ class InputEX extends Component{
                         isFocus={isFocus}/>
 
                 <Line>
-                    <Color isFocus={isFocus}/>
+                    <Color isFocus={isFocus} lineColor={lineColor}/>
                 </Line>
 
                 <InputIconWrapper>
