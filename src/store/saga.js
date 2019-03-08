@@ -134,8 +134,24 @@ function* ajaxLogin(action) {
 
         return
     }
+
     try{
-        const res = yield LoginRequest.RequestLogin(action.value)
+
+        const state = yield select()
+
+        const username = state.get('loginPage').get('username').get('value')
+        const password = state.get('loginPage').get('password').get('value')
+        const captchaId = state.get('captcha').get('loginPage').get('captchaId')
+        const captchaCode = state.get('captcha').get('loginPage').get('captchaCode')
+
+        const loginData = {
+            username: username,
+            password: password,
+            captchaId: captchaId,
+            captchaCode: captchaCode,
+        }
+
+        const res = yield LoginRequest.RequestLogin(loginData)
 
         //登录成功
         if(res.data.loginStatus === 1){

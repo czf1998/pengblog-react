@@ -172,12 +172,7 @@ const mapActions = (dispatch) => {
             const triggerIsLoggingInAction = createTriggerIsLoggingInAction(true)
             dispatch(triggerIsLoggingInAction)
 
-            const loginValue = {
-                username: username,
-                password: password
-            }
-
-            const loginAction = createLoginAction(loginValue)
+            const loginAction = createLoginAction()
             dispatch(loginAction)
         },
         tryToLogout(){
