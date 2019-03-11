@@ -19,12 +19,13 @@ import {createAppointLoginPageInputValueAction,
         createTriggerIsLoggingInAction,
         createLoginAction,
         createTriggerShowWarnOfInputOfLoginPageAction,
-        createGetSmsAction} from './store'
+        createGetSmsAction,
+        createCountDownSmsSecondAction} from './store'
 
 import Logo from "../homeEx/components/themeJumbotron/components/logo";
 import {createPushPrograssToEndAction} from "../home/store";
 import themeImage from "../../static/image/background/black-and-white-nature-sky-field.jpg";
-import {SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
+import {FADE_IN, SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
 import {PASSWORD, PHONENUMBER, CAPTCHA} from "./constant";
 import loadingSpin from "../../common/loading/svg/loading-spin.svg";
 import {createAppointNoticeContent, createTriggerAlreadyLoggedInAction} from "../../store/actionCreators";
@@ -42,7 +43,12 @@ class LoginPage extends PureComponent {
                 tryToLogin,
                 isLogging,
                 alreadyLoggedIn,
-                tryToLogout,shutdownShowWarn} = this.props
+                tryToLogout,
+                shutdownShowWarn,
+                tryToGetSms,
+                isGettingSms,
+                haveGotSmsOnce,
+                currentSecond} = this.props
 
 
         return (
@@ -53,7 +59,7 @@ class LoginPage extends PureComponent {
 
 
 
-                   <LogoWrapper>
+                   <LogoWrapper className={FADE_IN}>
                        <Logo scale={1}/>
                    </LogoWrapper>
 
@@ -89,34 +95,53 @@ class LoginPage extends PureComponent {
                                 onFocus={() => {shutdownShowWarn(PASSWORD)}}
                                 onChange={(e) => {appointLoginPageInputValue(PASSWORD,e)}}/>
                        <GetSmsButtonWrapper>
-                           <Button fontSize="0.8rem;">
-                               获取动态密码
+                           <Button fontSize="0.8rem;"
+                                   backgroundColor="#EEEEEE"
+                                   borderColor="#EEEEEE"
+                                   width="6rem"
+                                   disabled={currentSecond > -1}
+                                   onClick={() => {tryToGetSms(currentSecond)}}>
+                               {
+                                   currentSecond === -1 ?
+                                       (haveGotSmsOnce ? '再试一次' : '获取动态密码')
+                                       :
+                                       '已发送（' + currentSecond + 's）'
+                               }
                            </Button>
                        </GetSmsButtonWrapper>
                    </InputWrapper>
 
-                   <Captcha captchaHost="loginPage"/>
+
 
                    <ButtonWrapper>
                        {
                            alreadyLoggedIn ?
                                <Button onClick={() => {!isLogging && tryToLogout()}}
-                                       disabled={isLogging}>
-                                   &nbsp;&nbsp;登出&nbsp;&nbsp;
+                                       disabled={isLogging}
+                                       backgroundColor="#FFDDE4"
+                                       color="#99001F"
+                                       borderColor="#FFDDE4">
+                                   <i className="fa fa-sign-out"/>&nbsp;&nbsp;登出&nbsp;&nbsp;
                                </Button>
                                :
                                (
                                    isLogging ?
 
                                        <Button disabled={true}
+                                               backgroundColor='#CCFFCC'
+                                               borderColor='#CCFFCC'
+                                               color="#009900"
                                                style={{width:'6rem'}}>
                                            &nbsp;&nbsp;请稍等&nbsp;&nbsp;
                                         </Button>
                                        :
                                        <Button style={{width:'6rem'}}
+                                               backgroundColor='#CCFFCC'
+                                               borderColor='#CCFFCC'
+                                               color="#009900"
                                                onClick={() => {!isLogging && tryToLogin(phoneNumber.get('value'),password.get('value'))}}
                                                disabled={isLogging}>
-                                           &nbsp;&nbsp;登录&nbsp;&nbsp;
+                                           <i className='fa fa-sign-in'/>&nbsp;&nbsp;登录&nbsp;&nbsp;
                                        </Button>
                                )
                        }
@@ -133,6 +158,14 @@ class LoginPage extends PureComponent {
         //this.props.tryToGetSms()
     }
 
+    componentDidUpdate(){
+        if(this.props.currentSecond > -1){
+            setTimeout(() => {
+                this.props.countDownCurrentSmsSecond(this.props.currentSecond)
+            },1000)
+        }
+    }
+
 
 }
 
@@ -144,6 +177,9 @@ const mapState = (state) => ({
         password: state.get('loginPage').get('password'),
         isLogging: state.get('loginPage').get('isLogging'),
         alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn'),
+        isGettingSms: state.get('loginPage').get('isGettingSms'),
+        haveGotSmsOnce: state.get('loginPage').get('haveGotSmsOnce'),
+        currentSecond: state.get('loginPage').get('currentSecond')
     })
 
 const mapActions = (dispatch) => {
@@ -210,9 +246,18 @@ const mapActions = (dispatch) => {
             const triggerShowWarnOfInputOfLoginPageAction = createTriggerShowWarnOfInputOfLoginPageAction(value)
             dispatch(triggerShowWarnOfInputOfLoginPageAction)
         },
-        tryToGetSms(){
+        tryToGetSms(currentSecond){
+            if(currentSecond > -1) {
+                return
+            }
+
             const getSmsAction = createGetSmsAction()
             dispatch(getSmsAction)
+
+        },
+        countDownCurrentSmsSecond(){
+            const action = createCountDownSmsSecondAction()
+            dispatch(action)
         }
     }
 }

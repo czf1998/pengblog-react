@@ -84,7 +84,7 @@ export const ThemeImage = styled.img`
 
 export const Gap = styled.div`
         width: 0;
-        border-right: solid 1px #CCCCCC;
+        border-right: solid 1px #f0f0f0;
         align-self: stretch;
          @media(max-width:1000px){
             display: none

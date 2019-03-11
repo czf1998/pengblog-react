@@ -35,7 +35,8 @@ import {createDeliverArticleDataToHomeAction,
         createRecordCommentHasBeenDeletedAction,
         createRecordSubCommentHasBeenDeletedAction,
         createDeliverCaptchaImageBase64Action,
-        createTriggerShowCaptchaInputWarnAction} from './actionCreators'
+        createTriggerShowCaptchaInputWarnAction,
+    createTriggerIsGettingSmsAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest,
@@ -111,11 +112,15 @@ function* ajaxGetSms() {
 
         const state = yield select()
 
-        const phoneNumber = state.getState().get('loginPage').get('phoneNumber').get('value')
+        const phoneNumber = state.get('loginPage').get('phoneNumber').get('value')
 
-        const res = yield SmsRequest.RequestSms(phoneNumber)
+        /*const res = yield SmsRequest.RequestSms(phoneNumber)
 
-        console.log(res)
+        console.log(res)*/
+
+        const triggerIsGettingSmsAction = createTriggerIsGettingSmsAction(true)
+
+        yield put(triggerIsGettingSmsAction)
 
 
     }catch (err) {

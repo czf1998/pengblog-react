@@ -7,3 +7,5 @@ export const LOGIN = 'login'
 export const TRIGGER_SHOW_WARN_OF_INPUT_OF_LOGIN_PAGE = 'triggerShowWarnOfInputOfLoginPage'
 
 export const GET_SMS = 'getSms'
+
+export const COUNT_DOWN_SMS_SECOUND = 'countDownSmsSecond'

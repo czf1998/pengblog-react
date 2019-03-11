@@ -3,11 +3,13 @@ import {createAppointLoginPageInputValueAction,
         createTriggerIsLoggingInAction,
         createLoginAction,
         createTriggerShowWarnOfInputOfLoginPageAction,
-        createGetSmsAction} from './actionCreators'
+        createGetSmsAction,
+    createCountDownSmsSecondAction} from './actionCreators'
 
 export {reducer}
 export {createAppointLoginPageInputValueAction,
         createTriggerIsLoggingInAction,
         createLoginAction,
         createTriggerShowWarnOfInputOfLoginPageAction,
-        createGetSmsAction}
+        createGetSmsAction,
+    createCountDownSmsSecondAction}

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Button = styled.button`
+        ${props => props.width ? 'width:' + props.width + ';' : ''}
         font-size: ${props => props.fontSize ? props.fontSize : '1rem'};
         display: inline-block;
         margin: ${props => props.margin ? props.margin : "0"};
