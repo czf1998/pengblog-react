@@ -1,5 +1,9 @@
 import reducer from './reducer'
-import {createGetCaptchaImageAction,createAppointCaptchaCodeAction} from './actionCreators'
+import {createGetCaptchaImageAction,
+        createAppointCaptchaCodeAction,
+        createTriggerIsLoadingCaptchaImageAction} from './actionCreators'
 
 export { reducer }
-export {createGetCaptchaImageAction,createAppointCaptchaCodeAction}
+export {createGetCaptchaImageAction,
+        createAppointCaptchaCodeAction,
+        createTriggerIsLoadingCaptchaImageAction}

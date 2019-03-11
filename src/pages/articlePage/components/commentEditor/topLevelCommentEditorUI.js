@@ -4,10 +4,12 @@ import {
     Content,
     EmojiButton,
     EmojiPickerWrapper,
-    Name, SubmitButton,
+    Name,
+    SubmitButton,
     SubmitButtonWrapper,
     Title,
-    VisitorInfo
+    VisitorInfo,
+    Space
 } from "./style";
 import {GapLine} from "../../../../common/gapLine";
 import * as CommonClassNameConstants from "../../../../commonStyle/commonClassNameConstant";
@@ -15,6 +17,7 @@ import Input from "../../../../common/input";
 import {COMMENT_CONTENT, TOP_LEVEL_COMMENT_EDITOR, VISITOR_EMAIL, VISITOR_NAME, VISITOR_SITE_ADDRESS} from "./constant";
 import Textarea from "../../../../common/textarea";
 import EmojiPicker from "./components/emojiPicker";
+import Captcha from "../../../../common/captcha";
 
 class TopLevelCommentEditorUI extends PureComponent{
 
@@ -32,6 +35,7 @@ class TopLevelCommentEditorUI extends PureComponent{
             submitComment,
             focusHandler,
             blurHandler,
+            widthOfBrowser,
             isLoading} = this.props
 
 
@@ -45,7 +49,8 @@ class TopLevelCommentEditorUI extends PureComponent{
                 </Title>
 
                 <Name className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
-                    <Input  placeholder="设定好昵称"
+                    <Input  width={isMobile ? '100%' : '45%'}
+                            placeholder="设定好昵称"
                             type="text"
                             value={visitorNameManager.get('value')}
                             onChange={(event) => {appointInputValue(event,VISITOR_NAME,TOP_LEVEL_COMMENT_EDITOR)}}
@@ -87,7 +92,8 @@ class TopLevelCommentEditorUI extends PureComponent{
 
                 <VisitorInfo className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
 
-                    <Input  width={isMobile ? '100%' : '35%'}
+                    <Input  width={isMobile ? '100%' : '45%'}
+                            style={{flexGrow: '1',marginBottom: isMobile?'1rem':''}}
                             placeholder="您的邮箱"
                             type="text"
                             value={visitorEmailManager.get('value')}
@@ -98,10 +104,11 @@ class TopLevelCommentEditorUI extends PureComponent{
                             onFocus={() => {focusHandler(VISITOR_EMAIL,TOP_LEVEL_COMMENT_EDITOR)}}
                             onBlur={(event) => {blurHandler(event,VISITOR_EMAIL,this,TOP_LEVEL_COMMENT_EDITOR)}}/>
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Space/>
 
-                    <Input  width={isMobile ? '100%' : '35%'}
-                            placeholder="你的个人网站？如果有"
+                    <Input  width={isMobile ? '100%' : '45%'}
+                            style={{flexGrow: '1'}}
+                            placeholder="你的个人网站？"
                             type="text"
                             value={visitorSiteAddressManager.get('value')}
                             onChange={(event) => {appointInputValue(event,VISITOR_SITE_ADDRESS,TOP_LEVEL_COMMENT_EDITOR)}}
@@ -112,6 +119,10 @@ class TopLevelCommentEditorUI extends PureComponent{
                             onBlur={(event) => {blurHandler(event,VISITOR_SITE_ADDRESS,this,TOP_LEVEL_COMMENT_EDITOR)}}/>
 
                 </VisitorInfo>
+
+                {/*<CaptchaWrapper>
+                    <Captcha captchaHost="topLevelCommentEditor"/>
+                </CaptchaWrapper>*/}
 
                 <SubmitButtonWrapper>
 

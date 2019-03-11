@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 import {
     SubCommentEditorWrapper,
     Content,
-    EmojiButton,
+    EmojiButton,SubContent,
     SubEmojiPickerWrapper,
     SubmitButton,
     SubmitButtonWrapper,
@@ -40,8 +40,7 @@ class SubCommentEditorUI extends PureComponent{
 
 
 
-                <Content className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL +
-                                    CommonClassNameConstants.COMMON_MARGIN_BOTTOM}>
+                <SubContent className={CommonClassNameConstants.COMMON_MARGIN_BOTTOM}>
 
                     <Textarea rows={5}
                               placeholder="开始编辑您的留言"
@@ -66,9 +65,9 @@ class SubCommentEditorUI extends PureComponent{
                         </SubEmojiPickerWrapper>
                     }
 
-                </Content>
+                </SubContent>
 
-                <SubVisitorInfo className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}>
+                <SubVisitorInfo>
                     <InputWrapper>
                         <Input  placeholder="设定好昵称"
                                 type="text"

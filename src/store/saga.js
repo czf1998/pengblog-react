@@ -40,7 +40,8 @@ import {ArticleRequest,
         CommentRequest,
         ImageRequest,
         LoginRequest,
-        CaptchaRequest} from './request'
+        CaptchaRequest,
+        SmsRequest} from './request'
 import {SUBMIT_COMMENT} from "../pages/articlePage/components/commentEditor/store/actionType";
 import {
     createAppointInputValueAction,
@@ -65,7 +66,7 @@ import {
     createTiggerIsMultipleSelectingInManagePageAction,
     createTriggerIsLoadingManagePageArticleListDataAction
 } from "../pages/managePage/store";
-import {LOGIN} from "../pages/loginPage/store/actionTypes";
+import {GET_SMS, LOGIN} from "../pages/loginPage/store/actionTypes";
 import {createTriggerIsLoggingInAction} from "../pages/loginPage/store";
 import {GET_FRESH_COMMENTS_DATA} from "../pages/managePage/components/freshComments/store/actionTypes";
 import {DELETE_COMMENT_FROM_FRESH_COMMENTS} from "../pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes";
@@ -102,6 +103,24 @@ function* mySaga() {
     yield takeEvery(DELETE_COMMENT_FROM_ARTICLE_PAGE, ajaxDeleteCommentFromArticlePage)
     yield takeEvery(DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE, ajaxDeleteSubCommentFromArticlePage)
     yield takeEvery(GET_CAPTCHA_IMAGE, ajaxGetCaptchaImage)
+    yield takeEvery(GET_SMS, ajaxGetSms)
+}
+
+function* ajaxGetSms() {
+    try{
+
+        const state = yield select()
+
+        const phoneNumber = state.getState().get('loginPage').get('phoneNumber').get('value')
+
+        const res = yield SmsRequest.RequestSms(phoneNumber)
+
+        console.log(res)
+
+
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_SMS  ERR: ' + err)
+    }
 }
 
 function* ajaxGetCaptchaImage(action) {
@@ -151,6 +170,7 @@ function* ajaxLogin(action) {
             captchaCode: captchaCode,
         }
 
+
         const res = yield LoginRequest.RequestLogin(loginData)
 
         //登录成功
@@ -158,7 +178,7 @@ function* ajaxLogin(action) {
             //本地存储token以及过期时间
             let validTime = res.data.validTimeMillis
             let expTime = new Date().getTime() + validTime
-            localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, username:action.value.username}))
+            localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, username:username}))
 
             //更新reducer为已登录
             const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)

@@ -46,3 +46,5 @@ export const API_DELETE_COMMENT = server + 'comment/comment_delete.do'
 export const API_GET_CAPTCHA = server + 'captcha/get_captcha.do'
 
 export const API_CHECK_CAPTCHA = server + 'captcha/check_captcha.do'
+
+export const API_GET_SMS = server + 'sms/send.do'

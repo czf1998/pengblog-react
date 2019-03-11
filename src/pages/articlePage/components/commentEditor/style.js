@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Button } from '../../../../common'
 
+const milePostWidth = 800
 
 const widthOfMainArea = 750
 
@@ -26,7 +27,6 @@ export const Title = styled.div`
     `
 
 export const Name = styled.div`
-        width: 40%;
         margin-bottom: 1rem;
         @media(max-width: ${widthOfMainArea}px) {
             width: 100%;
@@ -36,6 +36,15 @@ export const Name = styled.div`
 export const Content = styled.div`
         margin-top: 1rem;
         position: relative;
+    `
+
+export const SubContent = styled.div`
+        padding: 0 2rem;
+        margin-top: 1rem;
+        position: relative;
+        @media(max-width:${milePostWidth}px){
+            padding: 0 1rem;
+        }
     `
 
 export const EmojiButton = styled.div`
@@ -68,29 +77,44 @@ export const VisitorInfo = styled.div`
         margin-bottom: 1rem;    
         display:flex;
         flex-wrap: wrap;
+        justify-content: space-between;
         @media(max-width:${widthOfMainArea}px){
            display:block;
         }
     `
 
+export const Space = styled.div`
+        width: 2rem;
+    `
+
+export const CaptchaWrapper = styled.div`
+        padding: 0 2rem;
+        padding-right:8rem;
+    `
+
 export const SubVisitorInfo = styled(VisitorInfo)`
+        padding: 0 2rem;
         margin-bottom: 0;
         justify-content: space-between;
+         @media(max-width:${milePostWidth}px){
+            padding: 0 1rem;
+        }
     `
 
 export const InputWrapper = styled.div`
         width: 47.5%;
         margin-bottom: 1rem;
-        @media(max-width:${widthOfMainArea}px){
+        @media(max-width:${milePostWidth}px){
            width:100%;
         }
     `
 
 export const SubmitButtonWrapper = styled.div`
-        position: absolute;
-        right: 2rem;
-        width: 15%;
-        bottom: 0;
+        padding: 0 2rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
         @media(max-width:${widthOfMainArea}px){
             padding: 0 1rem 1rem 1rem;
             width: 100%;
@@ -103,7 +127,7 @@ export const SubSubmitButtonWrapper = styled.div`
         right: 2rem;
         width: 20%;
         bottom: 1rem;
-        @media(max-width:${widthOfMainArea}px){
+        @media(max-width:${milePostWidth}px){
             padding: 0 1rem 1rem 1rem;
             width: 100%;
             position: static;

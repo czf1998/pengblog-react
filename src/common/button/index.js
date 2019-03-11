@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Button = styled.button`
-        font-size: 1rem;
+        font-size: ${props => props.fontSize ? props.fontSize : '1rem'};
         display: inline-block;
         margin: ${props => props.margin ? props.margin : "0"};
         border: 1px solid ${props => props.disabled ? '#CCCCCC' : (props.borderColor ? props.borderColor : "gray")};

@@ -4,13 +4,13 @@ import styled from 'styled-components'
 export const CaptchaWrapper = styled.div`
         margin-bottom: 2rem;
         display: flex;
+        align-items: stretch;
     `
 
 export const CaptchaImage = styled.div`
         position: relative;
-        margin-right: 1rem;
-        width: 10rem;
-        height: 100%;
+        margin-left: 1rem;
+        width: 7rem;
         cursor: pointer;
         filter: brightness(${props => props.isLoading ? '90%' : '100%'});
         background: url(data:image/jpeg;base64,${props => props.captchaImage}) no-repeat;

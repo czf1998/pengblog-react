@@ -1,4 +1,4 @@
-export const USERNAME = 'username'
+export const PHONENUMBER = 'phoneNumber'
 
 export const PASSWORD = 'password'
 

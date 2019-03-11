@@ -3,10 +3,19 @@ import {} from "./actionTypes";
 import {DELIVER_CAPTCHA_IMAGE_BASE64, TRIGGER_SHOW_CAPTCHA_INPUT_WARN} from "../../../store/actionTypesWithSaga";
 import {GET_CAPTCHA_IMAGE} from "./actionTypes";
 import {APPOINT_CAPTCHA_CODE} from "./actionTypes";
+import {TRIGGER_IS_LOADING_CAPTCHA_IMAGE} from "./actionTypes";
 
 
 const defaultState = fromJS({
     loginPage:fromJS({
+        captchaId: '',
+        captchaCode: '',
+        captchaImage: '',
+        isLoading: true,
+        showWarn: false,
+        warnMsg: '尚未填写'
+    }),
+    topLevelCommentEditor:fromJS({
         captchaId: '',
         captchaCode: '',
         captchaImage: '',
@@ -57,6 +66,14 @@ export default (state = defaultState, action) => {
                 showWarn: action.value.showWarn
             })
         )
+    }
+
+    if(action.type === TRIGGER_IS_LOADING_CAPTCHA_IMAGE){
+        const target = state.get(action.value.captchaHost)
+
+        return state.set(action.value.captchaHost, target.merge({
+            isLoading: action.value.isLoading
+        }))
     }
     return state
 }

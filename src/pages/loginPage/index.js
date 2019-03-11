@@ -12,18 +12,20 @@ import {LoginPageWrapper,
         Gap,
         LogoWrapper,
         ButtonWrapper,
-        Loading} from './style'
+        Loading,
+        GetSmsButtonWrapper} from './style'
 
 import {createAppointLoginPageInputValueAction,
         createTriggerIsLoggingInAction,
         createLoginAction,
-        createTriggerShowWarnOfInputOfLoginPageAction} from './store'
+        createTriggerShowWarnOfInputOfLoginPageAction,
+        createGetSmsAction} from './store'
 
 import Logo from "../homeEx/components/themeJumbotron/components/logo";
 import {createPushPrograssToEndAction} from "../home/store";
-import themeImage from "../../static/image/fangao.jpg";
+import themeImage from "../../static/image/background/black-and-white-nature-sky-field.jpg";
 import {SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
-import {PASSWORD, USERNAME, CAPTCHA} from "./constant";
+import {PASSWORD, PHONENUMBER, CAPTCHA} from "./constant";
 import loadingSpin from "../../common/loading/svg/loading-spin.svg";
 import {createAppointNoticeContent, createTriggerAlreadyLoggedInAction} from "../../store/actionCreators";
 
@@ -35,7 +37,7 @@ class LoginPage extends PureComponent {
 
         const { heightOfBrowser,
                 appointLoginPageInputValue,
-                username,
+                phoneNumber,
                 password,
                 tryToLogin,
                 isLogging,
@@ -46,9 +48,9 @@ class LoginPage extends PureComponent {
         return (
            <LoginPageWrapper heightOfBrowser={heightOfBrowser}>
 
-               <ThemeJumbotron className={SLIDE_UP_FAST}>
+               <ThemeJumbotron className={SLIDE_UP_FAST} themeImage={themeImage}>
 
-                   <ThemeImage src={themeImage}/>
+
 
 
                    <LogoWrapper>
@@ -63,24 +65,34 @@ class LoginPage extends PureComponent {
                <Loginer>
 
                    <InputWrapper>
-                       <InputEX value={username.get('value')}
-                                showWarn={username.get('showWarn')}
-                                warnMsg={username.get('warnMsg')}
-                                placeholder="用户名"
+                       <InputEX width="100%"
+                                value={phoneNumber.get('value')}
+                                showWarn={phoneNumber.get('showWarn')}
+                                warnMsg={phoneNumber.get('warnMsg')}
+                                placeholder="手机号码"
                                 disabled={isLogging || alreadyLoggedIn}
-                                onFocus={() => {shutdownShowWarn(USERNAME)}}
-                                onChange={(e) => {appointLoginPageInputValue(USERNAME,e)}}/>
+                                onFocus={() => {shutdownShowWarn(PHONENUMBER)}}
+                                onChange={(e) => {appointLoginPageInputValue(PHONENUMBER,e)}}/>
+
+
                    </InputWrapper>
 
                    <InputWrapper>
-                       <InputEX value={password.get('value')}
+                       <InputEX width="60%"
+                                value={password.get('value')}
                                 showWarn={password.get('showWarn')}
                                 warnMsg={password.get('warnMsg')}
-                                placeholder="密码"
+                                placeholder="动态密码"
                                 type="password"
+                                width="100%"
                                 disabled={isLogging || alreadyLoggedIn}
                                 onFocus={() => {shutdownShowWarn(PASSWORD)}}
                                 onChange={(e) => {appointLoginPageInputValue(PASSWORD,e)}}/>
+                       <GetSmsButtonWrapper>
+                           <Button fontSize="0.8rem;">
+                               获取动态密码
+                           </Button>
+                       </GetSmsButtonWrapper>
                    </InputWrapper>
 
                    <Captcha captchaHost="loginPage"/>
@@ -97,12 +109,12 @@ class LoginPage extends PureComponent {
                                    isLogging ?
 
                                        <Button disabled={true}
-                                               style={{width:'5rem'}}>
+                                               style={{width:'6rem'}}>
                                            &nbsp;&nbsp;请稍等&nbsp;&nbsp;
                                         </Button>
                                        :
-                                       <Button style={{width:'5rem'}}
-                                               onClick={() => {!isLogging && tryToLogin(username.get('value'),password.get('value'))}}
+                                       <Button style={{width:'6rem'}}
+                                               onClick={() => {!isLogging && tryToLogin(phoneNumber.get('value'),password.get('value'))}}
                                                disabled={isLogging}>
                                            &nbsp;&nbsp;登录&nbsp;&nbsp;
                                        </Button>
@@ -117,10 +129,10 @@ class LoginPage extends PureComponent {
 
     componentDidMount() {
         this.props.pushPrograssBarToEnd()
+
+        //this.props.tryToGetSms()
     }
 
-    componentWillUnmount() {
-    }
 
 }
 
@@ -128,7 +140,7 @@ const mapState = (state) => ({
         browser: state.get('rootState').get('browser'),
         isMobile: state.get('rootState').get('isMobile'),
         heightOfBrowser: state.get('rootState').get('heightOfBrowser'),
-        username: state.get('loginPage').get('username'),
+        phoneNumber: state.get('loginPage').get('phoneNumber'),
         password: state.get('loginPage').get('password'),
         isLogging: state.get('loginPage').get('isLogging'),
         alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn'),
@@ -151,7 +163,7 @@ const mapActions = (dispatch) => {
         tryToLogin(username,password){
             if(username === ''){
                 const value = {
-                    inputId: USERNAME,
+                    inputId: PHONENUMBER,
                     showWarn: true
                 }
                 const triggerShowWarnOfInputOfLoginPageAction = createTriggerShowWarnOfInputOfLoginPageAction(value)
@@ -197,6 +209,10 @@ const mapActions = (dispatch) => {
             }
             const triggerShowWarnOfInputOfLoginPageAction = createTriggerShowWarnOfInputOfLoginPageAction(value)
             dispatch(triggerShowWarnOfInputOfLoginPageAction)
+        },
+        tryToGetSms(){
+            const getSmsAction = createGetSmsAction()
+            dispatch(getSmsAction)
         }
     }
 }

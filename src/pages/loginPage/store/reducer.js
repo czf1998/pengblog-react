@@ -4,7 +4,7 @@ import {TRIGGER_IS_LOGGING_IN} from "./actionTypes";
 import {TRIGGER_ALREADY_LOGGED_IN} from "../../../store/actionTypesWithSaga";
 
 const defaultState = fromJS({
-    username: fromJS({
+    phoneNumber: fromJS({
         value: '',
         warnMsg: '尚未填写',
         showWarn: false

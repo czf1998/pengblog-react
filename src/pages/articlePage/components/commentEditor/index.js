@@ -27,7 +27,8 @@ const mapState = (editorManagerId) => (state) => {
         visitorEmailManager: state.get('commentEditor').get(editorManagerId).get('visitorEmail'),
         visitorSiteAddressManager: state.get('commentEditor').get(editorManagerId).get('visitorSiteAddress'),
         hasOnceTryToSubmit: state.get('commentEditor').get(editorManagerId).get('hasOnceTryToSubmit'),
-        isLoading: state.get('commentEditor').get(editorManagerId).get('isLoading')
+        isLoading: state.get('commentEditor').get(editorManagerId).get('isLoading'),
+        widthOfBrowser: state.get('rootState').get('widthOfBrowser')
     }
 }
 
@@ -62,7 +63,7 @@ const mapActions = (dispatch) => ({
             dispatch(appointInputWarnAction)
         },
         blurHandler(event, inputId, _this, editorId) {
-            if((!_this.props.hasOnceTryToSubmit) && event.target.value === EMPTYSTRING){
+            if((!_this.props.hasOnceTryToSubmit) || event.target.value === EMPTYSTRING){
                 return
             }
             const stringToCheck = event.target.value
