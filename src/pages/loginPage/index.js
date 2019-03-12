@@ -6,13 +6,9 @@ import {LoginPageWrapper,
         ThemeJumbotron,
         Loginer,
         InputWrapper,
-        CaptchaWrapper,
-        CaptchaImage,
-        ThemeImage,
         Gap,
         LogoWrapper,
         ButtonWrapper,
-        Loading,
         GetSmsButtonWrapper} from './style'
 
 import {createAppointLoginPageInputValueAction,
@@ -247,9 +243,6 @@ const mapActions = (dispatch) => {
             dispatch(triggerShowWarnOfInputOfLoginPageAction)
         },
         tryToGetSms(currentSecond){
-            if(currentSecond > -1) {
-                return
-            }
 
             const getSmsAction = createGetSmsAction()
             dispatch(getSmsAction)

@@ -114,13 +114,21 @@ function* ajaxGetSms() {
 
         const phoneNumber = state.get('loginPage').get('phoneNumber').get('value')
 
-        /*const res = yield SmsRequest.RequestSms(phoneNumber)
+        const res = yield SmsRequest.RequestSms(phoneNumber)
 
-        console.log(res)*/
+        if(res.data.success === true){
 
-        const triggerIsGettingSmsAction = createTriggerIsGettingSmsAction(true)
+            const triggerIsGettingSmsAction = createTriggerIsGettingSmsAction(true)
 
-        yield put(triggerIsGettingSmsAction)
+            yield put(triggerIsGettingSmsAction)
+
+            return
+        }
+
+        /*通知窗口提示异常*/
+        const appointNoticeContent = createAppointNoticeContent('获取动态密码失败: ' + res.data.message)
+
+        yield put(appointNoticeContent)
 
 
     }catch (err) {
@@ -179,7 +187,7 @@ function* ajaxLogin(action) {
         const res = yield LoginRequest.RequestLogin(loginData)
 
         //登录成功
-        if(res.data.loginStatus === 1){
+        if(res.data.loginStatus === 'success'){
             //本地存储token以及过期时间
             let validTime = res.data.validTimeMillis
             let expTime = new Date().getTime() + validTime
@@ -197,9 +205,9 @@ function* ajaxLogin(action) {
         }
 
         //登陆失败
-        if(res.data.loginStatus === 0){
+        if(res.data.loginStatus === 'fail'){
             /*通知窗口提示登录失败*/
-            const appointNoticeContent = createAppointNoticeContent('登录失败: ' + res.data.loginMsg)
+            const appointNoticeContent = createAppointNoticeContent('登录失败: ' + res.data.message)
             yield put(appointNoticeContent)
 
             //更新loginPage.reducer的isLoggingIn
@@ -747,10 +755,10 @@ function* checkCaptchaCode(captchaHost) {
 
         /*通知窗口提示提交验证码验证失败*/
         if(res.data.pass !== true){
-            if(res.data.status === 'wrong'){
+            if(res.data.message === 'wrong'){
                 const appointNoticeContent = createAppointNoticeContent('验证码填写错误')
                 yield put(appointNoticeContent)
-            }else if(res.data.status === 'overdue'){
+            }else if(res.data.message === 'overdue'){
                 const appointNoticeContent = createAppointNoticeContent('验证码已过期')
                 yield put(appointNoticeContent)
             }
