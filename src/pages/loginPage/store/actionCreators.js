@@ -1,5 +1,6 @@
 import {APPOINT_LOGIN_PAGE_INPUT_VALUE,
         TRIGGER_IS_LOGGING_IN,
+        LOGIN_WITH_DYNAMIC_PASSWORD,
         LOGIN,
         TRIGGER_SHOW_WARN_OF_INPUT_OF_LOGIN_PAGE,
         GET_SMS,
@@ -31,4 +32,8 @@ export const createGetSmsAction = () => ({
 
 export const createCountDownSmsSecondAction = () => ({
     type: COUNT_DOWN_SMS_SECOUND
+})
+
+export const createLoginWithDynamicPasswordAction = () => ({
+    type: LOGIN_WITH_DYNAMIC_PASSWORD
 })

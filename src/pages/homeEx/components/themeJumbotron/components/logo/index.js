@@ -26,6 +26,8 @@ class Logo extends PureComponent {
                 </LogoWrapper>
         );
     }
+
+
 }
 
 const mapState = (state) => {

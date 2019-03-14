@@ -84,6 +84,7 @@ const mapState = (state) => {
 const mapActions = (dispatch) => ({
     submitButtonClickHandler(dataGetter){
 
+
         const value = {
             startIndex: 0,
             currentPage: 1

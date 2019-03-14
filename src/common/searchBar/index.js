@@ -6,6 +6,7 @@ import {createTriggerSearchInputIsFocusAction,
 
 
 
+
 class SearchBar extends PureComponent {
 
     constructor(props){
@@ -15,7 +16,7 @@ class SearchBar extends PureComponent {
 
     render() {
 
-        const { searchBarObj,
+        const { style,searchBarObj,backgroundColor,
                 dataGetter,
                 searchButtonClickHandler,
                 triggerIsFocus,
@@ -25,7 +26,7 @@ class SearchBar extends PureComponent {
         const searchBarValue = searchBarObj.get(searchBarId).get('searchBarValue')
         const isFocus = searchBarObj.get(searchBarId).get('isFocus')
         return (
-          <SearchBarWrapper >
+          <SearchBarWrapper backgroundColor={backgroundColor} style={style}>
               <Input placeholder="标题、作者、标签"
                      isMobile={isMobile}
                      value={searchBarValue}

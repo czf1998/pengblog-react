@@ -45,7 +45,8 @@ class InputEX extends Component{
         return (
             <InputWrapper style={style} width={width}>
 
-                <Inputer id={id}
+                <Inputer autocomplete="false" readonly
+                        id={id}
                         type={type}
                         placeholder={placeholder}
                         value={value}

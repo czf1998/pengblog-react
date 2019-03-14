@@ -15,7 +15,7 @@ export const Inputer = styled.input`
         background: ${props => props.backgroundColor ? props.backgroundColor : '#F7F7F7'};
         font-size: ${props => props.fontSize ? props.fontSize + 'px' : '1rem'};
         outline: none;
-        padding: ${props => props.padding ? props.padding : '0.5rem'}   ;
+        padding: ${props => props.padding ? props.padding : (window.innerWidth < 750 ? '0.8rem' : '0.5rem')};
         padding-left: 2rem;
         border: solid 1px ${props => props.showWarn ? 'red' : backgroundColor};
         border-radius: 0.4rem;

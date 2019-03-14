@@ -9,7 +9,8 @@ import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataByLabelAction,
         createResetCentralControllerOfManagePage,
         createTiggerIsMultipleSelectingInManagePageAction,
-        createDeleteArticleListAction} from './actionCreators'
+        createDeleteArticleListAction,
+    createResetPageIndexOfPaginationAction} from './actionCreators'
 
 export { reducer}
 
@@ -23,5 +24,6 @@ export {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataByLabelAction,
         createResetCentralControllerOfManagePage,
         createTiggerIsMultipleSelectingInManagePageAction,
-        createDeleteArticleListAction}
+        createDeleteArticleListAction,
+    createResetPageIndexOfPaginationAction}
 

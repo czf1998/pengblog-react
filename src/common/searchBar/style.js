@@ -8,6 +8,7 @@ export const SearchBarWrapper = styled.div`
         width: 100%;
         position: relative;
         padding: 1rem 2rem;
+        background: ${props => props.backgroundColor ? props.backgroundColor : 'white'};
         @media(max-width: ${maxMobileWidth}px){
             padding: 1rem 1rem;
         }

@@ -24,7 +24,7 @@ class Header extends PureComponent {
                                 <MobileHeader/>
                                 :
                                 (
-                                    currentPath === '/login' ?
+                                    currentPath.match(/^\/login/) ?
                                         <LoginPageHeader/>
                                         :
                                         <CommonHeader/>

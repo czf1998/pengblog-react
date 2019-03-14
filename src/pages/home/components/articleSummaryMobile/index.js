@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import {Link} from 'react-router-dom'
 import {ArticleSummaryWrapper,
         Title,
         Label,
@@ -27,15 +28,16 @@ class ArticleSummary extends PureComponent {
         const isFocus = article.get('article_id') === currentArticleId
 
         return (
-                <ArticleSummaryWrapper onClick={() => {goTo(ARTICLE_PAGE_PATH)}}
-                                       widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}
-                                       isFocus={isFocus}>
+            <Link to={ARTICLE_PAGE_PATH}>
+                <ArticleSummaryWrapper
+                    widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}
+                    isFocus={isFocus}>
 
                     <Title className={CommonClassNameConstants.CURSORP}>
-                          <Label>
-                              [{article.get('article_label')}]
-                          </Label>&nbsp;
-                            {article.get('article_title')}
+                        <Label>
+                            [{article.get('article_label')}]
+                        </Label>&nbsp;
+                        {article.get('article_title')}
                     </Title>
 
 
@@ -43,7 +45,7 @@ class ArticleSummary extends PureComponent {
 
                     <ArticleMultipleContent>
                         <ArticleContent className={CommonClassNameConstants.CURSORP +
-                                                    CommonClassNameConstants.OVER_3ROWS_HANDLE}
+                        CommonClassNameConstants.OVER_3ROWS_HANDLE}
                                         withPreviewImage={withPreviewImage}
                                         isMobile={isMobile}>
                             {article.get('article_summary')}
@@ -75,6 +77,8 @@ class ArticleSummary extends PureComponent {
                     </ArticleInfoColumn>
 
                 </ArticleSummaryWrapper>
+            </Link>
+
         );
     }
     componentDidMount() {

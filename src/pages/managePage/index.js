@@ -17,8 +17,7 @@ import {CentralController,
         SearchBarMobile,
         MultipleSelectTitle,
         ShutDownMultipleSelect,ArticleItemWrapper,FreshCommentsTitle} from './style'
-import {SearchBar,
-        ArticleFiling,
+import {ArticleFiling,
         ArticleClassification,
         FreshComments,
         ArticleItem,
@@ -33,8 +32,9 @@ import {createTriggerIsLoadingManagePageArticleListDataAction,
         createGetManagePageArticleListDataByLabelAction,
         createResetCentralControllerOfManagePage,
         createTiggerIsMultipleSelectingInManagePageAction,
-        createDeleteArticleListAction} from "./store";
-import {Pagination} from '../../common'
+        createDeleteArticleListAction,
+        createResetPageIndexOfPaginationAction} from "./store";
+import {Pagination,SearchBar} from '../../common'
 import Loading from "../../common/loading";
 import store from '../../store'
 import {COMMON_CONTEXT, FILING_CONTENT, LABEL_CONTEXT, SEARCH_CONTEXT} from "./store/reducer";
@@ -74,13 +74,13 @@ class ManagePage extends PureComponent {
                 <CentralController>
 
                     <SearchBar searchBarId="managePage"
-                               dataGetter={getArticleByKeyWord}/>
+                               dataGetter={() => {getArticleByKeyWord(true)}}/>
 
                     <ArticleFiling articleFilingObj={articleFilingObj}
-                                   dataGetter={getArticleByFiling}/>
+                                   dataGetter={() => {getArticleByFiling(true)}}/>
 
                     <ArticleClassification articleLabelObjList={articleLabelObjList}
-                                           dataGetter={getArticleByLabel}/>
+                                           dataGetter={() => {getArticleByLabel(true)}}/>
 
                     <FreshCommentsTitle>最近评论</FreshCommentsTitle>
                     <FreshComments/>
@@ -283,7 +283,12 @@ const mapActions = (dispatch) => {
             dispatch(getArticleLabelDataAction)
         },
 
-        getArticleByKeyWord(){
+        getArticleByKeyWord(resetPageIndexFlag){
+
+            if(resetPageIndexFlag){
+                const resetPageIndexAction = createResetPageIndexOfPaginationAction('managePage')
+                dispatch(resetPageIndexAction)
+            }
 
             const resetCentralControllerAction = createResetCentralControllerOfManagePage(SEARCH_CONTEXT)
             dispatch(resetCentralControllerAction)
@@ -302,7 +307,12 @@ const mapActions = (dispatch) => {
             dispatch(getArticleByKeyWordAction)
         },
 
-        getArticleByFiling(){
+        getArticleByFiling(resetPageIndexFlag){
+
+            if(resetPageIndexFlag){
+                const resetPageIndexAction = createResetPageIndexOfPaginationAction('managePage')
+                dispatch(resetPageIndexAction)
+            }
 
             const resetCentralControllerAction = createResetCentralControllerOfManagePage(FILING_CONTENT)
             dispatch(resetCentralControllerAction)
@@ -327,7 +337,16 @@ const mapActions = (dispatch) => {
             dispatch(getArticleByFilingAction)
         },
 
-        getArticleByLabel(){
+        getArticleByLabel(resetPageIndexFlag){
+
+            if(resetPageIndexFlag){
+                const resetPageIndexAction = createResetPageIndexOfPaginationAction('managePage')
+                dispatch(resetPageIndexAction)
+            }
+
+
+            console.log('get')
+            console.log(resetPageIndexFlag)
             const resetCentralControllerAction = createResetCentralControllerOfManagePage(LABEL_CONTEXT)
             dispatch(resetCentralControllerAction)
 

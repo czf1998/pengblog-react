@@ -8,6 +8,15 @@ const history = createBrowserHistory()
 history.listen((location, action) => {
     handlerModal()
     registerCurrentPath(location)
+
+    if(location.pathname === '/login/dynamic'){
+        return
+    }
+
+    if(store.getState().get('router').get('lastPath') === '/login/dynamic'){
+        return
+    }
+
     if(action === 'PUSH'){
         rebootPrograssBar()
     }

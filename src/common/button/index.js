@@ -10,7 +10,7 @@ export const Button = styled.button`
         text-align: center;
         white-space: nowrap;
         vertical-align: middle;
-        padding: 0.4rem 0.6rem;
+        padding: ${props => window.innerWidth < 750 ? '0.8rem' : '0.4rem'} 0.6rem;
         background-color: ${props => props.backgroundColor ? props.backgroundColor : "white"};
         filter:brightness(1);
         color: ${props => props.disabled ? '#CCCCCC' : (props.color ? props.color : "black")};

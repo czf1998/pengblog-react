@@ -47,8 +47,11 @@ class Captcha extends Component{
         )
     }
 
+
     componentDidMount(){
-        this.props.getCaptchaImage(this.props.captchaHost)
+        if(!this.props.manualInit){
+            this.props.getCaptchaImage(this.props.captchaHost)
+        }
     }
 
 }

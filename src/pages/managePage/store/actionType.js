@@ -19,3 +19,5 @@ export const RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE = 'resetCentralControllerOf
 export const TRIGGER_IS_MULTIPLE_SELECTING_IN_MANAGE_PAGE = 'triggerIsMultipleSelectingInManagePage'
 
 export const DELETE_ARTICLE_LIST = 'deleteArticleList'
+
+export const RESET_PAGE_INDEX_OF_PAGINATION = 'resetPageIndexOfPagination'

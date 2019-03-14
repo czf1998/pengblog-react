@@ -12,7 +12,7 @@ import { reducer as articleEditorReducer } from '../pages/articleEditPage/compon
 import { reducer as titleImageReducer } from '../pages/articleEditPage/components/titleImage/store'
 import { reducer as routerReducer } from '../router/store'
 import { reducer as modalReducer } from '../common/modal/store'
-import { reducer as searchBarReducer } from '../pages/managePage/components/searchBar/store'
+import { reducer as searchBarReducer } from '../common/searchBar/store'
 import { reducer as selectReducer } from '../common/select/store'
 import { reducer as managePageReducer } from '../pages/managePage/store'
 import { reducer as paginationReducer } from '../common/pagination/store'

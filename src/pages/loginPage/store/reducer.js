@@ -11,6 +11,11 @@ import {
 } from "../../../store/actionTypesWithSaga";
 
 const defaultState = fromJS({
+    username: fromJS({
+        value: '',
+        warnMsg: '尚未填写',
+        showWarn: false
+    }),
     phoneNumber: fromJS({
         value: '',
         warnMsg: '尚未填写',

@@ -45,6 +45,7 @@ const mapState = (state) => {
 
 const mapActions = (dispatch) => ({
     appointCurrentLabel(label,dataGetter){
+
         const action = createAppointCurrentLabelAction(label)
         dispatch(action)
         dataGetter()

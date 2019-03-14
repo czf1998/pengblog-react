@@ -5,7 +5,10 @@ import {
     DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE,
     RESET_MANAGE_PAGE_ARTICLE_LIST
 } from "../../../store/actionTypesWithSaga";
-import {APPOINT_MANAGE_PAGE_PAGINATION} from "../../../pages/managePage/store/actionType";
+import {
+    APPOINT_MANAGE_PAGE_PAGINATION,
+    RESET_PAGE_INDEX_OF_PAGINATION
+} from "../../../pages/managePage/store/actionType";
 
 //根据浏览器显示高度初始化managePage的pageScale
 let pageScaleDefault = window.innerWidth < 800 ? 8 : parseInt((window.innerHeight - 300)/54)
@@ -17,6 +20,15 @@ const defaultState = fromJS({
         currentPage: 0,
         maxPage: 1,
         startIndex: startIndexDefault,
+        pageScale: pageScaleDefault,
+    })
+})
+
+const resetState = fromJS({
+    managePage: fromJS({
+        currentPage: 1,
+        maxPage: 1,
+        startIndex: startIndexDefault + pageScaleDefault,
         pageScale: pageScaleDefault,
     })
 })
@@ -59,6 +71,10 @@ export default (state = defaultState, action) => {
 
     if(action.type === RESET_MANAGE_PAGE_ARTICLE_LIST){
         return defaultState
+    }
+
+    if(action.type === RESET_PAGE_INDEX_OF_PAGINATION){
+        return state.set(action.value, resetState.get(action.value))
     }
     return state
 }

@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 import {} from './style'
 import {createAppointArticleBeingSelectedInManagePage,
         createDeleteArticleAction} from './store'
@@ -78,10 +79,12 @@ class ArticleItem extends PureComponent {
 
                 <ArticleTitle isBeingHover={isBeingHover}>
 
-                    <ArticleTitleInner browser={browser}
-                                       onClick={() => {goTo('/article/' + article_id)}}>
-                        {article_title}
-                    </ArticleTitleInner>
+                    <Link to={'/article/' + article_id}>
+                        <ArticleTitleInner browser={browser}>
+                            {article_title}
+                        </ArticleTitleInner>
+                    </Link>
+
 
 
 

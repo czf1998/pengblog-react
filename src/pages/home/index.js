@@ -8,11 +8,9 @@ import {createTriggerHasBeenMountOnce,
         createPushPrograssToEndAction,
         createTriggerIsLoadingHomeArticleListAction } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
-import { Loading, ForMore  } from '../../common'
-import {
-    createGetFreshCommentsDataAction,
-    createTriggerIsLoadingFreshCommentsAction
-} from "../managePage/components/freshComments/store";
+import { Loading, ForMore,SearchBar  } from '../../common'
+import store from "../../store";
+
 
 class Home extends PureComponent {
 
@@ -37,21 +35,10 @@ class Home extends PureComponent {
             articleListDataIsReady ?
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
 
-
-              {/*  {
-                    !isMobile &&
-                    <Fragment>
-                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="20px"/>
-                        {
-                            jumbotronArticleId !== jumbotronArticleIdDefault
-                            &&
-                            <div className={jumbotronTransitionClassName}>
-                                <Jumbotron jumbotronArticleId={jumbotronArticleId}/>
-                            </div>
-                        }
-                        <Gap widthOfMainArea={basicUIFeatures.get('widthOfMainArea')} gapHeight="10px"/>
-                    </Fragment>
-                }*/}
+                <SearchBar backgroundColor='white'
+                           style={{borderBottom:'solid 1px #F0F0F0'}}
+                           searchBarId="home"
+                           dataGetter={null}/>
 
                 {
                     articleList.map((item) => {
@@ -154,6 +141,10 @@ const mapActions = (dispatch) => {
         pushPrograssBarToEnd() {
             const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home'})
             dispatch(pushPrograssBarToEndAction)
+        },
+        getArticleListByKeyword(){
+            const keyword = store.getState().get('searchBar').get('home').get('searchBarValue')
+
         }
     }
 }

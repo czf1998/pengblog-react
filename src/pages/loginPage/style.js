@@ -15,9 +15,10 @@ const maxMobileWidth = 750
 export const LoginPageWrapper = styled.div`
         display: flex;
         justify-content: center;
-        
+        position: fixed;
         background: white;
-        height: ${props => props.heightOfBrowser - headerHeight}px;
+        width: 100%;
+        height: calc(100% - 70px);
     `
 
 export const ThemeJumbotron = styled.div`
@@ -39,21 +40,25 @@ export const LogoWrapper = styled.div`
        
     `
 
-export const Loginer = styled.div`
+export const LoginerWrapper = styled.div`
         width: 400px;
+        min-height: 350px;
         margin-bottom: 4rem;
         padding: 4rem 3rem;
+        padding-top: 2rem;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         @media(max-height:600px){
             margin-bottom: 0;
             padding: 1rem 3rem;
+            padding-top: 1.5rem;
         }
     `
 
 export const InputWrapper = styled.div`
         display: flex;
+        justify-content: space-between;
         margin-bottom: 2rem;
     `
 
@@ -107,3 +112,40 @@ export const LoadingWrapper = styled.div`
         width: 100%;
         height: 100%;
     `
+
+export const LoginBar = styled.div`
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    `
+
+export const SwitchButton = styled.ul` 
+        display: flex;
+        margin: 0 3rem;
+        
+    `
+
+export const Item = styled.li`
+        cursor: pointer;
+        padding: 1rem 1rem;
+        color: grey;
+        
+        ${props => props.active ? `
+            border: solid 1px #dee2e6;
+            border-radius: 0.4rem;
+            font-weight: bold;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: solid 1px white;
+        ` : `
+            border: solid 1px white;
+            border-bottom: solid 1px #dee2e6;
+        `}
+        
+    `
+
+export const Space = styled.li`
+        flex-grow: 1;
+        border-bottom: solid 1px #dee2e6;
+    `
+

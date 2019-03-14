@@ -67,7 +67,7 @@ import {
     createTiggerIsMultipleSelectingInManagePageAction,
     createTriggerIsLoadingManagePageArticleListDataAction
 } from "../pages/managePage/store";
-import {GET_SMS, LOGIN} from "../pages/loginPage/store/actionTypes";
+import {GET_SMS, LOGIN, LOGIN_WITH_DYNAMIC_PASSWORD} from "../pages/loginPage/store/actionTypes";
 import {createTriggerIsLoggingInAction} from "../pages/loginPage/store";
 import {GET_FRESH_COMMENTS_DATA} from "../pages/managePage/components/freshComments/store/actionTypes";
 import {DELETE_COMMENT_FROM_FRESH_COMMENTS} from "../pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes";
@@ -99,6 +99,7 @@ function* mySaga() {
     yield takeEvery(DELETE_ARTICLE, ajaxDeleteArticle)
     yield takeEvery(DELETE_ARTICLE_LIST, ajaxDeleteArticleList)
     yield takeEvery(LOGIN, ajaxLogin)
+    yield takeEvery(LOGIN_WITH_DYNAMIC_PASSWORD, ajaxLoginWithDynamicPassword)
     yield takeEvery(GET_FRESH_COMMENTS_DATA, ajaxGetFreshCommentsData)
     yield takeEvery(DELETE_COMMENT_FROM_FRESH_COMMENTS, ajaxDeleteCommentFromFreshComments)
     yield takeEvery(DELETE_COMMENT_FROM_ARTICLE_PAGE, ajaxDeleteCommentFromArticlePage)
@@ -107,12 +108,69 @@ function* mySaga() {
     yield takeEvery(GET_SMS, ajaxGetSms)
 }
 
+function* ajaxLoginWithDynamicPassword() {
+
+    try{
+
+        const state = yield select()
+
+        const phoneNumber = state.get('loginPage').get('phoneNumber').get('value')
+        const password = state.get('loginPage').get('password').get('value')
+
+        const loginData = {
+            phoneNumber: phoneNumber,
+            password: password,
+        }
+
+
+        const res = yield LoginRequest.RequestLoginWithDynamicPassword(loginData)
+
+        //登录成功
+        if(res.data.loginStatus === 'success'){
+            //本地存储token以及过期时间
+            let validTime = res.data.validTimeMillis
+            let expTime = new Date().getTime() + validTime
+            localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, phoneNumber:phoneNumber}))
+
+            //更新reducer为已登录
+            const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
+            yield put(triggerAlreadyLoggedInAction)
+
+            /*通知窗口提示登录成功*/
+            const appointNoticeContent = createAppointNoticeContent('登录成功')
+            yield put(appointNoticeContent)
+
+            return
+        }
+
+        //登陆失败
+        if(res.data.loginStatus === 'fail'){
+            /*通知窗口提示登录失败*/
+            const appointNoticeContent = createAppointNoticeContent('登录失败: ' + res.data.message)
+            yield put(appointNoticeContent)
+
+            //更新loginPage.reducer的isLoggingIn
+            const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
+            yield put(triggerIsLoggingInAction)
+        }
+
+
+    }catch (err) {
+        console.log('ERR IN ACTION: LOGIN  ERR: ' + err)
+
+        /*通知窗口提示登录失败*/
+        const appointNoticeContent = createAppointNoticeContent('登录失败: ' + err)
+        yield put(appointNoticeContent)
+    }
+}
+
 function* ajaxGetSms() {
     try{
 
         const state = yield select()
 
         const phoneNumber = state.get('loginPage').get('phoneNumber').get('value')
+
 
         const res = yield SmsRequest.RequestSms(phoneNumber)
 

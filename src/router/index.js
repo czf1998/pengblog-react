@@ -32,7 +32,7 @@ class RouterComponent extends PureComponent {
                     <Route exact path='/manage' component={ManagePageLoadable}/>
                     <Route exact path='/edit' component={ArticleEditPageLoadable}/>
                     <Route exact path='/edit' render={() => (alreadyLoggedIn ? (<ArticleEditPageLoadable/>) : (<Redirect to='/login'/>))}/>
-                    <Route exact path='/login' render={() => (alreadyLoggedIn ? (<Redirect to='/home'/>) : (<LoginPageLoadable/>))}/>
+                    <Route path='/login' render={() => (alreadyLoggedIn ? (<Redirect to='/home'/>) : (<LoginPageLoadable/>))}/>
                     <Route exact path='/logout' render={() => (alreadyLoggedIn ? (<LoginPageLoadable/>) : (<Redirect to='/home'/>))}/>
                 </Fragment>
             </Router>

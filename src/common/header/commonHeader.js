@@ -5,6 +5,7 @@ import {
     NavItem,
     NavItemWrapper, Info
 } from './style'
+import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
 import { withRouter } from 'react-router-dom'
@@ -20,6 +21,7 @@ class CommonHeader extends PureComponent {
                 backgroundColor,
                 basicUIFeatures,
                 goTo,
+            currentPath,
                 alreadyLoggedIn} = this.props
 
         return (
@@ -32,14 +34,20 @@ class CommonHeader extends PureComponent {
 
                     <NavItemWrapper>
 
-                        <NavItem cursorp={true}>
-                            <span className="iconfont"
-                                  onClick={() => {goTo('/manage')}}
-                                  style={{fontSize:'1.6rem'}}>&#xe76a;</span>
-                            <Info onClick={() => {goTo('/manage')}}>
-                                索引
-                            </Info>
-                        </NavItem>
+                        {
+                            currentPath !== '/manage' &&
+                            <NavItem cursorp={true}>
+                                <Link to="/manage" style={{display:'flex',alignItems:'center'}}>
+                                <span className="iconfont"
+                                      style={{fontSize:'1.6rem'}}>&#xe76a;</span>
+                                    <Info>
+                                        索引
+                                    </Info>
+                                </Link>
+                            </NavItem>
+
+                        }
+
 
                         {
                             alreadyLoggedIn &&

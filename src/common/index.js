@@ -16,6 +16,7 @@ import Select from './select'
 import Pagination from './pagination'
 import CheckBox from './checkBox'
 import Captcha from './captcha'
+import SearchBar from './searchBar'
 
 export {Button,
         Input,
@@ -35,4 +36,4 @@ export {Button,
         Select,
         Pagination,
         CheckBox,
-        Captcha }
+        Captcha,SearchBar }

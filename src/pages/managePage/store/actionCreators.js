@@ -8,7 +8,8 @@ import {GET_MANAGE_PAGE_ARTICLE_LIST_DATA,
         GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL,
         RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE,
         TRIGGER_IS_MULTIPLE_SELECTING_IN_MANAGE_PAGE,
-        DELETE_ARTICLE_LIST} from './actionType'
+        DELETE_ARTICLE_LIST,
+        RESET_PAGE_INDEX_OF_PAGINATION} from './actionType'
 
 export const createGetManagePageArticleListDataAction = (value) => ({
     type: GET_MANAGE_PAGE_ARTICLE_LIST_DATA,
@@ -60,5 +61,10 @@ export const createTiggerIsMultipleSelectingInManagePageAction = (value) => ({
 
 export const createDeleteArticleListAction = (value) => ({
     type: DELETE_ARTICLE_LIST,
+    value
+})
+
+export const createResetPageIndexOfPaginationAction = (value) => ({
+    type: RESET_PAGE_INDEX_OF_PAGINATION,
     value
 })
