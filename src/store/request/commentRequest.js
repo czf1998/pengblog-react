@@ -2,14 +2,15 @@ import * as Api from '../apiConstant'
 import axios from 'axios'
 import {getToken} from "./articleRequest";
 
-export function SubmitCommentListData(value) {
+export function SubmitCommentData(value) {
     let commentData = {
         comment_hostId: value.article_id,
         comment_referComment: value.referCommentId,
         visitor_name: value.visitorName,
         comment_content: value.commentContent,
         visitor_email: value.visitorEmail,
-        visitor_siteAddress: value.visitorSiteAddress
+        visitor_siteAddress: value.visitorSiteAddress,
+        comment_platform: navigator.platform
     }
     return axios.post(Api.API_POST_SUBMIT_COMMENT,commentData);
 }

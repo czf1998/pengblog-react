@@ -80,6 +80,24 @@ class Comment extends PureComponent {
         const metaColor = colorPicker(visitor_name)
         const featureString = extractFeatureString(visitor_name)
 
+        let platformIconClasName = undefined
+
+        if(comment.get('comment_platform') === undefined){
+
+        } else if(comment.get('comment_platform').toLowerCase().indexOf('win') !== -1){
+            platformIconClasName = 'fa fa-windows'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('ios') !== -1){
+            platformIconClasName = 'fa fa-apple'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('ipad') !== -1){
+            platformIconClasName = 'fa fa-apple'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('iphone') !== -1){
+            platformIconClasName = 'fa fa-apple'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('mac') !== -1){
+            platformIconClasName = 'fa fa-apple'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('Linux') !== -1){
+            platformIconClasName = 'fa fa-linux'
+        }
+
 
         return (
             <CommentWrapper isBeenDeleting={isBeenDeleting}
@@ -107,14 +125,26 @@ class Comment extends PureComponent {
                         {comment.get('comment_content')}
                     </Content>
                     <OperationBar  className={CommonClassNameConstants.FONT_DARK }>
+
+                        {
+                            platformIconClasName &&
+                            <Fragment>
+                                <i className={platformIconClasName}/>
+                                &nbsp;|&nbsp;
+                            </Fragment>
+                        }
+
                         {GetDateDiff(comment.get('comment_releaseTime'))}
+
                         &nbsp;|&nbsp;
+
                         <ReplyButton onClick={() => {clickReplyHandler(comment_id)}}>
                             <i className={replyButtonIconClassName}/>&nbsp;
                             {
                                 isMobile && replyButtonMsg
                             }
                         </ReplyButton>
+
                         {
                             alreadyLoggedIn &&
                             <Fragment>

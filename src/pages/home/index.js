@@ -2,7 +2,7 @@ import React, {PureComponent, Fragment} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { ArticleSummaryMobile}from './components'
-import { HomeWrapper,LoadingWrapper} from './style'
+import { HomeWrapper,LoadingWrapper,LoadingSearchResult} from './style'
 import {createTriggerHasBeenMountOnce,
         createGetHomeDataAction,
         createPushPrograssToEndAction,
@@ -45,6 +45,13 @@ class Home extends PureComponent {
                            dataGetter={() => {getArticleListByKeyword(true)}}/>
 
                 {
+                    isLoading &&
+                    <LoadingSearchResult>
+                        <Loading/>
+                    </LoadingSearchResult>
+                }
+
+                {
                     articleList.map((item) => {
 
                         return (
@@ -64,9 +71,14 @@ class Home extends PureComponent {
                     })
                 }
 
-                <ForMore isLoading={isLoading}
-                         noMore={currentPage === maxPage}
-                         clickHandler={() => {getMoreData(context,getData,getArticleListByKeyword)}}/>
+                {
+
+                    !(context === SEARCH_CONTEXT && currentPage === maxPage ) &&
+                    <ForMore isLoading={isLoading}
+                             noMore={currentPage === maxPage}
+                             clickHandler={() => {getMoreData(context,getData,getArticleListByKeyword)}}/>
+                }
+
 
 
             </HomeWrapper>

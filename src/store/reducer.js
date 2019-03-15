@@ -39,7 +39,8 @@ const defaultState = fromJS({
     heightOfBrowser: 0,
     widthOfBrowser: 0,
     isMobile: false,
-    browser: undefined
+    browser: undefined,
+    platform: undefined
 })
 
 export default combineReducers({
@@ -75,25 +76,30 @@ export default combineReducers({
             })
         }
         if(action.type === RECORD_CURRENT_BROWSER_EDITION){
-            const userAgent =  window.navigator.userAgent
+            const userAgent =  navigator.userAgent
+            const platform = navigator.platform
             if (userAgent.indexOf('Firefox') !== -1){
                 return state.merge({
-                    browser: 'Firefox'
+                    browser: 'Firefox',
+                    platform: platform
                 })
             }
             if (userAgent.indexOf('Edge') !== -1){
                 return state.merge({
-                    browser: 'Edge'
+                    browser: 'Edge',
+                    platform: platform
                 })
             }
             if (userAgent.indexOf('Chrome') !== -1){
                 return state.merge({
-                    browser: 'Chrome'
+                    browser: 'Chrome',
+                    platform: platform
                 })
             }
             if (userAgent.indexOf('Safari') !== -1){
                 return state.merge({
-                    browser: 'Safari'
+                    browser: 'Safari',
+                    platform: platform
                 })
             }
         }

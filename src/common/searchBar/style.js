@@ -40,16 +40,16 @@ export const Input = styled.input`
 
 export const SubmitButton = styled.button`
         -webkit-appearance:none;
-        padding: 0 0.6rem;
+        padding: 0 ${props => props.isFocus ? '0.6rem' : '0'};
         outline: none;
         cursor: pointer;
         position: absolute;
         right: 2rem;
         color: white;
         height: calc(100% - 2rem);
-        width: ${props => props.isFocus ? '2.4rem' : '3.8rem'};
+        width: ${props => props.isFocus ? '2.4rem' : '0'};
         background: ${props => props.isFocus ? '#0084FF' : 'gray'};
-        border: 1px solid ${props => props.isFocus ? '#0084FF' : 'gray'};
+        border: none;
         border-radius: 0.4rem;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;

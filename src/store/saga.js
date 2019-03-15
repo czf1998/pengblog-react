@@ -657,7 +657,7 @@ function* ajaxDraft() {
 
 function* ajaxSubmitComment(action) {
     try{
-        const res = yield CommentRequest.SubmitCommentListData(action.value)
+        const res = yield CommentRequest.SubmitCommentData(action.value)
         if(res.status === 200){
 
             /*结束submit按钮加载状态*/

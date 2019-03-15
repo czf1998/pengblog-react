@@ -40,7 +40,7 @@ class SearchBar extends PureComponent {
                     isFocus ?
                         <i className='fa fa-search' style={{pointerEvents:'none'}}/>
                         :
-                        'Search'
+                        ''
                 }
               </SubmitButton>
               {/*<SearchTitle isFocus={isFocus}>搜索</SearchTitle>*/}

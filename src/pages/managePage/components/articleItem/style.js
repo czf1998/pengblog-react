@@ -16,6 +16,7 @@ export const ArticleTitle = styled.div`
     `
 
 export const ArticleTitleInner = styled.span`
+        color: black;
         cursor: pointer;
         ${props => props.browser === 'Safari' ? '' : `
           &:hover{

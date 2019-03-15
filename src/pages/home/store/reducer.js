@@ -27,6 +27,7 @@ const defaultState = fromJS({
     context: COMMON_CONTEXT
 })
 
+
 export default (state = defaultState, action) => {
     if(action.type === DELIVER_ARTICLE_LIST_DATA_TO_HOME) {
         return state.merge({
@@ -75,7 +76,7 @@ export default (state = defaultState, action) => {
         })
     }
     if(action.type === RESET_HOME_PAGE_INDEX){
-        return defaultState
+        return defaultState.set('articleListDataIsReady', true)
     }
     if(action.type === GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD){
         return state.merge({
