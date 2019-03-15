@@ -83,9 +83,12 @@ export const LoadingWrapper = styled.div`
     `
 
 export const ThemeJumbotronWrapper = styled.div`
-        width: fit-content;
         @media(max-width:${milePostWidth}px){
             margin-left: 300px;
             width: calc(100% - 300px);
+        }
+        @media(min-width:${milePostWidth}px){
+            margin-left: 450px;
+            width: calc(100% - 450px);
         }
     `
