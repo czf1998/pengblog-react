@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const HomeWrapper = styled.div`
         background: #f7f7f7;
         position: relative;
+        min-height: ${window.innerHeight - 70}px;
     `
 export const Gap = styled.div`
         height: ${props => props.gapHeight};
@@ -16,7 +17,6 @@ export const LoadingWrapper = styled.div`
         position: fixed;
         width: 100%;
         height: 100%;
-        opacity: 0;
     `
 
 export const LoadingSearchResult = styled.div`

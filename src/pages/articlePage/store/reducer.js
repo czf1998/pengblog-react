@@ -160,7 +160,8 @@ export const constructComment = (commentData) => {
         },
         comment_id: commentData.commentId,
         comment_content: commentData.commentContent,
-        comment_releaseTime: date.toString()
+        comment_releaseTime: date.toString(),
+        comment_platform: commentData.comment_platform
     }
     return fromJS(comment)
 }

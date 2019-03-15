@@ -42,6 +42,7 @@ export const SelectButton = styled.div`
     `
 
 export const Options = styled.div`
+        z-index: 999;
         background: white;
         position: absolute;
         width: 100%;

@@ -14,7 +14,7 @@ import {CentralController,
         PaginationFixer,
         LoadingWrapper,
         ArticleDetail,
-        SearchBarMobile,
+    CentralControllerMobile,
         MultipleSelectTitle,
         ShutDownMultipleSelect,ArticleItemWrapper,FreshCommentsTitle} from './style'
 import {ArticleFiling,
@@ -67,7 +67,8 @@ class ManagePage extends PureComponent {
                 tryToDeleteArticleList,
                 articleListBeingSelected,
                 confirmDeletePostProcessor,
-                alreadyLoggedIn} = this.props
+                alreadyLoggedIn,
+                isMobile} = this.props
 
         return (
             <Fragment>
@@ -92,18 +93,31 @@ class ManagePage extends PureComponent {
 
                         <ArticleList>
 
-                            <SearchBarMobile>
-                                <SearchBar searchBarId="managePage"
-                                           dataGetter={getArticleByKeyWord}/>
-                            </SearchBarMobile>
+                            {
+                                window.innerWidth < 800 &&
+                                <CentralControllerMobile>
+                                    <SearchBar searchBarId="managePage"
+                                               dataGetter={getArticleByKeyWord}/>
+                                    <ArticleFiling articleFilingObj={articleFilingObj}
+                                                   dataGetter={() => {getArticleByFiling(true)}}/>
+
+                                    <ArticleClassification articleLabelObjList={articleLabelObjList}
+                                                           dataGetter={() => {getArticleByLabel(true)}}/>
+                                </CentralControllerMobile>
+                            }
 
 
 
-                            <Title>
-                                {
-                                    currentContext !== 'common' ? '检索结果' : '所有文章'
-                                }
-                            </Title>
+
+                            {
+                                window.innerWidth > 800 &&
+                                <Title>
+                                    {
+                                        currentContext !== 'common' ? '检索结果' : '所有文章'
+                                    }
+                                </Title>
+                            }
+
 
                             {
                                 widthOfBrowser > 800 &&
@@ -243,7 +257,8 @@ const mapState = (state) => ({
         widthOfBrowser: state.get('rootState').get('widthOfBrowser'),
         isMultipleSelecting: state.get('managePage').get('isMultipleSelecting'),
         articleListBeingSelected: state.get('managePage').get('articleListBeingSelected'),
-        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn'),
+        isMobile:state.get('rootState').get('isMobile')
     })
 
 const mapActions = (dispatch) => {

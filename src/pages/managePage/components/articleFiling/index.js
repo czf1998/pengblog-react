@@ -17,7 +17,7 @@ class ArticleFiling extends PureComponent {
 
     render() {
 
-        const {year,month,articleFilingObj,dataGetter,submitButtonClickHandler} = this.props
+        const {year,month,articleFilingObj,dataGetter,submitButtonClickHandler,isMobile} = this.props
 
         let years = []
 
@@ -39,7 +39,12 @@ class ArticleFiling extends PureComponent {
 
         return (
          <ArticleFilingWrapper>
-             <ArticleFilingTitle>归档</ArticleFilingTitle>
+
+
+             {
+                 window.innerWidth > 800  &&  <ArticleFilingTitle>归档</ArticleFilingTitle>
+             }
+
 
              <ArticleFilinger>
                  <DateSelector>
@@ -77,7 +82,8 @@ class ArticleFiling extends PureComponent {
 const mapState = (state) => {
     return  {
         year: state.get('select').get('year'),
-        month: state.get('select').get('month')
+        month: state.get('select').get('month'),
+        isMobile:state.get('rootState').get('isMobile')
     }
 }
 

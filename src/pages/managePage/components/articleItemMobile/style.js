@@ -2,15 +2,15 @@ import styled from 'styled-components'
 
 
 export const ArticleItemMobileWrapper = styled.div`
+        flex-grow: 1;
         position: relative;
-        width: 100%;
-        padding-left: 1rem;
-        margin: 0.5rem 0;
+        margin: 0.5rem 1rem;
         ${props => props.isDeleted ? 'text-decoration:line-through' : ''};
     `
 
 export const ArticleLabelAndTitle = styled.div`
         line-height: 1.5;
+        margin-right: 1rem;
     `
 
 export const Label = styled.span`
@@ -38,7 +38,7 @@ export const DeleteButtonWraper = styled.div`
         position: absolute;
         top: 0.8rem;
         bottom: 0;
-        right: 1rem;
+        right: 0;
         width: 1rem;
         
         display: flex;

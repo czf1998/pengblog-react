@@ -2,12 +2,19 @@ import styled from 'styled-components'
 
 const widthOfMainArea = 750
 const maxMobileWidth = 750
+const milePostWidth = 800
 
 const backgroundColor = '#F7F7F7'
 
 export const ArticleFilingWrapper = styled.div`
         padding: 1rem 2rem;
         width: 100%;
+        @media(max-width:${milePostWidth}px){
+            border-top: solid 1px #F0F0F0;
+        }
+        @media(max-width:${maxMobileWidth}px){
+            padding: 1rem;
+        }
     `
 
 export const ArticleFilingTitle = styled.div`
@@ -45,7 +52,10 @@ export const SubmitButton = styled.button`
             background: hsl(209, 100%, 45%);
             border: 1px solid #0084FF;
         }` : ''};
-       
+        @media(max-width:${maxMobileWidth}px){
+            font-size: 1rem;
+            padding: 0 1rem;
+        }
     `
 
 export const Option = styled.option`

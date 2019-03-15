@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 const headerHeight = 70
 
+const maxMobileWidth = 750
+
 const milePostWidth3 = 800
 
 const milePostWidth2 = 1200
@@ -149,15 +151,9 @@ export const PaginationFixer = styled.div`
     `
 
 export const LoadingWrapper = styled.div`
-        z-index: -1;
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        position: fixed;
+        width: 100%;
+        height: 100%;
     `
 
 export const ArticleDetail = styled.div`
@@ -172,19 +168,27 @@ export const ArticleDetail = styled.div`
         transition: all 0.4s ease; 
     `
 
-export const SearchBarMobile = styled.div`
-        width: 100%;
-        display: none;
+export const CentralControllerMobile = styled.div`
         border-bottom: solid 1px #f0f0f0; 
         @media(max-width:${milePostWidth3}px){
-           display: block;
+            padding: 0 4rem;
+        }
+        @media(max-width:${maxMobileWidth}px){
+            padding: 0;
         }
     `
+
 
 export const ArticleItemWrapper = styled.div`
         display: flex;
         align-items: center;
-        border-top: solid 1px #f0f0f0; 
+        border-bottom: solid 1px #f0f0f0; 
+         @media(max-width:${milePostWidth3}px){
+            margin: 0 4rem;
+        }
+         @media(max-width:${maxMobileWidth}px){
+            margin: 0;
+        }
     `
 
 export const FreshCommentsTitle = styled.div`

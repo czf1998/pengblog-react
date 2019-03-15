@@ -94,9 +94,14 @@ class Comment extends PureComponent {
             platformIconClasName = 'fa fa-apple'
         }else if(comment.get('comment_platform').toLowerCase().indexOf('mac') !== -1){
             platformIconClasName = 'fa fa-apple'
-        }else if(comment.get('comment_platform').toLowerCase().indexOf('Linux') !== -1){
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('arm') !== -1){
+            platformIconClasName = 'fa fa-android'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('linux') !== -1){
             platformIconClasName = 'fa fa-linux'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('android') !== -1){
+            platformIconClasName = 'fa fa-android'
         }
+
 
 
         return (

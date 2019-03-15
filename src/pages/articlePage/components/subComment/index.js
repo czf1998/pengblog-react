@@ -8,6 +8,7 @@ import {
     createAppointShowSubCommentEditorManagerAction,
 } from "../comment/store";
 import loadingSpin from "../../../../common/loading/svg/loading-spin.svg";
+import {OperationBar} from "../comment/style";
 
 const REPLY_CLASSNAME = 'fa fa-reply'
 const RETRACT_CLASSNAME = 'fa fa-chevron-up'
@@ -27,6 +28,8 @@ class SubComment extends PureComponent {
 
     render() {
 
+
+
         const { comment,
                 isMobile,
                 clickReplyHandler,
@@ -42,6 +45,28 @@ class SubComment extends PureComponent {
 
         const {isBeenDeleting} = this.state
 
+        let platformIconClasName = undefined
+
+        if(comment.get('comment_platform') === undefined){
+
+        } else if(comment.get('comment_platform').toLowerCase().indexOf('win') !== -1){
+            platformIconClasName = 'fa fa-windows'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('ios') !== -1){
+            platformIconClasName = 'fa fa-apple'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('ipad') !== -1){
+            platformIconClasName = 'fa fa-apple'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('iphone') !== -1){
+            platformIconClasName = 'fa fa-apple'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('mac') !== -1){
+            platformIconClasName = 'fa fa-apple'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('arm') !== -1){
+            platformIconClasName = 'fa fa-android'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('linux') !== -1){
+            platformIconClasName = 'fa fa-linux'
+        }else if(comment.get('comment_platform').toLowerCase().indexOf('android') !== -1){
+            platformIconClasName = 'fa fa-android'
+        }
+
         return (
             <SubCommentWrapper isBeenDeleting={isBeenDeleting}>
 
@@ -53,6 +78,15 @@ class SubComment extends PureComponent {
                 </Content>
 
                 <Meta className={CommonClassNameConstants.FONT_DARK}>
+
+                    {
+                        platformIconClasName &&
+                        <Fragment>
+                            <i className={platformIconClasName}/>
+                            &nbsp;|&nbsp;
+                        </Fragment>
+                    }
+
                     {GetDateDiff(comment.get('comment_releaseTime'))}
                     &nbsp;|&nbsp;
                     <ReplyButton className={replyButtonIconClassName}

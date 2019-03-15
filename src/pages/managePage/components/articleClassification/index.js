@@ -9,11 +9,15 @@ class ArticleClassification extends PureComponent {
 
     render() {
 
-        const {articleLabelObjList,appointCurrentLabel,currentLabel,dataGetter,browser} = this.props
+        const {articleLabelObjList,appointCurrentLabel,currentLabel,dataGetter,browser,isMobile} = this.props
 
         return (
             <ArticleClassificationWrapper>
-                <Title>TAG</Title>
+
+                {
+                    window.innerWidth > 800 && <Title>TAG</Title>
+                }
+
                 <Tags browser={browser}>
 
                     {
@@ -39,7 +43,8 @@ class ArticleClassification extends PureComponent {
 const mapState = (state) => {
     return  {
         currentLabel: state.get('managePage').get('currentLabel'),
-        browser: state.get('rootState').get('browser')
+        browser: state.get('rootState').get('browser'),
+        isMobile:state.get('rootState').get('isMobile')
     }
 }
 

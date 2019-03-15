@@ -38,7 +38,7 @@ class ArticleItemMobile extends PureComponent {
                 goTo,
                 articleHasBeenDeleteList,
                 tryToDeleteThisArticle,
-                confirmDeletePostProcessor} = this.props
+                confirmDeletePostProcessor,alreadyLoggedIn} = this.props
 
         const isDeleted = articleHasBeenDeleteList.some((item) => {
             return item === article.get('article_id')
@@ -78,12 +78,16 @@ class ArticleItemMobile extends PureComponent {
 
                 </ArticleAuthorAndReleaseTime>
 
-                <DeleteButtonWraper>
-                    <DeleteButton className="fa fa-close"
-                                  onClick={(e) => {tryToDeleteThisArticle(article_id,
-                                                                          article_title,
-                                                                          confirmDeletePostProcessor,e)}}/>
-                </DeleteButtonWraper>
+                {
+                    alreadyLoggedIn &&
+                    <DeleteButtonWraper>
+                        <DeleteButton className="fa fa-close"
+                                      onClick={(e) => {tryToDeleteThisArticle(article_id,
+                                          article_title,
+                                          confirmDeletePostProcessor,e)}}/>
+                    </DeleteButtonWraper>
+                }
+
 
             </ArticleItemMobileWrapper>
         );
@@ -106,7 +110,8 @@ const mapState = (state) => {
     return  {
         goTo: state.get('router').get('goTo'),
         browser: state.get('rootState').get('browser'),
-        articleHasBeenDeleteList: state.get('managePage').get('articleHasBeenDeleteList')
+        articleHasBeenDeleteList: state.get('managePage').get('articleHasBeenDeleteList'),
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }
 }
 

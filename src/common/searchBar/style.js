@@ -47,7 +47,7 @@ export const SubmitButton = styled.button`
         right: 2rem;
         color: white;
         height: calc(100% - 2rem);
-        width: ${props => props.isFocus ? '2.4rem' : '0'};
+        width: ${props => props.isFocus ? '3rem' : '0'};
         background: ${props => props.isFocus ? '#0084FF' : 'gray'};
         border: none;
         border-radius: 0.4rem;

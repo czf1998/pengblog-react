@@ -685,6 +685,7 @@ function* ajaxSubmitComment(action) {
             /*挂载刚刚提交的留言*/
             const appendCommentJustSubmitValue = {
                 commentId: res.data.commentIdJustSubmit,
+                comment_platform: window.navigator.platform,
                 ...action.value
             }
             const appendCommentJustSubmitAction = createAppendCommentJustSubmitAction(appendCommentJustSubmitValue)
