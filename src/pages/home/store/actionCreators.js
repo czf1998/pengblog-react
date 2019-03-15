@@ -1,5 +1,8 @@
 import {GET_HOME_ARTICLE_LIST_DATA, PUSH_PROGRASS_TO_END} from '../../../store/actionTypesWithSaga'
-import {TRIGGER_HAS_BEEN_MOUNT_ONCE,TRIGGER_ISLOADING_HOME_ARTICLE_LIST} from './actionType'
+import {TRIGGER_HAS_BEEN_MOUNT_ONCE,
+    TRIGGER_ISLOADING_HOME_ARTICLE_LIST,
+    GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD,
+    RESET_HOME_PAGE_INDEX} from './actionType'
 
 export const createPushPrograssToEndAction = (value) => ({
     type: PUSH_PROGRASS_TO_END,
@@ -20,3 +23,10 @@ export const createTriggerIsLoadingHomeArticleListAction = (value) => ({
     value
 })
 
+export const createResetHomePageIndexAction = () => ({
+    type: RESET_HOME_PAGE_INDEX
+})
+
+export const createGetHomeArticleListDataByKeywordAction = () => ({
+    type: GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD
+})

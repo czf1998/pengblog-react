@@ -58,7 +58,7 @@ export const RequestArticleListDataByKeyWord = (value) => {
         params: {
             startIndex: value.startIndex,
             pageScale: value.pageScale,
-            searchString: value.keyWord
+            searchString: value.keyword
         }
     }
 

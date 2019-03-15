@@ -6,10 +6,14 @@ import { HomeWrapper,LoadingWrapper} from './style'
 import {createTriggerHasBeenMountOnce,
         createGetHomeDataAction,
         createPushPrograssToEndAction,
-        createTriggerIsLoadingHomeArticleListAction } from './store'
+        createTriggerIsLoadingHomeArticleListAction,
+        createResetHomePageIndexAction,
+        createGetHomeArticleListDataByKeywordAction } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
 import { Loading, ForMore,SearchBar  } from '../../common'
 import store from "../../store";
+import {createGetManagePageArticleListDataByKeyWordAction} from "../managePage/store";
+import {COMMON_CONTEXT, SEARCH_CONTEXT} from "../managePage/store/reducer";
 
 
 class Home extends PureComponent {
@@ -25,9 +29,9 @@ class Home extends PureComponent {
                 maxPage,
                 currentPage,
                 hasBeenMountOnce,
-                articleListDataIsReady,
+                articleListDataIsReady,getArticleListByKeyword,getMoreData,
                 getData,
-                state} = this.props
+            context} = this.props
 
         const articleSummaryListTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.SLIDE_UP_FAST
 
@@ -38,7 +42,7 @@ class Home extends PureComponent {
                 <SearchBar backgroundColor='white'
                            style={{borderBottom:'solid 1px #F0F0F0'}}
                            searchBarId="home"
-                           dataGetter={null}/>
+                           dataGetter={() => {getArticleListByKeyword(true)}}/>
 
                 {
                     articleList.map((item) => {
@@ -62,7 +66,7 @@ class Home extends PureComponent {
 
                 <ForMore isLoading={isLoading}
                          noMore={currentPage === maxPage}
-                         clickHandler={() => {getData(state)}}/>
+                         clickHandler={() => {getMoreData(context,getData,getArticleListByKeyword)}}/>
 
 
             </HomeWrapper>
@@ -105,26 +109,28 @@ const mapState = (state) => ({
         isLoading: state.get('home').get('isLoading'),
         articleListDataIsReady: state.get('home').get('articleListDataIsReady'),
         hasBeenMountOnce: state.get('home').get('hasBeenMountOnce'),
+        context: state.get('home').get('context')
     })
 
 const mapActions = (dispatch) => {
     return {
-        getData(state) {
-
-            const startIndex = state.get('home').get('startIndex')
-            const pageScale = state.get('home').get('pageScale')
+        getMoreData(context,getData,getArticleListByKeyword){
+            if(context === COMMON_CONTEXT) {
+                getData()
+                return
+            }
+            if(context === SEARCH_CONTEXT){
+                getArticleListByKeyword(false)
+                return
+            }
+        },
+        getData() {
 
             //trigger当前组件为loading状态
             const triggerIsLoadingHomeArticleListAction = createTriggerIsLoadingHomeArticleListAction(true)
             dispatch(triggerIsLoadingHomeArticleListAction)
 
-            //请求数据
-            const getHomeDataActionValue = {
-                startIndex: startIndex,
-                pageScale: pageScale
-            }
-
-            const action = createGetHomeDataAction(getHomeDataActionValue)
+            const action = createGetHomeDataAction()
             dispatch(action)
         },
         getMoreArticleListData(startIndex, pageScale){
@@ -142,9 +148,16 @@ const mapActions = (dispatch) => {
             const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home'})
             dispatch(pushPrograssBarToEndAction)
         },
-        getArticleListByKeyword(){
-            const keyword = store.getState().get('searchBar').get('home').get('searchBarValue')
+        getArticleListByKeyword(resetHomePageIndexFlag){
 
+            //重置home页面指标
+            if(resetHomePageIndexFlag){
+                const resetHomePageIndexAction = createResetHomePageIndexAction()
+                dispatch(resetHomePageIndexAction)
+            }
+
+            const getArticleByKeyordAction = createGetHomeArticleListDataByKeywordAction()
+            dispatch(getArticleByKeyordAction)
         }
     }
 }

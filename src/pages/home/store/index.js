@@ -2,11 +2,15 @@ import reducer from './reducer'
 import {createPushPrograssToEndAction,
         createGetHomeDataAction,
         createTriggerHasBeenMountOnce,
-        createTriggerIsLoadingHomeArticleListAction} from './actionCreators'
+    createGetHomeArticleListDataByKeywordAction,
+        createTriggerIsLoadingHomeArticleListAction,
+        createResetHomePageIndexAction} from './actionCreators'
 
 export { reducer}
 
 export {createPushPrograssToEndAction,
         createGetHomeDataAction,
         createTriggerHasBeenMountOnce,
-        createTriggerIsLoadingHomeArticleListAction}
+    createGetHomeArticleListDataByKeywordAction,
+        createTriggerIsLoadingHomeArticleListAction,
+        createResetHomePageIndexAction}

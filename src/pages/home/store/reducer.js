@@ -7,7 +7,13 @@ import {
     DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME
 } from '../../../store/actionTypesWithSaga'
 
-import {TRIGGER_HAS_BEEN_MOUNT_ONCE, TRIGGER_ISLOADING_HOME_ARTICLE_LIST} from "./actionType";
+import {
+    GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD,
+    RESET_HOME_PAGE_INDEX,
+    TRIGGER_HAS_BEEN_MOUNT_ONCE,
+    TRIGGER_ISLOADING_HOME_ARTICLE_LIST
+} from "./actionType";
+import {COMMON_CONTEXT, SEARCH_CONTEXT} from "../../managePage/store/reducer";
 
 const defaultState = fromJS({
     startIndex: 0,
@@ -17,7 +23,8 @@ const defaultState = fromJS({
     articleList: [],
     isLoading: false,
     articleListDataIsReady: false,
-    hasBeenMountOnce: false
+    hasBeenMountOnce: false,
+    context: COMMON_CONTEXT
 })
 
 export default (state = defaultState, action) => {
@@ -48,7 +55,8 @@ export default (state = defaultState, action) => {
     }
     if(action.type === GET_HOME_ARTICLE_LIST_DATA) {
         return state.merge({
-            isLoading: true
+            isLoading: true,
+            context: COMMON_CONTEXT
         })
     }
     if(action.type === ROADED_AND_SHOW_JUMBOTRON) {
@@ -64,6 +72,15 @@ export default (state = defaultState, action) => {
     if(action.type === TRIGGER_ISLOADING_HOME_ARTICLE_LIST){
         return state.merge({
             isLoading: action.value
+        })
+    }
+    if(action.type === RESET_HOME_PAGE_INDEX){
+        return defaultState
+    }
+    if(action.type === GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD){
+        return state.merge({
+            isLoading: true,
+            context: SEARCH_CONTEXT
         })
     }
     return state

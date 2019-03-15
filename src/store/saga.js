@@ -74,12 +74,14 @@ import {DELETE_COMMENT_FROM_FRESH_COMMENTS} from "../pages/managePage/components
 import {DELETE_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/components/comment/store/actionTypes";
 import {DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/components/subComment/store/actionTypes";
 import {GET_CAPTCHA_IMAGE} from "../common/captcha/store/actionTypes";
+import {GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD} from "../pages/home/store/actionType";
 
 
 const NO_MORE_ITEM_AVAILABLE = 'noMoreItemAvailable'
 
 function* mySaga() {
     yield takeEvery(GET_HOME_ARTICLE_LIST_DATA, ajaxHomeArticleListData)
+    yield takeEvery(GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD, ajaxHomeArticleListDataByKeyword)
     yield takeLatest(OBSERVE_SCROLL_TOP_OF_ELEMENT_EL, recordScrollTopOfElementEl)
     yield takeEvery(GET_JUMBOTRON_ARTICLE_DATA, ajaxJumbotronArticleData)
     yield takeEvery(GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA, ajaxArticleDataForArticlePageData)
@@ -106,6 +108,39 @@ function* mySaga() {
     yield takeEvery(DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE, ajaxDeleteSubCommentFromArticlePage)
     yield takeEvery(GET_CAPTCHA_IMAGE, ajaxGetCaptchaImage)
     yield takeEvery(GET_SMS, ajaxGetSms)
+}
+
+function* ajaxHomeArticleListDataByKeyword() {
+    try{
+
+        const state = yield select()
+
+        const keyword = state.get('searchBar').get('home').get('searchBarValue')
+        const startIndex = state.get('home').get('startIndex')
+        const pageScale = state.get('home').get('pageScale')
+
+        const value = {
+            keyword: keyword,
+            startIndex: startIndex,
+            pageScale: pageScale
+        }
+
+        //console.log(value)
+
+        const res = yield ArticleRequest.RequestArticleListDataByKeyWord(value)
+
+        let appointDataAction = createDeliverArticleDataToHomeAction(res.data)
+
+        yield put(appointDataAction)
+
+
+    }catch (err) {
+        console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_BY_KEYWORD  ERR: ' + err)
+
+        /*通知窗口提示登录失败*/
+        const appointNoticeContent = createAppointNoticeContent('登录失败: ' + err)
+        yield put(appointNoticeContent)
+    }
 }
 
 function* ajaxLoginWithDynamicPassword() {
@@ -713,9 +748,21 @@ function* ajaxCommentListData(action) {
     }
 }
 
-function* ajaxHomeArticleListData(action) {
+function* ajaxHomeArticleListData() {
     try{
-        const res = yield ArticleRequest.RequestArticleListData(action.value)
+
+        const state = yield select()
+
+        const startIndex = state.get('home').get('startIndex')
+
+        const pageScale = state.get('home').get('pageScale')
+
+        const value = {
+            startIndex: startIndex,
+            pageScale: pageScale
+        }
+
+        const res = yield ArticleRequest.RequestArticleListData(value)
         let appointDataAction = createDeliverArticleDataToHomeAction(res.data)
         yield put(appointDataAction)
      /*   const state = yield select();
