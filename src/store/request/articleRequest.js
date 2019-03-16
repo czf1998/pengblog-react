@@ -52,7 +52,7 @@ export const RequestArticleLabelData = () => {
     return axios.get(Api.API_GET_ARTICLE_LABEL)
 }
 
-export const RequestArticleListDataByKeyWord = (value) => {
+export const RequestArticleListDataBykeyword = (value) => {
 
     let config = {
         params: {

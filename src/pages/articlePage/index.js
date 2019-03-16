@@ -41,7 +41,7 @@ class ArticlePage extends PureComponent {
                 currentPage,
                 scrollPosition,
                 referComment,
-                titleImageSize,heightOfBrowser } = this.props
+                titleImageSize,currentPath } = this.props
 
         const { article_id } = this.props.match.params
 
@@ -121,7 +121,7 @@ class ArticlePage extends PureComponent {
                         </ArticlePageFixer>
                     </ArticlePageWrapper>
                     :
-                   <LoadingWrapper heightOfBrowser={heightOfBrowser}>
+                   <LoadingWrapper currentPath={currentPath}>
                        <Loading/>
                    </LoadingWrapper>
                 )
@@ -187,7 +187,7 @@ const mapState = (state) => ({
         currentPage: state.get('articlePage').get('currentPage'),
         scrollPosition: state.get('articlePage').get('scrollPosition'),
         titleImageSize: state.get('articlePage').get('titleImageSize'),
-        heightOfBrowser: state.get('rootState').get('heightOfBrowser')
+        currentPath: state.get('router').get('currentPath')
     })
 
 const mapActions = (dispatch) => {

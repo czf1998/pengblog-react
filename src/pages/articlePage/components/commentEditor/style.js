@@ -123,20 +123,25 @@ export const SubmitButtonWrapper = styled.div`
     `
 
 export const SubSubmitButtonWrapper = styled.div`
-        position: absolute;
-        right: 2rem;
-        width: 20%;
-        bottom: 1rem;
+        width: 47.5%;
+        margin-bottom: 1rem;
         @media(max-width:${milePostWidth}px){
-            padding: 0 1rem 1rem 1rem;
-            width: 100%;
-            position: static;
+           width:100%;
         }
+    `
+
+export const SubSubmitButton = styled(Button)`
+        height: 2.2rem;
+        width: 100%;
+        @media(max-width:${widthOfMainArea}px){
+             height: 3em;
+             width: 100%;
+        } 
     `
 
 export const SubmitButton = styled(Button)`
         height: 2.2rem;
-        width: 100%;
+        width: calc(50% - 1rem);
         @media(max-width:${widthOfMainArea}px){
              height: 3em;
              width: 100%;

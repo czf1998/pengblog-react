@@ -79,7 +79,7 @@ export const ArticleDetailFixer = styled.div`
 
 export const LoadingWrapper = styled.div`
         width: 100%;
-        height: ${props => props.heightOfBrowser - headerHeight}px;
+        height: ${window.innerHeight}px;
     `
 
 export const ThemeJumbotronWrapper = styled.div`

@@ -54,9 +54,9 @@ export const SubmitButton = styled.button`
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         transition: all 0.4s ease;
+        transition-delay: 0.3s;
          &:hover{
             background: hsl(209, 100%, 45%);
-            border: 1px solid #0084FF;
          }
           @media(max-width: ${maxMobileWidth}px){
             right: 1rem;

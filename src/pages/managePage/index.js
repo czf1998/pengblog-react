@@ -15,7 +15,7 @@ import {CentralController,
         LoadingWrapper,
         ArticleDetail,
     CentralControllerMobile,
-        MultipleSelectTitle,
+        MultipleSelectTitle,TriggerShowMoreIndexButton,MoreIndex,
         ShutDownMultipleSelect,ArticleItemWrapper,FreshCommentsTitle} from './style'
 import {ArticleFiling,
         ArticleClassification,
@@ -48,6 +48,14 @@ import ScrollToThePositionOnMount from "../../common/scrollBehaviour/scrollToThe
 
 class ManagePage extends PureComponent {
 
+    constructor(props){
+        super(props)
+        this.state = {
+            showMoreIndex: false
+        }
+        this.triggerShowMoreIndex = this.triggerShowMoreIndex.bind(this)
+    }
+
     render() {
 
         const { isLoading,
@@ -69,6 +77,8 @@ class ManagePage extends PureComponent {
                 confirmDeletePostProcessor,
                 alreadyLoggedIn,
                 isMobile} = this.props
+
+        const {showMoreIndex} = this.state
 
         return (
             <Fragment>
@@ -98,11 +108,21 @@ class ManagePage extends PureComponent {
                                 <CentralControllerMobile>
                                     <SearchBar searchBarId="managePage"
                                                dataGetter={getArticleByKeyWord}/>
-                                    <ArticleFiling articleFilingObj={articleFilingObj}
-                                                   dataGetter={() => {getArticleByFiling(true)}}/>
 
-                                    <ArticleClassification articleLabelObjList={articleLabelObjList}
-                                                           dataGetter={() => {getArticleByLabel(true)}}/>
+                                    <MoreIndex showMoreIndex={showMoreIndex}>
+                                        <ArticleFiling articleFilingObj={articleFilingObj}
+                                                       dataGetter={() => {getArticleByFiling(true)}}/>
+
+                                        <ArticleClassification articleLabelObjList={articleLabelObjList}
+                                                               dataGetter={() => {getArticleByLabel(true)}}/>
+                                    </MoreIndex>
+
+
+
+                                    <TriggerShowMoreIndexButton onClick={this.triggerShowMoreIndex}>
+                                        <i className={showMoreIndex ? "fa fa-angle-up fa-2x" : "fa fa-2x fa-angle-down"}/>
+                                    </TriggerShowMoreIndexButton>
+
                                 </CentralControllerMobile>
                             }
 
@@ -242,6 +262,12 @@ class ManagePage extends PureComponent {
         }
     }
 
+    triggerShowMoreIndex(){
+        this.setState({
+            showMoreIndex: !this.state.showMoreIndex
+        })
+    }
+
 }
 
 const mapState = (state) => ({
@@ -308,15 +334,17 @@ const mapActions = (dispatch) => {
             const resetCentralControllerAction = createResetCentralControllerOfManagePage(SEARCH_CONTEXT)
             dispatch(resetCentralControllerAction)
 
-            const keyWord = store.getState().get('searchBar').get('managePage').get('searchBarValue')
+            const keyword = store.getState().get('searchBar').get('managePage').get('searchBarValue')
             const startIndex = store.getState().get('pagination').get('managePage').get('startIndex')
             const pageScale = store.getState().get('pagination').get('managePage').get('pageScale')
 
             const value = {
-                keyWord: keyWord,
+                keyword: keyword,
                 startIndex: startIndex,
                 pageScale: pageScale
             }
+
+            console.log(value)
 
             const getArticleByKeyWordAction = createGetManagePageArticleListDataByKeyWordAction(value)
             dispatch(getArticleByKeyWordAction)

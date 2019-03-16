@@ -95,7 +95,7 @@ function* mySaga() {
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA, ajaxManagePageArticleListData)
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_FILING_DATA, ajaxManagePageArticleFilingData)
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LABEL_DATA, ajaxManagePageArticleLabelData)
-    yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD, ajaxManagePageArticleListDataByKeyWord)
+    yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD, ajaxManagePageArticleListDataBykeyword)
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING, ajaxManagePageArticleListDataByFiling)
     yield takeEvery(GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL, ajaxManagePageArticleListDataByLabel)
     yield takeEvery(DELETE_ARTICLE, ajaxDeleteArticle)
@@ -127,7 +127,7 @@ function* ajaxHomeArticleListDataByKeyword() {
 
         //console.log(value)
 
-        const res = yield ArticleRequest.RequestArticleListDataByKeyWord(value)
+        const res = yield ArticleRequest.RequestArticleListDataBykeyword(value)
 
         let appointDataAction = createDeliverArticleDataToHomeAction(res.data)
 
@@ -554,9 +554,9 @@ function* ajaxManagePageArticleListDataByFiling(action) {
     }
 }
 
-function* ajaxManagePageArticleListDataByKeyWord(action) {
+function* ajaxManagePageArticleListDataBykeyword(action) {
     try{
-        const res = yield ArticleRequest.RequestArticleListDataByKeyWord(action.value)
+        const res = yield ArticleRequest.RequestArticleListDataBykeyword(action.value)
         let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {

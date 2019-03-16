@@ -126,14 +126,13 @@ class TopLevelCommentEditorUI extends PureComponent{
 
                 <SubmitButtonWrapper>
 
-                    <div onClick={() => {submitComment( article_id,
-                                                        null,
-                                                        visitorNameManager.get('value'),
-                                                        commentContentManager.get('value'),
-                                                        visitorEmailManager.get('value'),
-                                                        visitorSiteAddressManager.get('value'),
-                                                        TOP_LEVEL_COMMENT_EDITOR)}}>
-                        <SubmitButton>
+                        <SubmitButton  onClick={() => {submitComment( article_id,
+                                        null,
+                                        visitorNameManager.get('value'),
+                                        commentContentManager.get('value'),
+                                        visitorEmailManager.get('value'),
+                                        visitorSiteAddressManager.get('value'),
+                                        TOP_LEVEL_COMMENT_EDITOR)}}>
                             {
                                 isLoading ?
                                     <span>
@@ -141,11 +140,10 @@ class TopLevelCommentEditorUI extends PureComponent{
                                     </span>
                                     :
                                     <span>
-                                    Submit
+                                     <i className="fa fa-paper-plane"/>&nbsp;Submit&nbsp;
                                     </span>
                             }
                         </SubmitButton>
-                    </div>
 
                 </SubmitButtonWrapper>
             </CommentEditorWrapper>

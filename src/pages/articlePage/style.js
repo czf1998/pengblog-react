@@ -56,5 +56,7 @@ export const CommentTitle = styled.div`
     `
 
 export const LoadingWrapper = styled.div`
-        height: ${props => props.heightOfBrowser - 70   }px;
+        position: ${props => props.currentPath && props.currentPath.match(/^\/home/) === null ? 'fixed' : 'static'};
+        width: 100%;
+        height: ${window.innerHeight}px;
     `

@@ -36,12 +36,7 @@ class SearchBar extends PureComponent {
                      onBlur={() => {triggerIsFocus(searchBarId,false)}}/>
 
               <SubmitButton isFocus={isFocus}  onClick={() => {searchButtonClickHandler(dataGetter)}}>
-                {
-                    isFocus ?
-                        <i className='fa fa-search' style={{pointerEvents:'none'}}/>
-                        :
-                        ''
-                }
+                <i className='fa fa-search' style={{pointerEvents:'none'}}/>
               </SubmitButton>
               {/*<SearchTitle isFocus={isFocus}>搜索</SearchTitle>*/}
           </SearchBarWrapper>

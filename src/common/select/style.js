@@ -12,6 +12,7 @@ export const SelectHead = styled.div`
     `
 
 export const SelectContent = styled.div`
+        background: white;
         -webkit-appearance:none;
         outline: none;
         font-size: 1rem;

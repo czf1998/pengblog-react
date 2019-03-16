@@ -169,6 +169,7 @@ export const ArticleDetail = styled.div`
     `
 
 export const CentralControllerMobile = styled.div`
+        
         border-bottom: solid 1px #f0f0f0; 
         @media(max-width:${milePostWidth3}px){
             padding: 0 4rem;
@@ -198,4 +199,22 @@ export const FreshCommentsTitle = styled.div`
         margin: 1rem 2rem;
         margin-bottom: 0.5rem;
         border-bottom: solid 1px #f0f0f0;
+    `
+
+export const TriggerShowMoreIndexButton = styled.div`
+        padding: 0.4rem 0;
+        display: flex;
+        color: grey;
+        justify-content: center;
+        align-items: center;
+        border-top: solid 1px #f0f0f0;
+    `
+
+export const MoreIndex = styled.div`
+    position:relative;
+        background: #F0F0F0;
+        height: ${props => props.showMoreIndex ? '8.5rem' : '0'};
+        overflow-Y: ${props => props.showMoreIndex ? 'visible' : 'hidden'};
+        opacity: ${props => props.showMoreIndex ? '1' : '0'};
+        transition: all 0.4s ease;
     `
