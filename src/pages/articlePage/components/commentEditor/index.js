@@ -145,7 +145,7 @@ const mapActions = (dispatch) => ({
 })
 
 const TopLevelCommentEditor = connect(mapState(TOP_LEVEL_COMMENT_EDITOR), mapActions)(TopLevelCommentEditorUI)
-const SubCommentEditor = connect(mapState(SUB_COMMENT_EDITOR), mapActions)(SubCommentEditorUI)
+const SubCommentEditor = connect(mapState(SUB_COMMENT_EDITOR), mapActions, null, {forwardRef: true})(SubCommentEditorUI)
 
 
 export {TopLevelCommentEditor, SubCommentEditor}

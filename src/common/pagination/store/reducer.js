@@ -15,6 +15,7 @@ let pageScaleDefault = window.innerWidth < 800 ? 8 : parseInt((window.innerHeigh
 pageScaleDefault = pageScaleDefault < 8 ? 8 : pageScaleDefault
 const startIndexDefault = -pageScaleDefault
 
+
 const defaultState = fromJS({
     managePage: fromJS({
         currentPage: 0,

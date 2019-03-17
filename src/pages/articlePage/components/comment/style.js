@@ -107,3 +107,10 @@ export const DeleteButton = styled.i`
             color: black;
         }
     `
+
+export const SubCommentEditorWrapper = styled.div`
+        height: ${props => props.showSubCommentEditor ? window.heightOfSubCommentEditor + 16 + 'px' : '0'};
+        overflow: ${props => props.showSubCommentEditor ? 'visible' : 'hidden'};
+        opacity: ${props => props.showSubCommentEditor ? '1' : '0'};
+        transition: all 0.4s ease;
+    `

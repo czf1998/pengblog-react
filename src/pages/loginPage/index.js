@@ -52,7 +52,7 @@ class LoginPage extends PureComponent {
                 haveGotSmsOnce,
                 currentSecond} = this.props
 
-        const themeImage = 'https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/black-and-white-nature-sky-field.440ec64e.jpg?q-sign-algorithm=sha1&q-ak=AKID3IJTEKi6qQ4HFFknCUW8jbPJBoXLfK5n&q-sign-time=1552814074;1552815874&q-key-time=1552814074;1552815874&q-header-list=&q-url-param-list=&q-signature=73f8bb7ae470b59d442399128af710ccc63f8e1c&x-cos-security-token=c60147323b49c60426139e77313bc28dfca5c3ef10001'
+        const themeImage = '\thttps://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/black-and-white-nature-sky-field.440ec64e.jpg'
 
         return (
            <LoginPageWrapper>

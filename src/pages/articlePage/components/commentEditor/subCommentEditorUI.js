@@ -35,7 +35,7 @@ class SubCommentEditorUI extends PureComponent{
             isLoading} = this.props
 
         return (
-            <SubCommentEditorWrapper>
+            <SubCommentEditorWrapper className="subCommentEditor">
 
 
 

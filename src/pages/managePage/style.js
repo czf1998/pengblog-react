@@ -171,12 +171,7 @@ export const ArticleDetail = styled.div`
 export const CentralControllerMobile = styled.div`
         
         border-bottom: solid 1px #f0f0f0; 
-        @media(max-width:${milePostWidth3}px){
-            padding: 0 4rem;
-        }
-        @media(max-width:${maxMobileWidth}px){
-            padding: 0;
-        }
+       
     `
 
 
@@ -217,4 +212,10 @@ export const MoreIndex = styled.div`
         overflow-Y: ${props => props.showMoreIndex ? 'visible' : 'hidden'};
         opacity: ${props => props.showMoreIndex ? '1' : '0'};
         transition: all 0.4s ease;
+         @media(max-width:${milePostWidth3}px){
+            padding: 0 4rem;
+        }
+        @media(max-width:${maxMobileWidth}px){
+            padding: 0;
+        }
     `

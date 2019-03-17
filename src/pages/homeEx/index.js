@@ -37,7 +37,7 @@ class HomeEX extends PureComponent {
                 {
                     !isMobile &&
                     <ThemeJumbotronWrapper  className={themeJumbotronClassName}>
-                            <Route path="/home" exact component={ThemeJumbotron}/>
+                            <Route path="/home" exact component={ThemeJumbotron} />
                     </ThemeJumbotronWrapper>
                 }
 

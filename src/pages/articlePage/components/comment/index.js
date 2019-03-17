@@ -12,7 +12,7 @@ import {CommentWrapper,
         Avatar,
         GapH,
         ReplyButton,
-        DeleteButton } from './style'
+        DeleteButton,SubCommentEditorWrapper } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
 import SubComment from '../subComment'
@@ -38,7 +38,7 @@ class Comment extends PureComponent {
         this.state = {
             startIndex: 0,
             currentPage: 1,
-            isBeenDeleting: false
+            isBeenDeleting: false,
         }
     }
 
@@ -102,7 +102,7 @@ class Comment extends PureComponent {
             platformIconClasName = 'fa fa-android'
         }
 
-
+        const showSubCommentEditor = showSubCommentEditorManager.get('hostTopLevelCommentId') === comment_id
 
         return (
             <CommentWrapper isBeenDeleting={isBeenDeleting}
@@ -199,20 +199,15 @@ class Comment extends PureComponent {
 
 
                     {
-                        showSubCommentEditorManager.get('hostTopLevelCommentId') === comment_id
-                        &&
-                        <CSSTransition in={showSubCommentEditorManager.get('hostTopLevelCommentId') === comment_id}
-                                       timeout={400}
-                                       classNames={CommonClassNameConstants.SLIDE_UP_CSSTRANSITION}
-                                       appear={true}
-                                       unmountOnExit>
-                            <div>
-                                <GapH/>
-                                <SubCommentEditor article_id={comment.get('comment_hostArticle').get('article_id')}
-                                                  comment_referComment={comment}/>
-                            </div>
-                        </CSSTransition>
+                        showSubCommentEditor && <GapH/>
+
                     }
+                    <SubCommentEditorWrapper showSubCommentEditor={showSubCommentEditor}>
+                        <SubCommentEditor article_id={comment.get('comment_hostArticle').get('article_id')}
+                                          comment_referComment={comment}/>
+                    </SubCommentEditorWrapper>
+
+
 
                 </MultiContent>
 
@@ -231,6 +226,9 @@ class Comment extends PureComponent {
     }
 
     componentDidMount(){
+
+        window.heightOfSubCommentEditor = parseInt(window.getComputedStyle(document.getElementsByClassName('subCommentEditor')[0]).height)
+
         const comment_id = this.props.comment.get('comment_id').toString()
 
         //获取subComment数据

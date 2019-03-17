@@ -79,7 +79,7 @@ export const VisitorInfo = styled.div`
         flex-wrap: wrap;
         justify-content: space-between;
         @media(max-width:${widthOfMainArea}px){
-           display:block;
+           display:default;
         }
     `
 

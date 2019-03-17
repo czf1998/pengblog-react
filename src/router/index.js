@@ -1,5 +1,5 @@
 import React, {PureComponent, Fragment} from 'react';
-import {  Router, Route ,Redirect} from 'react-router-dom'
+import {  Router, Route ,Redirect,Switch} from 'react-router-dom'
 import { connect } from 'react-redux'
 import history from './history'
 import ArticlePageEXLoadable from '../pages/articlePageEX/loadable'
@@ -21,22 +21,28 @@ class RouterComponent extends PureComponent {
 
         let alreadyLoggedIn = getLoginStatus()
 
+        const legalRoutePath = []
         return (
             <Router history={history}>
                 <Fragment>
                     <Header/>
 
-                    {/*<Route exact path='/article/:article_id' component={ArticlePageLoadable}/>*/}
-                    <Route exact path='/' render={() => (<Redirect to='/home'/>)}/>
-                    <Route exact={isMobile} path='/home' component={HomeEXLoadable}/>
-                    <Route exact path='/article/:article_id' render={() => (isMobile ? (<ArticlePageLoadable/>) : (<ArticlePageEXLoadable/>))}/>
-                    <Route exact path='/manage' component={ManagePageLoadable}/>
-                    <Route exact path='/edit' component={ArticleEditPageLoadable}/>
-                    <Route exact path='/edit' render={() => (alreadyLoggedIn ? (<ArticleEditPageLoadable/>) : (<Redirect to='/login'/>))}/>
-                    <Route path='/login' render={() => (alreadyLoggedIn ? (<Redirect to='/home'/>) : (<LoginPageLoadable/>))}/>
-                    <Route exact path='/logout' render={() => (alreadyLoggedIn ? (<LoginPageLoadable/>) : (<Redirect to='/home'/>))}/>
-                    <Route exact path='/404' component={NoFoundPageLoadable}/>
-                    <Route component={NoFoundPageLoadable}/>
+                    <Switch>
+                        {/*<Route exact path='/article/:article_id' component={ArticlePageLoadable}/>*/}
+                        <Route exact path='/' render={() => (<Redirect to='/home'/>)}/>
+                        <Route exact={isMobile} path='/home' component={HomeEXLoadable}/>
+                        <Route exact path='/article/:article_id' render={() => (isMobile ? (<ArticlePageLoadable/>) : (<ArticlePageEXLoadable/>))}/>
+                        <Route exact path='/manage' component={ManagePageLoadable}/>
+                        <Route exact path='/edit' component={ArticleEditPageLoadable}/>
+                        <Route exact path='/edit' render={() => (alreadyLoggedIn ? (<ArticleEditPageLoadable/>) : (<Redirect to='/login'/>))}/>
+                        <Route path='/login' render={() => (alreadyLoggedIn ? (<Redirect to='/home'/>) : (<LoginPageLoadable/>))}/>
+                        <Route exact path='/logout' render={() => (alreadyLoggedIn ? (<LoginPageLoadable/>) : (<Redirect to='/home'/>))}/>
+                        <Route exact path='/404' component={NoFoundPageLoadable}/>
+                        {
+                            isMobile && <Route path="/home/article/:article_id" component={ArticlePageLoadable}/>
+                        }
+                        <Route component={NoFoundPageLoadable}/>
+                    </Switch>
                 </Fragment>
             </Router>
         );

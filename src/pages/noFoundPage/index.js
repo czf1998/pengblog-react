@@ -20,7 +20,7 @@ class NoFoundPage extends PureComponent {
         return (
           <NoFoundPageWrapper>
               <Image src={imageUrl}/>
-              <Title>404 NO FOUND</Title>
+              <Title>404 NOT FOUND</Title>
           </NoFoundPageWrapper>
         )
     }
