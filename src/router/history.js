@@ -13,6 +13,10 @@ history.listen((location, action) => {
         return
     }
 
+    if(location.pathname === '/404'){
+        return
+    }
+
     if(store.getState().get('router').get('lastPath') === '/login/dynamic'){
         return
     }

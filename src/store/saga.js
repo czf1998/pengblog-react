@@ -805,6 +805,9 @@ function* ajaxArticleDataForArticlePageData(action) {
         yield put(pushPrograssBarToEndAction)*/
     }catch (err) {
         console.log('ERR IN ACTION: GET_ARTICLE_PAGE_DATA  ERR: ' + err)
+        const state = yield select()
+        const goTo = state.get('router').get('goTo')
+        goTo('/404')
     }
 }
 
