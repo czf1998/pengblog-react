@@ -5,7 +5,7 @@ import {createAppointLoginPageInputValueAction,
         createLoginWithDynamicPasswordAction,
         createTriggerShowWarnOfInputOfLoginPageAction,
         createGetSmsAction,
-    createCountDownSmsSecondAction,createTriggerIsLoginWithDynamicPassword} from './actionCreators'
+    createCountDownSmsSecondAction} from './actionCreators'
 
 export {reducer}
 export {createAppointLoginPageInputValueAction,
@@ -14,4 +14,4 @@ export {createAppointLoginPageInputValueAction,
         createLoginWithDynamicPasswordAction,
         createTriggerShowWarnOfInputOfLoginPageAction,
         createGetSmsAction,
-        createCountDownSmsSecondAction,createTriggerIsLoginWithDynamicPassword}
+        createCountDownSmsSecondAction}

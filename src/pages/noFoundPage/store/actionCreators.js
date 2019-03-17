@@ -4,7 +4,7 @@ import {APPOINT_LOGIN_PAGE_INPUT_VALUE,
         LOGIN,
         TRIGGER_SHOW_WARN_OF_INPUT_OF_LOGIN_PAGE,
         GET_SMS,
-        COUNT_DOWN_SMS_SECOUND,TRIGGER_IS_LOGIN_WITH_DYNAMIC_PASSWORD} from './actionTypes'
+        COUNT_DOWN_SMS_SECOUND} from './actionTypes'
 
 export const createAppointLoginPageInputValueAction = (value) => ({
     type: APPOINT_LOGIN_PAGE_INPUT_VALUE,
@@ -36,9 +36,4 @@ export const createCountDownSmsSecondAction = () => ({
 
 export const createLoginWithDynamicPasswordAction = () => ({
     type: LOGIN_WITH_DYNAMIC_PASSWORD
-})
-
-export const createTriggerIsLoginWithDynamicPassword = (value) => ({
-    type: TRIGGER_IS_LOGIN_WITH_DYNAMIC_PASSWORD,
-    value
 })

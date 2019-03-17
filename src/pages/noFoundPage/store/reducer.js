@@ -1,7 +1,7 @@
 import {fromJS} from 'immutable'
 import {
     APPOINT_LOGIN_PAGE_INPUT_VALUE,
-    COUNT_DOWN_SMS_SECOUND, TRIGGER_IS_LOGIN_WITH_DYNAMIC_PASSWORD,
+    COUNT_DOWN_SMS_SECOUND,
     TRIGGER_SHOW_WARN_OF_INPUT_OF_LOGIN_PAGE
 } from "./actionTypes";
 import {TRIGGER_IS_LOGGING_IN} from "./actionTypes";
@@ -30,8 +30,7 @@ const defaultState = fromJS({
     alreadyLoggedIn: false,
     isGettingSms: false,
     haveGotSmsOnce: false,
-    currentSecond: -1,
-    loginWithDynamicPassword: false
+    currentSecond: -1
 })
 
 export default (state = defaultState, action) => {
@@ -74,15 +73,6 @@ export default (state = defaultState, action) => {
     if(action.type === COUNT_DOWN_SMS_SECOUND){
         return state.merge({
             currentSecond: state.get('currentSecond') - 1
-        })
-    }
-
-    if(action.type === TRIGGER_IS_LOGIN_WITH_DYNAMIC_PASSWORD){
-        return state.merge({
-            username: state.get('username').set('showWarn',false),
-            password: state.get('password').set('showWarn',false),
-            phoneNumber: state.get('phoneNumber').set('showWarn',false),
-            loginWithDynamicPassword: action.value
         })
     }
     return state

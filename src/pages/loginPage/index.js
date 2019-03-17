@@ -18,30 +18,23 @@ import {createAppointLoginPageInputValueAction,
         createLoginWithDynamicPasswordAction,
         createTriggerShowWarnOfInputOfLoginPageAction,
         createGetSmsAction,
-        createCountDownSmsSecondAction} from './store'
+        createCountDownSmsSecondAction,createTriggerIsLoginWithDynamicPassword} from './store'
 
 import {LoginerWithDynamicPassword,Loginer,Logouter} from './components'
 
 import Logo from "../homeEx/components/themeJumbotron/components/logo";
 import {createPushPrograssToEndAction} from "../home/store";
-import themeImage from "../../static/image/background/black-and-white-nature-sky-field.jpg";
 import {FADE_IN, SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
 import {PASSWORD, PHONENUMBER, CAPTCHA} from "./constant";
 import loadingSpin from "../../common/loading/svg/loading-spin.svg";
 import {createAppointNoticeContent, createTriggerAlreadyLoggedInAction} from "../../store/actionCreators";
 import {createGetCaptchaImageAction} from "../../common/captcha/store";
+import {USERNAME} from "../noFoundPage/constant";
 
 const uuidv4 = require('uuid/v4');
 
 class LoginPage extends PureComponent {
 
-    constructor(props){
-        super(props)
-        this.state = {
-            loginWithDynamicPassword: false
-        }
-        this.triggerLoginModern = this.triggerLoginModern.bind(this)
-    }
 
     render() {
 
@@ -54,12 +47,12 @@ class LoginPage extends PureComponent {
                 tryToLoginWithDynamicPassword,
                 alreadyLoggedIn,
                 tryToLogout,
-                shutdownShowWarn,
+                shutdownShowWarn,triggerIsLoginWithDynamicPassword,loginWithDynamicPassword,
                 tryToGetSms,
                 haveGotSmsOnce,
                 currentSecond} = this.props
 
-        const {loginWithDynamicPassword} = this.state
+        const themeImage = 'https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/black-and-white-nature-sky-field.440ec64e.jpg?q-sign-algorithm=sha1&q-ak=AKID3IJTEKi6qQ4HFFknCUW8jbPJBoXLfK5n&q-sign-time=1552814074;1552815874&q-key-time=1552814074;1552815874&q-header-list=&q-url-param-list=&q-signature=73f8bb7ae470b59d442399128af710ccc63f8e1c&x-cos-security-token=c60147323b49c60426139e77313bc28dfca5c3ef10001'
 
         return (
            <LoginPageWrapper>
@@ -91,9 +84,9 @@ class LoginPage extends PureComponent {
                            <Fragment>
 
                                <SwitchButton>
-                                   <Item onClick={() => {this.triggerLoginModern(false)}}
+                                   <Item onClick={() => {triggerIsLoginWithDynamicPassword(false)}}
                                          active={!loginWithDynamicPassword}>账户登录</Item>
-                                   <Item onClick={() => {this.triggerLoginModern(true)}}
+                                   <Item onClick={() => {triggerIsLoginWithDynamicPassword(true)}}
                                          active={loginWithDynamicPassword}>短信登录</Item>
                                    <Space/>
                                </SwitchButton>
@@ -149,14 +142,6 @@ class LoginPage extends PureComponent {
         }
     }
 
-    triggerLoginModern(flag){
-
-        this.setState({
-            loginWithDynamicPassword: flag
-        })
-
-    }
-
 
 }
 
@@ -171,6 +156,7 @@ const mapState = (state) => ({
         isGettingSms: state.get('loginPage').get('isGettingSms'),
         haveGotSmsOnce: state.get('loginPage').get('haveGotSmsOnce'),
         currentSecond: state.get('loginPage').get('currentSecond'),
+        loginWithDynamicPassword: state.get('loginPage').get('loginWithDynamicPassword')
     })
 
 const mapActions = (dispatch) => {
@@ -195,8 +181,8 @@ const mapActions = (dispatch) => {
             const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home'})
             dispatch(pushPrograssBarToEndAction)
         },
-        tryToLoginWithDynamicPassword(username,password){
-            if(username === ''){
+        tryToLoginWithDynamicPassword(phoneNumber,password){
+            if(phoneNumber === ''){
                 const value = {
                     inputId: PHONENUMBER,
                     showWarn: true
@@ -213,7 +199,7 @@ const mapActions = (dispatch) => {
                 dispatch(triggerShowWarnOfInputOfLoginPageAction)
             }
 
-            if(username === '' || password === ''){
+            if(phoneNumber === '' || password === ''){
                 return
             }
 
@@ -226,7 +212,7 @@ const mapActions = (dispatch) => {
         tryToLogin(username,password){
             if(username === ''){
                 const value = {
-                    inputId: PHONENUMBER,
+                    inputId: USERNAME,
                     showWarn: true
                 }
                 const triggerShowWarnOfInputOfLoginPageAction = createTriggerShowWarnOfInputOfLoginPageAction(value)
@@ -282,6 +268,13 @@ const mapActions = (dispatch) => {
         countDownCurrentSmsSecond(){
             const action = createCountDownSmsSecondAction()
             dispatch(action)
+        },
+        triggerIsLoginWithDynamicPassword(flag){
+
+            const action = createTriggerIsLoginWithDynamicPassword(flag)
+
+            dispatch(action)
+
         }
     }
 }

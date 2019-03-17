@@ -25,12 +25,15 @@ import {reactLogo,
         webpackLogo,
         npmLogo,
         centosLogo,
+        webstormLogo,
+        eclipseLogo,
         tomcatLogo,
-        nginxLogo,reactRouterLogo} from '../../../../static/svg/logo'
+        nginxLogo} from '../../../../static/svg/logo'
 
 import mybatisLogo from '../../../../static/image/logo/mybatis.png'
 import mavenLogo from '../../../../static/image/logo/maven.png'
 import tencentcloud from '../../../../static/image/logo/tencentcloud.png'
+import themeImage from '../../../../static/image/theme/theme.png'
 import {SLIDE_UP_FAST} from "../../../../commonStyle/commonClassNameConstant";
 import {FADE_IN} from "../../../../commonStyle/commonClassNameConstant";
 
@@ -39,8 +42,6 @@ import {FADE_IN} from "../../../../commonStyle/commonClassNameConstant";
 class ThemeJumbotron extends PureComponent {
 
     render() {
-
-        const themeImage = 'https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/theme.a5d5fc1c.png'
 
         const {heightOfBrowser} = this.props
 
@@ -69,7 +70,6 @@ class ThemeJumbotron extends PureComponent {
                     <PowerBy>Powered by</PowerBy>
                     <SponsorContain>
                         <SponsorItem src={reactLogo} title="react"/>
-                        <SponsorItem src={reactRouterLogo} title="reactRouter"/>
                         <SponsorItem src={reduxLogo} title="redux"/>
                         <SponsorItem src={reduxSagaLogo} title="reduxSaga"/>
                         <SponsorItem src={springLogo} title="spring"/>
@@ -79,6 +79,8 @@ class ThemeJumbotron extends PureComponent {
                         <SponsorItem src={mybatisLogo} title="mybatis"/>
                         <SponsorItem src={tencentcloud} title="tencentCloud"/>
                         <SponsorItem src={centosLogo} title="centOS"/>
+                        <SponsorItem src={webstormLogo} title="webstorm"/>
+                        <SponsorItem src={eclipseLogo} title="eclipse"/>
                         <SponsorItem src={tomcatLogo} title="tomcat"/>
                         <SponsorItem src={nginxLogo} title="nginx"/>
                         <SponsorItem src={mavenLogo} title="maven" style={{width: '120px',height:'100%',padding:'10px'}}/>

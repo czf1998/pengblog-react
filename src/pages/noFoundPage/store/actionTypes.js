@@ -11,5 +11,3 @@ export const GET_SMS = 'getSms'
 export const COUNT_DOWN_SMS_SECOUND = 'countDownSmsSecond'
 
 export const LOGIN_WITH_DYNAMIC_PASSWORD = 'loginWithDynamicPassword'
-
-export const TRIGGER_IS_LOGIN_WITH_DYNAMIC_PASSWORD = 'triggerIsLoginWithDynamicPassword'

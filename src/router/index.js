@@ -8,6 +8,7 @@ import ArticleEditPageLoadable from '../pages/articleEditPage/loadable'
 import HomeEXLoadable from '../pages/homeEx/loadable'
 import ManagePageLoadable from '../pages/managePage/loadable'
 import LoginPageLoadable from '../pages/loginPage/loadable'
+import NoFoundPageLoadable from '../pages/noFoundPage/loadable'
 import { Header } from '../common'
 import {createTriggerAlreadyLoggedInAction} from "../store/actionCreators";
 import {createAppointLoginPageInputValueAction} from "../pages/loginPage/store";
@@ -34,6 +35,7 @@ class RouterComponent extends PureComponent {
                     <Route exact path='/edit' render={() => (alreadyLoggedIn ? (<ArticleEditPageLoadable/>) : (<Redirect to='/login'/>))}/>
                     <Route path='/login' render={() => (alreadyLoggedIn ? (<Redirect to='/home'/>) : (<LoginPageLoadable/>))}/>
                     <Route exact path='/logout' render={() => (alreadyLoggedIn ? (<LoginPageLoadable/>) : (<Redirect to='/home'/>))}/>
+                    <Route component={NoFoundPageLoadable}/>
                 </Fragment>
             </Router>
         );

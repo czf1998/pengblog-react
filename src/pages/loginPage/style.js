@@ -18,7 +18,7 @@ export const LoginPageWrapper = styled.div`
         position: fixed;
         background: white;
         width: 100%;
-        height: calc(100% - 70px);
+        min-height: calc(100% - 70px);
     `
 
 export const ThemeJumbotron = styled.div`
