@@ -797,13 +797,21 @@ function* recordScrollTopOfElementEl(action) {
 }
 
 function* ajaxArticleDataForArticlePageData(action) {
+
+    //如果之前对文章的请求还未完成，中止它
+   if(window.currentArticleGetting && window.currentArticleGetting !== action.value.article_id){
+       window.axiosSource.cancel('Cancel')
+   }
     try{
         const res = yield ArticleRequest.RequestArticleData(action.value.article_id)
         let appointDataAction = createDeliverArticleDataToArticlePage(res.data)
         yield put(appointDataAction)
-      /*  let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'articlePage'})
-        yield put(pushPrograssBarToEndAction)*/
+        window.currentArticleGetting = undefined
+        window.axiosSource = undefined
     }catch (err) {
+       if(err.message === 'Cancel'){
+           return
+       }
         console.log('ERR IN ACTION: GET_ARTICLE_PAGE_DATA  ERR: ' + err)
         const state = yield select()
         const goTo = state.get('router').get('goTo')

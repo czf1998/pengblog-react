@@ -5,6 +5,7 @@ import {createTriggerShowModalAction} from "../common/modal/store";
 
 const history = createBrowserHistory()
 
+
 history.listen((location, action) => {
     handlerModal()
     registerCurrentPath(location)
@@ -29,6 +30,7 @@ history.listen((location, action) => {
 export default history
 
 const rebootPrograssBar = () => {
+    window.clearInterval(store.getState().get('prograssBar').get('prograssBarManager').get('prograssTimer'))
     store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
 }
 

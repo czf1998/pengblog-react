@@ -21,7 +21,6 @@ class RouterComponent extends PureComponent {
 
         let alreadyLoggedIn = getLoginStatus()
 
-        const legalRoutePath = []
         return (
             <Router history={history}>
                 <Fragment>

@@ -1,12 +1,20 @@
 import * as Api from '../apiConstant'
 import axios from 'axios'
 
+
+
 export function RequestArticleData(article_id) {
+
+    window.axiosSource = axios.CancelToken.source();
+    window.currentArticleGetting = article_id
+
     let config = {
+        cancelToken: window.axiosSource.token,
         params: {
             article_id: article_id
         }
     }
+
     return axios.get(Api.API_GET_ARTICLE_BY_ID, config)
 }
 

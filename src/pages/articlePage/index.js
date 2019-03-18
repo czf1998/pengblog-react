@@ -156,6 +156,18 @@ class ArticlePage extends PureComponent {
             this.props.getCommentListData(this.props.match.params.article_id, 0, this.props.pageScale)
         }
 
+        if(preProps.dataReady === false && this.props.dataReady) {
+            this.props.pushPrograssBarToEnd()
+        }
+
+
+
+
+        //动态记录主题图片的尺寸
+        if(this.props.article.get('article_titleImageUrl') === undefined){
+            return
+        }
+        
         let imageObj = new Image()
 
         imageObj.src = this.props.article.get('article_titleImageUrl')
@@ -164,10 +176,6 @@ class ArticlePage extends PureComponent {
 
             this.props.appointSizeOfTitleImage(imageObj)
 
-        }
-
-        if(preProps.dataReady === false && this.props.dataReady) {
-            this.props.pushPrograssBarToEnd()
         }
 
     }

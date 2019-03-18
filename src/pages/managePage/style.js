@@ -150,8 +150,9 @@ export const PaginationFixer = styled.div`
         margin-bottom: 2rem;
     `
 
+
+
 export const LoadingWrapper = styled.div`
-        position: fixed;
         width: 100%;
         height: 100%;
     `

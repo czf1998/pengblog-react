@@ -5,6 +5,8 @@ import { actionCreators } from './store'
 
 const Nanobar = require('nanobar');
 
+window.nanobar = new Nanobar()
+
 class PrograssBar extends PureComponent {
 
 
@@ -20,12 +22,11 @@ class PrograssBar extends PureComponent {
     }
 
     componentDidMount() {
-        const nanobar = new Nanobar();
         const nanobarManager = {
-            nanobar: nanobar,
-            prograssBarGoToTheMilePost: nanobarGoToTheMilePost(nanobar, this.props.dispatcher),
-            prograssBarGoToTheEnd: nanobarGoToTheEnd(nanobar),
-            prograssBarGoToTheEndAtOnce: nanobarGoToTheEndAtOnce(nanobar)
+            nanobar: window.nanobar,
+            prograssBarGoToTheMilePost: nanobarGoToTheMilePost(window.nanobar, this.props.dispatcher),
+            prograssBarGoToTheEnd: nanobarGoToTheEnd(window.nanobar),
+            prograssBarGoToTheEndAtOnce: nanobarGoToTheEndAtOnce(window.nanobar)
         }
         this.props.appointNanobarManager(nanobarManager)
     }
@@ -38,7 +39,6 @@ class PrograssBar extends PureComponent {
 
 const nanobarGoToTheMilePost = (nanobar, dispatcher) => {
 
-
     return function(){
         nanobar.go(40)
 
@@ -50,6 +50,7 @@ const nanobarGoToTheMilePost = (nanobar, dispatcher) => {
                 nanobar.go(i)
         }, 500)
 
+
         const recordTimerAction = actionCreators.createRecordNanobarTimerAction(prograssTimer)
         dispatcher(recordTimerAction)
     }
@@ -57,11 +58,8 @@ const nanobarGoToTheMilePost = (nanobar, dispatcher) => {
 
 const nanobarGoToTheEnd = (nanobar) => {
     return function(nanobarTimer) {
-        window.throttleByGap(() => {
             clearInterval(nanobarTimer)
             nanobar.go(100)
-        }, 500)
-
     }
 }
 

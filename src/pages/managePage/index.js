@@ -388,7 +388,6 @@ const mapActions = (dispatch) => {
             }
 
 
-            console.log('get')
             console.log(resetPageIndexFlag)
             const resetCentralControllerAction = createResetCentralControllerOfManagePage(LABEL_CONTEXT)
             dispatch(resetCentralControllerAction)
