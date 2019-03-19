@@ -6,7 +6,7 @@ import {ModalItemWrapper,
         } from "./style";
 import Captcha from '../../../captcha'
 import {CancelButton, ConfirmButton, OperationColumn} from "../commonModalItem/style";
-import {createTriggerModalIsLoadingAction, createTriggerShowModalAction} from "../../store";
+import {createTriggerModalIsLoadingAction, createTriggerShowModalAction,createSubmitCommentWithCaptchaAction} from "../../store";
 import {put} from "redux-saga/effects";
 
 
@@ -15,7 +15,7 @@ class CaptchaComment extends PureComponent{
 
     render(){
 
-        const {modalTitle,modalContent,browser,multiPostProcessor,postProcessor,closeThisModal,isLoading} = this.props
+        const {modalTitle,modalContent,browser,multiPostProcessor,postProcessor,closeThisModal,isLoading,currentCommentEditorId} = this.props
 
         return (
             <ModalItemWrapper>
@@ -33,7 +33,7 @@ class CaptchaComment extends PureComponent{
                     modalContent !== '' && <Warn>{modalContent}</Warn>
                 }
                 <OperationColumn>
-                    <ConfirmButton browser={browser} onClick={() => {multiPostProcessor(postProcessor)}}>
+                    <ConfirmButton browser={browser} onClick={() => {multiPostProcessor(currentCommentEditorId)}}>
                         {
                             isLoading ?
                                 <i className="fa fa-spinner fa-pulse"/>
@@ -55,7 +55,8 @@ const mapState = (state) => ({
     postProcessor: state.get('modal').get('postProcessor'),
     modalTitle: state.get('modal').get('modalTitle'),
     modalContent: state.get('modal').get('modalContent'),
-    isLoading: state.get('modal').get('isLoading')
+    isLoading: state.get('modal').get('isLoading'),
+    currentCommentEditorId: state.get('commentEditor').get('currentCommentEditorId')
 })
 
 const mapActions = (dispatch) => ({
@@ -63,10 +64,12 @@ const mapActions = (dispatch) => ({
         const triggerShowModalAction = createTriggerShowModalAction(false)
         dispatch(triggerShowModalAction)
     },
-    multiPostProcessor(postProcessor){
+    multiPostProcessor(currentCommentEditorId){
         const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(true)
         dispatch(triggerModalIsLoadingAction)
-        postProcessor()
+
+        const submitCommentAction = createSubmitCommentWithCaptchaAction(currentCommentEditorId)
+        dispatch(submitCommentAction)
     }
 })
 

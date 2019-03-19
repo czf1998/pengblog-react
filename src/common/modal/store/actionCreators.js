@@ -1,4 +1,4 @@
-import {TRIGGER_SHOW_MODAL,APPOINT_MODAL_MSG,TRIGGER_MODAL_IS_LOADING} from './actionTypes'
+import {TRIGGER_SHOW_MODAL,APPOINT_MODAL_MSG,TRIGGER_MODAL_IS_LOADING,SUBMIT_COMMENT_WITH_CAPTCHA} from './actionTypes'
 
 export const createTriggerShowModalAction = (value) => ({
     type: TRIGGER_SHOW_MODAL,
@@ -12,5 +12,10 @@ export const createAppointModalMsgAction = (value) => ({
 
 export const createTriggerModalIsLoadingAction = (value) => ({
     type: TRIGGER_MODAL_IS_LOADING,
+    value
+})
+
+export const createSubmitCommentWithCaptchaAction = (value) => ({
+    type: SUBMIT_COMMENT_WITH_CAPTCHA,
     value
 })

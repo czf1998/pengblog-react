@@ -80,6 +80,7 @@ import {DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/compone
 import {GET_CAPTCHA_IMAGE} from "../common/captcha/store/actionTypes";
 import {GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD} from "../pages/home/store/actionType";
 import {CAPTCHA_MODAL} from "../common/modal/store/reducer";
+import {SUBMIT_COMMENT_WITH_CAPTCHA} from "../common/modal/store/actionTypes";
 
 
 const NO_MORE_ITEM_AVAILABLE = 'noMoreItemAvailable'
@@ -93,8 +94,8 @@ function* mySaga() {
     yield takeEvery(GET_COMMENT_LIST_DATA, ajaxCommentListData)
     yield takeEvery(GET_COUNT_OF_COMMENT, ajaxCountOfComment)
     yield takeEvery(GET_SUB_COMMENT_LIST_DATA, ajaxSubCommentListData)
-    //yield takeEvery(SUBMIT_COMMENT, ajaxSubmitComment)
     yield takeEvery(SUBMIT_COMMENT, ajaxCheckWetherNeedCaptchaForSubmitComment)
+    yield takeEvery(SUBMIT_COMMENT_WITH_CAPTCHA, ajaxSubmitCommentWithCaptcha)
     yield takeEvery(GET_DRAFT_DATA, ajaxDraft)
     yield takeEvery(SAVE_ARTICLE_ACTION, ajaxSaveArticle)
     yield takeEvery(UPLOAD_TITLE_IMAGE, ajaxUploadImage)
@@ -664,18 +665,12 @@ function* ajaxDraft() {
 //check提交评论时是否需要输入验证码
 function* ajaxCheckWetherNeedCaptchaForSubmitComment(action){
 
-
-
-
-
     try{
         const res = yield CommentRequest.CheckWetherNeedCaptcha()
         if(res.data === false){
             yield ajaxSubmitComment(action)
             return
         }
-
-        const generaterPostProcessorNexter = generaterPostProcessor()
 
         const appointModalMsgValue = {
             modalTitle: '频繁发言，请输入验证码',
@@ -698,6 +693,8 @@ function* ajaxSubmitCommentWithCaptcha(action) {
 
     const captchaPassResult = yield checkCaptchaCode('modal',false)
 
+
+
     if(!captchaPassResult.pass){
 
         const action = createTriggerModalIsLoadingAction(false)
@@ -716,28 +713,16 @@ function* ajaxSubmitCommentWithCaptcha(action) {
 
     try{
 
-        const editorId = action.value.editorId
+        const editorId = action.value
 
-        const state = yield select();
-
-        /*editorId: editorId,
-            article_id:article_id,
-            referCommentId:referCommentId,
-            visitorName:visitorName,
-            commentContent:commentContent,
-            visitorEmail:visitorEmail,
-            visitorSiteAddress:visitorSiteAddress*/
+        const state = yield select()
 
         const article_id = state.get('articlePage').get('article').get('article_id')
 
         const referCommentId = state.get('commentEditor').get('showSubCommentEditorManager').get('hostTopLevelCommentId')
-
         const visitorName = state.get('commentEditor').get(editorId).get('visitorName').get('value')
-
         const commentContent = state.get('commentEditor').get(editorId).get('commentContent').get('value')
-
         const visitorEmail = state.get('commentEditor').get(editorId).get('visitorEmail').get('value')
-
         const visitorSiteAddress = state.get('commentEditor').get(editorId).get('visitorSiteAddress').get('value')
 
         const captchaId = state.get('captcha').get('modal').get('captchaId')
@@ -756,12 +741,13 @@ function* ajaxSubmitCommentWithCaptcha(action) {
         }
 
         const res = yield CommentRequest.SubmitCommentData(value)
+
         if(res.status === 200){
 
             /*结束submit按钮加载状态*/
             const triggerCommentEditorLoadingActionValue = {
                 isLoading: false,
-                editorId: action.value.editorId
+                editorId: action.value
             }
             const triggerCommentEditorLoadingAction = createTriggerCommentEditorLoadingAction(triggerCommentEditorLoadingActionValue)
             yield put(triggerCommentEditorLoadingAction)
@@ -773,7 +759,7 @@ function* ajaxSubmitCommentWithCaptcha(action) {
 
             /*重置文本编辑框正文value*/
             const appointInputValue = {
-                editorId: action.value.editorId,
+                editorId: action.value,
                 input: COMMENT_CONTENT,
                 inputValue: ''
             }
@@ -797,6 +783,9 @@ function* ajaxSubmitCommentWithCaptcha(action) {
             }
             const appointShowSubCommentEditorManagerAction = createAppointShowSubCommentEditorManagerAction(appointShowSubCommentEditorManagerActionValue)
             yield put(appointShowSubCommentEditorManagerAction)
+
+            const triggerShowModalAction = createTriggerShowModalAction(false)
+            yield put(triggerShowModalAction)
         }
     }catch (err) {
         const appointNoticeContent = createAppointNoticeContent('评论提交失败: ' + err.response.data.msg)
@@ -805,7 +794,7 @@ function* ajaxSubmitCommentWithCaptcha(action) {
         /*结束submit按钮加载状态*/
         const triggerCommentEditorLoadingActionValue = {
             isLoading: false,
-            editorId: action.value.editorId
+            editorId: action.value
         }
         const triggerCommentEditorLoadingAction = createTriggerCommentEditorLoadingAction(triggerCommentEditorLoadingActionValue)
         yield put(triggerCommentEditorLoadingAction)
@@ -1086,11 +1075,9 @@ function* checkCaptchaCode(captchaHost,showNotice) {
                 const appointNoticeContent = createAppointNoticeContent('验证码已过期')
                 yield put(appointNoticeContent)
             }
-
-            return {pass:false,message:res.data.message}
         }
 
-        return {pass:true}
+        return res.data
     }catch (err) {
         console.log('ERR IN ACTION: CHECK_CAPTCHA_CODE  ERR: ' + err)
     }

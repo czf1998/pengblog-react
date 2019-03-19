@@ -1,10 +1,12 @@
 import { fromJS } from 'immutable'
 import { APPEND_EMOJI_TO_COMMENT_CONTENT} from "../components/emojiPicker/store";
-import {TRIGGER_SHOW_EMOJIPICKER,
-        APPOINT_INPUT_VALUE,
-        APPOINT_INPUT_WARN,
-        TRIGGER_HAS_ONCE_TRY_TO_SUBMIT,
-        TRIGGER_COMMENT_EDITOR_LOADING} from './actionType'
+import {
+    TRIGGER_SHOW_EMOJIPICKER,
+    APPOINT_INPUT_VALUE,
+    APPOINT_INPUT_WARN,
+    TRIGGER_HAS_ONCE_TRY_TO_SUBMIT,
+    TRIGGER_COMMENT_EDITOR_LOADING, APPOINT_CURRENT_COMMENT_EDITOR_ID
+} from './actionType'
 import {
     COMMENT_CONTENT
 } from '../constant'
@@ -13,7 +15,11 @@ import {
     APPOINT_SHOW_SUB_COMMENT_EDITOR_MANAGER
 } from "../../comment/store/actionTypes";
 
+export const TOP_LEVEL_COMMENT_EDITOR = 'topLevelCommentEditor'
+export const SUB_COMMENT_EDITOR = 'subCommentEditor'
+
 const defaultState = fromJS({
+    currentCommentEditorId: TOP_LEVEL_COMMENT_EDITOR,
     topLevelCommentEditor: fromJS({
         showEmojiPicker: false,
         commentContent: fromJS({
@@ -149,5 +155,10 @@ export default (state = defaultState, action) => {
         })
     }
 
+    if(action.type === APPOINT_CURRENT_COMMENT_EDITOR_ID){
+        return state.merge({
+            currentCommentEditorId: action.value
+        })
+    }
     return state
 }

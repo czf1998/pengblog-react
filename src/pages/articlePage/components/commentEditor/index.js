@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import {createTriggerShowEmojiPickerAction,
         createAppointInputValueAction,
         createAppointInputWarnAction,
-        createTriggerHasOnceTryToSubmitAction,
+        createTriggerHasOnceTryToSubmitAction,createAppointCurrentCommentEditorIdAction,
         createSubmitCommentAction,
         createTriggerCommentEditorLoadingAction } from './store'
 import { CountLength,setCookie,deleteCookie } from "../../../../exJs";
@@ -91,6 +91,9 @@ const mapActions = (dispatch) => ({
                       visitorEmail,
                       visitorSiteAddress,
                       editorId){
+
+            const appointCurrentCommentEditorIdAction = createAppointCurrentCommentEditorIdAction(editorId)
+            dispatch(appointCurrentCommentEditorIdAction)
 
             const triggerHasOnceTryToSubmitAction = createTriggerHasOnceTryToSubmitAction(editorId)
             dispatch(triggerHasOnceTryToSubmitAction)

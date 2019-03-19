@@ -1,11 +1,11 @@
 import reducer from './reducer'
 import {createTriggerShowModalAction,
         createAppointModalMsgAction,
-        createTriggerModalIsLoadingAction} from './actionCreators'
+        createTriggerModalIsLoadingAction,createSubmitCommentWithCaptchaAction} from './actionCreators'
 import {APPOINT_MODAL_MSG} from './actionTypes'
 
 export {reducer}
 export {createTriggerShowModalAction,
         createAppointModalMsgAction,
-        createTriggerModalIsLoadingAction}
+        createTriggerModalIsLoadingAction,createSubmitCommentWithCaptchaAction}
 export {APPOINT_MODAL_MSG}

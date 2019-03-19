@@ -3,7 +3,7 @@ import {createTriggerShowEmojiPickerAction,
         createAppointInputValueAction,
         createTriggerHasOnceTryToSubmitAction,
         createSubmitCommentAction,
-        createTriggerCommentEditorLoadingAction} from './actionCreators'
+        createTriggerCommentEditorLoadingAction,createAppointCurrentCommentEditorIdAction} from './actionCreators'
 
 import reducer from './reducer'
 
@@ -14,5 +14,5 @@ export {createTriggerShowEmojiPickerAction,
         createAppointInputValueAction,
         createTriggerHasOnceTryToSubmitAction,
         createSubmitCommentAction,
-        createTriggerCommentEditorLoadingAction }
+        createTriggerCommentEditorLoadingAction,createAppointCurrentCommentEditorIdAction}
 

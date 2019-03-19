@@ -19,10 +19,10 @@ export const ModalTitle = styled.div`
 
 export const Warn = styled.div`
         color: red;
-        padding: 0.4rem 0;
+        padding: 1rem 2rem;
     `
 
 export const CaptchaWrapper = styled.div`
-        padding 2rem 2rem;
+        padding 3rem 2rem;
         padding-bottom: 0;
     `

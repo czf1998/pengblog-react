@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 
 export const CaptchaWrapper = styled.div`
-        margin-bottom: 2rem;
         display: flex;
         align-items: stretch;
     `

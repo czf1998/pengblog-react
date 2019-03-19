@@ -9,3 +9,5 @@ export const TRIGGER_HAS_ONCE_TRY_TO_SUBMIT = 'triggerHasOnceTryToSubmit'
 export const SUBMIT_COMMENT = 'submitComment'
 
 export const TRIGGER_COMMENT_EDITOR_LOADING = 'triggerCommentEditorLoading'
+
+export const APPOINT_CURRENT_COMMENT_EDITOR_ID = 'appointCurrentCommentEditorId'
