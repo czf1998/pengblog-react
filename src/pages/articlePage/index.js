@@ -106,12 +106,7 @@ class ArticlePage extends PureComponent {
                                 <GapLine/>
                                 <ForMore isLoading={isLoadingMoreComment}
                                          noMore={currentPage === maxPage}
-                                         clickHandler={this.props.getMoreCommentListData.bind(this)}
-                                         meta={[article_id,
-                                             startIndex,
-                                             pageScale,
-                                             maxPage,
-                                             currentPage]}/>
+                                         clickHandler={this.props.getMoreCommentListData}/>
 
                             </ArticleMainArea>
 
@@ -135,9 +130,10 @@ class ArticlePage extends PureComponent {
             this.props.pushPrograssBarToEnd()
             return
         }*/
+
         this.props.resetCommentEditor()
         this.props.getArticleData(this.props.match.params.article_id)
-        this.props.getCommentListData(this.props.match.params.article_id, 0, this.props.pageScale)
+        this.props.getCommentListData(this.props.match.params.article_id)
     }
 
     componentWillUnmount() {
@@ -167,7 +163,7 @@ class ArticlePage extends PureComponent {
         if(this.props.article.get('article_titleImageUrl') === undefined){
             return
         }
-        
+
         let imageObj = new Image()
 
         imageObj.src = this.props.article.get('article_titleImageUrl')
@@ -207,11 +203,9 @@ const mapActions = (dispatch) => {
             const action = createGetArticlePageDataAction(value)
             dispatch(action)
         },
-        getCommentListData(article_id, startIndex, pageScale) {
+        getCommentListData(article_id) {
             let value = {
-                article_id: article_id,
-                startIndex: startIndex,
-                pageScale: pageScale
+                article_id: article_id
             }
             const action = createGetCommentListDataAction(value)
             dispatch(action)
@@ -224,8 +218,9 @@ const mapActions = (dispatch) => {
             const loadArticleCacheAction = createLoadArticleCacheAction()
             dispatch(loadArticleCacheAction)
         },
-        getMoreCommentListData(article_id, startIndex, pageScale) {
-            this.props.getCommentListData(article_id, startIndex, pageScale)
+        getMoreCommentListData() {
+            const action = createGetCommentListDataAction()
+            dispatch(action)
         },
         pushPrograssBarToEnd() {
             const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'articlePage'})

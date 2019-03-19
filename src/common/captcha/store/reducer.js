@@ -22,6 +22,14 @@ const defaultState = fromJS({
         isLoading: true,
         showWarn: false,
         warnMsg: '尚未填写'
+    }),
+    modal:fromJS({
+        captchaId: '',
+        captchaCode: '',
+        captchaImage: '',
+        isLoading: true,
+        showWarn: false,
+        warnMsg: '尚未填写'
     })
 })
 

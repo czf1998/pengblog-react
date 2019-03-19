@@ -10,7 +10,9 @@ export function SubmitCommentData(value) {
         comment_content: value.commentContent,
         visitor_email: value.visitorEmail,
         visitor_siteAddress: value.visitorSiteAddress,
-        comment_platform: navigator.platform
+        comment_platform: navigator.platform,
+        captchaId: value.captchaId,
+        captchaCode: value.captchaCode
     }
     return axios.post(Api.API_POST_SUBMIT_COMMENT,commentData);
 }
@@ -76,3 +78,9 @@ export function RequestDeleteComment(value) {
     return axios.get(Api.API_DELETE_COMMENT, config)
 }
 
+
+export function CheckWetherNeedCaptcha() {
+
+    return axios.get(Api.API_CHECK_WHETHER_NEED_CAPTCHA_TO_SUBMIT_COMMENT)
+
+}

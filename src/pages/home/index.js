@@ -40,7 +40,7 @@ class Home extends PureComponent {
             <HomeWrapper className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
 
                 <SearchBar backgroundColor='white'
-                           style={{borderBottom:'solid 1px #F0F0F0',position:'sticky',top:'0',zIndex:'1'}}
+                           style={{borderBottom:'solid 1px #F0F0F0',position:'sticky',top:'0',zIndex:isMobile?'0':'1'}}
                            searchBarId="home"
                            dataGetter={() => {getArticleListByKeyword(true)}}/>
 

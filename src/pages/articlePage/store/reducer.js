@@ -11,7 +11,7 @@ import {APPOINT_SIZE_OF_TITLE_IMAGE} from "../../articleEditPage/components/titl
 
 const defaultState = fromJS({
     cache: {},
-    article: {},
+    article: fromJS({}),
     titleImageSize: fromJS({}),
     startIndex: 0,
     pageScale: 5,

@@ -81,11 +81,11 @@ const appointDocumentTitle = (path,currentArticle) => {
         return
     }
     if(path.match(/^\/home\/article/) !== null){
-        document.title = currentArticle.get('article_title')
+        document.title = currentArticle.get('article_title') ? currentArticle.get('article_title') : '载入中...'
         return
     }
     if(path.match(/^\/article/) !== null){
-        document.title = currentArticle.get('article_title')
+        document.title = currentArticle.get('article_title') ? currentArticle.get('article_title') : '载入中...'
         return
     }
     if(path === '/edit'){

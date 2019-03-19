@@ -28,8 +28,7 @@ class ArticleSummary extends PureComponent {
         const isFocus = article.get('article_id') === currentArticleId
 
         return (
-            <Link to={ARTICLE_PAGE_PATH}>
-                <ArticleSummaryWrapper
+                <ArticleSummaryWrapper onClick={() => {goTo(ARTICLE_PAGE_PATH)}}
                     widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}
                     isFocus={isFocus}>
 
@@ -77,7 +76,6 @@ class ArticleSummary extends PureComponent {
                     </ArticleInfoColumn>
 
                 </ArticleSummaryWrapper>
-            </Link>
 
         );
     }

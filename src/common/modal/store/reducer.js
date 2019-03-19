@@ -5,6 +5,7 @@ import {APPOINT_MODAL_MSG} from "../store";
 export const COMMON_MODAL = 'common'
 export const SHARE_TO_WECHAT_MODAL = 'shareToWechat'
 export const CONTACT_ME_MODAL = 'contactMe'
+export const CAPTCHA_MODAL = 'captcha'
 
 const defaultState = fromJS({
     showModal: false,
@@ -24,10 +25,10 @@ export default (state = defaultState, action) => {
     }
     if(action.type === APPOINT_MODAL_MSG){
         return state.merge({
-            modalTitle: action.value.modalTitle,
-            modalContent: action.value.modalContent,
+            modalTitle: action.value.modalTitle ? action.value.modalTitle : state.get('modalTitle'),
+            modalContent: action.value.modalContent ? action.value.modalContent : state.get('modalContent'),
             postProcessor: action.value.postProcessor ? action.value.postProcessor : () => {},
-            context: action.value.context
+            context: action.value.context ? action.value.context : state.get('context')
         })
     }
     if(action.type === TRIGGER_MODAL_IS_LOADING){

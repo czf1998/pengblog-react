@@ -8,8 +8,8 @@ import {ModalWrapper,
 import {CommonClassNameConstants} from "../../commonStyle";
 import {createTriggerShowModalAction} from "./store";
 
-import {CommonModalItem,ShareToWechatModalItem,ContactMeModalItem} from './modalItem'
-import {COMMON_MODAL, SHARE_TO_WECHAT_MODAL,CONTACT_ME_MODAL} from "./store/reducer";
+import {CommonModalItem,ShareToWechatModalItem,ContactMeModalItem,CaptchaModalItem} from './modalItem'
+import {COMMON_MODAL, SHARE_TO_WECHAT_MODAL, CONTACT_ME_MODAL, CAPTCHA_MODAL} from "./store/reducer";
 
 class Modal extends PureComponent{
 
@@ -52,6 +52,10 @@ class Modal extends PureComponent{
                                 <ContactMeModalItem/>
                         }
 
+                        {
+                            context === CAPTCHA_MODAL &&
+                                <CaptchaModalItem/>
+                        }
 
                         <CloseButton className="iconfont"
                                      onClick={closeThisModal}>&#xe70b;</CloseButton>
