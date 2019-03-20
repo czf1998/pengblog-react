@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
-import {ButtonWrapper, InputWrapper, LoginerWrapper} from "../../style";
+import {ButtonWrapper, InputWrapper, LoginerWrapper,CaptchaWrapper} from "../../style";
 import InputEX from "../../../../common/inputEX";
 import {PASSWORD, USERNAME} from "../../constant";
 import {Button,Captcha} from "../../../../common";
@@ -49,7 +49,9 @@ class Loginer extends PureComponent {
                              onChange={(e) => {appointLoginPageInputValue(PASSWORD,e)}}/>
                 </InputWrapper>
 
-                <Captcha captchaHost="loginPage" manualInit={true}/>
+                <CaptchaWrapper>
+                    <Captcha captchaHost="loginPage" manualInit={true}/>
+                </CaptchaWrapper>
 
                 <ButtonWrapper>
                     {

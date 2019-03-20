@@ -34,8 +34,6 @@ export default (state = defaultState, action) => {
         let commentList = state.get('commentList').toJS()
         let startIndex = state.get('startIndex')
         let newCommentList = []
-        console.log(commentList)
-
         commentList.map((item) => {
 
             if(item.comment_id === action.value.comment_id){

@@ -36,7 +36,7 @@ import {createDeliverArticleDataToHomeAction,
         createRecordSubCommentHasBeenDeletedAction,
         createDeliverCaptchaImageBase64Action,
         createTriggerShowCaptchaInputWarnAction,
-    createTriggerIsGettingSmsAction} from './actionCreators'
+    createTriggerIsGettingSmsAction,createAppointCaptchaWarnMsgAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest,
@@ -167,35 +167,18 @@ function* ajaxLoginWithDynamicPassword() {
 
         const res = yield LoginRequest.RequestLoginWithDynamicPassword(loginData)
 
-        //登录成功
-        if(res.data.loginStatus === 'success'){
-            //本地存储token以及过期时间
-            let validTime = res.data.validTimeMillis
-            let expTime = new Date().getTime() + validTime
-            localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, phoneNumber:phoneNumber}))
+        //本地存储token以及过期时间
+        let validTime = res.data.validTimeMillis
+        let expTime = new Date().getTime() + validTime
+        localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, phoneNumber:phoneNumber}))
 
-            //更新reducer为已登录
-            const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
-            yield put(triggerAlreadyLoggedInAction)
+        //更新reducer为已登录
+        const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
+        yield put(triggerAlreadyLoggedInAction)
 
-            /*通知窗口提示登录成功*/
-            const appointNoticeContent = createAppointNoticeContent('登录成功')
-            yield put(appointNoticeContent)
-
-            return
-        }
-
-        //登陆失败
-        if(res.data.loginStatus === 'fail'){
-            /*通知窗口提示登录失败*/
-            const appointNoticeContent = createAppointNoticeContent('登录失败: ' + res.data.message)
-            yield put(appointNoticeContent)
-
-            //更新loginPage.reducer的isLoggingIn
-            const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
-            yield put(triggerIsLoggingInAction)
-        }
-
+        /*通知窗口提示登录成功*/
+        const appointNoticeContent = createAppointNoticeContent('登录成功')
+        yield put(appointNoticeContent)
 
     }catch (err) {
         console.log('ERR IN ACTION: LOGIN  ERR: ' + err)
@@ -203,6 +186,10 @@ function* ajaxLoginWithDynamicPassword() {
         /*通知窗口提示登录失败*/
         const appointNoticeContent = createAppointNoticeContent('登录失败: ' + err)
         yield put(appointNoticeContent)
+
+        //更新loginPage.reducer的isLoggingIn
+        const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
+        yield put(triggerIsLoggingInAction)
     }
 }
 
@@ -257,13 +244,11 @@ function* ajaxGetCaptchaImage(action) {
 
 function* ajaxLogin() {
 
-    const captchaPass = yield checkCaptchaCode('loginPage',true).pass
+    const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
 
-    if(!captchaPass){
+    const captchaResult = yield checkCaptchaCode('loginPage',true,triggerIsLoggingInAction)
 
-        const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
-        yield put(triggerIsLoggingInAction)
-
+    if(!captchaResult.pass){
         return
     }
 
@@ -286,43 +271,31 @@ function* ajaxLogin() {
 
         const res = yield LoginRequest.RequestLogin(loginData)
 
-        //登录成功
-        if(res.data.loginStatus === 'success'){
-            //本地存储token以及过期时间
-            let validTime = res.data.validTimeMillis
-            let expTime = new Date().getTime() + validTime
-            localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, username:username}))
+        //本地存储token以及过期时间
+        let validTime = res.data.validTimeMillis
+        let expTime = new Date().getTime() + validTime
+        localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, username:username}))
 
-            //更新reducer为已登录
-            const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
-            yield put(triggerAlreadyLoggedInAction)
+        //更新reducer为已登录
+        const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
+        yield put(triggerAlreadyLoggedInAction)
 
-            /*通知窗口提示登录成功*/
-            const appointNoticeContent = createAppointNoticeContent('登录成功')
-            yield put(appointNoticeContent)
-
-            return
-        }
-
-        //登陆失败
-        if(res.data.loginStatus === 'fail'){
-            /*通知窗口提示登录失败*/
-            const appointNoticeContent = createAppointNoticeContent('登录失败: ' + res.data.message)
-            yield put(appointNoticeContent)
-
-            //更新loginPage.reducer的isLoggingIn
-            const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
-            yield put(triggerIsLoggingInAction)
-        }
+        /*通知窗口提示登录成功*/
+        const appointNoticeContent = createAppointNoticeContent('登录成功')
+        yield put(appointNoticeContent)
 
 
     }catch (err) {
         console.log('ERR IN ACTION: LOGIN  ERR: ' + err)
 
         /*通知窗口提示登录失败*/
-        const appointNoticeContent = createAppointNoticeContent('登录失败: ' + err)
+        const appointNoticeContent = createAppointNoticeContent('登录失败: ' + err.response.data)
         yield put(appointNoticeContent)
+
+        const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
+        yield put(triggerIsLoggingInAction)
     }
+
 }
 
 function* ajaxDeleteSubCommentFromArticlePage(action) {
@@ -691,23 +664,11 @@ function* ajaxCheckWetherNeedCaptchaForSubmitComment(action){
 
 function* ajaxSubmitCommentWithCaptcha(action) {
 
-    const captchaPassResult = yield checkCaptchaCode('modal',false)
+    const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(false)
 
+    const captchaResult = yield checkCaptchaCode('modal',false,triggerModalIsLoadingAction)
 
-
-    if(!captchaPassResult.pass){
-
-        const action = createTriggerModalIsLoadingAction(false)
-        yield put(action)
-
-        const appointModalMsgValue = {
-            modalContent: captchaPassResult.message,
-            context: CAPTCHA_MODAL
-        }
-
-        const appointModalMsg = createAppointModalMsgAction(appointModalMsgValue)
-        yield put(appointModalMsg)
-
+    if(!captchaResult.pass){
         return
     }
 
@@ -799,6 +760,7 @@ function* ajaxSubmitCommentWithCaptcha(action) {
         const triggerCommentEditorLoadingAction = createTriggerCommentEditorLoadingAction(triggerCommentEditorLoadingActionValue)
         yield put(triggerCommentEditorLoadingAction)
     }
+
 }
 
 
@@ -1037,13 +999,14 @@ function* checkToken(){
     }
 }
 
-function* checkCaptchaCode(captchaHost,showNotice) {
+function* checkCaptchaCode(captchaHost,showNotice,errCatchAction) {
     try{
 
         const state = yield select()
 
         const captchaId = state.get('captcha').get(captchaHost).get('captchaId')
         const uncheckCaptchaCode = state.get('captcha').get(captchaHost).get('captchaCode')
+
 
         if(uncheckCaptchaCode === '' || uncheckCaptchaCode == null){
 
@@ -1066,19 +1029,32 @@ function* checkCaptchaCode(captchaHost,showNotice) {
 
         const res = yield CaptchaRequest.RequestCheck(value)
 
-        /*通知窗口提示提交验证码验证失败*/
-        if(res.data.pass !== true && showNotice){
-            if(res.data.message === 'wrong'){
-                const appointNoticeContent = createAppointNoticeContent('验证码填写错误')
-                yield put(appointNoticeContent)
-            }else if(res.data.message === 'overdue'){
-                const appointNoticeContent = createAppointNoticeContent('验证码已过期')
-                yield put(appointNoticeContent)
-            }
-        }
-
         return res.data
     }catch (err) {
-        console.log('ERR IN ACTION: CHECK_CAPTCHA_CODE  ERR: ' + err)
+
+        yield put(errCatchAction)
+
+        const value = {
+            captchaHost: captchaHost,
+            warnMsg: err.response.data
+        }
+        const appointCaptchaWarnMsgaction = createAppointCaptchaWarnMsgAction(value)
+        yield put(appointCaptchaWarnMsgaction)
+
+        const triggerShowModalWarnValue = {
+            captchaHost: captchaHost,
+            showWarn: true
+        }
+
+        const triggerShowModalWarnAction = createTriggerShowCaptchaInputWarnAction(triggerShowModalWarnValue)
+        yield put(triggerShowModalWarnAction)
+
+
+        /*通知窗口提示提交验证码验证失败*/
+        if(showNotice){
+            const appointNoticeContent = createAppointNoticeContent(err.response.data)
+            yield put(appointNoticeContent)
+        }
+        return {pass:false}
     }
 }

@@ -27,6 +27,7 @@ import {SLIDE_FROM_LEFT_CSSTRANSITION} from "../../commonStyle/commonClassNameCo
 
 class ArticlePage extends PureComponent {
 
+
     render() {
 
         const { article,
@@ -105,7 +106,7 @@ class ArticlePage extends PureComponent {
 
                                 <GapLine/>
                                 <ForMore isLoading={isLoadingMoreComment}
-                                         noMore={currentPage === maxPage}
+                                         noMore={startIndex >= countOfAllComment}
                                          clickHandler={this.props.getMoreCommentListData}/>
 
                             </ArticleMainArea>

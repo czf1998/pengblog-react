@@ -148,4 +148,3 @@ export const Space = styled.li`
         flex-grow: 1;
         border-bottom: solid 1px #dee2e6;
     `
-

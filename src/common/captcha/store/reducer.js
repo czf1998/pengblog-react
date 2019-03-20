@@ -1,6 +1,10 @@
 import { fromJS } from 'immutable'
 import {} from "./actionTypes";
-import {DELIVER_CAPTCHA_IMAGE_BASE64, TRIGGER_SHOW_CAPTCHA_INPUT_WARN} from "../../../store/actionTypesWithSaga";
+import {
+    APPOINT_CAPTCHA_WARN_MSG,
+    DELIVER_CAPTCHA_IMAGE_BASE64,
+    TRIGGER_SHOW_CAPTCHA_INPUT_WARN
+} from "../../../store/actionTypesWithSaga";
 import {GET_CAPTCHA_IMAGE} from "./actionTypes";
 import {APPOINT_CAPTCHA_CODE} from "./actionTypes";
 import {TRIGGER_IS_LOADING_CAPTCHA_IMAGE} from "./actionTypes";
@@ -81,6 +85,14 @@ export default (state = defaultState, action) => {
 
         return state.set(action.value.captchaHost, target.merge({
             isLoading: action.value.isLoading
+        }))
+    }
+
+    if(action.type === APPOINT_CAPTCHA_WARN_MSG){
+        const target = state.get(action.value.captchaHost)
+
+        return state.set(action.value.captchaHost, target.merge({
+            warnMsg: action.value.warnMsg
         }))
     }
     return state

@@ -69,3 +69,5 @@ export const DELIVER_CAPTCHA_IMAGE_BASE64 = 'deliverCaptchaImageBase64'
 export const TRIGGER_SHOW_CAPTCHA_INPUT_WARN = 'triggerShowCaptchaInputWarn'
 
 export const TRIGGER_IS_GETTING_SMS = 'triggerIsGettingSms'
+
+export const APPOINT_CAPTCHA_WARN_MSG = 'appointCaptchaWarnMsg'

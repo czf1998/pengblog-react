@@ -26,7 +26,7 @@ import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
         RECORD_SUB_COMMENT_HAS_BEEN_DELETED,
         DELIVER_CAPTCHA_IMAGE_BASE64,
         TRIGGER_SHOW_CAPTCHA_INPUT_WARN,
-    TRIGGER_IS_GETTING_SMS} from './actionTypesWithSaga'
+    TRIGGER_IS_GETTING_SMS,APPOINT_CAPTCHA_WARN_MSG} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -173,5 +173,10 @@ export const createTriggerShowCaptchaInputWarnAction = (value) => ({
 
 export const createTriggerIsGettingSmsAction = (value) => ({
     type: TRIGGER_IS_GETTING_SMS,
+    value
+})
+
+export const createAppointCaptchaWarnMsgAction = (value) => ({
+    type: APPOINT_CAPTCHA_WARN_MSG,
     value
 })

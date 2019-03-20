@@ -16,9 +16,8 @@ export const createTriggerIsLoggingInAction = (value) => ({
     value
 })
 
-export const createLoginAction = (value) => ({
-    type: LOGIN,
-    value
+export const createLoginAction = () => ({
+    type: LOGIN
 })
 
 export const createTriggerShowWarnOfInputOfLoginPageAction = (value) => ({

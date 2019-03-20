@@ -8,6 +8,7 @@ import Captcha from '../../../captcha'
 import {CancelButton, ConfirmButton, OperationColumn} from "../commonModalItem/style";
 import {createTriggerModalIsLoadingAction, createTriggerShowModalAction,createSubmitCommentWithCaptchaAction} from "../../store";
 import {put} from "redux-saga/effects";
+import {createTriggerCommentEditorLoadingAction} from "../../../../pages/articlePage/components/commentEditor/store";
 
 
 
@@ -41,7 +42,7 @@ class CaptchaComment extends PureComponent{
                                 '确认'
                         }
                     </ConfirmButton>
-                    <CancelButton onClick={closeThisModal}>取消</CancelButton>
+                    <CancelButton onClick={() => {closeThisModal(currentCommentEditorId)}}>取消</CancelButton>
                 </OperationColumn>
 
             </ModalItemWrapper>
@@ -60,9 +61,16 @@ const mapState = (state) => ({
 })
 
 const mapActions = (dispatch) => ({
-    closeThisModal(){
+    closeThisModal(currentCommentEditorId){
         const triggerShowModalAction = createTriggerShowModalAction(false)
         dispatch(triggerShowModalAction)
+
+        const triggerCommentEditorLoadingActionValue = {
+            editorId: currentCommentEditorId,
+            loading: false
+        }
+        const triggerCommentEditorLoadingAction = createTriggerCommentEditorLoadingAction(triggerCommentEditorLoadingActionValue)
+        dispatch(triggerCommentEditorLoadingAction)
     },
     multiPostProcessor(currentCommentEditorId){
         const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(true)
