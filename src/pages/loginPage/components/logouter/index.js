@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {ButtonWrapper} from "../../style";
-import {LogouterWrapper, Title, Info} from './style'
+import {LogouterWrapper, Title, Info,CurrentAutoInfo} from './style'
 import {Button,Captcha} from "../../../../common";
 import {DateFormat} from "../../../../exJs";
 
@@ -31,13 +31,20 @@ class Logouter extends PureComponent {
                     已登录
                 </Title>
 
-                <Info>
-                    {'当前用户: ' + currentUser}
-                </Info>
 
-                <Info style={{marginBottom: '0.5rem'}}>
-                    {'过期时间: ' + DateFormat('MM/dd hh:mm:ss',new Date(expireTime))}
-                </Info>
+                <CurrentAutoInfo>
+                    <Info>
+                        <span>当前用户:&nbsp;</span>
+                        <span>{currentUser}</span>
+                    </Info>
+
+                    <Info>
+                        <span>过期时间:&nbsp;</span>
+                        <span>{DateFormat('MM/dd hh:mm:ss',new Date(expireTime))}</span>
+                    </Info>
+                </CurrentAutoInfo>
+
+
 
                 <ButtonWrapper>
 

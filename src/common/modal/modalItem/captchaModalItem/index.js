@@ -34,7 +34,9 @@ class CaptchaComment extends PureComponent{
                     modalContent !== '' && <Warn>{modalContent}</Warn>
                 }
                 <OperationColumn>
-                    <ConfirmButton browser={browser} onClick={() => {multiPostProcessor(currentCommentEditorId)}}>
+                    <ConfirmButton browser={browser}
+                                   isLoading={isLoading}
+                                   onClick={() => {multiPostProcessor(currentCommentEditorId)}}>
                         {
                             isLoading ?
                                 <i className="fa fa-spinner fa-pulse"/>
@@ -42,7 +44,10 @@ class CaptchaComment extends PureComponent{
                                 '确认'
                         }
                     </ConfirmButton>
-                    <CancelButton onClick={() => {closeThisModal(currentCommentEditorId)}}>取消</CancelButton>
+                    {
+                        !isLoading &&
+                        <CancelButton onClick={() => {closeThisModal(currentCommentEditorId)}}>取消</CancelButton>
+                    }
                 </OperationColumn>
 
             </ModalItemWrapper>

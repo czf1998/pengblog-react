@@ -24,7 +24,13 @@ export const Title = styled.div`
         border-bottom: solid 1px #f0f0f0;
     `
 
-export const Info = styled .div`
+export const Info = styled.div`
+        display: flex;
+        justify-content: space-between;
         color: grey;
         padding-bottom: 0.5rem;
+    `
+
+export const CurrentAutoInfo = styled.div`
+        padding: 1rem 0;
     `

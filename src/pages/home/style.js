@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+const heightOfHeader = 70
+
 export const HomeWrapper = styled.div`
         background: #f7f7f7;
         position: relative;
@@ -14,7 +16,6 @@ export const Gap = styled.div`
     `
 
 export const LoadingWrapper = styled.div`
-        position: fixed;
         width: 100%;
         height: 100%;
     `
@@ -22,7 +23,7 @@ export const LoadingWrapper = styled.div`
 export const LoadingSearchResult = styled.div`
         position: absolute;
         top: 70px;
-        height: ${window.innerHeight - 200}px;
+        height: ${window.innerHeight - 140}px;
         left: 0;
         right: 0;
     `

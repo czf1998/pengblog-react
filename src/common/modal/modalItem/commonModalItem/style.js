@@ -54,7 +54,7 @@ export const ConfirmButton = styled.div`
         margin-left: 1rem;
         border: solid 1px #F0F0F0;
         border-radius: 0.4rem;
-        color: #00AA00;
+        color: ${props => props.isLoading ? 'grey' : '#00AA00'};
         transition: all 0.4s ease;
         ${props => props.browser === 'Safari' ? '' : `
             &:hover{

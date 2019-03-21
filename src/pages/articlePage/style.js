@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+const heightOfHeader = 70
+
 const widthOfMainArea = 800
 
 const maxMobileWidth = 750
@@ -58,5 +60,5 @@ export const CommentTitle = styled.div`
 export const LoadingWrapper = styled.div`
         position: ${props => props.currentPath && props.currentPath.match(/^\/home/) === null ? 'fixed' : 'static'};
         width: 100%;
-        height: ${window.innerHeight}px;
+        height: ${window.innerHeight - heightOfHeader}px;
     `

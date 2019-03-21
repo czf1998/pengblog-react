@@ -246,7 +246,7 @@ function* ajaxLogin() {
 
     const triggerIsLoggingInAction = createTriggerIsLoggingInAction(false)
 
-    const captchaResult = yield checkCaptchaCode('loginPage',true,triggerIsLoggingInAction)
+    const captchaResult = yield checkCaptchaCode('loginPage',false,triggerIsLoggingInAction)
 
     if(!captchaResult.pass){
         return

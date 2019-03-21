@@ -1,11 +1,13 @@
 import Loadable from 'react-loadable'
 import React from 'react'
 import Loading from '../../common/loading'
-
+import {LoadingWrapper} from './style'
 const HomeLoadable = Loadable({
     loader: () =>  import('./'),
     loading(){
-        return <Loading/>
+        return <LoadingWrapper>
+                    <Loading/>
+                </LoadingWrapper>
     }
 });
 
