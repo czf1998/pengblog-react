@@ -83,7 +83,7 @@ class Home extends PureComponent {
 
             </HomeWrapper>
             :
-            <LoadingWrapper>
+            <LoadingWrapper isMobile={isMobile}>
                 <Loading/>
             </LoadingWrapper>
         )

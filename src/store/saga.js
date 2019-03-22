@@ -1,7 +1,7 @@
 import { put, takeEvery, takeLatest,select } from 'redux-saga/effects'
 
 import {
-    GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA,
+    GET_ARTICLE_DATA_FOR_ARTICLE_PAGE,
     GET_COMMENT_LIST_DATA, GET_COUNT_OF_COMMENT,
     GET_HOME_ARTICLE_LIST_DATA,
     GET_JUMBOTRON_ARTICLE_DATA,
@@ -90,7 +90,7 @@ function* mySaga() {
     yield takeEvery(GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD, ajaxHomeArticleListDataByKeyword)
     yield takeLatest(OBSERVE_SCROLL_TOP_OF_ELEMENT_EL, recordScrollTopOfElementEl)
     yield takeEvery(GET_JUMBOTRON_ARTICLE_DATA, ajaxJumbotronArticleData)
-    yield takeEvery(GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA, ajaxArticleDataForArticlePageData)
+    yield takeEvery(GET_ARTICLE_DATA_FOR_ARTICLE_PAGE, ajaxArticleDataForArticlePageData)
     yield takeEvery(GET_COMMENT_LIST_DATA, ajaxCommentListData)
     yield takeEvery(GET_COUNT_OF_COMMENT, ajaxCountOfComment)
     yield takeEvery(GET_SUB_COMMENT_LIST_DATA, ajaxSubCommentListData)
@@ -962,18 +962,23 @@ function* ajaxArticleDataForArticlePageData(action) {
    }
     try{
         const res = yield ArticleRequest.RequestArticleData(action.value.article_id)
+
         let appointDataAction = createDeliverArticleDataToArticlePage(res.data)
         yield put(appointDataAction)
         window.currentArticleGetting = undefined
         window.axiosSource = undefined
+
     }catch (err) {
-       if(err.message === 'Cancel'){
-           return
-       }
+
         console.log('ERR IN ACTION: GET_ARTICLE_PAGE_DATA  ERR: ' + err)
-        const state = yield select()
-        const goTo = state.get('router').get('goTo')
-        goTo('/404')
+
+        if(err.message === 'Cancel'){
+            return
+        }
+
+        if(err.response.status === 400) {
+            yield notFound()
+        }
     }
 }
 
@@ -1057,4 +1062,10 @@ function* checkCaptchaCode(captchaHost,showNotice,errCatchAction) {
         }
         return {pass:false}
     }
+}
+
+function* notFound() {
+    const state = yield select()
+    const goTo = state.get('router').get('goTo')
+    goTo('/404')
 }

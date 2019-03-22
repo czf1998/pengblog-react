@@ -16,9 +16,12 @@ export const Gap = styled.div`
     `
 
 export const LoadingWrapper = styled.div`
+        position: ${props => props.isMobile ? 'fixed' : 'static'};
         width: 100%;
         height: 100%;
     `
+
+
 
 export const LoadingSearchResult = styled.div`
         position: absolute;

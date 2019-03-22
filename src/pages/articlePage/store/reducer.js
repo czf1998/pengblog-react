@@ -2,7 +2,10 @@ import { fromJS } from 'immutable'
 import {
     APPEND_COMMENT_JUST_SUBMIT,
     DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
-    DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE, GET_COMMENT_LIST_DATA, RECORD_COMMENT_HAS_BEEN_DELETED,
+    DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
+    GET_ARTICLE_DATA_FOR_ARTICLE_PAGE,
+    GET_COMMENT_LIST_DATA,
+    RECORD_COMMENT_HAS_BEEN_DELETED,
     RESET_ARTICLE_PAGE_STORE
 } from '../../../store/actionTypesWithSaga'
 import {LOAD_ARTICLE_CACHE, RECORD_SCROLL_TOP_OF_ARTICLE_PAGE} from "./actionType";
@@ -42,6 +45,7 @@ export default (state = defaultState, action) => {
             scrollPosition: action.value.scrollPosition
         })
     }
+
     if(action.type === GET_COMMENT_LIST_DATA) {
         return state.merge({
             isLoadingMoreComment: true

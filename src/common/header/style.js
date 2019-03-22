@@ -73,7 +73,10 @@ export const MenuButtonWrapper = styled.div`
 export const Button = styled.span``
 
 export const MenuList = styled.div`
-        height: ${props => props.showMenuList ? '12rem' : '0'};
+        transform: ${props => props.showMenuList ? 'translateY(0%)' : 'translateY(-50%)'};
+        opacity: ${props => props.showMenuList ? '1' : '0'};
+        pointer-events: ${props => props.showMenuList ? 'default' : 'none'};
+        visibility:  ${props => props.showMenuList ? 'visible' : 'hidden'};
         background: white;
         position: absolute;
         width: 100%;

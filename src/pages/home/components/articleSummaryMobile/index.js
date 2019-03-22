@@ -17,7 +17,7 @@ class ArticleSummary extends PureComponent {
 
     render() {
 
-        const { basicUIFeatures,article,currentArticleId,isMobile,goTo } = this.props
+        const { basicUIFeatures,article,currentArticleOfArticlePage,isMobile,goTo } = this.props
 
         const withPreviewImage = article.get('article_previewImageUrl') !== '' && article.get('article_previewImageUrl') !== undefined
 
@@ -25,7 +25,7 @@ class ArticleSummary extends PureComponent {
 
         const ARTICLE_PAGE_PATH = isMobile ?  '/article/' + article.get('article_id') : baseUrl + '/article/' + article.get('article_id')
 
-        const isFocus = article.get('article_id') === currentArticleId
+        const isFocus = currentArticleOfArticlePage && article.get('article_id') === currentArticleOfArticlePage.get('article_id')
 
         return (
                 <ArticleSummaryWrapper onClick={() => {goTo(ARTICLE_PAGE_PATH)}}
@@ -89,7 +89,7 @@ class ArticleSummary extends PureComponent {
 const mapState = (state) => {
     return  {
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
-        currentArticleId: state.get('articlePage').get('article').get('article_id'),
+        currentArticleOfArticlePage: state.get('articlePage').get('article'),
         isMobile: state.get('rootState').get('isMobile'),
         goTo: state.get('router').get('goTo'),
         hasBeenMountOnce: state.get('home').get('hasBeenMountOnce')

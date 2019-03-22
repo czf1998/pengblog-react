@@ -1,4 +1,4 @@
-import {GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA,
+import {GET_ARTICLE_DATA_FOR_ARTICLE_PAGE,
         RESET_ARTICLE_PAGE_STORE,
         GET_COMMENT_LIST_DATA,
         PUSH_PROGRASS_TO_END} from '../../../store/actionTypesWithSaga'
@@ -45,7 +45,7 @@ export function createResetArticlePageStoreAction() {
 
 export function createGetArticlePageDataAction(value) {
     return {
-        type: GET_ARTICLE_DATA_FOR_ARTICLE_PAGE_DATA,
+        type: GET_ARTICLE_DATA_FOR_ARTICLE_PAGE,
         value
     }
 }

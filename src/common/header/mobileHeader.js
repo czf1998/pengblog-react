@@ -33,6 +33,33 @@ class MobileHeader extends PureComponent {
             <HeaderWrapper id="_header" className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
                            height={height}
                            backgroundColor={backgroundColor}>
+
+
+                <MenuList showMenuList={showMenuList}>
+
+                    {
+                        showMenuList && <Cover/>
+                    }
+
+                    <MenuItem onClick={() => {goTo('/')}}>
+                            <span className="iconfont"
+                                  style={{fontSize: '1.6rem'}}>&#xe626;</span>
+                        主页
+                    </MenuItem>
+
+                    <MenuItem onClick={() => {goTo('/manage')}}>
+                            <span className="iconfont"
+                                  style={{fontSize: '1.6rem'}}>&#xe76a;</span>
+                        索引
+                    </MenuItem>
+
+                    <MenuItem onClick={() => {goTo('/edit')}}
+                              style={{borderBottom:'none'}}>
+                            <span className="iconfont"
+                                  style={{fontSize: '1.6rem'}}>&#xe67f;</span>
+                        写作
+                    </MenuItem>
+                </MenuList>
                 <MobileHeaderMainArea   widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
 
                     <Logo/>
@@ -47,31 +74,7 @@ class MobileHeader extends PureComponent {
                         </MenuButtonWrapper>
                     </NavItemWrapper>
 
-                    <MenuList showMenuList={showMenuList}>
 
-                        {
-                            showMenuList && <Cover/>
-                        }
-
-                        <MenuItem onClick={() => {goTo('/')}}>
-                            <span className="iconfont"
-                                  style={{fontSize: '1.6rem'}}>&#xe626;</span>
-                            主页
-                        </MenuItem>
-
-                        <MenuItem onClick={() => {goTo('/manage')}}>
-                            <span className="iconfont"
-                                  style={{fontSize: '1.6rem'}}>&#xe76a;</span>
-                            索引
-                        </MenuItem>
-
-                        <MenuItem onClick={() => {goTo('/edit')}}
-                                  style={{borderBottom:'none'}}>
-                            <span className="iconfont"
-                                  style={{fontSize: '1.6rem'}}>&#xe67f;</span>
-                            写作
-                        </MenuItem>
-                    </MenuList>
                 </MobileHeaderMainArea>
 
 
