@@ -22,6 +22,8 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
+const server = 'https://pengblog.xyz/pengblog-SSM/'
+
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -484,7 +486,7 @@ module.exports = {
     new WorkboxWebpackPlugin.GenerateSW({
       clientsClaim: true,
       exclude: [/\.map$/, /asset-manifest\.json$/],
-      importWorkboxFrom: 'cdn',
+      importWorkboxFrom: 'local',
       navigateFallback: publicUrl + '/index.html',
       navigateFallbackBlacklist: [
         // Exclude URLs starting with /_, as they're likely an API call
@@ -493,6 +495,46 @@ module.exports = {
         // public/ and not a SPA route
         new RegExp('/[^/]+\\.[^/]+$'),
       ],
+      runtimeCaching: [{
+          // Match any same-origin request that contains 'api'.
+          urlPattern: new RegExp("^" + server),
+          // Apply a network-first strategy.
+          handler: 'networkFirst',
+          options: {
+              // Fall back to the cache after 10 seconds.
+              networkTimeoutSeconds: 10,
+              // Use a custom cache name for this route.
+              cacheName: 'pengblog-SSM-cache',
+              // Configure custom cache expiration.
+              expiration: {
+                  maxEntries: 100,
+                  maxAgeSeconds: 60*60*24,
+              },
+              // Configure background sync.
+              backgroundSync: {
+                  name: 'pengblog-SSM-queue',
+                  options: {
+                      maxRetentionTime: 60 * 60,
+                  },
+              },
+              // Configure which responses are considered cacheable.
+              cacheableResponse: {
+                  statuses: [0, 200],
+                  headers: {'X-Is-Cacheable': 'true'},
+              },
+              // Configure the broadcast cache update plugin.
+              broadcastUpdate: {
+                  channelName: 'pengblog-SSM-update-channel',
+              },
+              // Add in any additional plugin logic you need.
+              plugins: [
+                  {cacheDidUpdate: () => {}/* custom plugin code */}
+              ],
+              matchOptions: {
+                  ignoreSearch: false,
+              },
+          },
+      }]
     }),
     // TypeScript type checking
     fs.existsSync(paths.appTsConfig) &&
