@@ -1,6 +1,6 @@
-const server = 'https://pengblog.xyz/pengblog-SSM/'
+//const server = 'https://pengblog.xyz/pengblog-SSM/'
 //const server = 'http://pengblog.xyz:8080/pengblog-SSM/'
-//const server = 'http://localhost/pengkaifanblog/'
+const server = 'http://localhost/pengkaifanblog/'
 //const server = 'http://localhost:8088/pengkaifanblog/'
 
 
@@ -55,3 +55,5 @@ export const API_GET_SMS = server + 'sms/send.do'
 export const API_LOGIN_WITH_DYNAMIC_PASSWORD = server + 'login/login_dynamic.do'
 
 export const API_CHECK_WHETHER_NEED_CAPTCHA_TO_SUBMIT_COMMENT = server + 'comment/check_whether_need_captcha.do'
+
+export const API_BAN_IP = server + 'ip/ban_byip.do'

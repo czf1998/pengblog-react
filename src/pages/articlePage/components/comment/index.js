@@ -12,18 +12,24 @@ import {CommentWrapper,
         Avatar,
         GapH,
         ReplyButton,
-        DeleteButton,SubCommentEditorWrapper } from './style'
+        DeleteButton,SubCommentEditorWrapper,BanButton } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
 import SubComment from '../subComment'
 import {SubCommentEditor} from '../commentEditor'
 import {createGetSubCommentListDataAction,
         createAppointShowSubCommentEditorManagerAction,
-        createDeleteCommentFromArticlePageAction } from './store'
+        createDeleteCommentFromArticlePageAction,
+        createBanIPAction } from './store'
 import {ForMore} from "../../../../common";
 import {LoadingIcon} from "../../../managePage/components/freshComments/components/freshCommentItem/style";
 import loadingSpin from "../../../../common/loading/svg/loading-spin.svg";
 import {SLIDE_FROM_LEFT_CSSTRANSITION} from "../../../../commonStyle/commonClassNameConstant";
+import {
+    createAppointModalMsgAction,
+    createTriggerModalIsLoadingAction,
+    createTriggerShowModalAction
+} from "../../../../common/modal/store";
 
 const REPLY_CLASSNAME = 'fa fa-reply'
 const RETRACT_CLASSNAME = 'fa fa-chevron-up'
@@ -57,9 +63,13 @@ class Comment extends PureComponent {
                 pageScale,
                 isLoadingMoreSubComment,
                 alreadyLoggedIn,
-                tryToDeleteThisComment} = this.props
+                tryToDeleteThisComment,
+                tryToBanThisIP} = this.props
 
         const comment_id = comment.get('comment_id')
+
+        const comment_ip = comment.get('comment_ip') ? comment.get('comment_ip').get('ip_ip') : undefined
+
         const {currentPage,isBeenDeleting} = this.state
 
         let maxPage = subCommentMaxPageMananger.get(comment.get('comment_id').toString())
@@ -156,6 +166,10 @@ class Comment extends PureComponent {
                                 &nbsp;|&nbsp;
                                 <DeleteButton onClick={() => {tryToDeleteThisComment(comment_id,comment.get('comment_hostArticle').get('article_id'),this)}}
                                               className="fa fa-trash-o"/>
+
+                                &nbsp;|&nbsp;
+                                <BanButton onClick={() => {tryToBanThisIP(comment_id, comment_ip)}}
+                                              className="fa fa-ban"/>
                             </Fragment>
                         }
                     </OperationBar>
@@ -173,7 +187,6 @@ class Comment extends PureComponent {
                                             <SubComment comment={item}/>
                                         </div>
                                     </CSSTransition>
-
                                 )
                             return null
                         })
@@ -307,7 +320,40 @@ const mapActions = (dispatch) => ({
         const deleteCommentAction = createDeleteCommentFromArticlePageAction(value)
         dispatch(deleteCommentAction)
 
+    },
+
+    tryToBanThisIP(comment_id, ip) {
+
+        const  banIPPostHandler = () => {
+
+            //trigger loading状态
+            const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(true)
+            dispatch(triggerModalIsLoadingAction)
+
+            //向saga发送请求
+            const value = {
+                ip: ip,
+                comment_id: comment_id
+            }
+            const action = createBanIPAction(value)
+
+            dispatch(action)
+        }
+
+        const value = {
+            modalTitle: '提示',
+            modalContent: '你正在尝试封禁ip: ' + ip,
+            postProcessor: banIPPostHandler
+        }
+
+        const appointModalMsgAction = createAppointModalMsgAction(value)
+        dispatch(appointModalMsgAction)
+
+        const triggerShowModalAction = createTriggerShowModalAction(true)
+        dispatch(triggerShowModalAction)
+
     }
+
 })
 
 

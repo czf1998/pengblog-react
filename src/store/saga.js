@@ -35,13 +35,13 @@ import {createDeliverArticleDataToHomeAction,
         createRecordCommentHasBeenDeletedAction,
         createRecordSubCommentHasBeenDeletedAction,
         createDeliverCaptchaImageBase64Action,
-        createTriggerShowCaptchaInputWarnAction,
+        createTriggerShowCaptchaInputWarnAction,createMarkCommentWhichIPBeenBanAction,
     createTriggerIsGettingSmsAction,createAppointCaptchaWarnMsgAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest,
         LoginRequest,
-        CaptchaRequest,
+        CaptchaRequest,IpRequest,
         SmsRequest} from './request'
 import {SUBMIT_COMMENT} from "../pages/articlePage/components/commentEditor/store/actionType";
 import {
@@ -75,7 +75,10 @@ import {GET_SMS, LOGIN, LOGIN_WITH_DYNAMIC_PASSWORD} from "../pages/loginPage/st
 import {createTriggerIsLoggingInAction} from "../pages/loginPage/store";
 import {GET_FRESH_COMMENTS_DATA} from "../pages/managePage/components/freshComments/store/actionTypes";
 import {DELETE_COMMENT_FROM_FRESH_COMMENTS} from "../pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes";
-import {DELETE_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/components/comment/store/actionTypes";
+import {
+    BAN_IP_COMMENT_SAGA,
+    DELETE_COMMENT_FROM_ARTICLE_PAGE
+} from "../pages/articlePage/components/comment/store/actionTypes";
 import {DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/components/subComment/store/actionTypes";
 import {GET_CAPTCHA_IMAGE} from "../common/captcha/store/actionTypes";
 import {GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD} from "../pages/home/store/actionType";
@@ -115,6 +118,49 @@ function* mySaga() {
     yield takeEvery(DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE, ajaxDeleteSubCommentFromArticlePage)
     yield takeEvery(GET_CAPTCHA_IMAGE, ajaxGetCaptchaImage)
     yield takeEvery(GET_SMS, ajaxGetSms)
+    yield takeEvery(BAN_IP_COMMENT_SAGA, ajaxBanIP)
+}
+
+function* ajaxBanIP(action) {
+    try{
+
+        const res = yield IpRequest.RequestBanIP(action.value.ip)
+
+        console.log(res.data)
+
+        //关闭模态框
+        const triggerShowModalAction = createTriggerShowModalAction(false);
+
+        yield put(triggerShowModalAction)
+
+        //标记已ban评论
+        const markCommentWhichIPBeenBanAction = createMarkCommentWhichIPBeenBanAction(action.value.comment_id);
+
+        yield put(markCommentWhichIPBeenBanAction)
+
+
+    }catch (err) {
+
+        yield delay(500);
+
+        //trigger loading状态
+        const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(false)
+
+        yield put(triggerModalIsLoadingAction)
+
+        //提示异常
+        const value = {
+            modalTitle: 'ERR',
+            modalContent: err.response.data,
+            notifyOnly: true
+        }
+
+        const appointModalMsgAction = createAppointModalMsgAction(value)
+
+        yield put(appointModalMsgAction)
+
+
+    }
 }
 
 function* ajaxHomeArticleListDataByKeyword() {
@@ -305,9 +351,7 @@ function* ajaxDeleteSubCommentFromArticlePage(action) {
         yield CommentRequest.RequestDeleteComment(action.value.comment_id)
 
 
-        const delay = (ms) => new Promise((resolve) => {
-            setTimeout(resolve, ms);
-        })
+
         yield delay(500);
 
 
@@ -488,9 +532,6 @@ function* ajaxDeleteArticle(action) {
         const triggerIsMultipleSelectingAction = createTiggerIsMultipleSelectingInManagePageAction(false)
         yield put(triggerIsMultipleSelectingAction)
 
-        const delay = (ms) => new Promise((resolve) => {
-            setTimeout(resolve, ms);
-        })
         yield delay(500);
 
         //刷新managePage数据前先trigger页面为loading状态
@@ -1069,3 +1110,7 @@ function* notFound() {
     const goTo = state.get('router').get('goTo')
     goTo('/404')
 }
+
+const delay = (ms) => new Promise((resolve) => {
+    setTimeout(resolve, ms);
+})

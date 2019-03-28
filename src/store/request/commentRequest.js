@@ -19,11 +19,17 @@ export function SubmitCommentData(value) {
 
 
 export function RequestSubCommentListData(value) {
+
+    let token = getToken()
+
     let config = {
         params: {
             comment_id: value.comment_id,
             startIndex: value.startIndex,
             pageScale: value.pageScale
+        },
+        headers:{
+            Authorization: token
         }
     }
     return axios.get(Api.API_GET_SUB_COMMENT_LIST, config)
@@ -40,11 +46,17 @@ export function RequestCountOfComment(value) {
 }
 
 export function RequestTopLevelCommentListData(value) {
+
+    let token = getToken()
+
     let config = {
         params: {
             article_id: value.article_id,
             startIndex: value.startIndex,
             pageScale: value.pageScale
+        },
+        headers:{
+            Authorization: token
         }
     }
     return axios.get(Api.API_GET_TOP_LEVEL_COMMENT_LIST_BY_LIMITINDEX, config)

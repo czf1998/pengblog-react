@@ -21,7 +21,7 @@ class CommonModalItem extends PureComponent{
                 modalTitle,
                 modalContent,
                 browser,
-                postProcessor,
+                postProcessor,notifyOnly,
                 isLoading} = this.props
 
         return (
@@ -43,8 +43,15 @@ class CommonModalItem extends PureComponent{
                 }
 
                 <OperationColumn>
-                    <ConfirmButton browser={browser} onClick={postProcessor}>确认</ConfirmButton>
-                    <CancelButton onClick={closeThisModal}>取消</CancelButton>
+                    {
+                        !notifyOnly &&
+                        <ConfirmButton browser={browser} onClick={postProcessor}>确认</ConfirmButton>
+                    }
+                    <CancelButton onClick={closeThisModal}>
+                        {
+                            notifyOnly ? '关闭' : '取消'
+                        }
+                    </CancelButton>
                 </OperationColumn>
 
             </ModalItemWrapper>
@@ -63,7 +70,8 @@ const mapState = (state) => ({
     browser: state.get('rootState').get('browser'),
     postProcessor: state.get('modal').get('postProcessor'),
     isLoading: state.get('modal').get('isLoading'),
-    context: state.get('modal').get('context')
+    context: state.get('modal').get('context'),
+    notifyOnly: state.get('modal').get('notifyOnly')
 })
 
 const mapActions = (dispatch) => ({

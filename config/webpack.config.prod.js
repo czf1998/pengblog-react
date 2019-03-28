@@ -534,7 +534,19 @@ module.exports = {
                   ignoreSearch: false,
               },
           },
-      }]
+      },
+      {
+          urlPattern: 'https://pengblog.xyz/favicon.ico',
+          handler: 'cacheFirst',
+          options: {
+              cacheName: 'favicon-ico-cache',
+              expiration: {
+                  maxEntries: 1,
+                  maxAgeSeconds: 60*60*24,
+              },
+          }
+      }
+      ]
     }),
     // TypeScript type checking
     fs.existsSync(paths.appTsConfig) &&

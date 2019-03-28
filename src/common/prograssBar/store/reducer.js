@@ -4,6 +4,7 @@ import {
     RECORD_NANOBAR_TIMER,
 } from "./actionType";
 import {PUSH_PROGRASS_TO_END} from "../../../store/actionTypesWithSaga";
+import {PUSH_PROGRASS_TO_MILEPOST_STARTUP_PROGRASSBAR} from "../../startup/store/actionTypes";
 
 const defaultState = fromJS({
     prograssBarManager: {},
@@ -30,5 +31,6 @@ export default (state = defaultState, action) => {
         const prograssBarManager = state.get('prograssBarManager')
         prograssBarManager.get('prograssBarGoToTheEnd')(prograssBarManager.get('prograssTimer'), action.value)
     }
+
     return state
 }

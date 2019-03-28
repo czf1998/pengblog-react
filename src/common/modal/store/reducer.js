@@ -13,11 +13,16 @@ const defaultState = fromJS({
     modalContent: '这是一个通知',
     postProcessor: () => {},
     isLoading: false,
-    context: COMMON_MODAL
+    context: COMMON_MODAL,
+    notifyOnly: false
 })
 
 export default (state = defaultState, action) => {
     if(action.type === TRIGGER_SHOW_MODAL){
+
+        if(!action.value){
+            return defaultState
+        }
 
         return state.merge({
             showModal: action.value
@@ -28,7 +33,8 @@ export default (state = defaultState, action) => {
             modalTitle: action.value.modalTitle ? action.value.modalTitle : state.get('modalTitle'),
             modalContent: action.value.modalContent ? action.value.modalContent : state.get('modalContent'),
             postProcessor: action.value.postProcessor ? action.value.postProcessor : () => {},
-            context: action.value.context ? action.value.context : state.get('context')
+            context: action.value.context ? action.value.context : state.get('context'),
+            notifyOnly: action.value.notifyOnly ? action.value.notifyOnly : state.get('notifyOnly')
         })
     }
     if(action.type === TRIGGER_MODAL_IS_LOADING){

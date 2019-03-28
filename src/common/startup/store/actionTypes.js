@@ -1,0 +1,1 @@
+export const PUSH_PROGRASS_TO_MILEPOST_STARTUP_PROGRASSBAR = 'pushPrograssToMilepost startup prograssBar'

@@ -71,3 +71,5 @@ export const TRIGGER_SHOW_CAPTCHA_INPUT_WARN = 'triggerShowCaptchaInputWarn'
 export const TRIGGER_IS_GETTING_SMS = 'triggerIsGettingSms'
 
 export const APPOINT_CAPTCHA_WARN_MSG = 'appointCaptchaWarnMsg'
+
+export const MARK_COMMENT_WHICH_IP_BEEN_BAN_SAGA_ARTICLEPAGE = 'markCommentWhichIPBeenBan saga articlePage'

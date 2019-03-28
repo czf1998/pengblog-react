@@ -7,7 +7,7 @@ import './exJs'
 import { createObserveScrollTopOfElementElAction,createRecordCurrentBrowserEdition } from "./store/actionCreators";
 import {PrograssBar,
         Notice,
-        Modal,Footer } from './common'
+        Modal,Footer,Startup } from './common'
 import history from './router/history'
 import {createAppointCurrentPathAction} from "./router/store";
 
@@ -15,14 +15,6 @@ class App extends Component {
 
     constructor(props){
         super(props)
-        this.state = {
-            isMobile: false
-        }
-        store.subscribe(() => {
-            this.setState({
-                isMobile: store.getState().get('rootState').get('isMobile')
-            })
-        })
     }
 
 
@@ -43,18 +35,13 @@ class App extends Component {
                     <Footer/>
             }
 
+            <Startup/>
         </Provider>
     );
   }
 
   componentDidMount() {
-      store.dispatch(createObserveScrollTopOfElementElAction())
-      store.dispatch(createAppointCurrentPathAction(history.location.pathname))
-      store.dispatch(createRecordCurrentBrowserEdition())
-      store.getState().get('prograssBar').get('prograssBarManager').get('prograssBarGoToTheMilePost')()
-      window.addEventListener('resize', () => {
-          store.dispatch(createObserveScrollTopOfElementElAction())
-      })
+
   }
 
 }

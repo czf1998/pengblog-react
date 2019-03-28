@@ -98,6 +98,10 @@ class SubComment extends PureComponent {
                             &nbsp;|&nbsp;
                             <DeleteButton onClick={(e) => {tryToDeleteThisSubComment(comment.get('comment_id'),comment.get('comment_referComment').get('comment_id'),this,e)}}
                                           className="fa fa-trash-o"/>
+
+                            &nbsp;|&nbsp;
+                            <DeleteButton onClick={(e) => {tryToDeleteThisSubComment(comment.get('comment_id'),comment.get('comment_referComment').get('comment_id'),this,e)}}
+                                          className="fa fa-ban"/>
                         </Fragment>
                     }
                 </Meta>

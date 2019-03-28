@@ -108,6 +108,10 @@ export const DeleteButton = styled.i`
         }
     `
 
+export const BanButton = styled(DeleteButton)`
+
+    `
+
 export const SubCommentEditorWrapper = styled.div`
         height: ${props => props.showSubCommentEditor ? window.heightOfSubCommentEditor + 16 + 'px' : '0'};
         overflow: ${props => props.showSubCommentEditor ? 'visible' : 'hidden'};
