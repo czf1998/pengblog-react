@@ -169,11 +169,11 @@ const mapActions = (dispatch) => ({
 
             saveArticle(dispatch, 'draft')
 
-        },500,{page:'articleEditPage'})
+        },1000,{page:'articleEditPage'})
 
         window.throttleByDelay(() => {
             checkIfSubmitable(dispatch)
-        },500,{page:'articleEditPage',method: 'checkIfSubmitable'})
+        },1000,{page:'articleEditPage',method: 'checkIfSubmitable'})
     },
     initDraftData() {
         const getDraftDataAction = createGetDraftDataAction()

@@ -138,7 +138,11 @@ const mapActions = (dispatch) => ({
         const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(true)
         dispatch(triggerModalIsLoadingAction)
 
-        const deleteArticleAction = createDeleteArticleAction(article_id)
+        const value = {
+            article_id: article_id,
+
+        }
+        const deleteArticleAction = createDeleteArticleAction(value)
         dispatch(deleteArticleAction)
 
     }

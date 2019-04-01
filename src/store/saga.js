@@ -986,7 +986,7 @@ function* ajaxSubmitComment(action) {
 
         const article_id = state.get('articlePage').get('article').get('article_id')
 
-        const referCommentId = state.get('commentEditor').get('showSubCommentEditorManager').get('hostTopLevelCommentId')
+        const referCommentId = editorId === 'subCommentEditor' ? state.get('commentEditor').get('showSubCommentEditorManager').get('hostTopLevelCommentId') : undefined
 
         const visitorName = state.get('commentEditor').get(editorId).get('visitorName').get('value')
 
