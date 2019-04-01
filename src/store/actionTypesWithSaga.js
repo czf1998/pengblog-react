@@ -72,4 +72,10 @@ export const TRIGGER_IS_GETTING_SMS = 'triggerIsGettingSms'
 
 export const APPOINT_CAPTCHA_WARN_MSG = 'appointCaptchaWarnMsg'
 
-export const MARK_COMMENT_WHICH_IP_BEEN_BAN_SAGA_ARTICLEPAGE = 'markCommentWhichIPBeenBan saga articlePage'
+export const MARK_COMMENT_WHICH_IP_BEEN_BAN_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS = 'markCommentWhichIPBeenBan saga articlePage & freshComments'
+
+export const MARK_COMMENT_WHICH_IP_BEEN_LIFTED_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS = 'markCommentWhichIPBeenLifted saga articlePage & freshComments'
+
+export const DELIVER_IP_LIST_DATA_SAGA_IPMANAGEPAGE = 'deliverIpListData saga ipManagePage'
+
+export const APPOINT_MAX_PAGE_SAGA_PAGINATION = 'appointMaxPage saga pagination'

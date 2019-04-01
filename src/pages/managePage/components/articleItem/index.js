@@ -20,6 +20,7 @@ import {createAppointModalMsgAction,
         createTriggerShowModalAction,
         createTriggerModalIsLoadingAction} from "../../../../common/modal/store";
 import {COMMON_MODAL} from "../../../../common/modal/store/reducer";
+import {SLIDE_UP_FAST} from "../../../../commonStyle/commonClassNameConstant";
 
 
 
@@ -28,7 +29,8 @@ class ArticleItem extends PureComponent {
     constructor(props){
         super(props)
         this.state = {
-            isBeingHover: false
+            isBeingHover: false,
+            isDeleted:false
         }
         this.mouseBehaviourHandler = this.mouseBehaviourHandler.bind(this)
     }
@@ -50,11 +52,11 @@ class ArticleItem extends PureComponent {
             return item === article.get('article_id')
         })
 
-        const isDeleted = articleHasBeenDeleteList.some((item) => {
+        let {isBeingHover,isDeleted} = this.state
+
+        isDeleted = isDeleted || articleHasBeenDeleteList.some((item) => {
             return item === article.get('article_id')
         })
-
-        const {isBeingHover} = this.state
 
         const article_id = article.get('article_id')
         const article_title = article.get('article_title')
@@ -63,7 +65,7 @@ class ArticleItem extends PureComponent {
         const article_releaseTime = article.get('article_releaseTime')
 
         return (
-            <ArticleItemWrapper isDeleted={isDeleted}
+            <ArticleItemWrapper isDeleted={isDeleted} className={SLIDE_UP_FAST}
                                 isMultipleSelecting={isMultipleSelecting}
                                 browser={browser}
                                 onMouseEnter={() => {this.mouseBehaviourHandler(true,browser)}}
@@ -93,7 +95,7 @@ class ArticleItem extends PureComponent {
                         <DeleteButton browser={browser}>
                             <i className="fa fa-trash-o"
                                   style={{cursor: 'pointer'}}
-                                  onClick={() => {tryToDeleteThisArticle(article_id,article_title,confirmDeletePostProcessor)}}/>
+                                  onClick={() => {tryToDeleteThisArticle(article_id,article_title,confirmDeletePostProcessor,this)}}/>
                         </DeleteButton>
                     }
 
@@ -150,11 +152,13 @@ const mapActions = (dispatch) => ({
         const action = createAppointArticleBeingSelectedInManagePage(value)
         dispatch(action)
     },
-    tryToDeleteThisArticle(article_id,article_title,confirmDeletePostProcessor){
+    tryToDeleteThisArticle(article_id,article_title,confirmDeletePostProcessor,_this){
         const appointModalMsgValue = {
             modalTitle: '提示',
             modalContent: '你正在试图删除标题为“' + article_title + '”的文章，这个操作将不可恢复。',
-            postProcessor: () => {confirmDeletePostProcessor(article_id)},
+            postProcessor: () => {
+                confirmDeletePostProcessor(article_id,_this)
+            },
             context: COMMON_MODAL
         }
 
@@ -164,12 +168,21 @@ const mapActions = (dispatch) => ({
         const triggerShowModalAction = createTriggerShowModalAction(true)
         dispatch(triggerShowModalAction)
     },
-    confirmDeletePostProcessor(article_id){
+    confirmDeletePostProcessor(article_id,_this){
 
         const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(true)
         dispatch(triggerModalIsLoadingAction)
 
-        const deleteArticleAction = createDeleteArticleAction(article_id)
+        const value = {
+            article_id: article_id,
+            postHandler: () => {
+                _this.setState({
+                    isDeleted: true
+                })
+            }
+        }
+
+        const deleteArticleAction = createDeleteArticleAction(value)
         dispatch(deleteArticleAction)
 
     }

@@ -30,7 +30,7 @@ export default (state = defaultState, action) => {
             return state.merge({
                 sizeOfTitleImageFrame: state.get('sizeOfTitleImageFrame').merge({
                     width: action.value.width,
-                    heigth: action.value.height
+                    height: action.value.height
                 })
             })
     }

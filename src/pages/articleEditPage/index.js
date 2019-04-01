@@ -24,9 +24,9 @@ import store from '../../store'
 import {createPushPrograssToEndAction} from "../articlePage/store";
 
 
-class ArticleEditPage extends PureComponent{
+class ArticleEditPage extends PureComponent {
 
-    render(){
+    render() {
 
         const { title,
                 appointArticleEditInfo,

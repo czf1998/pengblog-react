@@ -120,7 +120,13 @@ class ManagePage extends PureComponent {
 
 
                                     <TriggerShowMoreIndexButton onClick={this.triggerShowMoreIndex}>
-                                        <i className={showMoreIndex ? "fa fa-angle-up fa-2x" : "fa fa-2x fa-angle-down"}/>
+                                        {
+                                            showMoreIndex ?
+                                                <span className="iconfont">&#xe627;</span>
+                                                :
+                                                <span className="iconfont">&#xe60d;</span>
+
+                                        }
                                     </TriggerShowMoreIndexButton>
 
                                 </CentralControllerMobile>
@@ -129,14 +135,6 @@ class ManagePage extends PureComponent {
 
 
 
-                            {
-                                window.innerWidth > 800 &&
-                                <Title>
-                                    {
-                                        currentContext !== 'common' ? '检索结果' : '所有文章'
-                                    }
-                                </Title>
-                            }
 
 
                             {
@@ -186,12 +184,8 @@ class ManagePage extends PureComponent {
                                                                    article={item}/>
                                             </ArticleItemWrapper>
                                             :
-                                            <ArticleItemWrapper currentPage={paginationObj.get('currentPage')}
-                                                                className={SLIDE_UP_FAST}
-                                                                key={item.get('article_id')}>
-                                                <ArticleItem isMultipleSelecting={isMultipleSelecting}
-                                                             article={item}/>
-                                            </ArticleItemWrapper>
+                                            <ArticleItem isMultipleSelecting={isMultipleSelecting} key={item.get('article_id')}
+                                                         article={item}/>
 
                                     )
                                 })

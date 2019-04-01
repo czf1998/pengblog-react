@@ -26,8 +26,12 @@ import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
         RECORD_SUB_COMMENT_HAS_BEEN_DELETED,
         DELIVER_CAPTCHA_IMAGE_BASE64,
         TRIGGER_SHOW_CAPTCHA_INPUT_WARN,
-        MARK_COMMENT_WHICH_IP_BEEN_BAN_SAGA_ARTICLEPAGE,
-        TRIGGER_IS_GETTING_SMS,APPOINT_CAPTCHA_WARN_MSG} from './actionTypesWithSaga'
+        MARK_COMMENT_WHICH_IP_BEEN_BAN_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS,
+        TRIGGER_IS_GETTING_SMS,
+        APPOINT_CAPTCHA_WARN_MSG,
+        DELIVER_IP_LIST_DATA_SAGA_IPMANAGEPAGE,
+        APPOINT_MAX_PAGE_SAGA_PAGINATION,
+        MARK_COMMENT_WHICH_IP_BEEN_LIFTED_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -183,6 +187,21 @@ export const createAppointCaptchaWarnMsgAction = (value) => ({
 })
 
 export const createMarkCommentWhichIPBeenBanAction = (value) => ({
-    type: MARK_COMMENT_WHICH_IP_BEEN_BAN_SAGA_ARTICLEPAGE,
+    type: MARK_COMMENT_WHICH_IP_BEEN_BAN_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS,
+    value
+})
+
+export const createMarkCommentWhichIPBeenLiftedAction = (value) => ({
+    type: MARK_COMMENT_WHICH_IP_BEEN_LIFTED_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS,
+    value
+})
+
+export const createDeliverIpListDataToIpManagePageAction = (value) => ({
+    type: DELIVER_IP_LIST_DATA_SAGA_IPMANAGEPAGE,
+    value
+})
+
+export const createAppointMaxPageToPaginationAction = (value) => ({
+    type: APPOINT_MAX_PAGE_SAGA_PAGINATION,
     value
 })

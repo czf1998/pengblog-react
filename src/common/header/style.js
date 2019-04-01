@@ -14,6 +14,7 @@ export const HeaderWrapper = styled.div`
     `
 
 export const HeaderMainArea = styled.div`
+        position: relative;
         display: flex;
         justify-content: space-between;
         height: inherit;
@@ -72,20 +73,26 @@ export const MenuButtonWrapper = styled.div`
 
 export const Button = styled.span``
 
-export const MenuList = styled.div`
-        transform: ${props => props.showMenuList ? 'translateY(0%)' : 'translateY(-50%)'};
-        opacity: ${props => props.showMenuList ? '1' : '0'};
-        pointer-events: ${props => props.showMenuList ? 'default' : 'none'};
-        visibility:  ${props => props.showMenuList ? 'visible' : 'hidden'};
-        background: white;
+export const MenuListWrapper = styled.div`
         position: absolute;
         width: 100%;
-        top: 100%;
+        height: auto;
+        pointer-events: ${props => props.showMenuList ? 'default' : 'none'};   
+        top: calc(100% + 1px);
         left: 0;
         overflow: hidden;
+        
+    `
+
+export const MenuList = styled.div`
+        transform: translateY(${props => props.showMenuList ? '0%' : '-100%'});
+        pointer-events: ${props => props.showMenuList ? 'default' : 'none'};
+        visibility: ${props => props.showMenuList ? 'visible' : 'hidden'};
+        background: white;
+        width: 100%;
         transition: all 0.4s ease;
-        border-bottom: solid 1px rgba(60, 64, 67, 0.3);
-        box-shadow:rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        border-bottom: solid 1px #f0f0f0;
+        
     `
 
 export const MenuItem = styled.div`

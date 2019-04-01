@@ -12,7 +12,7 @@ import {CommentWrapper,
         Avatar,
         GapH,
         ReplyButton,
-        DeleteButton,SubCommentEditorWrapper,BanButton } from './style'
+        DeleteButton,SubCommentEditorWrapper,BanButton,LiftedButton } from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
 import { GetDateDiff } from '../../../../exJs'
 import SubComment from '../subComment'
@@ -20,7 +20,7 @@ import {SubCommentEditor} from '../commentEditor'
 import {createGetSubCommentListDataAction,
         createAppointShowSubCommentEditorManagerAction,
         createDeleteCommentFromArticlePageAction,
-        createBanIPAction } from './store'
+        createBanIPAction,createLiftedIPAction } from './store'
 import {ForMore} from "../../../../common";
 import {LoadingIcon} from "../../../managePage/components/freshComments/components/freshCommentItem/style";
 import loadingSpin from "../../../../common/loading/svg/loading-spin.svg";
@@ -64,11 +64,13 @@ class Comment extends PureComponent {
                 isLoadingMoreSubComment,
                 alreadyLoggedIn,
                 tryToDeleteThisComment,
-                tryToBanThisIP} = this.props
+                tryToBanThisIP,tryToLiftedThisIP} = this.props
 
         const comment_id = comment.get('comment_id')
 
         const comment_ip = comment.get('comment_ip') ? comment.get('comment_ip').get('ip_ip') : undefined
+
+        const isBanned = comment.get('comment_ip') ? comment.get('comment_ip').get('ip_isBanned') : false
 
         const {currentPage,isBeenDeleting} = this.state
 
@@ -115,7 +117,7 @@ class Comment extends PureComponent {
         const showSubCommentEditor = showSubCommentEditorManager.get('hostTopLevelCommentId') === comment_id
 
         return (
-            <CommentWrapper isBeenDeleting={isBeenDeleting}
+            <CommentWrapper isBeenDeleting={isBeenDeleting} isBanned={isBanned}
                             widthOfMainArea={widthOfMainArea}
                             ref="topLevelComment">
 
@@ -126,7 +128,7 @@ class Comment extends PureComponent {
                             {featureString}
                         </Avatar>
                     </AvatarWraper>
-                    <Name>
+                    <Name isBanned={isBanned}>
                         {comment.get('comment_author').get('visitor_name')}
                     </Name>
                 </VisitorInfo>
@@ -136,7 +138,7 @@ class Comment extends PureComponent {
 
 
                 <MultiContent>
-                    <Content>
+                    <Content isBanned={isBanned}>
                         {comment.get('comment_content')}
                     </Content>
                     <OperationBar  className={CommonClassNameConstants.FONT_DARK }>
@@ -168,8 +170,14 @@ class Comment extends PureComponent {
                                               className="fa fa-trash-o"/>
 
                                 &nbsp;|&nbsp;
-                                <BanButton onClick={() => {tryToBanThisIP(comment_id, comment_ip)}}
-                                              className="fa fa-ban"/>
+                                {
+                                    isBanned ?
+                                        <LiftedButton onClick={() => {tryToLiftedThisIP(comment_id, comment_ip, isBanned)}}>lifted</LiftedButton>
+                                        :
+                                        <BanButton onClick={() => {tryToBanThisIP(comment_id, comment_ip, isBanned)}}
+                                                   className="fa fa-ban"/>
+                                }
+
                             </Fragment>
                         }
                     </OperationBar>
@@ -322,7 +330,11 @@ const mapActions = (dispatch) => ({
 
     },
 
-    tryToBanThisIP(comment_id, ip) {
+    tryToBanThisIP(comment_id, ip, isBanned) {
+
+        if(isBanned){
+            return
+        }
 
         const  banIPPostHandler = () => {
 
@@ -352,7 +364,43 @@ const mapActions = (dispatch) => ({
         const triggerShowModalAction = createTriggerShowModalAction(true)
         dispatch(triggerShowModalAction)
 
-    }
+    },
+
+    tryToLiftedThisIP(comment_id, ip, isBanned) {
+
+        if(!isBanned){
+            return
+        }
+
+        const  liftedIPPostHandler = () => {
+
+            //trigger loading状态
+            const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(true)
+            dispatch(triggerModalIsLoadingAction)
+
+            //向saga发送请求
+            const value = {
+                ip: ip,
+                comment_id: comment_id
+            }
+            const action = createLiftedIPAction(value)
+
+            dispatch(action)
+        }
+
+        const value = {
+            modalTitle: '提示',
+            modalContent: '你正在尝试解封ip: ' + ip,
+            postProcessor: liftedIPPostHandler
+        }
+
+        const appointModalMsgAction = createAppointModalMsgAction(value)
+        dispatch(appointModalMsgAction)
+
+        const triggerShowModalAction = createTriggerShowModalAction(true)
+        dispatch(triggerShowModalAction)
+
+    },
 
 })
 

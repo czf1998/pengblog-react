@@ -17,7 +17,7 @@ class Modal extends PureComponent{
 
         const { showModal,
                 closeThisModal,
-                context} = this.props
+                context,isLoading} = this.props
 
         return (
             <ModalWrapper>
@@ -57,7 +57,7 @@ class Modal extends PureComponent{
                                 <CaptchaModalItem/>
                         }
 
-                        <CloseButton className="iconfont"
+                        <CloseButton className="iconfont" isLoading={isLoading}
                                      onClick={closeThisModal}>&#xe70b;</CloseButton>
 
                     </ModalBodyWrapper>
@@ -71,7 +71,8 @@ class Modal extends PureComponent{
 
 const mapState = (state) => ({
     showModal: state.get('modal').get('showModal'),
-    context: state.get('modal').get('context')
+    context: state.get('modal').get('context'),
+    isLoading: state.get('modal').get('isLoading')
 })
 
 const mapActions = (dispatch) => ({

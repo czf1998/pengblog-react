@@ -2,6 +2,7 @@ import {fromJS} from 'immutable'
 import {} from "./actionTypes";
 import {APPOINT_CURRENTPAGE_OF_PAGINATION} from "./actionTypes";
 import {
+    APPOINT_MAX_PAGE_SAGA_PAGINATION,
     DELIVER_ARTICLE_LIST_DATA_TO_MANAGE_PAGE,
     RESET_MANAGE_PAGE_ARTICLE_LIST
 } from "../../../store/actionTypesWithSaga";
@@ -11,28 +12,23 @@ import {
 } from "../../../pages/managePage/store/actionType";
 
 //根据浏览器显示高度初始化managePage的pageScale
-let pageScaleDefault = window.innerWidth < 800 ? 8 : parseInt((window.innerHeight - 300)/54)
-pageScaleDefault = pageScaleDefault < 8 ? 8 : pageScaleDefault
-const startIndexDefault = -pageScaleDefault
 
 
 const defaultState = fromJS({
     managePage: fromJS({
         currentPage: 0,
         maxPage: 1,
-        startIndex: startIndexDefault,
-        pageScale: pageScaleDefault,
+        startIndex: window.innerWidth < 500 ? - 8 : - parseInt((window.innerHeight - 200)/54),
+        pageScale: window.innerWidth < 500 ? 8 : parseInt((window.innerHeight - 200)/54),
+    }),
+    ipManagePage:fromJS({
+        currentPage: 0,
+        maxPage: 1,
+        startIndex: window.innerWidth < 500 ? - 8 : - parseInt((window.innerHeight - 200)/50),
+        pageScale: window.innerWidth < 500 ? 8 : parseInt((window.innerHeight - 200)/50),
     })
 })
 
-const resetState = fromJS({
-    managePage: fromJS({
-        currentPage: 1,
-        maxPage: 1,
-        startIndex: startIndexDefault + pageScaleDefault,
-        pageScale: pageScaleDefault,
-    })
-})
 
 export default (state = defaultState, action) => {
     if(action.type === APPOINT_CURRENTPAGE_OF_PAGINATION){
@@ -40,7 +36,10 @@ export default (state = defaultState, action) => {
         let paginationId = action.value.paginationId
         let currentPage = action.value.currentPage
         let startIndex = state.get(paginationId).get('startIndex') + (currentPage - state.get(paginationId).get('currentPage')) * state.get(paginationId).get('pageScale')
-        startIndex = startIndex < 0 ? 0 : startIndex
+
+        if(currentPage > 0) {
+            startIndex = startIndex < 0 ? 0 : startIndex
+        }
 
         if(currentPage === state.get(paginationId).get('currentPage')){
             return state
@@ -61,6 +60,15 @@ export default (state = defaultState, action) => {
         })
     }
 
+    if(action.type === APPOINT_MAX_PAGE_SAGA_PAGINATION){
+
+        const target = state.get(action.value.paginationId)
+
+        return state.set(action.value.paginationId, target.merge({
+            maxPage: action.value.maxPage
+        }))
+    }
+
     if(action.type === APPOINT_MANAGE_PAGE_PAGINATION){
         return state.merge({
             managePage: state.get('managePage').merge({
@@ -74,8 +82,5 @@ export default (state = defaultState, action) => {
         return defaultState
     }
 
-    if(action.type === RESET_PAGE_INDEX_OF_PAGINATION){
-        return state.set(action.value, resetState.get(action.value))
-    }
     return state
 }

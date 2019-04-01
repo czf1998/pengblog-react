@@ -12,13 +12,11 @@ export const FreshCommentItemWrapper = styled.div`
         color:grey;
         font-size:0.9rem;
         margin-top: 0.5rem;
-        background: ${props => props.isLoading ? '#F7F7F7' : 'white'};
+        background: ${props => props.isLoading ? '#F7F7F7' : (props.isBanned ? '#F7F7F7' : 'white')};
     `
 
 export const DeleteButton = styled.i`
-        position: absolute;
-        top: -0.5rem;
-        right: -0.5rem;
+        margin-right:0.5rem;
         &:hover{
             color: black;
         }
@@ -38,11 +36,11 @@ export const CommentSubject = styled.div`
     `
 
 export const Visitor = styled.span`
-        
+        text-decoration: ${props => props.isBanned ? 'line-through' : 'none'};
     `
 
 export const Content = styled.span`
-        
+        text-decoration: ${props => props.isBanned ? 'line-through' : 'none'};
     `
 
 export const HostArticle = styled.div`
@@ -86,4 +84,20 @@ export const LoadingIcon = styled.img`
         height: 1.5rem;
         top: calc(50% - 0.75rem);
         left: calc(50% - 0.75rem);
+    `
+
+export const OperationColumn = styled.div`
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: flex-end;
+    `
+
+export const BanButton = styled(DeleteButton)`
+
+    `
+
+export const LiftedButton = styled.span`
+        &:hover{
+            color: black;
+        }
     `

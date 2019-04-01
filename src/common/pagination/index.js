@@ -27,11 +27,11 @@ class Pagination extends PureComponent{
         return (
             <PaginationWrapper>
 
-                <GoToFirstPageIcon onClick={() => {this.props.jumpToThePage(paginationId,1)}}>
+                <GoToFirstPageIcon onClick={() => {jumpToThePage(paginationId,1)}}>
                     <i className="fa fa-angle-double-left"/>
                 </GoToFirstPageIcon>
 
-                <GoToLastIcon onClick={() => {this.props.jumpToThePage(paginationId,currentPage - 1)}}>
+                <GoToLastIcon onClick={() => {jumpToThePage(paginationId,currentPage - 1)}}>
                     <i className="fa fa-angle-left"/>
                 </GoToLastIcon>
 
@@ -48,7 +48,7 @@ class Pagination extends PureComponent{
                         if(item > 0 && item < (maxPage + 1)){
                             return  <Item key={item}
                                           isCurrentPage={currentPage === item}
-                                          onClick={() => {this.props.jumpToThePage(paginationId,item)}}>
+                                          onClick={() => {jumpToThePage(paginationId,item)}}>
                                         {item}
                                      </Item>
                         }
@@ -64,11 +64,11 @@ class Pagination extends PureComponent{
                 }
 
 
-                <GoToNextIcon onClick={() => {this.props.jumpToThePage(paginationId,currentPage + 1)}}>
+                <GoToNextIcon onClick={() => {jumpToThePage(paginationId,currentPage + 1)}}>
                     <i className="fa fa-angle-right"/>
                 </GoToNextIcon>
 
-                <GoToEndPageIcon onClick={() => {this.props.jumpToThePage(paginationId,maxPage)}}>
+                <GoToEndPageIcon onClick={() => {jumpToThePage(paginationId,maxPage)}}>
                     <i className="fa fa-angle-double-right"/>
                 </GoToEndPageIcon>
 

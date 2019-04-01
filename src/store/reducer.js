@@ -19,6 +19,7 @@ import { reducer as paginationReducer } from '../common/pagination/store'
 import { reducer as loginPageReducer } from '../pages/loginPage/store'
 import { reducer as freshCommentsReducer } from '../pages/managePage/components/freshComments/store'
 import { reducer as captchaReducer } from '../common/captcha/store'
+import { reducer as ipManagePageReducer } from '../pages/ipManagePage/store'
 import { fromJS } from 'immutable'
 import {RECORD_CURRENT_BROWSER_EDITION, RECORD_SCROLL_TOP_OF_ELEMENT_EL} from './actionTypesWithSaga'
 
@@ -65,6 +66,7 @@ export default combineReducers({
     loginPage: loginPageReducer,
     freshComments: freshCommentsReducer,
     captcha: captchaReducer,
+    ipManagePage: ipManagePageReducer,
     rootState:(state = defaultState, action) => {
         if(action.type === RECORD_SCROLL_TOP_OF_ELEMENT_EL){
             return state.merge({

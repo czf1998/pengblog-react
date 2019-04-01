@@ -21,7 +21,10 @@ export default (state = defaultState, action) => {
     if(action.type === TRIGGER_SHOW_MODAL){
 
         if(!action.value){
-            return defaultState
+            return state.merge({
+                showModal: action.value,
+                isLoading: false
+            })
         }
 
         return state.merge({
@@ -34,7 +37,7 @@ export default (state = defaultState, action) => {
             modalContent: action.value.modalContent ? action.value.modalContent : state.get('modalContent'),
             postProcessor: action.value.postProcessor ? action.value.postProcessor : () => {},
             context: action.value.context ? action.value.context : state.get('context'),
-            notifyOnly: action.value.notifyOnly ? action.value.notifyOnly : state.get('notifyOnly')
+            notifyOnly: action.value.notifyOnly ? action.value.notifyOnly : false
         })
     }
     if(action.type === TRIGGER_MODAL_IS_LOADING){

@@ -5,6 +5,8 @@ import {
     DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
     GET_ARTICLE_DATA_FOR_ARTICLE_PAGE,
     GET_COMMENT_LIST_DATA,
+    MARK_COMMENT_WHICH_IP_BEEN_BAN_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS,
+    MARK_COMMENT_WHICH_IP_BEEN_LIFTED_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS,
     RECORD_COMMENT_HAS_BEEN_DELETED,
     RESET_ARTICLE_PAGE_STORE
 } from '../../../store/actionTypesWithSaga'
@@ -141,6 +143,37 @@ export default (state = defaultState, action) => {
             startIndex: startIndex - (commentList.length - newCommentList.length),
             maxPage: action.value.maxPage,
             countOfAllComment: state.get('countOfAllComment') - (commentList.length - newCommentList.length)
+        })
+    }
+    if(action.type === MARK_COMMENT_WHICH_IP_BEEN_BAN_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS){
+
+        let commentList = state.get('commentList')
+
+        const newCommentList = commentList.map((item) => {
+            if(item.get('comment_id') === action.value) {
+                return item.set('comment_ip',item.get('comment_ip').set('ip_isBanned',true))
+            }
+            return item
+        })
+
+        return state.merge({
+            commentList: newCommentList
+        })
+    }
+
+    if(action.type === MARK_COMMENT_WHICH_IP_BEEN_LIFTED_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS){
+
+        let commentList = state.get('commentList')
+
+        const newCommentList = commentList.map((item) => {
+            if(item.get('comment_id') === action.value) {
+                return item.set('comment_ip',item.get('comment_ip').set('ip_isBanned',false))
+            }
+            return item
+        })
+
+        return state.merge({
+            commentList: newCommentList
         })
     }
     return state

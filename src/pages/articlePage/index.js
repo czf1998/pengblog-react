@@ -24,6 +24,7 @@ import { DateFormat } from "../../exJs"
 import { Comment, TopLevelCommentEditor,Share } from './components'
 import {createAppointSizeOfTitleImageFrameAction} from "../articleEditPage/components/titleImage/store";
 import {SLIDE_FROM_LEFT_CSSTRANSITION} from "../../commonStyle/commonClassNameConstant";
+import './style.css'
 
 class ArticlePage extends PureComponent {
 
@@ -93,7 +94,7 @@ class ArticlePage extends PureComponent {
                                             return (
                                                 <CSSTransition key={item.get('comment_id')}
                                                                timeout={400}
-                                                               classNames={SLIDE_FROM_LEFT_CSSTRANSITION}>
+                                                               classNames="article-comment">
                                                     <div>
                                                         <GapLine/>
                                                         <Comment comment={item} clickReferHandler={() => {referComment(item)}}/>

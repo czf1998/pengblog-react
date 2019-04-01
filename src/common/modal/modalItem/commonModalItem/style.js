@@ -56,6 +56,8 @@ export const ConfirmButton = styled.div`
         border-radius: 0.4rem;
         color: ${props => props.isLoading ? 'grey' : '#00AA00'};
         transition: all 0.4s ease;
+        pointer-events: ${props => props.isLoading ? 'none' : 'default'};
+        transition: all 0.4s ease;
         ${props => props.browser === 'Safari' ? '' : `
             &:hover{
                 background: #F7F7F7;
@@ -65,6 +67,9 @@ export const ConfirmButton = styled.div`
 
 export const CancelButton = styled(ConfirmButton)`
         color: #AA0000;
+        color: ${props => props.isLoading ? 'grey' : '#AA0000'};
+        pointer-events: ${props => props.isLoading ? 'none' : 'default'};
+        transition: all 0.4s ease;
     `
 
 export const LoadingWraper = styled(ModalContent)`

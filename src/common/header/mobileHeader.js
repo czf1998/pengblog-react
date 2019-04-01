@@ -4,7 +4,7 @@ import {HeaderWrapper,
         NavItemWrapper,
         MenuButtonWrapper,
         Button,
-        MenuList,
+        MenuList,MenuListWrapper,
         MenuItem,
         Cover} from './style'
 import { connect } from 'react-redux'
@@ -17,6 +17,7 @@ class MobileHeader extends PureComponent {
 
     constructor(props){
         super(props)
+
         this.showMenu = this.showMenu.bind(this)
         this.closeMenu = this.closeMenu.bind(this)
     }
@@ -26,7 +27,7 @@ class MobileHeader extends PureComponent {
         const { height,
                 backgroundColor,
                 basicUIFeatures,
-                showMenuList,
+                showMenuList,alreadyLoggedIn,
                 goTo} = this.props
 
         return (
@@ -34,32 +35,63 @@ class MobileHeader extends PureComponent {
                            height={height}
                            backgroundColor={backgroundColor}>
 
+                <MenuListWrapper showMenuList={showMenuList}>
+                    <MenuList showMenuList={showMenuList}>
 
-                <MenuList showMenuList={showMenuList}>
+                        {
+                            showMenuList && <Cover/>
+                        }
 
-                    {
-                        showMenuList && <Cover/>
-                    }
-
-                    <MenuItem onClick={() => {goTo('/')}}>
+                        <MenuItem onClick={() => {goTo('/')}}>
                             <span className="iconfont"
                                   style={{fontSize: '1.6rem'}}>&#xe626;</span>
-                        主页
-                    </MenuItem>
+                            &nbsp;主页
+                        </MenuItem>
 
-                    <MenuItem onClick={() => {goTo('/manage')}}>
+                        <MenuItem onClick={() => {goTo('/manage')}}>
                             <span className="iconfont"
                                   style={{fontSize: '1.6rem'}}>&#xe76a;</span>
-                        索引
-                    </MenuItem>
+                            &nbsp;索引
+                        </MenuItem>
 
-                    <MenuItem onClick={() => {goTo('/edit')}}
-                              style={{borderBottom:'none'}}>
-                            <span className="iconfont"
-                                  style={{fontSize: '1.6rem'}}>&#xe67f;</span>
-                        写作
-                    </MenuItem>
-                </MenuList>
+                        {
+                            !alreadyLoggedIn &&
+                            <MenuItem onClick={() => {goTo('/login')}}>
+                                        <span className="iconfont"
+                                              style={{fontSize: '1.6rem'}}>&#xe624;</span>
+                                &nbsp;登录
+                            </MenuItem>
+                        }
+
+                        {
+                            alreadyLoggedIn &&
+                                <Fragment>
+                                    <MenuItem onClick={() => {goTo('/edit')}}>
+                                        <span className="iconfont"
+                                              style={{fontSize: '1.6rem'}}>&#xe67f;</span>
+                                        &nbsp;写作
+                                    </MenuItem>
+
+                                    <MenuItem onClick={() => {goTo('/logout')}}>
+                                        <span className="iconfont"
+                                              style={{fontSize: '1.6rem'}}>&#xe7cd;</span>
+                                        &nbsp;登出
+                                    </MenuItem>
+
+                                    <MenuItem onClick={() => {goTo('/ip')}}
+                                              style={{borderBottom:'none'}}>
+                                        <span className="iconfont"
+                                              style={{fontSize: '1.6rem'}}>&#xe64f;</span>
+                                        &nbsp;管理IP
+                                    </MenuItem>
+                                </Fragment>
+                        }
+
+
+                    </MenuList>
+                </MenuListWrapper>
+
+
                 <MobileHeaderMainArea   widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
 
                     <Logo/>
@@ -81,6 +113,8 @@ class MobileHeader extends PureComponent {
             </HeaderWrapper>
         );
     }
+
+
 
     componentDidMount(){
         this.refs.menuButton.addEventListener('click', this.showMenu)
@@ -107,7 +141,8 @@ const mapState = (state) => {
         backgroundColor: state.get('header').get('backgroundColor'),
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
         goTo: state.get('router').get('goTo'),
-        showMenuList: state.get('header').get('showMenuList')
+        showMenuList: state.get('header').get('showMenuList'),
+        alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }
 }
 

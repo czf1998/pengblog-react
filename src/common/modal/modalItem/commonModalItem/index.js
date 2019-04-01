@@ -45,9 +45,9 @@ class CommonModalItem extends PureComponent{
                 <OperationColumn>
                     {
                         !notifyOnly &&
-                        <ConfirmButton browser={browser} onClick={postProcessor}>确认</ConfirmButton>
+                        <ConfirmButton isLoading={isLoading} browser={browser} onClick={postProcessor}>确认</ConfirmButton>
                     }
-                    <CancelButton onClick={closeThisModal}>
+                    <CancelButton isLoading={isLoading} onClick={closeThisModal}>
                         {
                             notifyOnly ? '关闭' : '取消'
                         }

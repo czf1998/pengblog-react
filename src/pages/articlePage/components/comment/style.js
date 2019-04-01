@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import React from "react";
 
 const widthOfMainArea = 750
 
@@ -7,7 +8,7 @@ export const CommentWrapper = styled.div`
         display: flex;
         align-items: stretch;
         filter: brightness(${props => props.isBeenDeleting ? '95%' : '100%'});
-        background: white;
+        background: ${props => props.isBanned ? '#F7F7F7' : 'white'};
         margin: 0 2rem;
         transition: all 0.4s ease;
         @media(max-width: ${props => props.widthOfMainArea}px) {
@@ -52,6 +53,8 @@ export const Name = styled.div`
         line-height: 1.2;
         text-align: center;
         word-wrap: break-word 
+        text-decoration: ${props => props.isBanned ? 'line-through' : 'none'};
+        color: ${props => props.isBanned ? 'grey' : 'black'};
         
         margin: 1rem 0;
         padding: 0 1rem;
@@ -80,7 +83,9 @@ export const Content = styled.div`
         line-height: 1.5;
         padding: 0.8rem 1rem;
         flex-grow: 1;    
-         @media(min-width: ${widthOfMainArea}px) {
+        text-decoration: ${props => props.isBanned ? 'line-through' : 'none'};
+        color: ${props => props.isBanned ? 'grey' : 'black'};
+        @media(min-width: ${widthOfMainArea}px) {
             padding-right: 0;
 
         }    
@@ -109,7 +114,18 @@ export const DeleteButton = styled.i`
     `
 
 export const BanButton = styled(DeleteButton)`
+        cursor: ${props => props.isBanned ? 'default' : 'pointer'};
+        &:hover{
+            color: ${props => props.isBanned ? 'grey' : 'black'};;
+        }
+    `
 
+export const LiftedButton = styled.span`
+        cursor: pointer;
+        color: grey;
+        &:hover{
+            color: black;
+        }
     `
 
 export const SubCommentEditorWrapper = styled.div`

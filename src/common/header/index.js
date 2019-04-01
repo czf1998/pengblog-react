@@ -5,6 +5,7 @@ import CommonHeader from './commonHeader'
 import MobileHeader from './mobileHeader'
 import ArticleEditPageHeader from './articleEditPageHeader'
 import LoginPageHeader from './loginPageHeader'
+import IpManagePageHeader from './ipManagePageHeader'
 
 class Header extends PureComponent {
 
@@ -27,7 +28,12 @@ class Header extends PureComponent {
                                     currentPath.match(/^\/login/) ?
                                         <LoginPageHeader/>
                                         :
-                                        <CommonHeader/>
+                                        (
+                                            currentPath === '/ip' ?
+                                                <IpManagePageHeader/>
+                                                :
+                                                <CommonHeader/>
+                                        )
                                 )
                         )
                 }

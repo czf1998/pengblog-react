@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
 import { withRouter } from 'react-router-dom'
 import {Logo} from './components'
+import {GapLineVertical} from "../gapLine";
 
 
 class CommonHeader extends PureComponent {
@@ -30,20 +31,32 @@ class CommonHeader extends PureComponent {
                            backgroundColor={backgroundColor}>
                 <HeaderMainArea   widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
 
-                    <Logo/>
+                    <NavItemWrapper>
+
+                        <Logo/>
+
+                        {
+                            currentPath.match('^/home') === null &&  <GapLineVertical/>
+                        }
+
+
+                        <NavItem style={{fontWeight:'bold'}}>
+                            {
+                                currentPath === '/manage' &&  <span>索引</span>
+                            }
+                        </NavItem>
+                    </NavItemWrapper>
 
                     <NavItemWrapper>
 
                         {
                             currentPath !== '/manage' &&
                             <NavItem cursorp={true}>
-                                <Link to="/manage" style={{display:'flex',alignItems:'center'}}>
-                                <span className="iconfont"
+                                <span className="iconfont" onClick={() => {goTo('/manage')}}
                                       style={{fontSize:'1.6rem'}}>&#xe76a;</span>
-                                    <Info>
-                                        索引
-                                    </Info>
-                                </Link>
+                                <Info onClick={() => {goTo('/manage')}}>
+                                    索引
+                                </Info>
                             </NavItem>
 
                         }
@@ -52,7 +65,7 @@ class CommonHeader extends PureComponent {
                         {
                             alreadyLoggedIn &&
                             <NavItem cursorp={true}>
-                            <span className="iconfont"
+                                <span className="iconfont"
                                   onClick={() => {goTo('/edit')}}
                                   style={{fontSize:'1.6rem'}}>&#xe67f;</span>
                                 <Info onClick={() => {goTo('/edit')}}>

@@ -53,6 +53,7 @@ export const CloseButton = styled.div`
         right: 1rem;
         cursor: pointer;
         color: #EEEEEE;
+        pointer-events: ${props => props.isLoading ? 'none' : 'default'};
         &:hover{
             color: grey;
         }

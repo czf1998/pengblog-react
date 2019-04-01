@@ -9,6 +9,8 @@ import HomeEXLoadable from '../pages/homeEx/loadable'
 import ManagePageLoadable from '../pages/managePage/loadable'
 import LoginPageLoadable from '../pages/loginPage/loadable'
 import NoFoundPageLoadable from '../pages/noFoundPage/loadable'
+import ServerUnavailablePageLoadable from '../pages/serverUnavailablePage/loadable'
+import IpManagePageLoadable from "../pages/ipManagePage/loadable";
 import { Header } from '../common'
 import {createTriggerAlreadyLoggedInAction} from "../store/actionCreators";
 import {createAppointLoginPageInputValueAction} from "../pages/loginPage/store";
@@ -25,18 +27,17 @@ class RouterComponent extends PureComponent {
             <Router history={history}>
                 <Fragment>
                     <Header/>
-
                     <Switch>
-                        {/*<Route exact path='/article/:article_id' component={ArticlePageLoadable}/>*/}
                         <Route exact path='/' render={() => (<Redirect to='/home'/>)}/>
                         <Route exact={isMobile} path='/home' component={HomeEXLoadable}/>
                         <Route exact path='/article/:article_id' render={() => (isMobile ? (<ArticlePageLoadable/>) : (<ArticlePageEXLoadable/>))}/>
                         <Route exact path='/manage' component={ManagePageLoadable}/>
-                        <Route exact path='/edit' component={ArticleEditPageLoadable}/>
+                        <Route exact path='/ip' render={() => (alreadyLoggedIn ? (<IpManagePageLoadable/>) : (<Redirect to='/login'/>))}/>
                         <Route exact path='/edit' render={() => (alreadyLoggedIn ? (<ArticleEditPageLoadable/>) : (<Redirect to='/login'/>))}/>
                         <Route path='/login' render={() => (alreadyLoggedIn ? (<Redirect to='/home'/>) : (<LoginPageLoadable/>))}/>
                         <Route exact path='/logout' render={() => (alreadyLoggedIn ? (<LoginPageLoadable/>) : (<Redirect to='/home'/>))}/>
                         <Route exact path='/404' component={NoFoundPageLoadable}/>
+                        <Route exact path='/503' component={ServerUnavailablePageLoadable}/>
                         {
                             isMobile && <Route path="/home/article/:article_id" component={ArticlePageLoadable}/>
                         }
@@ -90,6 +91,15 @@ const appointDocumentTitle = (path,currentArticle) => {
     }
     if(path === '/edit'){
         document.title = '写文章'
+    }
+    if(path === '/404'){
+        document.title = '404'
+    }
+    if(path === '/503'){
+        document.title = '503'
+    }
+    if(path === '/ip'){
+        document.title = '封禁IP'
     }
 }
 

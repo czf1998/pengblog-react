@@ -35,8 +35,12 @@ import {createDeliverArticleDataToHomeAction,
         createRecordCommentHasBeenDeletedAction,
         createRecordSubCommentHasBeenDeletedAction,
         createDeliverCaptchaImageBase64Action,
-        createTriggerShowCaptchaInputWarnAction,createMarkCommentWhichIPBeenBanAction,
-    createTriggerIsGettingSmsAction,createAppointCaptchaWarnMsgAction} from './actionCreators'
+        createTriggerShowCaptchaInputWarnAction,
+        createMarkCommentWhichIPBeenBanAction,
+        createMarkCommentWhichIPBeenLiftedAction,
+        createDeliverIpListDataToIpManagePageAction,
+        createTriggerIsGettingSmsAction,createAppointCaptchaWarnMsgAction,
+        createAppointMaxPageToPaginationAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
         ImageRequest,
@@ -77,13 +81,15 @@ import {GET_FRESH_COMMENTS_DATA} from "../pages/managePage/components/freshComme
 import {DELETE_COMMENT_FROM_FRESH_COMMENTS} from "../pages/managePage/components/freshComments/components/freshCommentItem/store/actionTypes";
 import {
     BAN_IP_COMMENT_SAGA,
-    DELETE_COMMENT_FROM_ARTICLE_PAGE
+    DELETE_COMMENT_FROM_ARTICLE_PAGE, LIFTED_IP_IPITEM_and_COMMENT_SAGA
 } from "../pages/articlePage/components/comment/store/actionTypes";
 import {DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/components/subComment/store/actionTypes";
 import {GET_CAPTCHA_IMAGE} from "../common/captcha/store/actionTypes";
 import {GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD} from "../pages/home/store/actionType";
-import {CAPTCHA_MODAL} from "../common/modal/store/reducer";
+import {CAPTCHA_MODAL, COMMON_MODAL} from "../common/modal/store/reducer";
 import {SUBMIT_COMMENT_WITH_CAPTCHA} from "../common/modal/store/actionTypes";
+import {GET_IP_LIST_DATA_OF_IP_MANAGE_PAGE_IPMANAGEPAGE_SAGA} from "../pages/ipManagePage/store/actionTypes";
+import {createAppointCurrentPageOfPaginationAction} from "../common/pagination/store";
 
 
 const NO_MORE_ITEM_AVAILABLE = 'noMoreItemAvailable'
@@ -119,6 +125,89 @@ function* mySaga() {
     yield takeEvery(GET_CAPTCHA_IMAGE, ajaxGetCaptchaImage)
     yield takeEvery(GET_SMS, ajaxGetSms)
     yield takeEvery(BAN_IP_COMMENT_SAGA, ajaxBanIP)
+    yield takeEvery(LIFTED_IP_IPITEM_and_COMMENT_SAGA, ajaxLiftedIP)
+    yield takeEvery(GET_IP_LIST_DATA_OF_IP_MANAGE_PAGE_IPMANAGEPAGE_SAGA, ajaxGetIpListDataOfIpManagePage)
+}
+
+function* ajaxGetIpListDataOfIpManagePage(action) {
+    try{
+        const res = yield IpRequest.RequestIpList(action.value)
+
+        const deliverDataAction = createDeliverIpListDataToIpManagePageAction(res.data)
+
+        yield put(deliverDataAction)
+
+        const value = {
+            paginationId: 'ipManagePage',
+            maxPage: res.data.maxPage
+        }
+
+        const appointMaxPageAction = createAppointMaxPageToPaginationAction(value)
+
+        yield put(appointMaxPageAction)
+
+    }catch (err) {
+
+        goTo503(err)
+
+        const noticeAction = createAppointNoticeContent(err.response.data)
+
+        yield put(noticeAction)
+    }
+}
+
+function* ajaxLiftedIP(action) {
+    try{
+
+        const res = yield IpRequest.RequestLiftedIP(action.value.ip)
+
+
+        //关闭模态框
+        const triggerShowModalAction = createTriggerShowModalAction(false);
+
+        yield put(triggerShowModalAction)
+
+        //标记已ban评论
+        const markCommentWhichIPBeenLiftedAction = createMarkCommentWhichIPBeenLiftedAction(action.value.comment_id);
+
+        yield put(markCommentWhichIPBeenLiftedAction)
+
+        //重置ipManagePage
+
+        const value = {
+            paginationId: 'ipManagePage',
+            currentPage: 0
+        }
+
+        yield delay(1000)
+
+        const appointPagaAction = createAppointCurrentPageOfPaginationAction(value)
+
+        yield put(appointPagaAction)
+
+    }catch (err) {
+
+        yield goTo503(err)
+
+        yield delay(500);
+
+        //trigger loading状态
+        const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(false)
+
+        yield put(triggerModalIsLoadingAction)
+
+        //提示异常
+        const value = {
+            modalTitle: 'ERR',
+            modalContent: err.response.data,
+            notifyOnly: true
+        }
+
+        const appointModalMsgAction = createAppointModalMsgAction(value)
+
+        yield put(appointModalMsgAction)
+
+    }
 }
 
 function* ajaxBanIP(action) {
@@ -141,6 +230,8 @@ function* ajaxBanIP(action) {
 
     }catch (err) {
 
+        yield goTo503(err)
+
         yield delay(500);
 
         //trigger loading状态
@@ -158,7 +249,6 @@ function* ajaxBanIP(action) {
         const appointModalMsgAction = createAppointModalMsgAction(value)
 
         yield put(appointModalMsgAction)
-
 
     }
 }
@@ -188,6 +278,9 @@ function* ajaxHomeArticleListDataByKeyword() {
 
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_BY_KEYWORD  ERR: ' + err)
 
         /*通知窗口提示登录失败*/
@@ -227,6 +320,9 @@ function* ajaxLoginWithDynamicPassword() {
         yield put(appointNoticeContent)
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: LOGIN  ERR: ' + err)
 
         /*通知窗口提示登录失败*/
@@ -265,6 +361,9 @@ function* ajaxGetSms() {
 
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_SMS  ERR: ' + err)
     }
 }
@@ -284,6 +383,9 @@ function* ajaxGetCaptchaImage(action) {
         yield put(deliverImageAction)
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_CAPTCHA_IMAGE  ERR: ' + err)
     }
 }
@@ -332,6 +434,9 @@ function* ajaxLogin() {
 
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: LOGIN  ERR: ' + err)
 
         /*通知窗口提示登录失败*/
@@ -373,6 +478,9 @@ function* ajaxDeleteSubCommentFromArticlePage(action) {
         yield put(recordSubCommentHasBeenDeletedAction)
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: DELETE_COMMENT  ERR: ' + err)
 
         /*通知窗口提示异常*/
@@ -410,6 +518,9 @@ function* ajaxDeleteCommentFromArticlePage(action) {
 
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: DELETE_COMMENT  ERR: ' + err)
 
         /*通知窗口提示异常*/
@@ -446,6 +557,9 @@ function* ajaxDeleteCommentFromFreshComments(action) {
 
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: DELETE_COMMENT  ERR: ' + err)
 
         /*通知窗口提示异常*/
@@ -462,7 +576,7 @@ function* ajaxGetFreshCommentsData(action) {
         const appointFreshCommentsDataAction = createAppointFreshCommentsDataAction(res.data)
         yield put(appointFreshCommentsDataAction)
     }catch (err) {
-
+        yield goTo503(err)
     }
 }
 
@@ -487,20 +601,22 @@ function* ajaxDeleteArticleList(action) {
         const triggerIsMultipleSelectingAction = createTiggerIsMultipleSelectingInManagePageAction(false)
         yield put(triggerIsMultipleSelectingAction)
 
-        const delay = (ms) => new Promise((resolve) => {
-            setTimeout(resolve, ms);
-        })
-        yield delay(500);
 
-        //刷新managePage数据前先trigger页面为loading状态
-        const triggerIsLoadingManagePageArticleListDataAction = createTriggerIsLoadingManagePageArticleListDataAction(true)
-        yield put(triggerIsLoadingManagePageArticleListDataAction)
+        const value = {
+            paginationId: 'managePage',
+            currentPage: 0
+        }
 
-        //清空managePage页面数据articleList
-        const resetManagePageArticleListAction = createResetManagePageArticleListAction()
-        yield put(resetManagePageArticleListAction)
+        yield delay(1000)
+
+        const appointPagaAction = createAppointCurrentPageOfPaginationAction(value)
+
+        yield put(appointPagaAction)
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: DELETE_ARTICLE_LIST  ERR: ' + err)
 
         //关闭modal
@@ -518,11 +634,9 @@ function* ajaxDeleteArticle(action) {
     yield checkToken()
 
     try{
-        yield ArticleRequest.RequestDeleteArticle(action.value)
+        yield ArticleRequest.RequestDeleteArticle(action.value.article_id)
 
-        //标记已删除的文章条目
-        const recordArticleHasBeenDeletedAction = createRecordArticleHasBeenDeletedAction(action.value)
-        yield put(recordArticleHasBeenDeletedAction)
+        action.value.postHandler()
 
         //关闭modal
         const triggerShowModalAction = createTriggerShowModalAction(false)
@@ -532,17 +646,21 @@ function* ajaxDeleteArticle(action) {
         const triggerIsMultipleSelectingAction = createTiggerIsMultipleSelectingInManagePageAction(false)
         yield put(triggerIsMultipleSelectingAction)
 
-        yield delay(500);
+        const value = {
+            paginationId: 'managePage',
+            currentPage: 0
+        }
 
-        //刷新managePage数据前先trigger页面为loading状态
-        const triggerIsLoadingManagePageArticleListDataAction = createTriggerIsLoadingManagePageArticleListDataAction(true)
-        yield put(triggerIsLoadingManagePageArticleListDataAction)
+        yield delay(1000)
 
-        //清空managePage页面数据articleList
-        const resetManagePageArticleListAction = createResetManagePageArticleListAction()
-        yield put(resetManagePageArticleListAction)
+        const appointPagaAction = createAppointCurrentPageOfPaginationAction(value)
+
+        yield put(appointPagaAction)
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: DELETE_ARTICLE  ERR: ' + err)
 
         //关闭modal
@@ -561,6 +679,9 @@ function* ajaxManagePageArticleListDataByLabel(action) {
         let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_LIST  ERR: ' + err)
     }
 }
@@ -571,6 +692,9 @@ function* ajaxManagePageArticleListDataByFiling(action) {
         let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING  ERR: ' + err)
     }
 }
@@ -581,6 +705,9 @@ function* ajaxManagePageArticleListDataBykeyword(action) {
         let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEYWORD  ERR: ' + err)
     }
 }
@@ -591,6 +718,9 @@ function* ajaxManagePageArticleLabelData() {
         let appointDataAction = createDeliverArticleLabelDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_LABEL_DATA  ERR: ' + err)
     }
 }
@@ -601,6 +731,9 @@ function* ajaxManagePageArticleFilingData() {
         let appointDataAction = createDeliverArticleFilingDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_FILING_DATA  ERR: ' + err)
     }
 }
@@ -608,9 +741,13 @@ function* ajaxManagePageArticleFilingData() {
 function* ajaxManagePageArticleListData(action) {
     try{
         const res = yield ArticleRequest.RequestArticleListData(action.value)
+
         let appointDataAction = createDeliverArticleListDataToManagePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_MANAGE_PAGE_ARTICLE_LIST_DATA  ERR: ' + err)
     }
 }
@@ -624,6 +761,9 @@ function* ajaxUploadImage(action) {
         let appointTitleImageUrlAction = createDeliverTitleImageUrlAction(res.data.imgUrl)
         yield put(appointTitleImageUrlAction)
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: UPLOAD_IMAGE  ERR: ' + err)
 
         /*通知窗口提示异常*/
@@ -652,6 +792,9 @@ function* ajaxSaveArticle(action) {
             },2000)
         }
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: SAVE_ARTICLE  ERR: ' + err)
 
         /*通知窗口提示异常*/
@@ -671,6 +814,9 @@ function* ajaxDraft() {
         yield put(appointDataAction)
 
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_DRAFT_DATA  ERR: ' + err)
 
     }
@@ -700,6 +846,20 @@ function* ajaxCheckWetherNeedCaptchaForSubmitComment(action){
 
     }catch(err){
 
+        yield goTo503(err)
+
+        const appointModalMsgValue = {
+            modalTitle: 'ERR',
+            modalContent: err.response.data,
+            context: COMMON_MODAL,
+            notifyOnly: true
+        }
+
+        const appointModalMsg = createAppointModalMsgAction(appointModalMsgValue)
+        yield put(appointModalMsg)
+
+        const triggerShowModalAction = createTriggerShowModalAction(true)
+        yield put(triggerShowModalAction)
     }
 }
 
@@ -714,6 +874,7 @@ function* ajaxSubmitCommentWithCaptcha(action) {
     }
 
     try{
+
 
         const editorId = action.value
 
@@ -790,6 +951,9 @@ function* ajaxSubmitCommentWithCaptcha(action) {
             yield put(triggerShowModalAction)
         }
     }catch (err) {
+
+        yield goTo503(err)
+
         const appointNoticeContent = createAppointNoticeContent('评论提交失败: ' + err.response.data.msg)
         yield put(appointNoticeContent)
 
@@ -887,8 +1051,21 @@ function* ajaxSubmitComment(action) {
             yield put(appointShowSubCommentEditorManagerAction)
         }
     }catch (err) {
-        const appointNoticeContent = createAppointNoticeContent('评论提交失败: ' + err.response.data.msg)
-        yield put(appointNoticeContent)
+
+        yield goTo503(err)
+
+        const appointModalMsgValue = {
+            modalTitle: 'ERR',
+            modalContent: err.response.data,
+            context: COMMON_MODAL,
+            notifyOnly: true
+        }
+
+        const appointModalMsg = createAppointModalMsgAction(appointModalMsgValue)
+        yield put(appointModalMsg)
+
+        const triggerShowModalAction = createTriggerShowModalAction(true)
+        yield put(triggerShowModalAction)
 
         /*结束submit按钮加载状态*/
         const triggerCommentEditorLoadingActionValue = {
@@ -910,6 +1087,9 @@ function* ajaxSubCommentListData(action) {
         let appointDataAction = createDeliverSubCommentListDataAction(value)
         yield put(appointDataAction)
     }catch (err) {
+
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: SUBMIT_COMMENT  ERR: ' + err)
     }
 }
@@ -920,6 +1100,8 @@ function* ajaxCountOfComment(action) {
         let appointDataAction = createDeliverCountOfCommentDataToHomeAction(action.value, res.data)
         yield put(appointDataAction)
     }catch (err) {
+        yield goTo503(err)
+
         console.log('ERR IN ACTION: GET_COUNT_OF_COMMENT  ERR: ' + err)
     }
 
@@ -944,6 +1126,8 @@ function* ajaxCommentListData(action) {
         let appointDataAction = createDeliverCommentListDataToArticlePageAction(res.data)
         yield put(appointDataAction)
     }catch (err) {
+
+        yield goTo503(err)
         console.log('ERR IN ACTION: GET_COMMENT_LIST_DATA  ERR: ' + err)
     }
 }
@@ -972,6 +1156,7 @@ function* ajaxHomeArticleListData() {
             yield put(pushPrograssBarToEndAction)
         }*!/!*!/*/
     }catch (err) {
+        yield goTo503(err)
         console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_DATA  ERR: ' + err)
     }
 }
@@ -986,6 +1171,7 @@ function* ajaxJumbotronArticleData(action) {
         let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home'})
         yield put(pushPrograssBarToEndAction)
     }catch (err) {
+        yield goTo503(err)
         console.log('ERR IN ACTION: GET_JUMBOTRON_ARTICLE_DATA  ERR: ' + err)
     }
 }
@@ -1010,6 +1196,8 @@ function* ajaxArticleDataForArticlePageData(action) {
         window.axiosSource = undefined
 
     }catch (err) {
+
+        yield goTo503(err)
 
         console.log('ERR IN ACTION: GET_ARTICLE_PAGE_DATA  ERR: ' + err)
 
@@ -1114,3 +1302,11 @@ function* notFound() {
 const delay = (ms) => new Promise((resolve) => {
     setTimeout(resolve, ms);
 })
+
+function* goTo503(err){
+    const state = yield select()
+
+    if(err.response.status === 503){
+        state.get('router').get('goTo')('/503')
+    }
+}

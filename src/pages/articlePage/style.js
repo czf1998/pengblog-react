@@ -51,14 +51,13 @@ export const ArticleContent = styled.div`
         word-wrap:break-word;
     `
 
-
 export const CommentTitle = styled.div`
         font-size: 1.3rem;
         font-weight: bold;
     `
 
 export const LoadingWrapper = styled.div`
-        position: ${props => props.currentPath && props.currentPath.match(/^\/home/) === null ? 'fixed' : 'static'};
+        position: static;
         width: 100%;
         height: ${window.innerHeight - heightOfHeader}px;
     `
