@@ -39,7 +39,11 @@ import {createDeliverArticleDataToHomeAction,
         createMarkCommentWhichIPBeenBanAction,
         createMarkCommentWhichIPBeenLiftedAction,
         createDeliverIpListDataToIpManagePageAction,
-        createTriggerIsGettingSmsAction,createAppointCaptchaWarnMsgAction,
+        createResetArticleEditPageAction,
+        createTriggerIsGettingSmsAction,
+        createAppointCaptchaWarnMsgAction,
+        createDeliverArticleListDataToRecycleBinPageAction,
+        createRecordEditingArticleIdAction,
         createAppointMaxPageToPaginationAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
@@ -63,7 +67,8 @@ import {
     GET_MANAGE_PAGE_ARTICLE_LABEL_DATA,
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA,
     GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_FILING,
-    GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD, GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL
+    GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_KEY_WORD,
+    GET_MANAGE_PAGE_ARTICLE_LIST_DATA_BY_LABEL
 } from "../pages/managePage/store/actionType";
 import {DELETE_ARTICLE} from "../pages/managePage/components/articleItem/store/actionTypes";
 import {
@@ -87,9 +92,11 @@ import {DELETE_SUB_COMMENT_FROM_ARTICLE_PAGE} from "../pages/articlePage/compone
 import {GET_CAPTCHA_IMAGE} from "../common/captcha/store/actionTypes";
 import {GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD} from "../pages/home/store/actionType";
 import {CAPTCHA_MODAL, COMMON_MODAL} from "../common/modal/store/reducer";
-import {SUBMIT_COMMENT_WITH_CAPTCHA} from "../common/modal/store/actionTypes";
+import {CLEAN_RECYCLE_BIN_modal_saga, SUBMIT_COMMENT_WITH_CAPTCHA} from "../common/modal/store/actionTypes";
 import {GET_IP_LIST_DATA_OF_IP_MANAGE_PAGE_IPMANAGEPAGE_SAGA} from "../pages/ipManagePage/store/actionTypes";
 import {createAppointCurrentPageOfPaginationAction} from "../common/pagination/store";
+import {RECOVER_ARTICLE_deletedArticleItem_saga} from "../pages/recycleBinPage/components/articleItem/store/actionTypes";
+import {GET_ARTICLE_LIST_DATA_recycleBinPage_saga} from "../pages/recycleBinPage/store/actionTypes";
 
 
 const NO_MORE_ITEM_AVAILABLE = 'noMoreItemAvailable'
@@ -127,6 +134,125 @@ function* mySaga() {
     yield takeEvery(BAN_IP_COMMENT_SAGA, ajaxBanIP)
     yield takeEvery(LIFTED_IP_IPITEM_and_COMMENT_SAGA, ajaxLiftedIP)
     yield takeEvery(GET_IP_LIST_DATA_OF_IP_MANAGE_PAGE_IPMANAGEPAGE_SAGA, ajaxGetIpListDataOfIpManagePage)
+    yield takeEvery(GET_ARTICLE_LIST_DATA_recycleBinPage_saga, ajaxGetRecycleBinPageArticleListData)
+    yield takeEvery(RECOVER_ARTICLE_deletedArticleItem_saga, ajaxRecoverArticle)
+    yield takeEvery(CLEAN_RECYCLE_BIN_modal_saga, ajaxCleanRecycleBin)
+}
+
+function* ajaxCleanRecycleBin() {
+    try{
+
+        yield ArticleRequest.RequestDestroyAllArticleDeleted()
+
+        const triggerModalIsLoadingAction = createTriggerModalIsLoadingAction(false)
+
+        yield put(triggerModalIsLoadingAction)
+
+        const shutdownModalAction = createTriggerShowModalAction(false)
+
+        yield put(shutdownModalAction)
+
+
+        const value = {
+            paginationId: 'recycleBinPage',
+            currentPage: 0
+        }
+
+        yield delay(1000)
+
+        const appointPagaAction = createAppointCurrentPageOfPaginationAction(value)
+
+        yield put(appointPagaAction)
+
+        const noticeAction = createAppointNoticeContent("清空回收站成功")
+
+        yield put(noticeAction)
+
+    }catch(err){
+
+        goTo503(err)
+
+        const value = {
+            modalTitle: 'ERR',
+            modalContent: err.response ? err.response.data : '未知错误',
+            context: COMMON_MODAL,
+            notifyOnly: true
+        }
+
+        const appointModalMsgAction = createAppointModalMsgAction(value)
+
+        yield put(appointModalMsgAction)
+
+
+    }
+
+}
+
+function* ajaxGetRecycleBinPageArticleListData(action) {
+
+    try{
+
+        const res = yield ArticleRequest.RequestDeletedArticleListData(action.value)
+
+        const deliverDataAction = createDeliverArticleListDataToRecycleBinPageAction(res.data)
+
+        yield put(deliverDataAction)
+
+        const value = {
+            paginationId: 'recycleBinPage',
+            maxPage: res.data ? res.data.maxPage : 1
+        }
+
+        const appointMaxPageAction = createAppointMaxPageToPaginationAction(value)
+
+        yield put(appointMaxPageAction)
+
+    }catch(err){
+        goTo503(err)
+
+        const noticeAction = createAppointNoticeContent(err.response.data)
+
+        yield put(noticeAction)
+    }
+
+}
+
+function* ajaxRecoverArticle(action) {
+
+    try{
+
+        yield ArticleRequest.RequestRecoverArticle(action.value.article_id)
+
+        action.value.postHandler()
+
+
+        //重置recycleBinPage
+
+        const value = {
+            paginationId: 'recycleBinPage',
+            currentPage: 0
+        }
+
+        yield delay(1000)
+
+        const appointPagaAction = createAppointCurrentPageOfPaginationAction(value)
+
+        yield put(appointPagaAction)
+
+        const noticeAction = createAppointNoticeContent("还原成功")
+
+        yield put(noticeAction)
+
+
+    }catch(err){
+
+        goTo503(err)
+
+        const noticeAction = createAppointNoticeContent(err.response.data)
+
+        yield put(noticeAction)
+    }
+
 }
 
 function* ajaxGetIpListDataOfIpManagePage(action) {
@@ -171,6 +297,7 @@ function* ajaxLiftedIP(action) {
         const markCommentWhichIPBeenLiftedAction = createMarkCommentWhichIPBeenLiftedAction(action.value.comment_id);
 
         yield put(markCommentWhichIPBeenLiftedAction)
+
 
         //重置ipManagePage
 
@@ -777,18 +904,27 @@ function* ajaxSaveArticle(action) {
     yield checkToken()
 
     try{
-        yield ArticleRequest.SaveArticle(action.value)
+        const res = yield ArticleRequest.SaveArticle(action.value)
+
         const triggerIsSavingDraftAction = createTriggerIsSavingDraftAction(false)
         yield put(triggerIsSavingDraftAction)
         const triggerIsSavingArticleAction = createTriggerIsSavingArticleAction(false)
         yield put(triggerIsSavingArticleAction)
 
+        const recordEditingArticleIdAction = createRecordEditingArticleIdAction(res.data)
+        yield put(recordEditingArticleIdAction)
+
+
         if(action.value.article_type === 'article'){
+
+            //重置页面
+            const resetArticleEditPageAction = createResetArticleEditPageAction()
+            yield put(resetArticleEditPageAction)
             /*通知窗口提示提交成功*/
             const appointNoticeContent = createAppointNoticeContent('文章发布成功！即将跳转')
             yield put(appointNoticeContent)
             setTimeout(() => {
-                action.value.goTo('/home/article/' + action.value.article_id)
+                action.value.goTo('/home/article/' + res.data)
             },2000)
         }
     }catch (err) {

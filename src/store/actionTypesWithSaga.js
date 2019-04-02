@@ -79,3 +79,9 @@ export const MARK_COMMENT_WHICH_IP_BEEN_LIFTED_SAGA_ARTICLEPAGE_and_FRESHCOMMENT
 export const DELIVER_IP_LIST_DATA_SAGA_IPMANAGEPAGE = 'deliverIpListData saga ipManagePage'
 
 export const APPOINT_MAX_PAGE_SAGA_PAGINATION = 'appointMaxPage saga pagination'
+
+export const DELIVER_ARTICLE_LIST_DATA_saga_recycleBinPage = 'deliverArticleListData saga recycleBinPage'
+
+export const RESET_ARTICLE_EDIT_PAGE_saga_articleEditPage = 'resetArticleEditPage saga articleEditPage'
+
+export const RECORD_EDITING_ARTICLE_ID_saga_articleEditPage = 'recordEditingArticleId saga articleEditPage'

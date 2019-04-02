@@ -31,7 +31,10 @@ import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
         APPOINT_CAPTCHA_WARN_MSG,
         DELIVER_IP_LIST_DATA_SAGA_IPMANAGEPAGE,
         APPOINT_MAX_PAGE_SAGA_PAGINATION,
-        MARK_COMMENT_WHICH_IP_BEEN_LIFTED_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS} from './actionTypesWithSaga'
+        MARK_COMMENT_WHICH_IP_BEEN_LIFTED_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS,
+    RESET_ARTICLE_EDIT_PAGE_saga_articleEditPage,
+    RECORD_EDITING_ARTICLE_ID_saga_articleEditPage,
+        DELIVER_ARTICLE_LIST_DATA_saga_recycleBinPage} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
     type: DELIVER_ARTICLE_LIST_DATA_TO_HOME,
@@ -203,5 +206,19 @@ export const createDeliverIpListDataToIpManagePageAction = (value) => ({
 
 export const createAppointMaxPageToPaginationAction = (value) => ({
     type: APPOINT_MAX_PAGE_SAGA_PAGINATION,
+    value
+})
+
+export const createDeliverArticleListDataToRecycleBinPageAction = (value) => ({
+    type: DELIVER_ARTICLE_LIST_DATA_saga_recycleBinPage,
+    value
+})
+
+export const createResetArticleEditPageAction = () => ({
+    type: RESET_ARTICLE_EDIT_PAGE_saga_articleEditPage
+})
+
+export const createRecordEditingArticleIdAction = (value) => ({
+    type: RECORD_EDITING_ARTICLE_ID_saga_articleEditPage,
     value
 })

@@ -133,6 +133,51 @@ export const RequestDeleteArticleList = (value) => {
 
 }
 
+export const RequestRecoverArticle = (value) => {
+    let token = getToken()
+
+    let config = {
+        params: {
+            article_id: value
+        },
+        headers: {
+            Authorization: token
+        }
+    }
+
+    return axios.get(Api.API_RECOVER_ARTICLE, config)
+}
+
+export const RequestDeletedArticleListData = (value) => {
+
+    let token = getToken()
+
+    let config = {
+        params: value,
+        headers: {
+            Authorization: token
+        }
+    }
+
+    return axios.get(Api.API_GET_DELETED_ARTICLE_LIST, config)
+
+}
+
+
+export const RequestDestroyAllArticleDeleted = () => {
+
+    let token = getToken()
+
+    let config = {
+        headers: {
+            Authorization: token
+        }
+    }
+
+    return axios.get(Api.API_DESTROY_ALL_DELETED_ARTICLE, config)
+
+}
+
 export const getToken = () => {
     let tokenObj = JSON.parse(localStorage.getItem('token'))
     let token = tokenObj ? tokenObj.token : null

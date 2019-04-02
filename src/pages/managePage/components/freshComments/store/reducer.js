@@ -28,7 +28,7 @@ export default (state = defaultState, action) => {
     if(action.type === APPOINT_FRESH_COMMENTS_DATA){
         return state.merge({
             commentList: state.get('commentList').concat(fromJS(action.value.commentList)),
-            maxPage: action.value.maxPage,
+            maxPage: action.value.maxPage ? action.value.maxPage : 0,
             currentPage: state.get('currentPage') + 1,
             startIndex: state.get('startIndex') + state.get('pageScale'),
             isLoading: false

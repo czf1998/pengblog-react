@@ -20,12 +20,15 @@ class FreshComments extends PureComponent {
                 <TransitionGroup>
                     {
                         commentList.map((item) => {
-                            return <CSSTransition key={item.get('comment_id')}
-                                                  timeout={400}
-                                                  classNames={SLIDE_FROM_LEFT_CSSTRANSITION}>
-                                        <FreshCommentItem
-                                                          comment={item}/>
-                                    </CSSTransition>
+                            if(item){
+                                return <CSSTransition key={item.get('comment_id')}
+                                                      timeout={400}
+                                                      classNames={SLIDE_FROM_LEFT_CSSTRANSITION}>
+                                    <FreshCommentItem
+                                        comment={item}/>
+                                </CSSTransition>
+                            }
+
                         })
                     }
                 </TransitionGroup>

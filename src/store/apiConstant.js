@@ -1,7 +1,7 @@
-const server = 'https://pengblog.xyz/pengblog-SSM/'
+//const server = 'https://pengblog.xyz/pengblog-SSM/'
 //const server = 'http://pengblog.xyz:8080/pengblog-SSM/'
 //const server = 'http://localhost/pengkaifanblog/'
-//const server = 'http://localhost:8088/pengkaifanblog/'
+const server = 'http://localhost:8088/pengkaifanblog/'
 
 
 export const API_GET_ARTICLE_LIST_BY_LIMITINDEX = server + 'article/article_summary.do'
@@ -61,3 +61,9 @@ export const API_BAN_IP = server + 'ip/ban_byip.do'
 export const API_LIFTED_IP = server + 'ip/lifted_byip.do'
 
 export const API_IP_LIST = server + 'ip/ip_list_been_banned.do'
+
+export const API_RECOVER_ARTICLE = server + 'article/recover_article.do'
+
+export const API_GET_DELETED_ARTICLE_LIST = server + 'article/get_deleted_article_list.do'
+
+export const API_DESTROY_ALL_DELETED_ARTICLE = server + 'article/destroy_all_article_deleted.do'

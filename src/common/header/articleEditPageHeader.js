@@ -98,11 +98,12 @@ const mapState = (state) => {
         height: state.get('header').get('height'),
         backgroundColor: state.get('header').get('backgroundColor'),
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
-        isSaving: state.get('articleEditPage').get('isSaving'),
+
         showSaveTag: state.get('articleEditPage').get('articleEditPageHeader').get('showSaveTag'),
         currentPath: state.get('router').get('currentPath'),
         submitable: state.get('articleEditPage').get('submitable'),
         goTo: state.get('router').get('goTo'),
+        isSaving: state.get('articleEditPage').get('isSaving'),
         isSavingArticle: state.get('articleEditPage').get('articleEditPageHeader').get('isSavingArticle'),
         isMobile: state.get('rootState').get('isMobile')
     }

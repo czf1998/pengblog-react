@@ -32,7 +32,7 @@ class ArticleEditPage extends PureComponent {
                 appointArticleEditInfo,
                 maxTitleLength,
                 label,
-                author,
+                author,isSaving,isSavingArticle,
                 isMobile} = this.props
 
         let remnantTitleLength = maxTitleLength - (title ? title.length : 0)
@@ -54,7 +54,7 @@ class ArticleEditPage extends PureComponent {
                                           placeholder="请输入标题"
                                           id="titleTextarea"
                                           value={title}
-                                          onChange={(event) => {appointArticleEditInfo(event, TITLE)}}/>
+                                          onChange={(event) => {appointArticleEditInfo(isSaving,isSavingArticle,event, TITLE)}}/>
 
                     {
                         remnantTitleLength < 20 &&
@@ -79,7 +79,7 @@ class ArticleEditPage extends PureComponent {
                                           backgroundColor="rgba(0, 132, 255, 0.1)"/>*/}
                         <Input id='labelInput'
                                value={label}
-                               onChange={(event) => {appointArticleEditInfo(event, LABEL)}}
+                               onChange={(event) => {appointArticleEditInfo(isSaving,isSavingArticle,event, LABEL)}}
                                placeholder="标签"
                                type="text"
                                fontSize={22}
@@ -102,7 +102,7 @@ class ArticleEditPage extends PureComponent {
                                           backgroundColor="rgba(0, 255, 132, 0.1)"/>*/}
                         <Input id='authorInput'
                                value={author}
-                               onChange={(event) => {appointArticleEditInfo(event, AUTHOR)}}
+                               onChange={(event) => {appointArticleEditInfo(isSaving,isSavingArticle,event, AUTHOR)}}
                                placeholder="署名"
                                type="text"
                                fontSize={22}
@@ -153,17 +153,23 @@ const mapState = (state) => ({
     id: state.get('articleEditPage').get('id'),
     isMobile: state.get('rootState').get('isMobile'),
     articleEditor: state.get('articleEditor').get('editor'),
-    draftCache: state.get('articleEditPage').get('draftCache')
+    draftCache: state.get('articleEditPage').get('draftCache'),
+    isSaving: state.get('articleEditPage').get('isSaving'),
+    isSavingArticle: state.get('articleEditPage').get('articleEditPageHeader').get('isSavingArticle'),
 })
 
 const mapActions = (dispatch) => ({
-    appointArticleEditInfo(event, infoType) {
+    appointArticleEditInfo(isSaving, isSavingArticle, event, infoType) {
         const appointArticleEditInfoActionValue = {
             infoType: infoType,
             infoValue: event.target.value
         }
         const appointArticleEditInfoAction = createAppointArticleEditInfoAction(appointArticleEditInfoActionValue)
         dispatch(appointArticleEditInfoAction)
+
+        if(isSaving || isSavingArticle){
+            return
+        }
 
         window.throttleByDelay(() => {
 
@@ -172,7 +178,9 @@ const mapActions = (dispatch) => ({
         },1000,{page:'articleEditPage'})
 
         window.throttleByDelay(() => {
+
             checkIfSubmitable(dispatch)
+
         },1000,{page:'articleEditPage',method: 'checkIfSubmitable'})
     },
     initDraftData() {
@@ -214,10 +222,9 @@ const initMetaInput = () => {
 
 export const saveArticle = (dispatch, articleType, clickToSave) => {
 
-
+    const draftCache = store.getState().get('articleEditPage').get('draftCache')
     //判断系由点击发布按钮触发还是由input的change事件触发，如果是后者,则需要判断是否与获取的草稿数据是否一致，如果一致，则无需上传新的文章数据
-    if(!clickToSave){
-        const draftCache = store.getState().get('articleEditPage').get('draftCache')
+    if(!clickToSave && draftCache){
 
         if(draftCache.get('article_title') === store.getState().get('articleEditPage').get('title')
         &&

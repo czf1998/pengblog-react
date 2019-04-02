@@ -1,66 +1,59 @@
 import React, { PureComponent} from 'react'
 import {
     HeaderWrapper,
-    HeaderMainArea,
-    NavItem,
-    NavItemWrapper, Info
+    HeaderMainArea, NavItem, NavItemWrapper, Info,
 } from './style'
-import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { CommonClassNameConstants } from '../../commonStyle'
 import { withRouter } from 'react-router-dom'
 import {Logo} from './components'
 import {GapLineVertical} from "../gapLine";
 
 
-class CommonHeader extends PureComponent {
+class ManagePageHeader extends PureComponent {
 
 
     render() {
 
-        const { height,
+        const {
+                height,
                 backgroundColor,
-                basicUIFeatures,
-                goTo,
-            currentPath,
-                alreadyLoggedIn} = this.props
+                basicUIFeatures,alreadyLoggedIn,goTo} = this.props
 
         return (
             <HeaderWrapper id="_header" className={CommonClassNameConstants.FLEX_ROW_ROW_CENTER}
                            height={height}
                            backgroundColor={backgroundColor}>
                 <HeaderMainArea   widthOfMainArea={basicUIFeatures.get('widthOfMainArea')}>
-
                     <NavItemWrapper>
 
                         <Logo/>
 
+                        <GapLineVertical/>
+
+                        <NavItem style={{fontWeight:'bold'}}>
+                            索引
+                        </NavItem>
                     </NavItemWrapper>
 
                     <NavItemWrapper>
-
-
-                            <NavItem cursorp={true}>
-                                <span className="iconfont" onClick={() => {goTo('/manage')}}
-                                      style={{fontSize:'1.6rem'}}>&#xe76a;</span>
-                                <Info onClick={() => {goTo('/manage')}}>
-                                    索引
-                                </Info>
-                            </NavItem>
 
                         {
                             alreadyLoggedIn &&
                             <NavItem cursorp={true}>
                                 <span className="iconfont"
-                                  onClick={() => {goTo('/edit')}}
-                                  style={{fontSize:'1.6rem'}}>&#xe67f;</span>
-                                <Info onClick={() => {goTo('/edit')}}>
-                                    写作
+                                      onClick={() => {goTo('/recycle')}}
+                                      style={{fontSize:'1.4rem'}}>&#xe60c;</span>
+                                <Info onClick={() => {goTo('/recycle')}}>
+                                    回收站
                                 </Info>
                             </NavItem>
                         }
 
                     </NavItemWrapper>
+
+
                 </HeaderMainArea>
             </HeaderWrapper>
         );
@@ -87,4 +80,4 @@ const mapState = (state) => {
 }
 
 
-export default connect(mapState)(withRouter(CommonHeader))
+export default connect(mapState)(withRouter(ManagePageHeader))

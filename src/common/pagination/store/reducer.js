@@ -26,6 +26,12 @@ const defaultState = fromJS({
         maxPage: 1,
         startIndex: window.innerWidth < 500 ? - 8 : - parseInt((window.innerHeight - 200)/50),
         pageScale: window.innerWidth < 500 ? 8 : parseInt((window.innerHeight - 200)/50),
+    }),
+    recycleBinPage:fromJS({
+        currentPage: 0,
+        maxPage: 1,
+        startIndex: window.innerWidth < 500 ? - 8 : - parseInt((window.innerHeight - 200)/50),
+        pageScale: window.innerWidth < 500 ? 8 : parseInt((window.innerHeight - 200)/50),
     })
 })
 

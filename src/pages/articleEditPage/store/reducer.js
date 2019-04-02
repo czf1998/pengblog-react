@@ -6,7 +6,11 @@ import {
     UPDATE_DRAFT_CACHE
 } from "./actionTypes";
 import {TRIGGER_IS_SAVING_DRAFT} from "./actionTypes";
-import {DELIVER_DRAFT_DATA} from "../../../store/actionTypesWithSaga";
+import {
+    DELIVER_DRAFT_DATA,
+    RECORD_EDITING_ARTICLE_ID_saga_articleEditPage,
+    RESET_ARTICLE_EDIT_PAGE_saga_articleEditPage
+} from "../../../store/actionTypesWithSaga";
 import {TRIGGER_IS_SAVING_ARTICLE} from "../../../common/header/store/actionTypes";
 
 const defaultState = fromJS({
@@ -36,9 +40,9 @@ export default (state = defaultState, action) => {
         }, 100)
 
         return state.merge({
-            title: action.value.article_title,
-            label: action.value.article_label,
-            author: action.value.article_author,
+            title: action.value.article_title ? action.value.article_title : '',
+            label: action.value.article_label ? action.value.article_title : '',
+            author: action.value.article_author ? action.value.article_title : '',
             id: action.value.article_id,
             draftCache: fromJS(action.value)
         })
@@ -61,6 +65,14 @@ export default (state = defaultState, action) => {
     if(action.type === UPDATE_DRAFT_CACHE){
         return state.merge({
             draftCache: fromJS(action.value)
+        })
+    }
+    if(action.type === RESET_ARTICLE_EDIT_PAGE_saga_articleEditPage){
+        return defaultState
+    }
+    if(action.type === RECORD_EDITING_ARTICLE_ID_saga_articleEditPage){
+        return state.merge({
+            id: action.value
         })
     }
     return state
