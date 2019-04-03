@@ -1,49 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="435386c2-4738-4296-9e2d-0eb0c4eda9b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/common/header/managePageHeader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/header/recycleBinPageHeader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/components/articleItem/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/components/articleItem/store/actionCreators.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/components/articleItem/store/actionTypes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/components/articleItem/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/components/articleItem/style.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/components/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/loadable.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/store/actionCreators.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/store/actionTypes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/store/reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recycleBinPage/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/header/articleEditPageHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/articleEditPageHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/header/commonHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/commonHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/modal/store/actionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/modal/store/actionCreators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/modal/store/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/modal/store/actionTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/modal/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/modal/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/pagination/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/pagination/store/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/articleEditPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articleEditPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/articleEditPage/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/articleEditPage/store/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/managePage/components/freshComments/store/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/iconfont/iconfont.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/iconfont/iconfont.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/iconfont/iconfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/iconfont/iconfont.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/iconfont/iconfont.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/iconfont/iconfont.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/iconfont/iconfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/iconfont/iconfont.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/iconfont/iconfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/iconfont/iconfont.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/iconfont/iconfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/iconfont/iconfont.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/iconfont/iconfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/iconfont/iconfont.woff2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actionCreators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actionTypesWithSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actionTypesWithSaga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/apiConstant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/apiConstant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/request/articleRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/request/articleRequest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/saga.js" afterDir="false" />
-    </list>
+    <list default="true" id="435386c2-4738-4296-9e2d-0eb0c4eda9b8" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -114,7 +72,7 @@
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="40" />
+          <entry key="project.closed" value="41" />
           <entry key="project.open.time.0" value="5" />
           <entry key="project.open.time.1" value="15" />
           <entry key="project.open.time.10" value="1" />
@@ -597,14 +555,7 @@
       <workItem from="1553953786758" duration="34074000" />
       <workItem from="1554094456590" duration="14645000" />
       <workItem from="1554129359796" duration="1071000" />
-      <workItem from="1554181932092" duration="28650000" />
-    </task>
-    <task id="LOCAL-00065" summary="normal commit">
-      <created>1550991507173</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1550991507173</updated>
+      <workItem from="1554181932092" duration="28736000" />
     </task>
     <task id="LOCAL-00066" summary="normal commit">
       <created>1551017458434</created>
@@ -942,11 +893,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554130391079</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="normal commit">
+      <created>1554231003970</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1554231003970</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1639827000" />
+    <option name="totallyTimeSpent" value="1639913000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -959,7 +917,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16908851" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
