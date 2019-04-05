@@ -1,4 +1,4 @@
-import React, {PureComponent, Fragment} from 'react'
+import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {Route, withRouter} from 'react-router-dom'
 import {ScrollToThePositionOnMount} from '../../common'
@@ -18,7 +18,7 @@ class HomeEX extends PureComponent {
 
     render() {
 
-        const {browser,isMobile,hasBeenMountOnce,heightOfBrowser} = this.props
+        const {browser,isMobile,hasBeenMountOnce} = this.props
 
         const themeJumbotronClassName = hasBeenMountOnce ? '' : FADE_IN
 
@@ -62,10 +62,6 @@ const mapState = (state) => ({
         heightOfBrowser: state.get('rootState').get('heightOfBrowser')
     })
 
-const mapActions = (dispatch) => {
-    return {
 
-    }
-}
 
-export default connect(mapState, mapActions)(withRouter(HomeEX))
+export default connect(mapState)(withRouter(HomeEX))

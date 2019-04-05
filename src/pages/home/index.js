@@ -11,8 +11,6 @@ import {createTriggerHasBeenMountOnce,
         createGetHomeArticleListDataByKeywordAction } from './store'
 import { CommonClassNameConstants } from "../../commonStyle";
 import { Loading, ForMore,SearchBar  } from '../../common'
-import store from "../../store";
-import {createGetManagePageArticleListDataByKeyWordAction} from "../managePage/store";
 import {COMMON_CONTEXT, SEARCH_CONTEXT} from "../managePage/store/reducer";
 
 
@@ -24,14 +22,13 @@ class Home extends PureComponent {
                 articleList,
                 isMobile,
                 isLoading,
-                startIndex,
-                pageScale,
                 maxPage,
                 currentPage,
                 hasBeenMountOnce,
-                articleListDataIsReady,getArticleListByKeyword,getMoreData,
+                articleListDataIsReady,
+                getArticleListByKeyword,getMoreData,
                 getData,
-            context} = this.props
+                 context} = this.props
 
         const articleSummaryListTransitionClassName = hasBeenMountOnce ? '' : CommonClassNameConstants.SLIDE_UP_FAST
 
@@ -111,8 +108,6 @@ class Home extends PureComponent {
 
 const mapState = (state) => ({
         state: state,
-        startIndex: state.get('home').get('startIndex'),
-        pageScale: state.get('home').get('pageScale'),
         maxPage: state.get('home').get('maxPage'),
         currentPage: state.get('home').get('currentPage'),
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),

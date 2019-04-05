@@ -41,8 +41,8 @@ export default (state = defaultState, action) => {
 
         return state.merge({
             title: action.value.article_title ? action.value.article_title : '',
-            label: action.value.article_label ? action.value.article_title : '',
-            author: action.value.article_author ? action.value.article_title : '',
+            label: action.value.article_label ? action.value.article_label : '',
+            author: action.value.article_author ? action.value.article_author : '',
             id: action.value.article_id,
             draftCache: fromJS(action.value)
         })

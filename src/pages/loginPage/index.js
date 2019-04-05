@@ -1,16 +1,11 @@
 import React, {Fragment, PureComponent} from 'react'
 import { connect } from 'react-redux'
-import {withRouter,Link,Route} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
-import {InputEX,Button,Captcha} from '../../common'
 import {LoginPageWrapper,
         ThemeJumbotron,
-        LoginerWrapper,
-        InputWrapper,
         Gap,
-        LogoWrapper,LoginBar,SwitchButton,Item,Space,
-        ButtonWrapper,
-        GetSmsButtonWrapper} from './style'
+        LogoWrapper,LoginBar,SwitchButton,Item,Space} from './style'
 
 import {createAppointLoginPageInputValueAction,
         createTriggerIsLoggingInAction,
@@ -25,8 +20,7 @@ import {LoginerWithDynamicPassword,Loginer,Logouter} from './components'
 import Logo from "../homeEx/components/themeJumbotron/components/logo";
 import {createPushPrograssToEndAction} from "../home/store";
 import {FADE_IN, SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
-import {PASSWORD, PHONENUMBER, CAPTCHA} from "./constant";
-import loadingSpin from "../../common/loading/svg/loading-spin.svg";
+import {PASSWORD, PHONENUMBER} from "./constant";
 import {createAppointNoticeContent, createTriggerAlreadyLoggedInAction} from "../../store/actionCreators";
 import {createGetCaptchaImageAction} from "../../common/captcha/store";
 import {USERNAME} from "../noFoundPage/constant";
@@ -148,7 +142,6 @@ class LoginPage extends PureComponent {
 const mapState = (state) => ({
         browser: state.get('rootState').get('browser'),
         isMobile: state.get('rootState').get('isMobile'),
-        //heightOfBrowser: state.get('rootState').get('heightOfBrowser'),
         username: state.get('loginPage').get('username'),
         phoneNumber: state.get('loginPage').get('phoneNumber'),
         password: state.get('loginPage').get('password'),

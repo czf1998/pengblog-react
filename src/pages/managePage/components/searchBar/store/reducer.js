@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 import {APPOINT_KEYWORD_OF_SEARCH_BAR, TRIGGER_SEARCH_INPUT_IS_FOCUS} from "./actionTypes";
 import {RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE} from "../../../store/actionType";
-import {LABEL_CONTEXT, SEARCH_CONTEXT} from "../../../store/reducer";
+import {SEARCH_CONTEXT} from "../../../store/reducer";
 
 const defaultState = fromJS({
     managePage: fromJS({

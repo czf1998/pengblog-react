@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 import {APPOINT_SELECT_CONTENT} from "./actionTypes";
 import {RESET_CENTRAL_CONTROLLER_OF_MANAGE_PAGE} from "../../../pages/managePage/store/actionType";
-import {FILING_CONTENT, SEARCH_CONTEXT} from "../../../pages/managePage/store/reducer";
+import {FILING_CONTENT} from "../../../pages/managePage/store/reducer";
 
 
 const defaultState = fromJS({

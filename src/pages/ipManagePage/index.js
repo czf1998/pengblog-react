@@ -1,4 +1,4 @@
-import React, {PureComponent, Fragment} from 'react'
+import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {IpManagePageWrapper, LoadingWrapper, MainArea, PaginationFixer,Title} from './style'
@@ -7,7 +7,6 @@ import Pagination from "../../common/pagination";
 import {createPushPrograssToEndAction} from "../articlePage/store";
 import {IpItem} from "./components";
 import Loading from "../../common/loading";
-import {SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
 
 
 class IpManagePage extends PureComponent {

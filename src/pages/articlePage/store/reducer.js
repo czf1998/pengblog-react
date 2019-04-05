@@ -3,7 +3,6 @@ import {
     APPEND_COMMENT_JUST_SUBMIT,
     DELIVER_ARTICLE_DATA_TO_ARTICLE_PAGE,
     DELIVER_COMMENT_LIST_DATA_TO_ARTICLE_PAGE,
-    GET_ARTICLE_DATA_FOR_ARTICLE_PAGE,
     GET_COMMENT_LIST_DATA,
     MARK_COMMENT_WHICH_IP_BEEN_BAN_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS,
     MARK_COMMENT_WHICH_IP_BEEN_LIFTED_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS,
@@ -130,7 +129,7 @@ export default (state = defaultState, action) => {
         let startIndex = state.get('startIndex')
         let newCommentList = []
 
-        commentList.map((item) => {
+        commentList.forEach((item) => {
 
             if(item.comment_id === action.value.comment_id){
                 return

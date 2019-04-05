@@ -1,9 +1,7 @@
 import React, { PureComponent} from 'react'
 import {
     HeaderWrapper,
-    HeaderMainArea,
-    NavItem,
-    NavItemWrapper, Info
+    HeaderMainArea
 } from './style'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'

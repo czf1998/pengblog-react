@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {CheckBoxWrapper,CheckBoxButton} from "./style";
-import {} from './store'
 
 class CheckBox extends PureComponent{
 
@@ -29,13 +28,6 @@ class CheckBox extends PureComponent{
 
 }
 
-const mapState = (state) => ({
 
-})
-
-const mapActions = (dispatch) => ({
-
-})
-
-export default connect(mapState,mapActions)(CheckBox)
+export default connect()(CheckBox)
 

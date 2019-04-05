@@ -27,9 +27,7 @@ import {createDeliverArticleDataToHomeAction,
         createDeliverArticleListDataToManagePageAction,
         createDeliverArticleFilingDataToManagePageAction,
         createDeliverArticleLabelDataToManagePageAction,
-        createRecordArticleHasBeenDeletedAction,
         createRecordArticleListHasBeenDeletedAction,
-        createResetManagePageArticleListAction,
         createTriggerAlreadyLoggedInAction,
         createAppointFreshCommentsDataAction,
         createRecordCommentHasBeenDeletedAction,
@@ -77,8 +75,7 @@ import {
     createTriggerShowModalAction
 } from "../common/modal/store";
 import {
-    createTiggerIsMultipleSelectingInManagePageAction,
-    createTriggerIsLoadingManagePageArticleListDataAction
+    createTiggerIsMultipleSelectingInManagePageAction
 } from "../pages/managePage/store";
 import {GET_SMS, LOGIN, LOGIN_WITH_DYNAMIC_PASSWORD} from "../pages/loginPage/store/actionTypes";
 import {createTriggerIsLoggingInAction} from "../pages/loginPage/store";
@@ -98,8 +95,6 @@ import {createAppointCurrentPageOfPaginationAction} from "../common/pagination/s
 import {RECOVER_ARTICLE_deletedArticleItem_saga} from "../pages/recycleBinPage/components/articleItem/store/actionTypes";
 import {GET_ARTICLE_LIST_DATA_recycleBinPage_saga} from "../pages/recycleBinPage/store/actionTypes";
 
-
-const NO_MORE_ITEM_AVAILABLE = 'noMoreItemAvailable'
 
 function* mySaga() {
     yield takeEvery(GET_HOME_ARTICLE_LIST_DATA, ajaxHomeArticleListData)
@@ -183,7 +178,6 @@ function* ajaxCleanRecycleBin() {
 
         yield put(appointModalMsgAction)
 
-
     }
 
 }
@@ -227,7 +221,6 @@ function* ajaxRecoverArticle(action) {
 
 
         //重置recycleBinPage
-
         const value = {
             paginationId: 'recycleBinPage',
             currentPage: 0
@@ -285,7 +278,7 @@ function* ajaxGetIpListDataOfIpManagePage(action) {
 function* ajaxLiftedIP(action) {
     try{
 
-        const res = yield IpRequest.RequestLiftedIP(action.value.ip)
+        yield IpRequest.RequestLiftedIP(action.value.ip)
 
 
         //关闭模态框
@@ -582,10 +575,7 @@ function* ajaxDeleteSubCommentFromArticlePage(action) {
     try{
         yield CommentRequest.RequestDeleteComment(action.value.comment_id)
 
-
-
         yield delay(500);
-
 
         const state = yield select()
 
@@ -841,9 +831,11 @@ function* ajaxManagePageArticleListDataBykeyword(action) {
 
 function* ajaxManagePageArticleLabelData() {
     try{
+
         const res = yield ArticleRequest.RequestArticleLabelData()
         let appointDataAction = createDeliverArticleLabelDataToManagePageAction(res.data)
         yield put(appointDataAction)
+
     }catch (err) {
 
         yield goTo503(err)
@@ -854,9 +846,11 @@ function* ajaxManagePageArticleLabelData() {
 
 function* ajaxManagePageArticleFilingData() {
     try{
+
         const res = yield ArticleRequest.RequestArticleFilingData()
         let appointDataAction = createDeliverArticleFilingDataToManagePageAction(res.data)
         yield put(appointDataAction)
+
     }catch (err) {
 
         yield goTo503(err)
@@ -1112,14 +1106,6 @@ function* ajaxSubmitComment(action) {
 
         const state = yield select();
 
-        /*editorId: editorId,
-            article_id:article_id,
-            referCommentId:referCommentId,
-            visitorName:visitorName,
-            commentContent:commentContent,
-            visitorEmail:visitorEmail,
-            visitorSiteAddress:visitorSiteAddress*/
-
         const article_id = state.get('articlePage').get('article').get('article_id')
 
         const referCommentId = editorId === 'subCommentEditor' ? state.get('commentEditor').get('showSubCommentEditorManager').get('hostTopLevelCommentId') : undefined
@@ -1285,12 +1271,7 @@ function* ajaxHomeArticleListData() {
         const res = yield ArticleRequest.RequestArticleListData(value)
         let appointDataAction = createDeliverArticleDataToHomeAction(res.data)
         yield put(appointDataAction)
-     /*   const state = yield select();
-      /!*  const isMobile = state.get('rootState').get('isMobile')
-       /!* if(isMobile) {
-            let pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'home-mobile'})
-            yield put(pushPrograssBarToEndAction)
-        }*!/!*!/*/
+
     }catch (err) {
         yield goTo503(err)
         console.log('ERR IN ACTION: GET_HOME_ARTICLE_LIST_DATA  ERR: ' + err)

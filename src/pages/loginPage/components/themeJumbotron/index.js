@@ -13,7 +13,6 @@ import {ThemeJumbotronWrapper,
         PowerBy,
         SponsorContain,
         SponsorItem} from './style'
-import {} from "./store/index";
 import * as CommonClassNameConstants from "../../../../commonStyle/commonClassNameConstant";
 
 import {reactLogo,
@@ -34,9 +33,6 @@ import mybatisLogo from '../../../../static/image/logo/mybatis.png'
 import mavenLogo from '../../../../static/image/logo/maven.png'
 import tencentcloud from '../../../../static/image/logo/tencentcloud.png'
 import themeImage from '../../../../static/image/theme/theme.png'
-import {SLIDE_UP_FAST} from "../../../../commonStyle/commonClassNameConstant";
-import {FADE_IN} from "../../../../commonStyle/commonClassNameConstant";
-
 
 
 class ThemeJumbotron extends PureComponent {
@@ -103,8 +99,5 @@ const mapState = (state) =>({
     heightOfBrowser: state.get('rootState').get('heightOfBrowser')
 })
 
-const mapActions = (dispatch) => ({
 
-})
-
-export default connect(mapState, mapActions)(ThemeJumbotron)
+export default connect(mapState)(ThemeJumbotron)

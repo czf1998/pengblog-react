@@ -1,5 +1,5 @@
-import React, { PureComponent, Fragment } from 'react'
-import {  Router, Route ,Redirect,Switch} from 'react-router-dom'
+import React, { PureComponent } from 'react'
+import {  Router, Route ,Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import CommonHeader from './commonHeader'
@@ -16,7 +16,7 @@ class Header extends PureComponent {
 
     render() {
 
-        const {isMobile,currentPath} = this.props
+        const {isMobile} = this.props
 
         return (
                 <Router  history={history}>

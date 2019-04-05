@@ -7,8 +7,7 @@ import {
     RESET_MANAGE_PAGE_ARTICLE_LIST
 } from "../../../store/actionTypesWithSaga";
 import {
-    APPOINT_MANAGE_PAGE_PAGINATION,
-    RESET_PAGE_INDEX_OF_PAGINATION
+    APPOINT_MANAGE_PAGE_PAGINATION
 } from "../../../pages/managePage/store/actionType";
 
 //根据浏览器显示高度初始化managePage的pageScale

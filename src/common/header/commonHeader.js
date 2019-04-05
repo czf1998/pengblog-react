@@ -5,12 +5,10 @@ import {
     NavItem,
     NavItemWrapper, Info
 } from './style'
-import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { CommonClassNameConstants } from '../../commonStyle'
 import { withRouter } from 'react-router-dom'
 import {Logo} from './components'
-import {GapLineVertical} from "../gapLine";
 
 
 class CommonHeader extends PureComponent {
@@ -22,7 +20,6 @@ class CommonHeader extends PureComponent {
                 backgroundColor,
                 basicUIFeatures,
                 goTo,
-            currentPath,
                 alreadyLoggedIn} = this.props
 
         return (
@@ -80,7 +77,6 @@ const mapState = (state) => {
         metaColor: state.get('header').get('metaColor'),
         basicUIFeatures: state.get('rootState').get('basicUIFeatures'),
         goTo: state.get('router').get('goTo'),
-        currentPath: state.get('router').get('currentPath'),
         submitable: state.get('router').get('submitable'),
         alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }

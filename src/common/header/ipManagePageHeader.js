@@ -4,7 +4,6 @@ import {
     HeaderMainArea, NavItem, NavItemWrapper,
 } from './style'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 import { CommonClassNameConstants } from '../../commonStyle'
 import { withRouter } from 'react-router-dom'
 import {Logo} from './components'

@@ -13,7 +13,7 @@ class FreshComments extends PureComponent {
     render() {
 
 
-        const {browser,isLoading,currentPage,maxPage,commentList,getData,state,startIndex,pageScale} = this.props
+        const {browser,isLoading,currentPage,maxPage,commentList,getData,state} = this.props
 
         return (
             <FreshCommentsWrapper browser={browser}>
@@ -28,6 +28,7 @@ class FreshComments extends PureComponent {
                                         comment={item}/>
                                 </CSSTransition>
                             }
+                            return null
 
                         })
                     }
@@ -63,8 +64,6 @@ const mapState = (state) => ({
     currentPage: state.get('freshComments').get('currentPage'),
     maxPage: state.get('freshComments').get('maxPage'),
     commentList: state.get('freshComments').get('commentList'),
-    startIndex: state.get('freshComments').get('startIndex'),
-    pageScale: state.get('freshComments').get('pageScale')
 })
 
 const mapActions = (dispatch) => ({

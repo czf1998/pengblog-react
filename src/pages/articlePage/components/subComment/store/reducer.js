@@ -44,7 +44,7 @@ export default (state = defaultState, action) => {
     if(action.type === RECORD_SUB_COMMENT_HAS_BEEN_DELETED){
         let subCommentListToJS = subCommentList.toJS()
 
-        subCommentListToJS.map((item,index) => {
+        subCommentListToJS.forEach((item,index) => {
             item.comment_id === action.value.comment_id && subCommentListToJS.splice(index,1)
         })
 

@@ -1,4 +1,4 @@
-import React, { PureComponent,Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import {ModalItemWrapper,
         ModalTitle,
@@ -9,8 +9,6 @@ import wechatQrcode from '../../../../static/image/wechatQrcode/wechatQrcode.jpg
 class ContactMeModalItem extends PureComponent{
 
     render(){
-
-        const {} = this.props
 
         return (
             <ModalItemWrapper>

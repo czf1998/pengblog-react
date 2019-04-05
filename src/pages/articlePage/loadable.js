@@ -3,7 +3,6 @@ import React from 'react'
 import { Loading } from '../../common'
 import {LoadingWrapper} from './style'
 
-const heightOfBrowser = window.innerHeight
 
 const ArticlePageLoadable = Loadable({
     loader: () =>  import('./'),

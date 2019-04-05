@@ -4,7 +4,6 @@ import {withRouter} from 'react-router-dom'
 
 import {NoFoundPageWrapper, Image, Title} from './style'
 
-import {} from './store'
 import {createPushPrograssToEndAction} from "../home/store";
 
 
@@ -12,8 +11,6 @@ class ServerUnavailablePage extends PureComponent {
 
 
     render() {
-
-        const {} = this.props
 
         const imageUrl = 'https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/503.png'
 

@@ -6,6 +6,7 @@ import {createAppointArticleEditorContent,createAppointArticleEditorAction} from
 import {API_UPLOAD_IMAGE} from "../../../../store/apiConstant";
 import {createAppointNoticeContent} from "../../../../store/actionCreators";
 import {checkIfSubmitable, saveArticle} from "../../index";
+import {getToken} from "../../../../store/request/articleRequest";
 
 class ArticleEditor extends PureComponent{
 
@@ -109,6 +110,9 @@ const initEditor = (toolBarElem,
 
     articleEditor.customConfig.uploadImgServer = API_UPLOAD_IMAGE
     articleEditor.customConfig.uploadFileName = 'img'
+    articleEditor.customConfig.uploadImgHeaders = {
+        'Authorization': getToken()
+    }
     articleEditor.customConfig.uploadImgHooks = {
 
         fail: function (xhr, editor, result) {

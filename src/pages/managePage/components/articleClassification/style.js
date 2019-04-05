@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-const widthOfMainArea = 750
+//const widthOfMainArea = 750
 const maxMobileWidth = 750
 const milePostWidth = 800
 
-const backgroundColor = '#F7F7F7'
+//const backgroundColor = '#F7F7F7'
 
 export const ArticleClassificationWrapper = styled.div`
         padding: 1rem 2rem;

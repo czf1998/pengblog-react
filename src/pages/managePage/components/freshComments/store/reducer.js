@@ -1,5 +1,4 @@
 import { fromJS } from 'immutable'
-import {} from "./actionTypes";
 import {TRIGGER_IS_LOADING_FRESH_COMMENTS} from "./actionTypes";
 import {
     APPOINT_FRESH_COMMENTS_DATA,
@@ -39,7 +38,7 @@ export default (state = defaultState, action) => {
         let commentList = state.get('commentList').toJS()
         let startIndex = state.get('startIndex')
         let newCommentList = []
-        commentList.map((item) => {
+        commentList.forEach((item) => {
 
             if(item.comment_id === action.value.comment_id){
                 return

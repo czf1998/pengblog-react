@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import {ModalItemWrapper,
         ModalTitle,
         ModalContent,
-        CloseButton,
         OperationColumn,
         ConfirmButton,
         CancelButton,

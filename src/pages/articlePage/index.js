@@ -1,4 +1,4 @@
-import React, { PureComponent,Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
@@ -23,7 +23,6 @@ import { Loading, ForMore, ScrollToThePositionOnMount, GapLine } from '../../com
 import { DateFormat } from "../../exJs"
 import { Comment, TopLevelCommentEditor,Share } from './components'
 import {createAppointSizeOfTitleImageFrameAction} from "../articleEditPage/components/titleImage/store";
-import {SLIDE_FROM_LEFT_CSSTRANSITION} from "../../commonStyle/commonClassNameConstant";
 import './style.css'
 
 class ArticlePage extends PureComponent {
@@ -38,14 +37,17 @@ class ArticlePage extends PureComponent {
                 commentList,
                 isLoadingMoreComment,
                 startIndex,
-                pageScale,
-                maxPage,
-                currentPage,
                 scrollPosition,
                 referComment,
                 titleImageSize,currentPath } = this.props
 
         const { article_id } = this.props.match.params
+
+
+
+        const htmlContent = generateArticleContentWithLazyloadImage(article.get('article_content'))
+
+
 
         return (
                     dataReady ?
@@ -71,7 +73,7 @@ class ArticlePage extends PureComponent {
                                 </ArticleMeta>
 
                                 <ArticleContent className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}
-                                                dangerouslySetInnerHTML={{__html:article.get('article_content')}}>
+                                                dangerouslySetInnerHTML={{__html:htmlContent}}>
                                 </ArticleContent>
 
                                 <ArticleMeta className={CommonClassNameConstants.COMMON_PADDING +
@@ -126,12 +128,6 @@ class ArticlePage extends PureComponent {
 
 
     componentDidMount() {
-        /*读取缓存*/
-        /*if(this.props.cacheArticle && (parseInt(this.props.cacheArticle.get('article_id')) === parseInt(this.props.match.params.article_id))){
-            this.props.loadArticleCache()
-            this.props.pushPrograssBarToEnd()
-            return
-        }*/
 
         this.props.resetCommentEditor()
         this.props.getArticleData(this.props.match.params.article_id)
@@ -159,9 +155,6 @@ class ArticlePage extends PureComponent {
         }
 
 
-
-
-        //动态记录主题图片的尺寸
         if(this.props.article.get('article_titleImageUrl') === undefined){
             return
         }
@@ -188,8 +181,6 @@ const mapState = (state) => ({
         commentList: state.get('articlePage').get('commentList'),
         isLoadingMoreComment: state.get('articlePage').get('isLoadingMoreComment'),
         startIndex: state.get('articlePage').get('startIndex'),
-        pageScale: state.get('articlePage').get('pageScale'),
-        maxPage: state.get('articlePage').get('maxPage'),
         currentPage: state.get('articlePage').get('currentPage'),
         scrollPosition: state.get('articlePage').get('scrollPosition'),
         titleImageSize: state.get('articlePage').get('titleImageSize'),
@@ -254,3 +245,23 @@ const mapActions = (dispatch) => {
 
 export default
 connect(mapState, mapActions)(withRouter(ArticlePage))
+
+const generateArticleContentWithLazyloadImage = (htmlStr) => {
+
+    let virtualElement = document.createElement('div')
+    virtualElement.innerHTML = htmlStr
+
+    let imgs = virtualElement.getElementsByTagName("img")
+
+    if(imgs.length > 0) {
+        for(let i = 0; i < imgs.length; i++){
+            let src = imgs.item(i).getAttribute('src')
+            imgs.item(i).setAttribute('data-src',src)
+            imgs.item(i).setAttribute('class','lazyload')
+            imgs.item(i).setAttribute('src','https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/default.png')
+        }
+    }
+
+    return virtualElement.innerHTML
+
+}

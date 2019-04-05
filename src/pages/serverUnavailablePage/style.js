@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const headerHeight = 70
 
-const milePostWidth4 = 900
+/*const milePostWidth4 = 900
 
 const milePostWidth3 = 1200
 
@@ -10,7 +10,7 @@ const milePostWidth2 = 1320
 
 const milePostWidth = 1600
 
-const maxMobileWidth = 750
+const maxMobileWidth = 750*/
 
 export const NoFoundPageWrapper = styled.div`
         display: flex;

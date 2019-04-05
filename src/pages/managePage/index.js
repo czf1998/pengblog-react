@@ -5,7 +5,6 @@ import {CentralController,
         ArticleListWrapper,
         ArticleListFixer,
         ArticleList,
-        Title,
         Header,
         HeaderArticleTitle,
         ArticleAuthor,
@@ -69,14 +68,12 @@ class ManagePage extends PureComponent {
                 getArticleByLabel,
                 showArticleDetail,
                 widthOfBrowser,
-                currentContext,
                 triggerIsMultipleSelecting,
                 isMultipleSelecting,
                 tryToDeleteArticleList,
                 articleListBeingSelected,
                 confirmDeletePostProcessor,
-                alreadyLoggedIn,
-                isMobile} = this.props
+                alreadyLoggedIn} = this.props
 
         const {showMoreIndex} = this.state
 
@@ -338,7 +335,6 @@ const mapActions = (dispatch) => {
                 pageScale: pageScale
             }
 
-            console.log(value)
 
             const getArticleByKeyWordAction = createGetManagePageArticleListDataByKeyWordAction(value)
             dispatch(getArticleByKeyWordAction)
@@ -381,8 +377,6 @@ const mapActions = (dispatch) => {
                 dispatch(resetPageIndexAction)
             }
 
-
-            console.log(resetPageIndexFlag)
             const resetCentralControllerAction = createResetCentralControllerOfManagePage(LABEL_CONTEXT)
             dispatch(resetCentralControllerAction)
 

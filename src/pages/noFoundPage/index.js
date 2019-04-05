@@ -4,7 +4,6 @@ import {withRouter} from 'react-router-dom'
 
 import {NoFoundPageWrapper, Image, Title} from './style'
 
-import {} from './store'
 import {createPushPrograssToEndAction} from "../home/store";
 
 
@@ -13,7 +12,6 @@ class NoFoundPage extends PureComponent {
 
     render() {
 
-        const {} = this.props
 
         const imageUrl = 'https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/box_PNG132.png'
 
@@ -32,9 +30,7 @@ class NoFoundPage extends PureComponent {
 
 }
 
-const mapState = (state) => ({
 
-    })
 
 const mapActions = (dispatch) => {
     return {
@@ -45,4 +41,4 @@ const mapActions = (dispatch) => {
     }
 }
 
-export default connect(mapState, mapActions)(withRouter(NoFoundPage))
+export default connect(mapActions)(withRouter(NoFoundPage))

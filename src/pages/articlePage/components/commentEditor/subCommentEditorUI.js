@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react'
 import {
     SubCommentEditorWrapper,
-    Content,
     EmojiButton,SubContent,
     SubEmojiPickerWrapper,
     SubSubmitButton,

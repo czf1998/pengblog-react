@@ -17,7 +17,6 @@ import Input from "../../../../common/input";
 import {COMMENT_CONTENT, TOP_LEVEL_COMMENT_EDITOR, VISITOR_EMAIL, VISITOR_NAME, VISITOR_SITE_ADDRESS} from "./constant";
 import Textarea from "../../../../common/textarea";
 import EmojiPicker from "./components/emojiPicker";
-import Captcha from "../../../../common/captcha";
 
 class TopLevelCommentEditorUI extends PureComponent{
 
@@ -35,7 +34,6 @@ class TopLevelCommentEditorUI extends PureComponent{
             submitComment,
             focusHandler,
             blurHandler,
-            widthOfBrowser,
             isLoading} = this.props
 
 
@@ -120,9 +118,6 @@ class TopLevelCommentEditorUI extends PureComponent{
 
                 </VisitorInfo>
 
-                {/*<CaptchaWrapper>
-                    <Captcha captchaHost="topLevelCommentEditor"/>
-                </CaptchaWrapper>*/}
 
                 <SubmitButtonWrapper>
 

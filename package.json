@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.4.0",
     "@svgr/webpack": "2.4.1",
     "axios": "^0.18.0",
     "babel-core": "7.0.0-bridge.0",
@@ -38,6 +39,7 @@
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
+    "lazysizes": "^4.1.7",
     "loading-svg": "^1.0.0",
     "mini-css-extract-plugin": "0.4.3",
     "nanobar": "^0.4.2",
@@ -55,7 +57,6 @@
     "react-dev-utils": "^6.1.1",
     "react-dom": "^16.7.0",
     "react-keeper": "^2.1.9",
-    "react-lazyload": "^2.3.0",
     "react-loadable": "^5.5.0",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
@@ -133,6 +134,14 @@
     ]
   },
   "babel": {
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ]
+    ],
     "presets": [
       "react-app"
     ]

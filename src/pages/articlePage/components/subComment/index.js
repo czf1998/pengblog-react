@@ -8,12 +8,9 @@ import {
     createAppointShowSubCommentEditorManagerAction,
 } from "../comment/store";
 import loadingSpin from "../../../../common/loading/svg/loading-spin.svg";
-import {OperationBar} from "../comment/style";
 
 const REPLY_CLASSNAME = 'fa fa-reply'
 const RETRACT_CLASSNAME = 'fa fa-chevron-up'
-const REPLY_MSG = '回复'
-const RETRACT_MSG = '收起'
 
 
 
@@ -31,7 +28,6 @@ class SubComment extends PureComponent {
 
 
         const { comment,
-                isMobile,
                 clickReplyHandler,
                 showSubCommentEditorManager,
                 alreadyLoggedIn,
@@ -118,7 +114,6 @@ class SubComment extends PureComponent {
 
 const mapState = (state) => {
     return  {
-        isMobile: state.get('rootState').get('isMobile'),
         showSubCommentEditorManager: state.get('commentEditor').get('showSubCommentEditorManager'),
         alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }

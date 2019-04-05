@@ -4,6 +4,7 @@ import App from './App';
 import 'font-awesome/css/font-awesome.css'
 import './static/iconfont/iconfont.css'
 import * as serviceWorker from './serviceWorker';
+import 'lazysizes'
 
 
 ReactDOM.render(<App />, document.getElementById('root'));

@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
-import {} from './style'
 import {createAppointArticleBeingSelectedInManagePage,
         createDeleteArticleAction} from './store'
 import {
@@ -38,7 +37,6 @@ class ArticleItem extends PureComponent {
     render() {
 
         const {article,
-                goTo,
                 browser,
                 isMultipleSelecting,
                 articleListBeingSelected,
@@ -135,7 +133,6 @@ class ArticleItem extends PureComponent {
 
 const mapState = (state) => {
     return  {
-        goTo: state.get('router').get('goTo'),
         browser: state.get('rootState').get('browser'),
         articleListBeingSelected: state.get('managePage').get('articleListBeingSelected'),
         articleHasBeenDeleteList: state.get('managePage').get('articleHasBeenDeleteList'),

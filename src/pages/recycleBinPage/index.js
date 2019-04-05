@@ -1,17 +1,16 @@
-import React, {PureComponent, Fragment} from 'react'
+import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {RecycleBinPageWrapper,
         LoadingWrapper,
         MainArea,
-        PaginationFixer,Empty,
+        PaginationFixer,
         Title} from './style'
 import {createGetArticleListDataOfRecycleBinPageAction,createTriggerIsLoadingAction} from './store'
 import Pagination from "../../common/pagination";
 import {createPushPrograssToEndAction} from "../articlePage/store";
 import {ArticleItem} from "./components";
 import Loading from "../../common/loading";
-import {SLIDE_UP_FAST} from "../../commonStyle/commonClassNameConstant";
 
 
 class RecycleBinPage extends PureComponent {

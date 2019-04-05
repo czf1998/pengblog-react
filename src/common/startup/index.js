@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {connect} from 'react-redux'
 import {
     createAppointNoticeContent,
@@ -9,7 +9,6 @@ import history from '../../router/history'
 import {createAppointCurrentPathAction} from "../../router/store";
 import {createPushPrograssToMilePostAction} from './store'
 import store from "../../store";
-import {put} from "redux-saga/effects";
 
 
 class Startup extends Component {

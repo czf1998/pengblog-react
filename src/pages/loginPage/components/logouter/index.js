@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {ButtonWrapper} from "../../style";
 import {LogouterWrapper, Title, Info,CurrentAutoInfo} from './style'
-import {Button,Captcha} from "../../../../common";
+import {Button} from "../../../../common";
 import {DateFormat} from "../../../../exJs";
 
 

@@ -1,4 +1,4 @@
-import React, {Fragment, PureComponent} from 'react'
+import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {ArticleClassificationWrapper,Title,Tags,TagItem} from './style'
 import {createAppointCurrentLabelAction} from './store'
@@ -9,7 +9,7 @@ class ArticleClassification extends PureComponent {
 
     render() {
 
-        const {articleLabelObjList,appointCurrentLabel,currentLabel,dataGetter,browser,isMobile} = this.props
+        const {articleLabelObjList,appointCurrentLabel,currentLabel,dataGetter,browser} = this.props
 
         return (
             <ArticleClassificationWrapper>
@@ -25,7 +25,7 @@ class ArticleClassification extends PureComponent {
                             return <TagItem key={item.get('article_label')}
                                             isCurrent={currentLabel === item.get('article_label')}
                                             onClick={() => {appointCurrentLabel(item.get('article_label'),dataGetter)}}>
-                                        {item.get('article_label') + '(' + item .get('number') + ')'}
+                                        {item.get('article_label') + '(' + item.get('number') + ')'}
                                     </TagItem>
                         })
                     }
@@ -43,8 +43,7 @@ class ArticleClassification extends PureComponent {
 const mapState = (state) => {
     return  {
         currentLabel: state.get('managePage').get('currentLabel'),
-        browser: state.get('rootState').get('browser'),
-        isMobile:state.get('rootState').get('isMobile')
+        browser: state.get('rootState').get('browser')
     }
 }
 

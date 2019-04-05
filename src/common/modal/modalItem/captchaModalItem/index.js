@@ -1,13 +1,13 @@
-import React, { PureComponent,Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 import {ModalItemWrapper,
         ModalTitle,Warn,CaptchaWrapper
         } from "./style";
 import Captcha from '../../../captcha'
 import {CancelButton, ConfirmButton, OperationColumn} from "../commonModalItem/style";
-import {createTriggerModalIsLoadingAction, createTriggerShowModalAction,createSubmitCommentWithCaptchaAction} from "../../store";
-import {put} from "redux-saga/effects";
+import {createTriggerModalIsLoadingAction,
+        createTriggerShowModalAction,
+        createSubmitCommentWithCaptchaAction} from "../../store";
 import {createTriggerCommentEditorLoadingAction} from "../../../../pages/articlePage/components/commentEditor/store";
 
 
@@ -16,7 +16,13 @@ class CaptchaComment extends PureComponent{
 
     render(){
 
-        const {modalTitle,modalContent,browser,multiPostProcessor,postProcessor,closeThisModal,isLoading,currentCommentEditorId} = this.props
+        const {modalTitle,
+                modalContent,
+                browser,
+                multiPostProcessor,
+                closeThisModal,
+                isLoading,
+                currentCommentEditorId} = this.props
 
         return (
             <ModalItemWrapper>

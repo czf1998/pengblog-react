@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import { FooterWrapper,Row,ContactMe } from './style'
 import { CommonClassNameConstants } from '../../commonStyle'
-import {CONTACT_ME_MODAL, SHARE_TO_WECHAT_MODAL} from "../modal/store/reducer";
+import {CONTACT_ME_MODAL} from "../modal/store/reducer";
 import {createAppointModalMsgAction, createTriggerShowModalAction} from "../modal/store";
 
 

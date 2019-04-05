@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const heightOfHeader = 70
+//const heightOfHeader = 70
 
 export const HomeWrapper = styled.div`
         background: #f7f7f7;

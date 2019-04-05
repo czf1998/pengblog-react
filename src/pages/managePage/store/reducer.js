@@ -115,6 +115,7 @@ export default (state = defaultState, action) => {
     if(action.type === APPOINT_ARTICLE_BEING_SELECTED_IN_MANAGE_PAGE){
 
         let articleListBeingSelected = state.get('articleListBeingSelected').toJS()
+
         const articleHasBeingSelectedAlready = articleListBeingSelected.some((item) => {
             return item === action.value.article_id
         })
@@ -126,10 +127,9 @@ export default (state = defaultState, action) => {
         }
 
         if(!action.value.isSelected){
-            articleListBeingSelected.map((item,index) => {
+            articleListBeingSelected.forEach((item,index) => {
                 if(item === action.value.article_id){
                     articleListBeingSelected.splice(index,1)
-
                 }
             })
             return state.merge({

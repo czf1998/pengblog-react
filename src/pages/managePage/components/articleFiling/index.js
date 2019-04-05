@@ -1,12 +1,10 @@
-import React, {Fragment, PureComponent} from 'react'
+import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {ArticleFilingWrapper,
         ArticleFilingTitle,
         ArticleFilinger,
         DateSelector,
-        SubmitButton,
-        Option} from './style'
-import {} from './store'
+        SubmitButton} from './style'
 import {Select} from '../../../../common'
 import {createAppointManagePagePaginationAction} from "../../store";
 import {createAppointSelectContentAction} from "../../../../common/select/store";
@@ -17,7 +15,7 @@ class ArticleFiling extends PureComponent {
 
     render() {
 
-        const {year,month,articleFilingObj,dataGetter,submitButtonClickHandler,isMobile} = this.props
+        const {year,month,articleFilingObj,dataGetter,submitButtonClickHandler} = this.props
 
         let years = []
 
@@ -82,8 +80,7 @@ class ArticleFiling extends PureComponent {
 const mapState = (state) => {
     return  {
         year: state.get('select').get('year'),
-        month: state.get('select').get('month'),
-        isMobile:state.get('rootState').get('isMobile')
+        month: state.get('select').get('month')
     }
 }
 
