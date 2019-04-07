@@ -42,3 +42,4 @@ export const RecoverButtonWrapper = styled(Article)`
 export const RecoverButton = styled(Button)`
         ${props => props.isLoading ? 'z-index: -1' : ''};
     `
+

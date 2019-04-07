@@ -27,6 +27,7 @@ class Header extends PureComponent {
                         <Switch>
                             <Route exact path='/' component={CommonHeader}/>
                             <Route path='/home' component={CommonHeader}/>
+                            <Route path='/article' component={CommonHeader}/>
                             <Route exact path='/edit' component={ArticleEditPageHeader}/>
                             <Route exact path='/login' component={LoginPageHeader}/>
                             <Route exact path='/ip' component={IpManagePageHeader}/>

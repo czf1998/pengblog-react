@@ -27,10 +27,9 @@ export const ArticleMainArea = styled.div`
         }
     `
 
-export const ArticleTitleImage = styled.div`
-        ${props => props.titleImageUrl ? '' : 'display:none;'}
-        background: url(${props => props.titleImageUrl}) no-repeat center center;
-        background-size: cover;
+export const ArticleTitleImage = styled.img`
+        width: 100%;
+        object-fit: cover;
         height: ${props => props.titleImageSize.get('height') * widthOfMainArea / props.titleImageSize.get('width')}px;
         max-height: 320px;
     `

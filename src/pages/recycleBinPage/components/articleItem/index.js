@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {ArticleItemWrapper,
         Article,
-    DateOfBeingDeleted,
+        DateOfBeingDeleted,
         RecoverButton,
         Header,
         RecoverButtonWrapper} from './style'
 import { DateFormat } from "../../../../exJs"
 import {createRecoverArticleAction} from "./store";
 import {SLIDE_UP_FAST} from "../../../../commonStyle/commonClassNameConstant";
+import {createTriggerIsLoadingAction} from "../../../ipManagePage/store";
 
 
 
@@ -64,15 +65,10 @@ class ArticleItem extends PureComponent {
                     <RecoverButtonWrapper>
 
                                 <RecoverButton isLoading={isLoading}
-                                               disabled={isRecovered}
+                                               disabled={isRecovered || isLoading}
                                                width="5rem"
                                                onClick={() => tryToRecoverThisArticle(article_id, this)}>
-                                    {
-                                        isLoading ?
-                                            <i className="fa fa-spinner fa-pulse"/>
-                                            :
-                                            'recover'
-                                    }
+                                    recover
                                 </RecoverButton>
                     </RecoverButtonWrapper>
                 </ArticleItemWrapper>
@@ -90,6 +86,15 @@ const mapState = (state) => ({
 const mapActions = (dispatch) => {
     return {
         tryToRecoverThisArticle(article_id, _this) {
+
+            const isLoadingValue = {
+                isLoadingId: 'recycleBinPage',
+                isLoading: true
+            }
+
+            const triggerRecycleBinPageLoadingAction = createTriggerIsLoadingAction(isLoadingValue)
+
+            dispatch(triggerRecycleBinPageLoadingAction)
 
             _this.setState({
                 isLoading: true

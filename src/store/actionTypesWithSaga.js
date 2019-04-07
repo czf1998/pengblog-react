@@ -85,3 +85,5 @@ export const DELIVER_ARTICLE_LIST_DATA_saga_recycleBinPage = 'deliverArticleList
 export const RESET_ARTICLE_EDIT_PAGE_saga_articleEditPage = 'resetArticleEditPage saga articleEditPage'
 
 export const RECORD_EDITING_ARTICLE_ID_saga_articleEditPage = 'recordEditingArticleId saga articleEditPage'
+
+export const RESET_HOME_PAGE_DATA_saga_home = 'resetHomePageData saga home'

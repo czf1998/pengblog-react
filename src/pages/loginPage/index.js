@@ -29,6 +29,10 @@ const uuidv4 = require('uuid/v4');
 
 class LoginPage extends PureComponent {
 
+    constructor(props) {
+        super(props)
+        this.keydownhandler = this.keydownhandler.bind(this)
+    }
 
     render() {
 
@@ -41,12 +45,14 @@ class LoginPage extends PureComponent {
                 tryToLoginWithDynamicPassword,
                 alreadyLoggedIn,
                 tryToLogout,
-                shutdownShowWarn,triggerIsLoginWithDynamicPassword,loginWithDynamicPassword,
+                shutdownShowWarn,
+                triggerIsLoginWithDynamicPassword,
+                loginWithDynamicPassword,
                 tryToGetSms,
                 haveGotSmsOnce,
                 currentSecond} = this.props
 
-        const themeImage = '\thttps://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/black-and-white-nature-sky-field.440ec64e.jpg'
+        const themeImage = 'https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/black-and-white-nature-sky-field.440ec64e.jpg'
 
         return (
            <LoginPageWrapper>
@@ -125,6 +131,12 @@ class LoginPage extends PureComponent {
         this.props.pushPrograssBarToEnd()
 
         this.props.initCaptcha()
+
+        window.addEventListener('keydown', this.keydownhandler)
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener('keydown', this.keydownhandler)
     }
 
     componentDidUpdate(preProps){
@@ -136,6 +148,11 @@ class LoginPage extends PureComponent {
         }
     }
 
+    keydownhandler = (e) => {
+        if(e.key === 'Enter') {
+            //this.props.tryToLogin()
+        }
+    }
 
 }
 
@@ -229,11 +246,13 @@ const mapActions = (dispatch) => {
             const loginAction = createLoginAction()
             dispatch(loginAction)
         },
-        tryToLogout(){
+        async tryToLogout(){
             const triggerIsLoggingInAction = createTriggerIsLoggingInAction(true)
             dispatch(triggerIsLoggingInAction)
 
             localStorage.removeItem('token')
+
+            await timeout(1000)
 
             const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(false)
             dispatch(triggerAlreadyLoggedInAction)
@@ -273,3 +292,9 @@ const mapActions = (dispatch) => {
 }
 
 export default connect(mapState, mapActions)(withRouter(LoginPage))
+
+const timeout = (ms) => {
+    return new Promise((resolve) => {
+        setTimeout(resolve,ms)
+    })
+}

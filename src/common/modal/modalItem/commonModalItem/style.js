@@ -25,6 +25,7 @@ export const ModalContent = styled.div`
     `
 
 export const CloseButton = styled.div`
+        word-wrap:break-word;
         position: absolute;
         transform: scale(1.5);
         top: 1rem;

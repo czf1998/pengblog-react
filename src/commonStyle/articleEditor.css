@@ -5,3 +5,13 @@
 .w-e-text::-webkit-scrollbar {
     display: none;
 }
+
+.w-e-panel-container{
+    position: fixed !important;
+    top: 200px !important;
+    z-index: 2;
+}
+
+.w-e-text-container{
+    position: static !important;
+}

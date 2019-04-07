@@ -22,7 +22,7 @@ export const ArticleListWrapper = styled.div`
         bottom: 0;
         left: 0;
         width: 450px;
-        overflow-y: overlay;
+        overflow-y: ${props => props.browser === 'Edge' ? 'auto' : 'overlay'};
         border-right: solid 1px #F0F0F0;
         ${props => props.browser !== 'Safari' ? `&::-webkit-scrollbar{
             width:2px;

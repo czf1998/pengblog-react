@@ -5,7 +5,7 @@ import {RecycleBinPageWrapper,
         LoadingWrapper,
         MainArea,
         PaginationFixer,
-        Title} from './style'
+        Title,Cover} from './style'
 import {createGetArticleListDataOfRecycleBinPageAction,createTriggerIsLoadingAction} from './store'
 import Pagination from "../../common/pagination";
 import {createPushPrograssToEndAction} from "../articlePage/store";
@@ -40,7 +40,7 @@ class RecycleBinPage extends PureComponent {
                                 <span style={{fontSize:'4rem',color:'#CCCCCC'}} className="iconfont">&#xe673;</span>
                                 :
                             articleList && articleList.map((item,index) => {
-                                return <ArticleItem withHeader={index===0} key={item.get('article_id')} article={item} isLoading={isLoading}/>
+                                return <ArticleItem withHeader={index===0} key={item.get('article_id')} article={item}/>
                             })
                         }
                     </MainArea>
@@ -53,6 +53,10 @@ class RecycleBinPage extends PureComponent {
                         </PaginationFixer>
                     }
 
+                    {
+                        isLoading &&
+                        <Cover/>
+                    }
 
 
                 </RecycleBinPageWrapper>
@@ -119,9 +123,12 @@ const mapActions = (dispatch) => {
             const triggerIsLoadingAction = createTriggerIsLoadingAction(triggerIsLoadingValue)
             dispatch(triggerIsLoadingAction)
         },
+
         pushPrograssBarToEnd() {
+
             const pushPrograssBarToEndAction = createPushPrograssToEndAction({page: 'recycleBinPage'})
             dispatch(pushPrograssBarToEndAction)
+
         }
     }
 }

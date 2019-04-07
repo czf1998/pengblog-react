@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react'
+import React, {Fragment, PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {ButtonWrapper} from "../../style";
 import {LogouterWrapper, Title, Info,CurrentAutoInfo} from './style'
@@ -48,13 +48,23 @@ class Logouter extends PureComponent {
 
                 <ButtonWrapper>
 
+
+
                     <Button onClick={() => {tryToLogout()}}
                             disabled={isLogging}
                             backgroundColor="#FFDDE4"
                             color="#99001F"
                             width="100%"
                             borderColor="#FFDDE4">
-                        <i className="fa fa-sign-out"/>&nbsp;&nbsp;登出&nbsp;&nbsp;
+                        {
+                            isLogging ?
+                                'trying'
+                                :
+                                <Fragment>
+                                    <i className="fa fa-sign-out"/>&nbsp;&nbsp;登出&nbsp;&nbsp;
+                                </Fragment>
+                        }
+
                     </Button>
 
                 </ButtonWrapper>

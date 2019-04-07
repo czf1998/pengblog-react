@@ -42,6 +42,7 @@ import {createDeliverArticleDataToHomeAction,
         createAppointCaptchaWarnMsgAction,
         createDeliverArticleListDataToRecycleBinPageAction,
         createRecordEditingArticleIdAction,
+        createResetHomePageDataAction,
         createAppointMaxPageToPaginationAction} from './actionCreators'
 import {ArticleRequest,
         CommentRequest,
@@ -217,7 +218,7 @@ function* ajaxRecoverArticle(action) {
 
         yield ArticleRequest.RequestRecoverArticle(action.value.article_id)
 
-        action.value.postHandler()
+
 
 
         //重置recycleBinPage
@@ -228,6 +229,8 @@ function* ajaxRecoverArticle(action) {
 
         yield delay(1000)
 
+        action.value.postHandler()
+
         const appointPagaAction = createAppointCurrentPageOfPaginationAction(value)
 
         yield put(appointPagaAction)
@@ -235,6 +238,20 @@ function* ajaxRecoverArticle(action) {
         const noticeAction = createAppointNoticeContent("还原成功")
 
         yield put(noticeAction)
+
+
+        //重置home页面
+        const resetHomeAction = createResetHomePageDataAction()
+        yield put(resetHomeAction)
+
+        //重置managePage页面
+        const appointPagaActionValue = {
+            paginationId: 'managePage',
+            currentPage: 0
+        }
+
+        const appointManagePagaAction = createAppointCurrentPageOfPaginationAction(appointPagaActionValue)
+        yield put(appointManagePagaAction)
 
 
     }catch(err){
@@ -431,6 +448,8 @@ function* ajaxLoginWithDynamicPassword() {
         let expTime = new Date().getTime() + validTime
         localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, phoneNumber:phoneNumber}))
 
+        yield delay(1500)
+
         //更新reducer为已登录
         const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
         yield put(triggerAlreadyLoggedInAction)
@@ -543,6 +562,8 @@ function* ajaxLogin() {
         let validTime = res.data.validTimeMillis
         let expTime = new Date().getTime() + validTime
         localStorage.setItem('token', JSON.stringify({token: res.data.token, expTime: expTime, username:username}))
+
+        yield delay(1500)
 
         //更新reducer为已登录
         const triggerAlreadyLoggedInAction = createTriggerAlreadyLoggedInAction(true)
@@ -730,6 +751,10 @@ function* ajaxDeleteArticleList(action) {
 
         yield put(appointPagaAction)
 
+        //重置home页面
+        const resetHomeAction = createResetHomePageDataAction()
+        yield put(resetHomeAction)
+
     }catch (err) {
 
         yield goTo503(err)
@@ -763,6 +788,8 @@ function* ajaxDeleteArticle(action) {
         const triggerIsMultipleSelectingAction = createTiggerIsMultipleSelectingInManagePageAction(false)
         yield put(triggerIsMultipleSelectingAction)
 
+
+        //重置页码
         const value = {
             paginationId: 'managePage',
             currentPage: 0
@@ -771,8 +798,20 @@ function* ajaxDeleteArticle(action) {
         yield delay(1000)
 
         const appointPagaAction = createAppointCurrentPageOfPaginationAction(value)
-
         yield put(appointPagaAction)
+
+        //重置home页面
+        const resetHomeAction = createResetHomePageDataAction()
+        yield put(resetHomeAction)
+
+        //重置recycleBinPage页面
+        const appointPagaActionValue = {
+            paginationId: 'recycleBinPage',
+            currentPage: 0
+        }
+
+        const appointManagePagaAction = createAppointCurrentPageOfPaginationAction(appointPagaActionValue)
+        yield put(appointManagePagaAction)
 
     }catch (err) {
 
@@ -914,6 +953,11 @@ function* ajaxSaveArticle(action) {
             //重置页面
             const resetArticleEditPageAction = createResetArticleEditPageAction()
             yield put(resetArticleEditPageAction)
+
+            //重置home页面
+            const resetHomeAction = createResetHomePageDataAction()
+            yield put(resetHomeAction)
+
             /*通知窗口提示提交成功*/
             const appointNoticeContent = createAppointNoticeContent('文章发布成功！即将跳转')
             yield put(appointNoticeContent)

@@ -47,17 +47,24 @@ export const ArticleContent = styled.div`
         width: ${props => props.withPreviewImage ? '62%' : '100%'};
         color: black;
         line-height:1.5;
+        cursor: pointer;
+        
+        display: -webkit-box;
+        /* autoprefixer: ignore next */
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: ${window.innerWidth > 1600 ? '4' : '3'};
+        overflow: hidden;
     `
 
 
-export const PreviewImage = styled.div`
+export const PreviewImage = styled.img`
         position: absolute;
         right: 0;
         top: 5%;
         height: 90%;
         width: 35%;
-        background: url(${props => props.imageUrl}) no-repeat center center;
-        background-size: cover;
+        object-fit: cover;
+        border-radius: 0.4rem;
     `
 
 

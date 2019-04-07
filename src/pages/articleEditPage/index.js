@@ -7,7 +7,7 @@ import {ArticleEditorPageWrapper,ArticleEditorPageMainArea,
         TitleImageWrapper,
         ArticleTitleTextArea,
         TitleLengthWarn,
-        ArticleMetaWrapper,
+        ArticleMetaWrapper,Cover,
         Gap} from "./style";
 import {CommonClassNameConstants} from "../../commonStyle";
 import {Input, ScrollToThePositionOnMount} from '../../common'
@@ -26,20 +26,35 @@ import {createPushPrograssToEndAction} from "../articlePage/store";
 
 class ArticleEditPage extends PureComponent {
 
+    constructor(props){
+        super(props)
+
+        this.state = {
+            showCover: false
+        }
+    }
+
     render() {
 
         const { title,
                 appointArticleEditInfo,
                 maxTitleLength,
                 label,
-                author,isSaving,isSavingArticle,
+                author,
+                isSaving,
+                isSavingArticle,
                 isMobile} = this.props
+
+        const {showCover} = this.state
 
         let remnantTitleLength = maxTitleLength - (title ? title.length : 0)
 
 
         return (
             <ArticleEditorPageWrapper  className={CommonClassNameConstants.FLEX_ROW_COLUMN_CENTER}>
+
+
+
                 <ArticleEditorPageMainArea>
                     {
                         !isMobile &&
@@ -123,6 +138,11 @@ class ArticleEditPage extends PureComponent {
 
                 <ScrollToThePositionOnMount/>
 
+                {
+                    showCover &&
+                    <Cover/>
+                }
+
             </ArticleEditorPageWrapper>
         )
     }
@@ -136,11 +156,17 @@ class ArticleEditPage extends PureComponent {
         }
     }
 
-    componentDidUpdate(preProps){
+    componentDidUpdate(preProps,prevState){
         if((preProps.draftCache === undefined && this.props.draftCache !== undefined && this.props.articleEditor !== undefined)
             ||
             (this.props.draftCache !== undefined && preProps.articleEditor === undefined && this.props.articleEditor !== undefined)){
             this.props.pushPrograssBarToEnd()
+        }
+
+        if(!preProps.isSavingArticle && this.props.isSavingArticle){
+            this.setState({
+                showCover: true
+            })
         }
     }
 }

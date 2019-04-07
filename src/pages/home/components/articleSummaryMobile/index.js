@@ -12,6 +12,8 @@ import {CommonClassNameConstants} from '../../../../commonStyle'
 import { DateFormat } from "../../../../exJs"
 import {GET_COUNT_OF_COMMENT} from "../../../../store/actionTypesWithSaga";
 
+const defaultImageSrc = 'https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/default.png'
+
 class ArticleSummary extends PureComponent {
 
     render() {
@@ -42,16 +44,15 @@ class ArticleSummary extends PureComponent {
 
 
                     <ArticleMultipleContent>
-                        <ArticleContent className={CommonClassNameConstants.CURSORP +
-                        CommonClassNameConstants.OVER_3ROWS_HANDLE}
+                        <ArticleContent
                                         withPreviewImage={withPreviewImage}
                                         isMobile={isMobile}>
                             {article.get('article_summary')}
                         </ArticleContent>
 
                         {
-                            withPreviewImage &&  <PreviewImage imageUrl={article.get('article_previewImageUrl')}
-                                                               className={CommonClassNameConstants.COMMON_BORDER_RADIUS}/>
+                            withPreviewImage &&  <PreviewImage src={defaultImageSrc} data-src={article.get('article_previewImageUrl')}
+                                                               className="lazyload"/>
                         }
                     </ArticleMultipleContent>
 

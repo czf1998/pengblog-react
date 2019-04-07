@@ -107,6 +107,7 @@ class ManagePage extends PureComponent {
                                                dataGetter={getArticleByKeyWord}/>
 
                                     <MoreIndex showMoreIndex={showMoreIndex}>
+
                                         <ArticleFiling articleFilingObj={articleFilingObj}
                                                        dataGetter={() => {getArticleByFiling(true)}}/>
 

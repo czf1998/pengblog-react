@@ -1,7 +1,12 @@
 import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import {IpManagePageWrapper, LoadingWrapper, MainArea, PaginationFixer,Title} from './style'
+import {IpManagePageWrapper,
+        LoadingWrapper,
+        MainArea,
+        PaginationFixer,
+        Title,
+        Cover} from './style'
 import {createGetIpListDataOfManagePageAction,createTriggerIsLoadingAction} from './store'
 import Pagination from "../../common/pagination";
 import {createPushPrograssToEndAction} from "../articlePage/store";
@@ -42,6 +47,13 @@ class IpManagePage extends PureComponent {
                                     currentPage={paginationObj.get('currentPage')}
                                     maxPage={paginationObj.get('maxPage')}/>
                     </PaginationFixer>
+
+                    {
+                        isLoading &&
+                        <Cover/>
+
+                    }
+
 
 
                 </IpManagePageWrapper>

@@ -25,6 +25,8 @@ import { Comment, TopLevelCommentEditor,Share } from './components'
 import {createAppointSizeOfTitleImageFrameAction} from "../articleEditPage/components/titleImage/store";
 import './style.css'
 
+const defaultImageSrc = 'https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/default.png'
+
 class ArticlePage extends PureComponent {
 
 
@@ -55,7 +57,14 @@ class ArticlePage extends PureComponent {
                         <ArticlePageFixer>
                             <ArticleMainArea widthOfMainArea={widthOfMainArea} className={CommonClassNameConstants.SLIDE_UP_FAST}>
 
-                                <ArticleTitleImage titleImageUrl={article.get('article_titleImageUrl')} titleImageSize={titleImageSize}/>
+                                {
+                                    article.get('article_titleImageUrl') && article.get('article_titleImageUrl') !== '' &&
+                                    <ArticleTitleImage data-src={article.get('article_titleImageUrl')}
+                                                       src={defaultImageSrc}
+                                                       className="lazyload"
+                                                       titleImageSize={titleImageSize}/>
+                                }
+
 
                                 <ArticleTitle className={CommonClassNameConstants.COMMON_PADDING}>
                                     <h2>{article.get('article_title')}</h2>
@@ -258,7 +267,7 @@ const generateArticleContentWithLazyloadImage = (htmlStr) => {
             let src = imgs.item(i).getAttribute('src')
             imgs.item(i).setAttribute('data-src',src)
             imgs.item(i).setAttribute('class','lazyload')
-            imgs.item(i).setAttribute('src','https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/default.png')
+            imgs.item(i).setAttribute('src',defaultImageSrc)
         }
     }
 

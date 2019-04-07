@@ -248,7 +248,8 @@ class Comment extends PureComponent {
 
     componentDidMount(){
 
-        window.heightOfSubCommentEditor = parseInt(window.getComputedStyle(document.getElementsByClassName('subCommentEditor')[0]).height)
+        recordHeightOfSubCommentEditor()
+
 
         const comment_id = this.props.comment.get('comment_id').toString()
 
@@ -409,3 +410,11 @@ export { mapActions }
 
 
 export default connect(mapState, mapActions)(Comment)
+
+
+
+const recordHeightOfSubCommentEditor = () => {
+
+    window.heightOfSubCommentEditor = parseInt(window.getComputedStyle(document.getElementsByClassName('subCommentEditor')[0]).height)
+
+}

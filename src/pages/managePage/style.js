@@ -56,7 +56,7 @@ export const ArticleListFixer = styled.div`
         justify-content: space-between;
         
          @media(max-width:${milePostWidth}px){
-            width: 800px;
+            width: 100%;
         }
     `
 
@@ -172,7 +172,10 @@ export const ArticleDetail = styled.div`
 export const CentralControllerMobile = styled.div`
         
         border-bottom: solid 1px #f0f0f0; 
-       
+            margin 0 4rem;
+            @media(max-width:${maxMobileWidth}px){
+            margin: 0;
+        }
     `
 
 
@@ -208,15 +211,9 @@ export const TriggerShowMoreIndexButton = styled.div`
 
 export const MoreIndex = styled.div`
     position:relative;
-        background: #F0F0F0;
         height: ${props => props.showMoreIndex ? '8.5rem' : '0'};
         overflow-Y: ${props => props.showMoreIndex ? 'visible' : 'hidden'};
         opacity: ${props => props.showMoreIndex ? '1' : '0'};
         transition: all 0.4s ease;
-         @media(max-width:${milePostWidth3}px){
-            padding: 0 4rem;
-        }
-        @media(max-width:${maxMobileWidth}px){
-            padding: 0;
-        }
+       
     `

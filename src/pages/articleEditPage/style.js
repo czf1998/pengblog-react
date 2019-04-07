@@ -84,3 +84,11 @@ export const TitleLengthWarn = styled.div`
         text-align: right;
         margin-bottom: 1rem;
     `
+
+export const Cover = styled.div`
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: white;
+        opacity: 0.4;
+    `

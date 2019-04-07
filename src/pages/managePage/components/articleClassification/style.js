@@ -9,9 +9,7 @@ const milePostWidth = 800
 export const ArticleClassificationWrapper = styled.div`
         padding: 1rem 2rem;
         width: 100%;
-          @media(max-width:${milePostWidth}px){
-            border-top: solid 1px #F0F0F0;
-        }
+         
         @media(max-width:${maxMobileWidth}px){
             padding: 1rem;
         }
@@ -43,12 +41,16 @@ export const Tags = styled.div`
         
         }` 
         : ''}
-         @media(max-width:${maxMobileWidth}px){
+        
+        @media(max-width:${maxMobileWidth}px){
+            width: calc(${window.innerWidth}px - 2rem);
+        }
+        
+         @media(max-width:${milePostWidth}px){
             flex-wrap: nowrap;
             display: block;
             overflow-X: scroll;
             white-space:nowrap;
-            width: calc(${window.innerWidth}px - 2rem);
         }
     `
 
@@ -64,15 +66,13 @@ export const TagItem = styled.div`
         &:hover{
             background: #F7F7F7;
         }
-         @media(max-width:${milePostWidth}px){
+       
+        @media(max-width:${milePostWidth}px){
             height: 100%;
-            margin-bottom: 0;
-        }
-        @media(max-width:${maxMobileWidth}px){
             display: inline-block;
             font-size: 1rem;
             padding: 0.6rem 0.8rem;
-             margin-bottom: 0;
+            margin-bottom: 0;
         }
         
     `

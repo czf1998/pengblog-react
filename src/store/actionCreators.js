@@ -32,8 +32,9 @@ import {DELIVER_ARTICLE_LIST_DATA_TO_HOME,
         DELIVER_IP_LIST_DATA_SAGA_IPMANAGEPAGE,
         APPOINT_MAX_PAGE_SAGA_PAGINATION,
         MARK_COMMENT_WHICH_IP_BEEN_LIFTED_SAGA_ARTICLEPAGE_and_FRESHCOMMENTS,
-    RESET_ARTICLE_EDIT_PAGE_saga_articleEditPage,
-    RECORD_EDITING_ARTICLE_ID_saga_articleEditPage,
+        RESET_ARTICLE_EDIT_PAGE_saga_articleEditPage,
+        RECORD_EDITING_ARTICLE_ID_saga_articleEditPage,
+        RESET_HOME_PAGE_DATA_saga_home,
         DELIVER_ARTICLE_LIST_DATA_saga_recycleBinPage} from './actionTypesWithSaga'
 
 export const createDeliverArticleDataToHomeAction = (value) => ({
@@ -221,4 +222,8 @@ export const createResetArticleEditPageAction = () => ({
 export const createRecordEditingArticleIdAction = (value) => ({
     type: RECORD_EDITING_ARTICLE_ID_saga_articleEditPage,
     value
+})
+
+export const createResetHomePageDataAction = () => ({
+    type: RESET_HOME_PAGE_DATA_saga_home
 })

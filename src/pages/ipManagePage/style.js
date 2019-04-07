@@ -35,7 +35,12 @@ export const PaginationFixer = styled.div`
     `
 
 export const LoadingWrapper = styled.div`
-    position: fixed;
-    width: 100%;
-    height: 100%;
-`
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    `
+
+export const Cover = styled(LoadingWrapper)`
+        background: white;
+        opacity: 0.5;
+    `

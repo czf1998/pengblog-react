@@ -10,7 +10,6 @@ export const ArticleFilingWrapper = styled.div`
         padding: 1rem 2rem;
         width: 100%;
         @media(max-width:${milePostWidth}px){
-            border-top: solid 1px #F0F0F0;
         }
         @media(max-width:${maxMobileWidth}px){
             padding: 1rem;

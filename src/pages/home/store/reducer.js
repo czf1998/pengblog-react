@@ -4,7 +4,7 @@ import {
     GET_HOME_ARTICLE_LIST_DATA,
     NOTICE_HOME_STORE_JUMBOTRON_DATA_READY,
     ROADED_AND_SHOW_JUMBOTRON,
-    DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME
+    DELIVER_COUNT_OF_COMMENT_DATA_TO_HOME, RESET_HOME_PAGE_DATA_saga_home
 } from '../../../store/actionTypesWithSaga'
 
 import {
@@ -78,6 +78,11 @@ export default (state = defaultState, action) => {
     if(action.type === RESET_HOME_PAGE_INDEX){
         return defaultState.set('articleListDataIsReady', true)
     }
+
+    if(action.type === RESET_HOME_PAGE_DATA_saga_home){
+        return defaultState
+    }
+
     if(action.type === GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD){
         return state.merge({
             isLoading: true,
