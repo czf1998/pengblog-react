@@ -16,6 +16,9 @@ export const ArticleDetailWrapper = styled.div`
 
 export const ArticleDetailFixer = styled.div`
         width: 700px;
+        @media(min-width:1600px){
+            width: 900px;
+        }
     `
 
 

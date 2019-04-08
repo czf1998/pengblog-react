@@ -44,7 +44,7 @@ export const ArticleMultipleContent = styled.div`
 
 export const ArticleContent = styled.div`
         font-size: ${props => props.isMobile ? '1rem' : '0.8rem'};
-        width: ${props => props.withPreviewImage ? '62%' : '100%'};
+        width: ${props => props.withPreviewImage ? '68%' : '100%'};
         color: black;
         line-height:1.5;
         cursor: pointer;
@@ -62,7 +62,7 @@ export const PreviewImage = styled.img`
         right: 0;
         top: 5%;
         height: 90%;
-        width: 35%;
+        width: 30%;
         object-fit: cover;
         border-radius: 0.4rem;
     `

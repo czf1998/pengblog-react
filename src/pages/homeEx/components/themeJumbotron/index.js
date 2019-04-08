@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import { connect } from 'react-redux'
-import { Logo } from "./components";
+import { Logo,Carousel } from "./components";
 import {Footer} from '../../../../common'
 import {ThemeJumbotronWrapper,
         LogoAndSimpleDescription,
@@ -45,7 +45,7 @@ class ThemeJumbotron extends PureComponent {
             <ThemeJumbotronWrapper>
                 <LogoAndSimpleDescription heightOfBrowser={heightOfBrowser}>
 
-                    <ThemeImage src={themeImage}/>
+                 <ThemeImage src={themeImage}/>
 
                     <LogoAndSimpleDescriptionFixer>
 
@@ -59,6 +59,8 @@ class ThemeJumbotron extends PureComponent {
                             是<br/>一个<br/>简单的<br/>个人博客
                         </SimpleDescription>
                     </LogoAndSimpleDescriptionFixer>
+
+                   {/* <Carousel/>*/}
 
                 </LogoAndSimpleDescription>
 

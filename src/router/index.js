@@ -76,11 +76,11 @@ export default connect(mapState,mapActions)(RouterComponent);
 
 const appointDocumentTitle = (path,currentArticle) => {
     if(path === '/home'){
-        document.title = '彭凯帆的个人网站'
+        document.title = '远方有鱼'
         return
     }
     if(path === '/manage'){
-        document.title = '彭凯帆的个人网站-索引'
+        document.title = '远方有鱼-索引'
         return
     }
     if(path.match(/^\/home\/article/) !== null){

@@ -34,9 +34,18 @@ export const ArticleListWrapper = styled.div`
         &::-webkit-scrollbar-track{
         
         }` : ''}
+        
+         
          @media(max-width:${milePostWidth}px){
+            width: 350px;
+        }
+      
+       
+         @media(max-width:${milePostWidth4}px){
             width: 300px;
         }
+        
+        
         @media(max-width:${maxMobileWidth}px){
             position: static;
             width: 100%;
@@ -51,13 +60,19 @@ export const ArticleListWrapper = styled.div`
 export const ArticleDetailWrapper = styled.div`
         display: flex;
         justify-content: center;
-        padding: 0 1rem;
-        margin-left: 200px;
         width: calc(100% - 200px);
-        @media(max-width:${milePostWidth3}px){
-            margin-left: 300px;
+        margin-left: 200px;
+        
+        @media(max-width:${milePostWidth}px){
+            margin-left: 350px;
+            width: calc(100% - 350px);
+        }
+        
+        @media(max-width:${milePostWidth4}px){
+             margin-left: 300px;
             width: calc(100% - 300px);
         }
+        
          @media(max-width:${maxMobileWidth}px){
             display: none;
         }
@@ -73,7 +88,7 @@ export const ArticleDetailFixer = styled.div`
         }
         
         @media(min-width:${milePostWidth}px){
-            width: 800px;
+            width: 900px;
         }
     `
 
@@ -83,12 +98,19 @@ export const LoadingWrapper = styled.div`
     `
 
 export const ThemeJumbotronWrapper = styled.div`
+
+        margin-left: 450px;
+        width: calc(100% - 450px);
+
         @media(max-width:${milePostWidth}px){
+            margin-left: 350px;
+            width: calc(100% - 350px);
+        }
+
+        @media(max-width:${milePostWidth4}px){
             margin-left: 300px;
             width: calc(100% - 300px);
         }
-        @media(min-width:${milePostWidth}px){
-            margin-left: 450px;
-            width: calc(100% - 450px);
-        }
+        
+       
     `

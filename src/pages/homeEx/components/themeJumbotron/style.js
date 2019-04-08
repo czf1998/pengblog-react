@@ -17,14 +17,14 @@ export const LogoAndSimpleDescription = styled.div`
         justify-content: center;
         align-items: center;
         width: 100%;
-        padding-top: 3rem;
-        padding-bottom: 2rem;
+       
         background: white;
         height: ${props => props.heightOfBrowser - heightOfHeader}px;
     `
 
 export const ThemeImage = styled.img`
         width: 50%;
+        max-width: 450px;
         margin-bottom: 3rem;
         @media(max-width:${milePostWidth}px){
             width: 80%;

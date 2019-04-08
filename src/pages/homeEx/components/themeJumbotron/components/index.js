@@ -1,3 +1,4 @@
 import Logo from './logo'
+import Carousel from './carousel'
 
-export {Logo}
+export {Logo,Carousel}

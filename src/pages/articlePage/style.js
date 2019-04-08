@@ -13,7 +13,6 @@ export const ArticlePageWrapper = styled.div`
 
 export const ArticlePageFixer = styled.div`
         width: 100%;
-        max-width: ${widthOfMainArea}px;
         @media(max-width:${maxMobileWidth}px){
             width: 100%;
         }
@@ -32,6 +31,9 @@ export const ArticleTitleImage = styled.img`
         object-fit: cover;
         height: ${props => props.titleImageSize.get('height') * widthOfMainArea / props.titleImageSize.get('width')}px;
         max-height: 320px;
+        @media(min-width:1600px){
+            max-height: 400px;
+        }
     `
 export const ArticleTitle = styled.div`
         font-size: 36px;
