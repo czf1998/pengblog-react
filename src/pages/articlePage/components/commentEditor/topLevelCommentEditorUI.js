@@ -50,6 +50,7 @@ class TopLevelCommentEditorUI extends PureComponent{
                     <Input  width={isMobile ? '100%' : '45%'}
                             placeholder="设定好昵称"
                             type="text"
+
                             value={visitorNameManager.get('value')}
                             onChange={(event) => {appointInputValue(event,VISITOR_NAME,TOP_LEVEL_COMMENT_EDITOR)}}
                             showWarn={visitorNameManager.get('showWarn')}
@@ -64,6 +65,7 @@ class TopLevelCommentEditorUI extends PureComponent{
 
                     <Textarea rows={5}
                               placeholder="开始编辑您的留言"
+                              maxlength={10000}
                               value={commentContentManager.get('value')}
                               onChange={(event) => {appointInputValue(event,COMMENT_CONTENT,TOP_LEVEL_COMMENT_EDITOR)}}
                               showWarn={commentContentManager.get('showWarn')}

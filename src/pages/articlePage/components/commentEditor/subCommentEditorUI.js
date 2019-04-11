@@ -41,6 +41,7 @@ class SubCommentEditorUI extends PureComponent{
                 <SubContent className={CommonClassNameConstants.COMMON_MARGIN_BOTTOM}>
 
                     <Textarea rows={5}
+                              maxlength={200}
                               placeholder="开始编辑您的留言"
                               value={commentContentManager.get('value')}
                               onChange={(event) => {appointInputValue(event,COMMENT_CONTENT,SUB_COMMENT_EDITOR)}}

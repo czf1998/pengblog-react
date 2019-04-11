@@ -9,7 +9,7 @@ class Textarea extends Component{
 
     render() {
 
-        const { placeholder, value, onChange, showWarn, warnMsg, rows, onBlur, onFocus } = this.props
+        const { placeholder, value, onChange, showWarn, warnMsg, rows, onBlur, onFocus, maxlength } = this.props
 
         return (
             <TextareaWrapper>
@@ -19,6 +19,7 @@ class Textarea extends Component{
                             onChange={onChange}
                             showWarn={showWarn}
                             rows={rows}
+                            maxLength={maxlength}
                             onBlur={onBlur}
                             onFocus={onFocus}/>
 
