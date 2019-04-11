@@ -40,8 +40,7 @@ class ArticlePage extends PureComponent {
                 isLoadingMoreComment,
                 startIndex,
                 scrollPosition,
-                referComment,
-                titleImageSize,currentPath } = this.props
+                referComment,currentPath } = this.props
 
         const { article_id } = this.props.match.params
 
@@ -61,8 +60,7 @@ class ArticlePage extends PureComponent {
                                     article.get('article_titleImageUrl') && article.get('article_titleImageUrl') !== '' &&
                                     <ArticleTitleImage data-src={article.get('article_titleImageUrl')}
                                                        src={defaultImageSrc}
-                                                       className="lazyload"
-                                                       titleImageSize={titleImageSize}/>
+                                                       className="lazyload"/>
                                 }
 
 
@@ -71,14 +69,14 @@ class ArticlePage extends PureComponent {
                                 </ArticleTitle>
 
                                 <ArticleMeta className={CommonClassNameConstants.COMMON_PADDING +
-                                CommonClassNameConstants.FONT_DARK}>
-                        <span className={CommonClassNameConstants.CLICKABLE}>
-                            [{ article.get('article_label') }]
-                        </span>
-                                    &nbsp;| 作者:&nbsp;
-                                    <span>
-                            { article.get('article_author') }
-                        </span>
+                                                        CommonClassNameConstants.FONT_DARK}>
+                                    <span className={CommonClassNameConstants.CLICKABLE}>
+                                        [{ article.get('article_label') }]
+                                    </span>
+                                                &nbsp;| 作者:&nbsp;
+                                                <span>
+                                        { article.get('article_author') }
+                                    </span>
                                 </ArticleMeta>
 
                                 <ArticleContent className={CommonClassNameConstants.COMMON_PADDING_HORIZONTAL}
@@ -192,7 +190,6 @@ const mapState = (state) => ({
         startIndex: state.get('articlePage').get('startIndex'),
         currentPage: state.get('articlePage').get('currentPage'),
         scrollPosition: state.get('articlePage').get('scrollPosition'),
-        titleImageSize: state.get('articlePage').get('titleImageSize'),
         currentPath: state.get('router').get('currentPath')
     })
 

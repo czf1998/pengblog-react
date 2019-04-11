@@ -23,6 +23,7 @@ class App extends Component {
             <PrograssBar/>
 
             <RouterComponent/>
+
             {
                 window.innerWidth <= 750 &&
                     <Footer/>

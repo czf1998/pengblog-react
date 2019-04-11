@@ -28,7 +28,6 @@ export const Label = styled.span`
         color: #0066AA;
     `
 
-
 export const ArticleInfoColumn = styled.div`
         display: flex;
         flex-wrap: wrap;
@@ -55,7 +54,6 @@ export const ArticleContent = styled.div`
         -webkit-line-clamp: ${window.innerWidth > 1600 ? '4' : '3'};
         overflow: hidden;
     `
-
 
 export const PreviewImage = styled.img`
         position: absolute;

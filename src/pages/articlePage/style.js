@@ -29,7 +29,6 @@ export const ArticleMainArea = styled.div`
 export const ArticleTitleImage = styled.img`
         width: 100%;
         object-fit: cover;
-        height: ${props => props.titleImageSize.get('height') * widthOfMainArea / props.titleImageSize.get('width')}px;
         max-height: 320px;
         @media(min-width:1600px){
             max-height: 400px;

@@ -77,6 +77,12 @@ export const MultiContent = styled.div`
         flex-direction: column;
     `
 
+export const ContentWrapper = styled.div`
+        max-height: ${props => props.showAll ? props.heightOfCommentContent + 'px' : '210px'};
+        transition: all 0.4s ease;
+        overflow: hidden;
+    `
+
 export const Content = styled.div`
         font-size: 0.9rem;
         line-height: 1.5;
@@ -132,4 +138,11 @@ export const SubCommentEditorWrapper = styled.div`
         overflow: ${props => props.showSubCommentEditor ? 'visible' : 'hidden'};
         opacity: ${props => props.showSubCommentEditor ? '1' : '0'};
         transition: all 0.4s ease;
+    `
+
+export const ShowAll = styled.span`
+        cursor: pointer;
+        &:hover{
+            color: black;
+        }
     `

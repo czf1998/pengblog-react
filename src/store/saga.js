@@ -102,7 +102,7 @@ function* mySaga() {
     yield takeEvery(GET_HOME_ARTICLE_LIST_DATA_BY_KEYWORD, ajaxHomeArticleListDataByKeyword)
     yield takeLatest(OBSERVE_SCROLL_TOP_OF_ELEMENT_EL, recordScrollTopOfElementEl)
     yield takeEvery(GET_JUMBOTRON_ARTICLE_DATA, ajaxJumbotronArticleData)
-    yield takeEvery(GET_ARTICLE_DATA_FOR_ARTICLE_PAGE, ajaxArticleDataForArticlePageData)
+    yield takeLatest(GET_ARTICLE_DATA_FOR_ARTICLE_PAGE, ajaxArticleDataForArticlePageData)
     yield takeEvery(GET_COMMENT_LIST_DATA, ajaxCommentListData)
     yield takeEvery(GET_COUNT_OF_COMMENT, ajaxCountOfComment)
     yield takeEvery(GET_SUB_COMMENT_LIST_DATA, ajaxSubCommentListData)

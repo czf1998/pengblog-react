@@ -80,7 +80,7 @@ export default combineReducers({
             })
         }
         if(action.type === RECORD_CURRENT_BROWSER_EDITION){
-            const userAgent =  navigator.userAgent
+            const userAgent = navigator.userAgent
             const platform = navigator.platform
             if (userAgent.indexOf('Firefox') !== -1){
                 return state.merge({

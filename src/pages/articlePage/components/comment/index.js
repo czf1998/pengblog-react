@@ -1,8 +1,8 @@
 import React, {Fragment, PureComponent} from 'react'
 import { connect } from 'react-redux'
 import {CSSTransition, TransitionGroup} from 'react-transition-group'
-import {CommentWrapper,
-        Content,
+import {CommentWrapper,ContentWrapper,
+        Content,ShowAll,
         VisitorInfo,
         AvatarWraper,
         Name,
@@ -45,6 +45,8 @@ class Comment extends PureComponent {
             startIndex: 0,
             currentPage: 1,
             isBeenDeleting: false,
+            heightOfCommentContent:0,
+            showAll: false
         }
     }
 
@@ -72,7 +74,7 @@ class Comment extends PureComponent {
 
         const isBanned = comment.get('comment_ip') ? comment.get('comment_ip').get('ip_isBanned') : false
 
-        const {currentPage,isBeenDeleting} = this.state
+        const {currentPage,isBeenDeleting,heightOfCommentContent,showAll} = this.state
 
         let maxPage = subCommentMaxPageMananger.get(comment.get('comment_id').toString())
 
@@ -138,10 +140,20 @@ class Comment extends PureComponent {
 
 
                 <MultiContent>
-                    <Content isBanned={isBanned}>
-                        {comment.get('comment_content')}
-                    </Content>
+                    <ContentWrapper showAll={showAll} heightOfCommentContent={heightOfCommentContent}>
+                        <Content isBanned={isBanned} id={'comment_' + comment.get('comment_id')}>
+                            {heightOfCommentContent} {comment.get('comment_content')}
+                        </Content>
+                    </ContentWrapper>
+
                     <OperationBar  className={CommonClassNameConstants.FONT_DARK }>
+
+                        {
+                            heightOfCommentContent > 210 && !showAll &&
+                            <Fragment>
+                                <ShowAll onClick={() => {this.showAll(this)}}>显示全部</ShowAll> &nbsp;|&nbsp;
+                            </Fragment>
+                        }
 
                         {
                             platformIconClasName &&
@@ -250,6 +262,7 @@ class Comment extends PureComponent {
 
         recordHeightOfSubCommentEditor()
 
+        recordHeightOfCommentContent('comment_' + this.props.comment.get('comment_id'), this)
 
         const comment_id = this.props.comment.get('comment_id').toString()
 
@@ -267,6 +280,12 @@ class Comment extends PureComponent {
             this.setState({
                 startIndex: this.state.startIndex - 1
             })
+        })
+    }
+
+    showAll(_this){
+        _this.setState({
+            showAll: true
         })
     }
 }
@@ -417,4 +436,11 @@ const recordHeightOfSubCommentEditor = () => {
 
     window.heightOfSubCommentEditor = parseInt(window.getComputedStyle(document.getElementsByClassName('subCommentEditor')[0]).height)
 
+}
+
+const recordHeightOfCommentContent = (id,_this) => {
+    const heightOfCommentContent = parseInt(window.getComputedStyle(document.getElementById(id)).height)
+    _this.setState({
+        heightOfCommentContent: heightOfCommentContent
+    })
 }

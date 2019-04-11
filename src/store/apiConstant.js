@@ -3,7 +3,6 @@ const server = 'https://pengblog.xyz/pengblog-SSM/'
 //const server = 'http://localhost/pengkaifanblog/'
 //const server = 'http://localhost:8088/pengkaifanblog/'
 
-
 export const API_GET_ARTICLE_LIST_BY_LIMITINDEX = server + 'article/article_summary.do'
 
 export const API_GET_ARTICLE_BY_ID = server + 'article/article.do';
