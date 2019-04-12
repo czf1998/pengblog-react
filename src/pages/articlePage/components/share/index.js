@@ -18,16 +18,18 @@ class Share extends PureComponent {
 
         return (
           <ShareWrapper>
+
               <ShareItem color="#00bb29" onClick={shareToWechat}>
                   <i className="fa fa-wechat"/>
               </ShareItem>
+
               <ShareItem color="#e05244" onClick={() => {shareToWeibo(title,previewImageUrl)}}>
                   <i className="fa fa-weibo"/>
               </ShareItem>
+
               <ShareItem color="grey" id="copyLinkBtn" data-clipboard-text={window.location.href}>
                   <i className="fa fa-link"/>
               </ShareItem>
-
           </ShareWrapper>
         );
     }

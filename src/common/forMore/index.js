@@ -16,11 +16,16 @@ class ForMore extends PureComponent{
                             height={height} fontSize={fontSize}>
                 {
                     noMore ?
-                        <span  style={{color:'#BB0025'}}>
-                            {
-                                noMoreText ? noMoreText : 'NO MORE TO SHOW (￣﹁￣)'
-                            }
-                        </span>
+                        (
+                            isLoading ?
+                            <img src={loadingSpin} alt="Loading icon"/>
+                            :
+                            <span  style={{color:'#BB0025'}}>
+                                {
+                                    noMoreText ? noMoreText : 'NO MORE TO SHOW (￣﹁￣)'
+                                }
+                            </span>
+                        )
                     :
                         (
                             isLoading ?

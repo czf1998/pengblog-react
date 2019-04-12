@@ -3,3 +3,4 @@ export const APPOINT_SHOW_SUB_COMMENT_EDITOR_MANAGER = 'appointShowSubCommentEdi
 export const DELETE_COMMENT_FROM_ARTICLE_PAGE = 'deleteCommentFromArticlePage'
 export const BAN_IP_COMMENT_SAGA = 'banIp Comment Saga'
 export const LIFTED_IP_IPITEM_and_COMMENT_SAGA = 'liftedIp Comment & IpItem Saga'
+export const TRIGGER_IS_LOADING_MORE_SUB_COMMENT = 'triggerIsLoadingMoreSubComment'

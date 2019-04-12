@@ -6,11 +6,12 @@ import {
 } from "../../../../../store/actionTypesWithSaga";
 import {constructComment, uniqueCommentList} from "../../../store/reducer";
 import {GET_SUB_COMMENT_LIST_DATA} from "../../comment/store";
+import {TRIGGER_IS_LOADING_MORE_SUB_COMMENT} from "../../comment/store/actionTypes";
 
 const defaultState = fromJS({
     subCommentMaxPageMananger:Map(),
     subCommentList:fromJS([]),
-    pageScale: 5,
+    pageScale: 4,
     isLoadingMoreSubComment: false
 })
 
@@ -53,5 +54,7 @@ export default (state = defaultState, action) => {
             subCommentMaxPageMananger: subCommentMaxPageMananger.set(action.value.refer_comment_id,action.value.maxPage)
         })
     }
+
+
     return state
 }

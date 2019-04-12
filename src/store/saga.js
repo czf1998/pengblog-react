@@ -1291,6 +1291,7 @@ function* ajaxCommentListData(action) {
         const res = yield CommentRequest.RequestTopLevelCommentListData(value)
         let appointDataAction = createDeliverCommentListDataToArticlePageAction(res.data)
         yield put(appointDataAction)
+
     }catch (err) {
 
         yield goTo503(err)

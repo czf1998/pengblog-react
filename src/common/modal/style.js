@@ -6,7 +6,6 @@ export const ModalWrapper = styled.div`
         z-index: 4;
         position: fixed;
         display: flex;
-        flex-direction: center;
         justify-content: center;
         align-items: center;
         top: 0;
@@ -23,7 +22,7 @@ export const ModalCover = styled.div`
         right: 0;
         bottom: 0;
         background: rgba(0,0,0,0.1);
-        transition: all 1s ease;
+        transition: all .4s ease;
         pointer-events: auto;
     `
 

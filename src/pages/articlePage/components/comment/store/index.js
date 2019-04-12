@@ -2,7 +2,9 @@ import reducer from './reducer'
 import { GET_SUB_COMMENT_LIST_DATA } from "./actionTypes";
 import { createGetSubCommentListDataAction,
         createAppointShowSubCommentEditorManagerAction,
-        createDeleteCommentFromArticlePageAction,createBanIPAction,createLiftedIPAction } from "./actionCreators";
+        createDeleteCommentFromArticlePageAction,
+        createBanIPAction,createLiftedIPAction,
+        createTriggerIsLoadingMoreSubComment } from "./actionCreators";
 
 export { reducer }
 
@@ -10,4 +12,7 @@ export { GET_SUB_COMMENT_LIST_DATA }
 
 export { createGetSubCommentListDataAction,
         createAppointShowSubCommentEditorManagerAction,
-        createDeleteCommentFromArticlePageAction,createBanIPAction,createLiftedIPAction }
+        createDeleteCommentFromArticlePageAction,
+        createBanIPAction,
+        createLiftedIPAction,
+        createTriggerIsLoadingMoreSubComment }

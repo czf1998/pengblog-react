@@ -87,8 +87,8 @@ class ArticlePage extends PureComponent {
                                 CommonClassNameConstants.FONT_DARK}>
                                     发布于:&nbsp;
                                     <span>
-                                { DateFormat('yyyy-MM-dd', new Date(article.get('article_releaseTime'))) }
-                        </span>
+                                            { DateFormat('yyyy-MM-dd', new Date(article.get('article_releaseTime'))) }
+                                    </span>
                                 </ArticleMeta>
 
                                 <Share/>

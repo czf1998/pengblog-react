@@ -22,6 +22,7 @@ export const Content = styled.div`
     `
 
 export const Meta = styled.div`
+        padding-top: 1rem;
         font-size: 0.9rem;
         line-height: 1.5;
         text-align: right;

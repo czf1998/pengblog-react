@@ -12,8 +12,6 @@ import loadingSpin from "../../../../common/loading/svg/loading-spin.svg";
 const REPLY_CLASSNAME = 'fa fa-reply'
 const RETRACT_CLASSNAME = 'fa fa-chevron-up'
 
-
-
 class SubComment extends PureComponent {
 
     constructor(props) {

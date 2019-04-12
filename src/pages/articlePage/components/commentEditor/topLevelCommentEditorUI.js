@@ -50,7 +50,6 @@ class TopLevelCommentEditorUI extends PureComponent{
                     <Input  width={isMobile ? '100%' : '45%'}
                             placeholder="设定好昵称"
                             type="text"
-
                             value={visitorNameManager.get('value')}
                             onChange={(event) => {appointInputValue(event,VISITOR_NAME,TOP_LEVEL_COMMENT_EDITOR)}}
                             showWarn={visitorNameManager.get('showWarn')}

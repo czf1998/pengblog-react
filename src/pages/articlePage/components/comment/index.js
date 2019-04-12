@@ -20,7 +20,8 @@ import {SubCommentEditor} from '../commentEditor'
 import {createGetSubCommentListDataAction,
         createAppointShowSubCommentEditorManagerAction,
         createDeleteCommentFromArticlePageAction,
-        createBanIPAction,createLiftedIPAction } from './store'
+        createBanIPAction,createLiftedIPAction,
+        createTriggerIsLoadingMoreSubComment } from './store'
 import {ForMore} from "../../../../common";
 import {LoadingIcon} from "../../../managePage/components/freshComments/components/freshCommentItem/style";
 import loadingSpin from "../../../../common/loading/svg/loading-spin.svg";
@@ -46,7 +47,8 @@ class Comment extends PureComponent {
             currentPage: 1,
             isBeenDeleting: false,
             heightOfCommentContent:0,
-            showAll: false
+            showAll: false,
+            loadingMoreSubComment: false
         }
     }
 
@@ -74,7 +76,7 @@ class Comment extends PureComponent {
 
         const isBanned = comment.get('comment_ip') ? comment.get('comment_ip').get('ip_isBanned') : false
 
-        const {currentPage,isBeenDeleting,heightOfCommentContent,showAll} = this.state
+        const {currentPage,isBeenDeleting,heightOfCommentContent,showAll,loadingMoreSubComment} = this.state
 
         let maxPage = subCommentMaxPageMananger.get(comment.get('comment_id').toString())
 
@@ -94,27 +96,7 @@ class Comment extends PureComponent {
         const metaColor = colorPicker(visitor_name)
         const featureString = extractFeatureString(visitor_name)
 
-        let platformIconClasName = undefined
-
-        if(comment.get('comment_platform') === undefined){
-
-        } else if(comment.get('comment_platform').toLowerCase().indexOf('win') !== -1){
-            platformIconClasName = 'fa fa-windows'
-        }else if(comment.get('comment_platform').toLowerCase().indexOf('ios') !== -1){
-            platformIconClasName = 'fa fa-apple'
-        }else if(comment.get('comment_platform').toLowerCase().indexOf('ipad') !== -1){
-            platformIconClasName = 'fa fa-apple'
-        }else if(comment.get('comment_platform').toLowerCase().indexOf('iphone') !== -1){
-            platformIconClasName = 'fa fa-apple'
-        }else if(comment.get('comment_platform').toLowerCase().indexOf('mac') !== -1){
-            platformIconClasName = 'fa fa-apple'
-        }else if(comment.get('comment_platform').toLowerCase().indexOf('arm') !== -1){
-            platformIconClasName = 'fa fa-android'
-        }else if(comment.get('comment_platform').toLowerCase().indexOf('linux') !== -1){
-            platformIconClasName = 'fa fa-linux'
-        }else if(comment.get('comment_platform').toLowerCase().indexOf('android') !== -1){
-            platformIconClasName = 'fa fa-android'
-        }
+        let platformIconClasName = generatePlatformIconClass(comment.get('comment_platform'))
 
         const showSubCommentEditor = showSubCommentEditorManager.get('hostTopLevelCommentId') === comment_id
 
@@ -142,11 +124,11 @@ class Comment extends PureComponent {
                 <MultiContent>
                     <ContentWrapper showAll={showAll} heightOfCommentContent={heightOfCommentContent}>
                         <Content isBanned={isBanned} id={'comment_' + comment.get('comment_id')}>
-                            {heightOfCommentContent} {comment.get('comment_content')}
+                           {comment.get('comment_content')}
                         </Content>
                     </ContentWrapper>
 
-                    <OperationBar  className={CommonClassNameConstants.FONT_DARK }>
+                    <OperationBar  className={CommonClassNameConstants.FONT_DARK}>
 
                         {
                             heightOfCommentContent > 210 && !showAll &&
@@ -158,8 +140,7 @@ class Comment extends PureComponent {
                         {
                             platformIconClasName &&
                             <Fragment>
-                                <i className={platformIconClasName}/>
-                                &nbsp;|&nbsp;
+                                <i className={platformIconClasName}/>&nbsp;|&nbsp;
                             </Fragment>
                         }
 
@@ -214,17 +195,18 @@ class Comment extends PureComponent {
                     </TransitionGroup>
 
                     {
-                        comment.get('comment_haveSubComment') && currentPage !== maxPage &&
+                        comment.get('comment_haveSubComment') && maxPage > 1 &&
                         <Fragment>
                             <GapH/>
-                            <ForMore isLoading={isLoadingMoreSubComment}
+                            <ForMore isLoading={loadingMoreSubComment}
                                      noMore={currentPage >= maxPage}
                                      clickHandler={() => {getMoreSubCommentListData(comment_id,
-                                         pageScale,
-                                         maxPage,
-                                         this)}}
+                                                          pageScale,
+                                                          maxPage,
+                                                          this)}}
                                      height={60}
                                      forMoreText='加载更多'
+                                     noMoreText="it's all"
                                      fontSize='0.9rem'/>
                         </Fragment>
 
@@ -288,6 +270,16 @@ class Comment extends PureComponent {
             showAll: true
         })
     }
+
+    componentDidUpdate(prevProps) {
+
+        if(prevProps.subCommentList !== this.props.subCommentList){
+            this.setState({
+                loadingMoreSubComment: false
+            })
+        }
+
+    }
 }
 
 
@@ -302,7 +294,6 @@ const mapState = (state) => {
         subCommentList: state.get('subComment').get('subCommentList'),
         pageScale: state.get('subComment').get('pageScale'),
         showSubCommentEditorManager: state.get('commentEditor').get('showSubCommentEditorManager'),
-        isLoadingMoreSubComment: state.get('subComment').get('isLoadingMoreSubComment'),
         alreadyLoggedIn: state.get('loginPage').get('alreadyLoggedIn')
     }
 }
@@ -321,9 +312,13 @@ const mapActions = (dispatch) => ({
                               pageScale,
                               maxPage,
                               _this){
+
+
+
         _this.setState({
             startIndex:_this.state.startIndex + pageScale,
-            currentPage:_this.state.currentPage + 1
+            currentPage:_this.state.currentPage + 1,
+            loadingMoreSubComment: true
         })
         _this.props.getSubCommentListData(comment_id, _this.state.startIndex + pageScale, pageScale)
     },
@@ -443,4 +438,26 @@ const recordHeightOfCommentContent = (id,_this) => {
     _this.setState({
         heightOfCommentContent: heightOfCommentContent
     })
+}
+
+const  generatePlatformIconClass = (platform) => {
+    if(platform === undefined){
+        return ''
+    } else if(platform.toLowerCase().indexOf('win') !== -1){
+        return 'fa fa-windows'
+    }else if(platform.toLowerCase().indexOf('ios') !== -1){
+        return 'fa fa-apple'
+    }else if(platform.toLowerCase().indexOf('ipad') !== -1){
+        return 'fa fa-apple'
+    }else if(platform.toLowerCase().indexOf('iphone') !== -1){
+        return 'fa fa-apple'
+    }else if(platform.toLowerCase().indexOf('mac') !== -1){
+        return 'fa fa-apple'
+    }else if(platform.toLowerCase().indexOf('arm') !== -1){
+        return 'fa fa-android'
+    }else if(platform.toLowerCase().indexOf('linux') !== -1){
+        return 'fa fa-linux'
+    }else if(platform.toLowerCase().indexOf('android') !== -1){
+        return 'fa fa-android'
+    }
 }
