@@ -16,12 +16,16 @@ class SearchBar extends PureComponent {
 
     render() {
 
-        const { style,searchBarObj,backgroundColor,
-                dataGetter,
-                searchButtonClickHandler,
-                triggerIsFocus,
-                appointKeyWordOfSearchBar,isMobile,
-                searchBarId} = this.props
+        const {
+            style,
+            searchBarObj,
+            backgroundColor,
+            dataGetter,
+            searchButtonClickHandler,
+            triggerIsFocus,
+            appointKeyWordOfSearchBar,
+            isMobile,
+            searchBarId} = this.props
 
         const searchBarValue = searchBarObj.get(searchBarId).get('searchBarValue')
         const isFocus = searchBarObj.get(searchBarId).get('isFocus')

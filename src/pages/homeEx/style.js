@@ -80,6 +80,7 @@ export const ArticleDetailWrapper = styled.div`
 
 export const ArticleDetailFixer = styled.div`
         width: 700px;
+        max-width: 100%;
         @media(max-width:${milePostWidth2}px){
            width: 650px;
         }

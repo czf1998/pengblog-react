@@ -23,7 +23,7 @@ class Select extends Component{
     render() {
 
 
-        const {selectId,value,optionList,appointSelectContent,width} = this.props
+            const {selectId,value,optionList,appointSelectContent,width} = this.props
 
         return (
             <SelectWrapper>

@@ -7,7 +7,7 @@ import {
     RESET_MANAGE_PAGE_ARTICLE_LIST
 } from "../../../store/actionTypesWithSaga";
 import {
-    APPOINT_MANAGE_PAGE_PAGINATION
+    APPOINT_MANAGE_PAGE_PAGINATION, RESET_PAGE_INDEX_OF_PAGINATION
 } from "../../../pages/managePage/store/actionType";
 
 //根据浏览器显示高度初始化managePage的pageScale
@@ -87,5 +87,18 @@ export default (state = defaultState, action) => {
         return defaultState
     }
 
+    if(action.type === RESET_PAGE_INDEX_OF_PAGINATION){
+
+        let target = state.get(action.value)
+
+        return state.set(action.value,target.merge({
+            currentPage: 1,
+            startIndex: 0
+        }))
+
+    }
+
     return state
+
+
 }

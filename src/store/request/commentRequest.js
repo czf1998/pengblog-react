@@ -91,7 +91,7 @@ export function RequestDeleteComment(value) {
 }
 
 
-export function CheckWetherNeedCaptcha() {
+export function CheckWhetherNeedCaptcha() {
 
     return axios.get(Api.API_CHECK_WHETHER_NEED_CAPTCHA_TO_SUBMIT_COMMENT)
 

@@ -13,9 +13,13 @@ import {CentralController,
         PaginationFixer,
         LoadingWrapper,
         ArticleDetail,
-    CentralControllerMobile,
-        MultipleSelectTitle,TriggerShowMoreIndexButton,MoreIndex,
-        ShutDownMultipleSelect,ArticleItemWrapper,FreshCommentsTitle} from './style'
+        CentralControllerMobile,
+        MultipleSelectTitle,
+        TriggerShowMoreIndexButton,
+        MoreIndex,
+        ShutDownMultipleSelect,
+        ArticleItemWrapper,
+        FreshCommentsTitle} from './style'
 import {ArticleFiling,
         ArticleClassification,
         FreshComments,
@@ -335,7 +339,6 @@ const mapActions = (dispatch) => {
                 startIndex: startIndex,
                 pageScale: pageScale
             }
-
 
             const getArticleByKeyWordAction = createGetManagePageArticleListDataByKeyWordAction(value)
             dispatch(getArticleByKeyWordAction)

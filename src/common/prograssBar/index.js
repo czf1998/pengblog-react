@@ -9,8 +9,6 @@ window.nanobar = new Nanobar()
 
 class PrograssBar extends PureComponent {
 
-
-
     render() {
 
         const { prograssBarStatus } = this.props

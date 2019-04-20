@@ -52,7 +52,7 @@ export const Name = styled.div`
         font-size: 0.9rem;
         line-height: 1.2;
         text-align: center;
-        word-wrap: break-word 
+        word-wrap: break-word; 
         text-decoration: ${props => props.isBanned ? 'line-through' : 'none'};
         color: ${props => props.isBanned ? 'grey' : 'black'};
         
@@ -82,13 +82,13 @@ export const ContentWrapper = styled.div`
         max-height: ${props => props.showAll ? props.heightOfCommentContent + 'px' : '210px'};
         transition: all 0.4s ease;
         overflow: hidden;
+        flex-grow: 1;    
     `
 
 export const Content = styled.div`
         font-size: 0.9rem;
         line-height: 1.5;
         padding: 0.8rem 1rem;
-        flex-grow: 1;    
         text-decoration: ${props => props.isBanned ? 'line-through' : 'none'};
         color: ${props => props.isBanned ? 'grey' : 'black'};
         @media(min-width: ${widthOfMainArea}px) {

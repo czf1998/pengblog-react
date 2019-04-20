@@ -106,7 +106,7 @@ function* mySaga() {
     yield takeEvery(GET_COMMENT_LIST_DATA, ajaxCommentListData)
     yield takeEvery(GET_COUNT_OF_COMMENT, ajaxCountOfComment)
     yield takeEvery(GET_SUB_COMMENT_LIST_DATA, ajaxSubCommentListData)
-    yield takeEvery(SUBMIT_COMMENT, ajaxCheckWetherNeedCaptchaForSubmitComment)
+    yield takeEvery(SUBMIT_COMMENT, ajaxCheckWhetherNeedCaptchaForSubmitComment)
     yield takeEvery(SUBMIT_COMMENT_WITH_CAPTCHA, ajaxSubmitCommentWithCaptcha)
     yield takeEvery(GET_DRAFT_DATA, ajaxDraft)
     yield takeEvery(SAVE_ARTICLE_ACTION, ajaxSaveArticle)
@@ -997,10 +997,10 @@ function* ajaxDraft() {
 }
 
 //check提交评论时是否需要输入验证码
-function* ajaxCheckWetherNeedCaptchaForSubmitComment(action){
+function* ajaxCheckWhetherNeedCaptchaForSubmitComment(action){
 
     try{
-        const res = yield CommentRequest.CheckWetherNeedCaptcha()
+        const res = yield CommentRequest.CheckWhetherNeedCaptcha()
         if(res.data === false){
             yield ajaxSubmitComment(action)
             return

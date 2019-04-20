@@ -10,9 +10,7 @@ const uuidv4 = require('uuid/v4');
 
 class Captcha extends Component{
 
-
     render() {
-
 
         const {captchaHost,onChange,captchaManager,getAnothorCaptchaImage,getCaptchaImage,shutdownWarnMsg} = this.props
 

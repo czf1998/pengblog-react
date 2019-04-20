@@ -45,20 +45,20 @@ class ThemeJumbotron extends PureComponent {
             <ThemeJumbotronWrapper>
                 <LogoAndSimpleDescription heightOfBrowser={heightOfBrowser}>
 
-                 <ThemeImage src={themeImage}/>
+                <ThemeImage src={themeImage}/>
 
-                    <LogoAndSimpleDescriptionFixer>
+                <LogoAndSimpleDescriptionFixer>
 
-                        <LogoWrapper>
-                            <Logo scale={1}/>
-                        </LogoWrapper>
+                    <LogoWrapper>
+                        <Logo scale={1}/>
+                    </LogoWrapper>
 
-                        <Gap/>
+                    <Gap/>
 
-                        <SimpleDescription className={CommonClassNameConstants.FONT_SONG}>
-                            是<br/>一个<br/>简单的<br/>个人博客
-                        </SimpleDescription>
-                    </LogoAndSimpleDescriptionFixer>
+                    <SimpleDescription className={CommonClassNameConstants.FONT_SONG}>
+                        是<br/>一个<br/>简单的<br/>个人博客
+                    </SimpleDescription>
+                </LogoAndSimpleDescriptionFixer>
 
                    {/* <Carousel/>*/}
 
