@@ -2,8 +2,6 @@ import styled from 'styled-components'
 
 const heightOfHeader = 70
 
-const widthOfMainArea = 800
-
 const maxMobileWidth = 750
 
 export const ArticlePageWrapper = styled.div`

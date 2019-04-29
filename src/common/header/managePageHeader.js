@@ -43,9 +43,9 @@ class ManagePageHeader extends PureComponent {
                             <NavItem cursorp={true}>
                                 <span className="iconfont"
                                       onClick={() => {goTo('/recycle')}}
-                                      style={{fontSize:'1.4rem'}}>&#xe60c;</span>
+                                      style={{fontSize:'1.2rem'}}>&#xe60c;</span>
                                 <Info onClick={() => {goTo('/recycle')}}>
-                                    回收站
+                                    &nbsp;回收站
                                 </Info>
                             </NavItem>
                         }

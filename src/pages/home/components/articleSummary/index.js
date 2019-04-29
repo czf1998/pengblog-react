@@ -8,7 +8,6 @@ import {ArticleSummaryWrapper,
         ArticleContent,
         PreviewImage} from './style'
 import { CommonClassNameConstants } from '../../../../commonStyle'
-import { GET_COUNT_OF_COMMENT } from '../../../../store/actionTypesWithSaga'
 
 
 class ArticleSummary extends PureComponent {
@@ -80,12 +79,6 @@ class ArticleSummary extends PureComponent {
             </ArticleSummaryWrapper>
         );
     }
-
-    componentDidMount() {
-        if(this.props.article.get('countOfAllComment') !==undefined && this.props.hasBeenMountOnce)
-            return
-        this.props.getCountOfAllComment(this.props.article.get('article_id'), this)
-    }
 }
 
 const mapState = (state) => ({
@@ -95,14 +88,7 @@ const mapState = (state) => ({
 })
 
 const mapActions = (dispatch) => ({
-    getCountOfAllComment: (article_id, _this) => {
-        const action = {
-            type: GET_COUNT_OF_COMMENT,
-            value: article_id,
-            host: _this
-        }
-        dispatch(action)
-    }
+
 })
 
 export default connect(mapState, mapActions)(ArticleSummary)

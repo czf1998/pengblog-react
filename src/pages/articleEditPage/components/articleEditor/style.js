@@ -7,8 +7,6 @@ export const ArticleEditorWrapper = styled.div`
     `
 
 export const ToolBarWrapper = styled.div`
-        position: sticky;
-        top: ${heightOfHeader}px;
         background: white;
         z-index: 1;
         padding: 0.5rem 0;
@@ -19,12 +17,13 @@ export const ToolBarWrapper = styled.div`
             position: fixed;
             bottom: 0;
             width: 100%;
-            margin-bottom: 0
-        ` : ''}
+            margin-bottom: 0;
+        ` : 
+            `position: sticky;
+             top: ${heightOfHeader}px;`}
     `
 
 export const ToolBar = styled.div`
-      
         font-size: ${props => props.isMobile ? '1.4rem' : '1rem'};
         display: flex;
         justify-content: ${props => props.isMobile ? 'flex-end' : 'center'};

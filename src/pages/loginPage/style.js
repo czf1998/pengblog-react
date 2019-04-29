@@ -18,12 +18,22 @@ export const ThemeJumbotron = styled.div`
         justify-content: center;
         align-items: center;
         width: calc(100% - 400px);
-        background:url(${props => props.themeImage}) no-repeat center;
-        background-size: cover;
-
+       
         @media(max-width:1000px){
             display: none
         }
+    `
+
+export const ThemeBackground = styled.div`
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background:url(${props => props.themeImage}) no-repeat center;
+        background-size: cover;
+        transition: all 1s ease;
+        opacity: ${props => props.themeImageReady ? '1' : '0'};
     `
 
 export const LogoWrapper = styled.div`

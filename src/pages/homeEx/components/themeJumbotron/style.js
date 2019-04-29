@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 const heightOfHeader = 70
 
-const milePostWidth = 1000
 
 export const ThemeJumbotronWrapper = styled.div`
         display: flex;
@@ -12,6 +11,7 @@ export const ThemeJumbotronWrapper = styled.div`
     `
 
 export const LogoAndSimpleDescription = styled.div`
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -23,20 +23,35 @@ export const LogoAndSimpleDescription = styled.div`
     `
 
 export const ThemeImage = styled.img`
-        width: 50%;
-        max-width: 450px;
-        margin-bottom: 3rem;
-        @media(max-width:${milePostWidth}px){
-            width: 80%;
-        }
+        z-index: 2;
+        max-width: 80%;
+        width: 350px;
+        margin: 2rem 1rem;
+        transition: all 1s ease;
+        opacity: ${props => props.themeImageReady ? '1' : '0'};
     `
 
-export const LogoAndSimpleDescriptionFixer = styled.div`
+export const ThemeBackground = styled.div`
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background:url(${props => props.backgroundImage}) no-repeat center;
+        background-size: cover;
+        transition: all 1s ease;
+        opacity: ${props => props.backgroundImageReady ? '1' : '0'};
+    `
+
+export const LogoAndSimpleDescriptionFixer = styled.div` 
+        max-width: 80%;
+        width: 350px;
         display: flex;
         justify-content: center;
     `
 
 export const LogoWrapper = styled.div`
+        width: 100%;
         display: flex;
         align-items: flex-end;
         padding-bottom: 2rem;
@@ -46,35 +61,4 @@ export const Gap = styled.div`
         width: 0;
         border-right: solid 1px grey;
         align-self: stretch;
-    `
-
-export const SimpleDescription = styled.div`
-        font-size: 1.8rem;
-        font-weight: 100;
-        padding-left: 1rem;
-    `
-
-export const SponsorDisplayCabinet = styled(LogoAndSimpleDescription)`
-        flex-direction: column;
-        align-items: center;
-        background: #F7F7F7;
-        padding-top: 2rem;
-    `
-
-export const PowerBy = styled.div`
-        font-size: 1.4rem;
-        color: #999;
-        margin-bottom: 1rem;
-    `
-
-export const SponsorContain = styled.div`
-        display: flex;
-        flex-wrap: wrap;
-        width: 400px;
-        justify-content: center;
-    `
-
-export const SponsorItem = styled.img`
-        height: 3rem;
-        margin: 0.5rem 1rem;
     `

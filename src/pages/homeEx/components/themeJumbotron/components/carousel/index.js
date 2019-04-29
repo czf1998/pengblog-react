@@ -9,8 +9,6 @@ class Carousel extends PureComponent {
 
     render() {
 
-        const { metaColor} = this.props
-
         return (
                 <SwiperWrapper>
 

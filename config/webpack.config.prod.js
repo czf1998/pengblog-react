@@ -22,7 +22,7 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
-const server = 'https://pengblog.xyz/pengblog-SSM/'
+const server = 'https://react.pengblog.xyz/pengblog-SSM/'
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -536,7 +536,7 @@ module.exports = {
           },
       },
       {
-          urlPattern: 'https://pengblog.xyz/favicon.ico',
+          urlPattern: server + 'favicon.ico',
           handler: 'cacheFirst',
           options: {
               cacheName: 'favicon-ico-cache',

@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom'
 
 import {LoginPageWrapper,
         ThemeJumbotron,
-        Gap,
+        Gap,ThemeBackground,
         LogoWrapper,LoginBar,SwitchButton,Item,Space} from './style'
 
 import {createAppointLoginPageInputValueAction,
@@ -24,6 +24,7 @@ import {PASSWORD, PHONENUMBER} from "./constant";
 import {createAppointNoticeContent, createTriggerAlreadyLoggedInAction} from "../../store/actionCreators";
 import {createGetCaptchaImageAction} from "../../common/captcha/store";
 import {USERNAME} from "../noFoundPage/constant";
+import {imageLoader} from "../../exJs/imageLoader";
 
 const uuidv4 = require('uuid/v4');
 
@@ -32,6 +33,10 @@ class LoginPage extends PureComponent {
     constructor(props) {
         super(props)
         this.keydownhandler = this.keydownhandler.bind(this)
+        this.state = {
+            themeImage: 'https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/vincent-riszdorfer-1453674-unsplash.jpg',
+            themeImageReady: false
+        }
     }
 
     render() {
@@ -52,25 +57,23 @@ class LoginPage extends PureComponent {
                 haveGotSmsOnce,
                 currentSecond} = this.props
 
-        const themeImage = 'https://pengblogimage-1257899590.cos.ap-guangzhou.myqcloud.com/black-and-white-nature-sky-field.440ec64e.jpg'
+        const {themeImage,themeImageReady} = this.state
 
         return (
            <LoginPageWrapper>
 
-               <ThemeJumbotron className={SLIDE_UP_FAST} themeImage={themeImage}>
+               <ThemeJumbotron className={SLIDE_UP_FAST}>
 
-
-
+                   <ThemeBackground themeImage={themeImage}
+                                    themeImageReady={themeImageReady}/>
 
                    <LogoWrapper className={FADE_IN}>
                        <Logo scale={1}/>
                    </LogoWrapper>
 
-
                </ThemeJumbotron>
 
                <Gap/>
-
 
                <LoginBar>
 
@@ -90,7 +93,6 @@ class LoginPage extends PureComponent {
                                          active={loginWithDynamicPassword}>短信登录</Item>
                                    <Space/>
                                </SwitchButton>
-
 
                                {
                                    !loginWithDynamicPassword &&
@@ -133,6 +135,12 @@ class LoginPage extends PureComponent {
         this.props.initCaptcha()
 
         window.addEventListener('keydown', this.keydownhandler)
+
+        imageLoader(this.state.themeImage,() => {
+            this.setState({
+                themeImageReady: true
+            })
+        })
     }
 
     componentWillUnmount(){

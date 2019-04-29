@@ -16,7 +16,7 @@ class Footer extends PureComponent {
         return (
             <FooterWrapper className={CommonClassNameConstants.FLEX_COLUMN_CENTER}>
 
-                <Row>粤ICP备18156165号 |&nbsp;
+                <Row><a href="http://www.miit.gov.cn/">粤ICP备18156165号</a> |&nbsp;
                     <ContactMe onClick={triggerContactMeModal}>
                         与我联系
                     </ContactMe>

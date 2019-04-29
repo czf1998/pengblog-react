@@ -440,7 +440,6 @@ function* ajaxLoginWithDynamicPassword() {
             password: password,
         }
 
-
         const res = yield LoginRequest.RequestLoginWithDynamicPassword(loginData)
 
         //本地存储token以及过期时间
@@ -480,7 +479,6 @@ function* ajaxGetSms() {
         const state = yield select()
 
         const phoneNumber = state.get('loginPage').get('phoneNumber').get('value')
-
 
         const res = yield SmsRequest.RequestSms(phoneNumber)
 

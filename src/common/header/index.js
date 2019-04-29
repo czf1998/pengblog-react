@@ -30,6 +30,7 @@ class Header extends PureComponent {
                             <Route path='/article' component={CommonHeader}/>
                             <Route exact path='/edit' component={ArticleEditPageHeader}/>
                             <Route exact path='/login' component={LoginPageHeader}/>
+                            <Route exact path='/logout' component={LoginPageHeader}/>
                             <Route exact path='/ip' component={IpManagePageHeader}/>
                             <Route exact path='/manage' component={ManagePageHeader}/>
                             <Route exact path='/recycle' component={RecycleBinPageHeader}/>

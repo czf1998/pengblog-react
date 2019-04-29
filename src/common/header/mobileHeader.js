@@ -96,8 +96,6 @@ class MobileHeader extends PureComponent {
 
                     <Logo/>
 
-
-
                     <NavItemWrapper>
                         <MenuButtonWrapper showMenuList={showMenuList}>
                             <Button className="iconfont"

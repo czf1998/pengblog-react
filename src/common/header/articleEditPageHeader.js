@@ -69,7 +69,7 @@ class ArticleEditPageHeader extends PureComponent {
                             {
                                 isSavingArticle ?
                                     <Fragment>
-                                        <img src={loadingSpin} alt="Loading icon" style={{transform:'scale(0.7)'}}/>
+                                        <img src={loadingSpin} alt="Loading icon" style={{transform:'scale(0.6)'}}/>
                                         <Info onClick={submitArticle}>
                                             发布中. . .
                                         </Info>
@@ -77,7 +77,7 @@ class ArticleEditPageHeader extends PureComponent {
                                     :
                                     <SubmitButton submitable={submitable}>
                                         <span className="iconfont"
-                                              style={{fontSize:'1.4rem'}}
+                                              style={{fontSize:'1rem'}}
                                               onClick={submitArticle}>&#xe600;</span>
                                         <Info onClick={submitArticle}>
                                             发布

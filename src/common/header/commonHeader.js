@@ -39,7 +39,7 @@ class CommonHeader extends PureComponent {
 
                             <NavItem cursorp={true}>
                                 <span className="iconfont" onClick={() => {goTo('/manage')}}
-                                      style={{fontSize:'1.6rem'}}>&#xe76a;</span>
+                                      style={{fontSize:'1.2rem'}}>&#xe76a;</span>
                                 <Info onClick={() => {goTo('/manage')}}>
                                     索引
                                 </Info>
@@ -50,7 +50,7 @@ class CommonHeader extends PureComponent {
                             <NavItem cursorp={true}>
                                 <span className="iconfont"
                                   onClick={() => {goTo('/edit')}}
-                                  style={{fontSize:'1.6rem'}}>&#xe67f;</span>
+                                  style={{fontSize:'1.2rem'}}>&#xe67f;</span>
                                 <Info onClick={() => {goTo('/edit')}}>
                                     写作
                                 </Info>

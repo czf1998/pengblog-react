@@ -62,7 +62,7 @@ export const SubmitButton = styled.div`
 
 export const Info = styled.div`
         height: auto;
-        font-size: 1.2rem;
+        font-size: 1rem;
     `
 
 export const MenuButtonWrapper = styled.div`
@@ -81,7 +81,6 @@ export const MenuListWrapper = styled.div`
         top: calc(100% + 1px);
         left: 0;
         overflow: hidden;
-        
     `
 
 export const MenuList = styled.div`
@@ -92,7 +91,6 @@ export const MenuList = styled.div`
         width: 100%;
         transition: all 0.4s ease;
         border-bottom: solid 1px #f0f0f0;
-        
     `
 
 export const MenuItem = styled.div`

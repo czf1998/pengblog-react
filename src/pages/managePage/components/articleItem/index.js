@@ -85,9 +85,6 @@ class ArticleItem extends PureComponent {
                         </ArticleTitleInner>
                     </Link>
 
-
-
-
                     {
                         (isBeingHover || browser === 'Safari') && alreadyLoggedIn &&
                         <DeleteButton browser={browser}>

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const milePostWidth = 800
 
 export const LogoWrapper = styled.div`
+        width: 100%;
         position: relative;
         margin-right: 1rem;
         font-size: 1.7rem;

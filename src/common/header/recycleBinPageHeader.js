@@ -45,15 +45,15 @@ class RecycleBinPageHeader extends PureComponent {
 
                     <NavItemWrapper>
 
-
                         <NavItem cursorp={true}>
                                 <span className="iconfont"
                                       onClick={() => {tryToCleanRecycleBin(recycleBinIsNull)}}
-                                      style={{fontSize:'1.4rem'}}>&#xef52;</span>
+                                      style={{fontSize:'1rem'}}>&#xef52;</span>
                             <Info onClick={() => {tryToCleanRecycleBin(recycleBinIsNull)}}>
-                                清空回收站
+                                &nbsp;清空回收站
                             </Info>
                         </NavItem>
+
                     </NavItemWrapper>
 
                 </HeaderMainArea>

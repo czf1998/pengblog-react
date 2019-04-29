@@ -20,8 +20,7 @@ import {SubCommentEditor} from '../commentEditor'
 import {createGetSubCommentListDataAction,
         createAppointShowSubCommentEditorManagerAction,
         createDeleteCommentFromArticlePageAction,
-        createBanIPAction,createLiftedIPAction,
-        createTriggerIsLoadingMoreSubComment } from './store'
+        createBanIPAction,createLiftedIPAction } from './store'
 import {ForMore} from "../../../../common";
 import {LoadingIcon} from "../../../managePage/components/freshComments/components/freshCommentItem/style";
 import loadingSpin from "../../../../common/loading/svg/loading-spin.svg";
@@ -65,7 +64,6 @@ class Comment extends PureComponent {
                 showSubCommentEditorManager,
                 getMoreSubCommentListData,
                 pageScale,
-                isLoadingMoreSubComment,
                 alreadyLoggedIn,
                 tryToDeleteThisComment,
                 tryToBanThisIP,tryToLiftedThisIP} = this.props

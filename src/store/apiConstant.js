@@ -1,4 +1,4 @@
-const server = 'https://pengblog.xyz/pengblog-SSM/'
+const server = 'https://react.pengblog.xyz/pengblog-SSM/'
 //const server = 'http://pengblog.xyz:8080/pengblog-SSM/'
 //const server = 'http://localhost/pengkaifanblog/'
 //const server = 'http://localhost:8088/pengkaifanblog/'
